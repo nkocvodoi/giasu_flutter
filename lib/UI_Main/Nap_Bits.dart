@@ -14,9 +14,8 @@ class _Nap_Bits_State extends State<Nap_Bits> {
       _b = 'Mã số(ID):',
       _c = 'Email:',
       _d = 'Số điện thoại:';
-  final int group1 = 1;
-  final int group2 = 2;
-
+  int group1 = 0;
+  int group2 = 0;
 
   @override
   Widget build(BuildContext context) {
@@ -39,10 +38,14 @@ class _Nap_Bits_State extends State<Nap_Bits> {
             _Box1(),
             _Box2(),
             _Box3(),
-            SizedBox(height: 40.0,),
-            Divider(thickness: 3,),
+            SizedBox(
+              height: 40.0,
+            ),
+            Divider(
+              thickness: 3,
+            ),
             Padding(
-                padding: EdgeInsets.only(left: 240),
+              padding: EdgeInsets.only(left: 240),
               child: RaisedButton(
                 color: _color,
                 onPressed: () {
@@ -149,28 +152,28 @@ class _Nap_Bits_State extends State<Nap_Bits> {
               child: Row(
                 //mainAxisSize: MainAxisSize.min,
                 children: <Widget>[
-                  _buildBoxMoney('50 Bits = 50,000 VNĐ', 1, group1),
+                  _buildBoxMoney('50 Bits = 50,000 VNĐ', 0,),
                   SizedBox(
                     width: 20.0,
                   ),
-                  _buildBoxMoney('100 Bits = 100,000 VNĐ', 2, group1),
+                  _buildBoxMoney('100 Bits = 100,000 VNĐ', 1,),
                 ],
               ),
             ),
             Padding(
               padding: EdgeInsets.only(left: 18.0),
               child: Row(
-               // mainAxisSize: MainAxisSize.min,
+                // mainAxisSize: MainAxisSize.min,
                 children: <Widget>[
-                  _buildBoxMoney('200 Bits = 200,000 VNĐ', 3, group1),
+                  _buildBoxMoney('200 Bits = 200,000 VNĐ', 2, ),
                   SizedBox(
                     width: 20.0,
                   ),
-                  _buildBoxMoney('500 Bits = 500,000 VNĐ', 4, group1),
+                  _buildBoxMoney('500 Bits = 500,000 VNĐ', 3,),
                 ],
               ),
             ),
-            _buildBoxMoney('Số tiền khác', 5, group1),
+            _buildBoxMoney('Số tiền khác', 4,),
           ],
         ),
       ),
@@ -184,7 +187,6 @@ class _Nap_Bits_State extends State<Nap_Bits> {
   Widget _buildBoxMoney(
     String _s,
     int _a,
-    int _b,
   ) {
     return Container(
       child: Column(
@@ -205,10 +207,10 @@ class _Nap_Bits_State extends State<Nap_Bits> {
           ),
           Radio(
               value: _a,
-              groupValue: _b,
+              groupValue: group1,
               onChanged: (T) {
                 setState(() {
-                  _b = T;
+                  group1 = T;
                 });
               }),
         ],
@@ -244,11 +246,11 @@ class _Nap_Bits_State extends State<Nap_Bits> {
           mainAxisSize: MainAxisSize.min,
           children: <Widget>[
             _richText('Bước 2: Chọn phương thức thanh toán '),
-            _LineBox3('Nạp tiền bằng Internet-Banking', 1, group2),
-            _LineBox3('Thanh toán online bằng thẻ ngân hàng nội địa', 2, group2),
-            _LineBox3('Chuyển khoản ngân hàng', 3, group2),
-            _LineBox3('Nạp Coin tại văn phòng đại diện HTcon', 4, group2),
-
+            _LineBox3('Nạp tiền bằng Internet-Banking', 0,),
+            _LineBox3(
+                'Thanh toán online bằng thẻ ngân hàng nội địa', 1,),
+            _LineBox3('Chuyển khoản ngân hàng', 2,),
+            _LineBox3('Nạp Coin tại văn phòng đại diện HTcon', 3,),
           ],
         ),
       ),
@@ -259,22 +261,21 @@ class _Nap_Bits_State extends State<Nap_Bits> {
     );
   }
 
-  Widget _LineBox3(String _s, int _a, int _b ) {
+  Widget _LineBox3(String _s, int _a) {
     return Row(
       children: <Widget>[
         Radio(
             value: _a,
-            groupValue: _b,
-            onChanged: (T) {
+            groupValue: group2,
+            onChanged: (value) {
               setState(() {
-                _b = T;
+                group2 = value;
               });
             }),
         Text(
           _s,
           style: TextStyle(fontSize: 16.0, fontWeight: FontWeight.w400),
         ),
-
       ],
     );
   }

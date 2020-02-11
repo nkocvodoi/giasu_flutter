@@ -29,7 +29,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'giasu',
-      home: PassWord1(),
+      home: Payments(),
     );
   }
 }

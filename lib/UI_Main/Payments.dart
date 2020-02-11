@@ -46,7 +46,7 @@ class _Payments_State extends State<Payments> {
                   child: Container(
                     width: 380,
                     child: Text(infor ,
-                      style: TextStyle(color: colorApp, fontSize: 25.0),
+                      style: TextStyle(color: colorApp, fontSize: 22.0),
                     ),
                   ),
               ),
@@ -106,7 +106,7 @@ class _Payments_State extends State<Payments> {
                   onChanged: (v) {
                     setState(() {
                       _selectedvalue = v;
-                      if(v == 'Nợ phí') infor = 'Bạn cần nạp đủ 250 Bits và được nợ lạ 240 Bits tối đa 35 ngày (kể từ ngày bắt đầu nhận lớp)';
+                      if(v == 'Nợ phí') infor = 'Bạn cần nạp đủ 250 Bits và được nợ lại 240 Bits tối đa 35 ngày (kể từ ngày bắt đầu nhận lớp)';
                       else infor = 'Bạn cần nạp đủ 490 Bits';
                     });
                   },

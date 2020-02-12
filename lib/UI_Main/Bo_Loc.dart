@@ -3,6 +3,7 @@ import 'dart:ui';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:test_giasu/UI_Main/Lists_Class.dart';
 
 class Bo_Loc extends StatefulWidget {
   @override
@@ -100,10 +101,10 @@ class _Bo_Loc_State extends State<Bo_Loc> {
                       thumbColor: _color,
                       //thumbShape: RoundSliderThumbShape(enabledThumbRadius: 12.0),
                      // valueIndicatorShape: PaddleSliderValueIndicatorShape(),
-                      valueIndicatorColor: Colors.transparent,
+                      valueIndicatorColor: Colors.indigo,
                       valueIndicatorTextStyle: TextStyle(
                         fontSize: 15.0,
-                        color: _color,
+                        color: Colors.white,
                       ),
                     ),
                     child: Slider(
@@ -121,6 +122,12 @@ class _Bo_Loc_State extends State<Bo_Loc> {
                   ),
                   RaisedButton(
                     onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => Lists_Class(),
+                        ),
+                      );
                     },
                     color: _color,
                     child: new Padding(

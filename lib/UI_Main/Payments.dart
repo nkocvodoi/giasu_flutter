@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:test_giasu/UI_Main/General_Infor.dart';
 
 class Payments extends StatefulWidget {
   @override
@@ -13,6 +14,7 @@ class _Payments_State extends State<Payments> {
 
   String _selectedvalue = 'Thanh toán đủ phí' ;
   List<String> _menu = ['Thanh toán đủ phí', 'Nợ phí'];
+  String infor = 'Bạn cần nạp đủ 490 Bits';
 
   @override
   Widget build(BuildContext context) {
@@ -39,8 +41,14 @@ class _Payments_State extends State<Payments> {
                   color: _color,
                 ),
               ),
-              SizedBox(
-                height: 300,
+              SizedBox(height: 50,),
+              Expanded(
+                  child: Container(
+                    width: 380,
+                    child: Text(infor ,
+                      style: TextStyle(color: colorApp, fontSize: 22.0),
+                    ),
+                  ),
               ),
               Divider(
                 thickness: 2,
@@ -66,6 +74,7 @@ class _Payments_State extends State<Payments> {
                   ),
                 ),
               ),
+              SizedBox(height: 30.0,),
             ],
           ),
           Positioned(
@@ -97,6 +106,8 @@ class _Payments_State extends State<Payments> {
                   onChanged: (v) {
                     setState(() {
                       _selectedvalue = v;
+                      if(v == 'Nợ phí') infor = 'Bạn cần nạp đủ 250 Bits và được nợ lại 240 Bits tối đa 35 ngày (kể từ ngày bắt đầu nhận lớp)';
+                      else infor = 'Bạn cần nạp đủ 490 Bits';
                     });
                   },
                 ),

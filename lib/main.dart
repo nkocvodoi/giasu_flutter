@@ -15,7 +15,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'giasu',
-      home: BottomNavigationBar(currentIndex: 0,),
+      home: MyBottomNavigationBar(currentIndex: 0,),
     );
   }
 }

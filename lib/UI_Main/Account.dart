@@ -129,6 +129,12 @@ class _Account_State extends State<Account> {
             style: TextStyle(color: Colors.grey[600],fontSize: 25.0),
           ),
           onTap: () {
+//            Navigator.push(
+//              context,
+//              MaterialPageRoute(
+//                builder: (context) => Bo_Loc(),
+//              ),
+//            );
           },
         ),
       ],

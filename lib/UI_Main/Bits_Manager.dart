@@ -1,6 +1,9 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:test_giasu/UI_Main/Account.dart';
+import 'package:test_giasu/UI_Main/Nap_Bits.dart';
 
+import 'Bo_Loc.dart';
 import 'BottomNavigationBar.dart';
 import 'General_Infor.dart';
 
@@ -72,12 +75,10 @@ class _Bits_Manager_State extends State<Bits_Manager> {
                 _textField('Chọn giao dịch'),
                 _textField('Ngày giao dịch'),
                 _textField('Trạng thái'),
-
                 _button(),
                 SizedBox(
                   height: 10,
                 ),
-
               ],
             ),
             Positioned(
@@ -89,7 +90,8 @@ class _Bits_Manager_State extends State<Bits_Manager> {
                         Icons.account_box,
                         size: 40.0,
                       ),
-                      'Nạp Bits'),
+                      'Nạp Bits',
+                      1),
                   SizedBox(
                     width: 15.0,
                   ),
@@ -98,7 +100,8 @@ class _Bits_Manager_State extends State<Bits_Manager> {
                         Icons.account_box,
                         size: 40.0,
                       ),
-                      'Chuyển Bits'),
+                      'Chuyển Bits',
+                      2),
                   SizedBox(
                     width: 15.0,
                   ),
@@ -107,7 +110,8 @@ class _Bits_Manager_State extends State<Bits_Manager> {
                         Icons.account_box,
                         size: 40.0,
                       ),
-                      'Rút Bits'),
+                      'Rút Bits',
+                      3),
                 ],
               ),
               //child: _header_box(Icon(Icons.account_box, size: 40.0,), 'Nạp Bits')
@@ -117,7 +121,6 @@ class _Bits_Manager_State extends State<Bits_Manager> {
       ),
     );
   }
-
 
   Widget _Infor_Box(String _s, String _a) {
     return Container(
@@ -157,34 +160,33 @@ class _Bits_Manager_State extends State<Bits_Manager> {
   Widget _textField(String _text) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
-        children: <Widget>[
-          Text(_text,
+      children: <Widget>[
+        Text(
+          _text,
           style: TextStyle(
-              fontSize: 23.0,
-              color: Colors.grey,
-              fontWeight: FontWeight.w400),
-          ),
-          Container(
-            margin: EdgeInsets.only(top: 7.0,bottom: 7),
-            height: 45.0,
-            width: 310,
-            child: TextField(
-              style: TextStyle(fontSize: 23.0, height: 0.7),
-              decoration: InputDecoration(
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(6.0),
-                ),
-                hintStyle: TextStyle(fontSize: 23.0),
+              fontSize: 23.0, color: Colors.grey, fontWeight: FontWeight.w400),
+        ),
+        Container(
+          margin: EdgeInsets.only(top: 7.0, bottom: 7),
+          height: 45.0,
+          width: 310,
+          child: TextField(
+            style: TextStyle(fontSize: 23.0, height: 0.7),
+            decoration: InputDecoration(
+              border: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(6.0),
               ),
-            ),
-            decoration: BoxDecoration(
-              color: Colors.white,
-              border: Border.all(color: colorApp),
-              borderRadius: BorderRadius.circular(6.0),
+              hintStyle: TextStyle(fontSize: 23.0),
             ),
           ),
-        ],
-      );
+          decoration: BoxDecoration(
+            color: Colors.white,
+            border: Border.all(color: colorApp),
+            borderRadius: BorderRadius.circular(6.0),
+          ),
+        ),
+      ],
+    );
   }
 
   Widget _infor_text() {
@@ -219,21 +221,20 @@ class _Bits_Manager_State extends State<Bits_Manager> {
       ),
     );
   }
+
   Widget _button() {
-    return  Container(
+    return Container(
       alignment: Alignment.center,
       child: RaisedButton(
-        onPressed: () {
-        },
+        onPressed: () {},
         color: colorApp,
         child: new Padding(
-          padding: EdgeInsets.only(right: 10.0, left: 10.0, bottom: 10.0,top: 10.0),
+          padding:
+              EdgeInsets.only(right: 10.0, left: 10.0, bottom: 10.0, top: 10.0),
           child: Text(
             'Tìm kiếm',
             style: TextStyle(
-                fontSize: 20,
-                fontWeight: FontWeight.w400,
-                color: Colors.white),
+                fontSize: 20, fontWeight: FontWeight.w400, color: Colors.white),
           ),
         ),
         shape: RoundedRectangleBorder(
@@ -242,14 +243,39 @@ class _Bits_Manager_State extends State<Bits_Manager> {
       ),
     );
   }
-  Widget _header_box(Icon _icon, String _s) {
-    return  Container(
+
+  Widget _header_box(
+    Icon _icon,
+    String _s,
+    var _a,
+  ) {
+    return Container(
       //alignment: Alignment.center,
       height: 100,
       width: 110,
       child: RaisedButton(
         padding: EdgeInsets.all(0.0),
         onPressed: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) {
+                print(_a);
+            switch (_a) {
+              case 1:
+                {
+                  return Nap_Bits();
+                }
+                break;
+              default:
+                {
+                  return MyBottomNavigationBar(currentIndex: 4,);
+                }
+                break;
+            }
+              },
+            ),
+          );
         },
         color: Colors.white,
         child: Column(
@@ -277,5 +303,4 @@ class _Bits_Manager_State extends State<Bits_Manager> {
       ),
     );
   }
-
 }

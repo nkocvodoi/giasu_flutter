@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:test_giasu/UI_Main/BottomNavigationBar.dart';
 
+import 'Bo_Loc.dart';
+
 class Lists_Class extends StatefulWidget {
   @override
   State<StatefulWidget> createState() {
@@ -82,8 +84,19 @@ class _Lists_Class_State extends State<Lists_Class> {
                             color: Colors.white),
                         textAlign: TextAlign.center,
                       ),
-                      onTap: () {print('Tap');},
-                      trailing: Icon(Icons.arrow_forward_ios, color: Colors.white,),
+                      onTap: () {
+                        print('Tap');
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => Bo_Loc(),
+                            ),
+                        );
+                      },
+                      trailing: Icon(
+                        Icons.arrow_forward_ios,
+                        color: Colors.white,
+                      ),
                     ),
                     decoration: BoxDecoration(
                       color: _color,

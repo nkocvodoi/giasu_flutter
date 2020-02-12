@@ -14,7 +14,7 @@ class _Payments_State extends State<Payments> {
 
   String _selectedvalue = 'Thanh toán đủ phí' ;
   List<String> _menu = ['Thanh toán đủ phí', 'Nợ phí'];
-  String infor = '';
+  String infor = 'Bạn cần nạp đủ 490 Bits';
 
   @override
   Widget build(BuildContext context) {

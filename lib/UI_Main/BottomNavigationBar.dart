@@ -4,16 +4,19 @@ import 'package:test_giasu/UI_Main/Bits_Manager.dart';
 import 'package:test_giasu/UI_Main/Lists_Class.dart';
 
 class MyBottomNavigationBar extends StatefulWidget {
+  var currentIndex;
+  MyBottomNavigationBar({Key key, this.currentIndex}) : super(key:key);
   @override
   State<StatefulWidget> createState() {
     // TODO: implement createState
-    return _BottomNavigationBarState();
+    return _BottomNavigationBarState(currentIndex: currentIndex);
   }
 }
 
 class _BottomNavigationBarState extends State<MyBottomNavigationBar> {
   @override
-  int _currentIndex = 0;
+  var currentIndex;
+  _BottomNavigationBarState({this.currentIndex});
   final List<Widget> _children = [
     Account(),
     Lists_Class(),
@@ -23,18 +26,18 @@ class _BottomNavigationBarState extends State<MyBottomNavigationBar> {
   ];
   void _onTappedBar(int index) {
     setState(() {
-      _currentIndex = index;
+      currentIndex = index;
     });
   }
 
   Widget build(BuildContext context) {
     // TODO: implement build
     return Scaffold(
-        body: _children[_currentIndex],
+        body: _children[currentIndex],
         bottomNavigationBar: BottomNavigationBar(
           type: BottomNavigationBarType.fixed,
           onTap: _onTappedBar,
-          currentIndex: _currentIndex,
+          currentIndex: currentIndex,
           items: const <BottomNavigationBarItem>[
             BottomNavigationBarItem(
               icon: Icon(

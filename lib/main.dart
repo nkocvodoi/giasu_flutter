@@ -10,9 +10,9 @@ import 'package:test_giasu/UI_Main/Invite_Friend.dart';
 import 'package:test_giasu/UI_Main/Lists_Class.dart';
 import 'package:test_giasu/UI_Main/Nap_Bits.dart';
 import 'package:test_giasu/UI_Main/Payments.dart';
-import 'package:test_giasu/UI_Main/PersonInfor.dart';
+import 'package:test_giasu/Open_App/PersonInfor.dart';
 import 'package:test_giasu/UI_Main/Request.dart';
-import 'package:test_giasu/UI_Main/SpecialtyInfor.dart';
+import 'package:test_giasu/Open_App/SpecialtyInfor.dart';
 import 'package:test_giasu/UI_Main/Support_Settings.dart';
 
 import 'Open_App/SignIn_Page.dart';
@@ -29,7 +29,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'giasu',
-      home: Payments(),
+      home: MyBottomNavigationBar(currentIndex: 0,),
     );
   }
 }

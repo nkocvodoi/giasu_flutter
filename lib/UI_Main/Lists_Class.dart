@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:test_giasu/UI_Main/BottomNavigationBar.dart';
 
 import 'Bo_Loc.dart';
@@ -14,8 +15,12 @@ class Lists_Class extends StatefulWidget {
 
 class _Lists_Class_State extends State<Lists_Class> {
   final Color _color = Color.fromRGBO(47, 101, 174, 1);
+
   @override
   Widget build(BuildContext context) {
+    ScreenUtil.instance = ScreenUtil.getInstance()..init(context);
+    ScreenUtil.instance =
+        ScreenUtil(width: 750, height: 1334, allowFontScaling: true);
     // TODO: implement build
     return Scaffold(
       appBar: AppBar(
@@ -120,8 +125,8 @@ class _Lists_Class_State extends State<Lists_Class> {
       padding: EdgeInsets.all(0.0),
       child: Container(
         alignment: Alignment.center,
-        height: 190,
-        width: 380,
+        height: ScreenUtil.getInstance().setHeight(400),
+        width: ScreenUtil.getInstance().setWidth(600),
         child: Padding(
           padding: EdgeInsets.only(left: 5.0, top: 7.0),
           child: Row(

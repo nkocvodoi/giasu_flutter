@@ -101,10 +101,10 @@ class _Bo_Loc_State extends State<Bo_Loc> {
                       thumbColor: _color,
                       //thumbShape: RoundSliderThumbShape(enabledThumbRadius: 12.0),
                      // valueIndicatorShape: PaddleSliderValueIndicatorShape(),
-                      valueIndicatorColor: Colors.transparent,
+                      valueIndicatorColor: Colors.indigo,
                       valueIndicatorTextStyle: TextStyle(
                         fontSize: 15.0,
-                        color: _color,
+                        color: Colors.white,
                       ),
                     ),
                     child: Slider(

@@ -1,16 +1,26 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:provider/provider.dart';
+
 import 'PassWord1.dart';
-import 'PassWord2.dart';
 import 'SignUp_Page.dart';
 
+// ignore: camel_case_types
 class SignIn_Page extends StatefulWidget {
   @override
   _SignIn_PageState createState() => _SignIn_PageState();
 }
 
+// ignore: camel_case_types
 class _SignIn_PageState extends State<SignIn_Page> {
+  // bool _isHidden = true;
+  // void _toggleVisibility() {
+  //   setState(() {
+  //     _isHidden = !_isHidden;
+  //   });
+  // }
+
   @override
   Widget build(BuildContext context) {
     ScreenUtil.instance = ScreenUtil.getInstance()..init(context);
@@ -37,10 +47,10 @@ class _SignIn_PageState extends State<SignIn_Page> {
                         height: 90,
                       ),
                       Image.asset(
-                        'assets/Logo_HTcon_ok-01-6-1.png',
+                        'lib/assets/Logo2.png',
                         cacheHeight: 90,
                         cacheWidth: 130,
-                        height: 90,
+                        height: ScreenUtil.getInstance().setHeight(200),
                       ),
                     ],
                   )),
@@ -62,39 +72,23 @@ class _SignIn_PageState extends State<SignIn_Page> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: <Widget>[
                         TextField(
-                          autofocus: true,
-                          style: TextStyle(fontSize: 25.0),
                           decoration: InputDecoration(
                               hintText: 'Email/ Số điện thoại',
                               border: OutlineInputBorder(),
                               hintStyle: TextStyle(
                                 fontStyle: FontStyle.normal,
-                                color: Colors.grey[600],
-                                fontSize: 20.0,
+                                color: Colors.grey[400],
+                                fontSize: ScreenUtil().setSp(30),
                               ),
                               suffixIcon: IconButton(
                                 icon: Icon(Icons.mail),
                               )),
                         ),
                         SizedBox(
+                          width: double.infinity,
                           height: ScreenUtil.getInstance().setHeight(60),
                         ),
-                        TextField(
-                          decoration: InputDecoration(
-                              hintText: 'Mật khẩu',
-                              border: OutlineInputBorder(),
-                              hintStyle: TextStyle(
-                                fontStyle: FontStyle.normal,
-                                color: Colors.grey[600],
-                                fontSize: 20.0,
-                              ),
-                              suffixIcon: IconButton(
-                                icon: Icon(Icons.remove_red_eye),
-                              )),
-                        ),
-                        SizedBox(
-                          height: 10.0,
-                        ),
+                        _buildBox('Mật khẩu', true),
                       ],
                     ),
                   ),
@@ -104,10 +98,10 @@ class _SignIn_PageState extends State<SignIn_Page> {
                       RichText(
                         text: TextSpan(
                           style: TextStyle(
-                            color: Colors.grey[600],
-                            fontWeight: FontWeight.w300,
+                            color: Colors.black,
+                            fontWeight: FontWeight.normal,
                             fontStyle: FontStyle.italic,
-                            fontSize: 20.0,
+                            fontSize: ScreenUtil().setSp(25),
                           ),
                           children: <TextSpan>[
                             TextSpan(
@@ -155,19 +149,13 @@ class _SignIn_PageState extends State<SignIn_Page> {
                         child: Material(
                           color: Colors.transparent,
                           child: InkWell(
-                            onTap: () {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => PassWord1()),
-                              );
-                            },
+                            onTap: () {},
                             child: Center(
                               child: Text(
                                 'Đăng nhập',
                                 style: TextStyle(
                                   color: Colors.white,
-                                  fontSize: 16,
+                                  fontSize: ScreenUtil().setSp(25),
                                   letterSpacing: 1.0,
                                 ),
                               ),
@@ -198,7 +186,7 @@ class _SignIn_PageState extends State<SignIn_Page> {
                                 'Đăng nhập bằng Facebook',
                                 style: TextStyle(
                                   color: Colors.white,
-                                  fontSize: 11,
+                                  fontSize:ScreenUtil().setSp(20),
                                   letterSpacing: 1.0,
                                 ),
                                 textAlign: TextAlign.center,
@@ -230,7 +218,7 @@ class _SignIn_PageState extends State<SignIn_Page> {
                                 'Đăng nhập bằng Google +',
                                 style: TextStyle(
                                   color: Colors.white,
-                                  fontSize: 12,
+                                  fontSize: ScreenUtil().setSp(20),
                                   letterSpacing: 1.0,
                                 ),
                                 textAlign: TextAlign.center,
@@ -243,10 +231,59 @@ class _SignIn_PageState extends State<SignIn_Page> {
                   ),
                 ],
               ),
-            ),
+          ),
           ),
         ],
       ),
     );
+  }
+
+  Widget _buildBox(String _a, bool _b) {
+    return ChangeNotifierProvider<Counter>(
+      create: (_) => Counter(),
+      child: Consumer<Counter>(
+        builder: (_, counter, __) => _change_obscure(_a, counter),
+      ),
+    );
+  }
+
+  Widget _change_obscure(String _a, Counter counter) {
+    return TextField(
+          obscureText: counter.count,
+          decoration: InputDecoration(
+              hintText: 'Mật khẩu',
+              border: OutlineInputBorder(),
+              hintStyle: TextStyle(
+                fontStyle: FontStyle.normal,
+                color: Colors.grey[400],
+                fontSize: ScreenUtil().setSp(30),
+              ),
+              suffixIcon: IconButton(
+                icon: counter.count
+                    ? Icon(Icons.visibility_off)
+                    : Icon(Icons.visibility),
+                onPressed: () {
+                  counter.change();
+                },
+              )),
+        
+       
+    );
+  }
+}
+
+class Counter extends ChangeNotifier {
+  bool _count = true;
+
+  bool get count => _count;
+  void setCount(bool val) {
+    if (val != _count) {
+      _count = val;
+      notifyListeners();
+    }
+  }
+
+  change() {
+    setCount(!_count);
   }
 }

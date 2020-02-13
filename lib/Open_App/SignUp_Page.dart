@@ -1,8 +1,8 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
-import 'package:test_giasu/Open_App/PassWord1.dart';
-import 'package:test_giasu/Open_App/SignIn_Page.dart';
+
+import 'SignIn_Page.dart';
 
 class SignUpPage extends StatefulWidget {
   @override

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:test_giasu/UI_Main/Account.dart';
+import 'package:test_giasu/UI_Main/Anouncement.dart';
 import 'package:test_giasu/UI_Main/Bits_Manager.dart';
 import 'package:test_giasu/UI_Main/Lists_Class.dart';
 
@@ -21,7 +22,7 @@ class _BottomNavigationBarState extends State<MyBottomNavigationBar> {
     Account(),
     Lists_Class(),
     Bits_Manager(),
-    Account(),
+    Anouncement(),
     Account(),
   ];
   void _onTappedBar(int index) {

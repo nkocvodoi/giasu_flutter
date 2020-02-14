@@ -26,7 +26,7 @@ class _Lists_Class_State extends State<Lists_Class> {
     var height = MediaQuery.of(context).size.height.toInt();
     ScreenUtil.instance = ScreenUtil.getInstance()..init(context);
     ScreenUtil.instance =
-        ScreenUtil(width: 420, height: 680, allowFontScaling: true);
+        ScreenUtil(width: width, height: height, allowFontScaling: true);
 
     // TODO: implement build
     return Scaffold(
@@ -35,7 +35,9 @@ class _Lists_Class_State extends State<Lists_Class> {
         title: Center(
           child: Text(
             'Danh sách lớp gia sư',
-            style: TextStyle(fontSize: ScreenUtil.getInstance().setSp(30), fontWeight: FontWeight.w400),
+            style: TextStyle(
+                fontSize: ScreenUtil.getInstance().setSp(30),
+                fontWeight: FontWeight.w400),
             textAlign: TextAlign.center,
           ),
         ),
@@ -66,14 +68,15 @@ class _Lists_Class_State extends State<Lists_Class> {
                   Container(
                     height: ScreenUtil.getInstance().setHeight(55),
                     width: ScreenUtil.getInstance().setWidth(150),
-                    child: Text(
-                      'N kết quả',
-                      style: TextStyle(
-                          height: 1.7,
-                          fontSize: ScreenUtil.getInstance().setSp(25),
-                          fontWeight: FontWeight.w400,
-                          color: Colors.white),
-                      textAlign: TextAlign.center,
+                    child: Center(
+                      child: Text(
+                        'N kết quả',
+                        style: TextStyle(
+                            fontSize: ScreenUtil.getInstance().setSp(25),
+                            fontWeight: FontWeight.w400,
+                            color: Colors.white),
+                        textAlign: TextAlign.center,
+                      ),
                     ),
                     decoration: BoxDecoration(
                       color: _color,
@@ -90,7 +93,6 @@ class _Lists_Class_State extends State<Lists_Class> {
                       title: Text(
                         'Bộ lọc',
                         style: TextStyle(
-                            height: 0.8,
                             fontSize: ScreenUtil.getInstance().setSp(25),
                             fontWeight: FontWeight.w400,
                             color: Colors.white),
@@ -99,10 +101,10 @@ class _Lists_Class_State extends State<Lists_Class> {
                       onTap: () {
                         print('Tap');
                         Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => Bo_Loc(),
-                            ),
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => Bo_Loc(),
+                          ),
                         );
                       },
                       trailing: Icon(
@@ -188,7 +190,9 @@ class _Lists_Class_State extends State<Lists_Class> {
         ),
         decoration: BoxDecoration(
           color: Colors.white,
-          border: Border.all(color: Colors.blueAccent, width: ScreenUtil.getInstance().setWidth(2)),
+          border: Border.all(
+              color: Colors.blueAccent,
+              width: ScreenUtil.getInstance().setWidth(2)),
           borderRadius: BorderRadius.circular(10.0),
         ),
       ),
@@ -232,7 +236,7 @@ class _Lists_Class_State extends State<Lists_Class> {
           Text(
             _text,
             style: TextStyle(
-              height:ScreenUtil.getInstance().setSp(1),
+              height: ScreenUtil.getInstance().setSp(1),
               fontSize: ScreenUtil.getInstance().setSp(_a),
               color: _c,
               fontWeight: FontWeight.w400,
@@ -297,7 +301,9 @@ class _Lists_Class_State extends State<Lists_Class> {
             onPressed: () {},
             child: Text(
               'Đề nghị dạy',
-              style: TextStyle(fontSize: ScreenUtil.getInstance().setSp(15), color: Colors.white),
+              style: TextStyle(
+                  fontSize: ScreenUtil.getInstance().setSp(15),
+                  color: Colors.white),
             ),
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(15.0),

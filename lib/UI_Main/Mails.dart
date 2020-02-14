@@ -15,7 +15,7 @@ class Mails extends StatelessWidget {
     ScreenUtil.instance = ScreenUtil.getInstance()..init(context);
 
     ScreenUtil.instance =
-        ScreenUtil(width: 750, height: 1334, allowFontScaling: true);
+        ScreenUtil(width: 700, height: 1200, allowFontScaling: true);
     return Container(
       alignment: Alignment.center,
       width: ScreenUtil.getInstance().setWidth(700),
@@ -29,7 +29,7 @@ class Mails extends StatelessWidget {
             width: ScreenUtil.getInstance().setWidth(100),
             height: ScreenUtil.getInstance().setHeight(300),
             alignment: Alignment.topCenter,
-            child: Image.asset('lib/assets/momo.png',width: ScreenUtil.getInstance().setWidth(60),),
+            child: Image.asset('assets/momo.png',width: ScreenUtil.getInstance().setWidth(60),),
           ),
           Container(
             

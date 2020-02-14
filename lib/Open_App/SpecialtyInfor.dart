@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
+import 'SubjectChoice.dart';
+
 class SpecialtyInfor extends StatefulWidget {
   @override
   State<StatefulWidget> createState() {
@@ -183,7 +185,34 @@ class _SpecialtyInforState extends State<SpecialtyInfor> {
                   _textField('Bạn đang là'),
                   _textField('Hình thức dạy'),
                   _textField('Học phí vnđ/buổi (VD: 150.000)'),
-                  _textField('Gia sư môn (Dạng lưới: Chọn tối đa 3)'),
+                  Container(
+                    height: ScreenUtil.getInstance().setHeight(100),
+                    width: ScreenUtil.getInstance().setWidth(640),
+                    decoration: BoxDecoration(
+                      border: Border.all(color: Colors.grey),
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                    child: FlatButton(
+                      color: Colors.white,
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => SubjectChoice(),
+                          ),
+                        );
+                      },
+                      child: Text(
+                        'Gia sư môn',
+                        style: TextStyle(
+                          fontSize: ScreenUtil.getInstance().setSp(30),
+                          fontStyle: FontStyle.normal,
+                          color: Colors.grey[400],
+                        ),
+                        textAlign: TextAlign.start,
+                      ),
+                    ),
+                  ),
                   _textField('Số lượng lớp đã dạy (VD: 5)'),
                   RichText(
                     textAlign: TextAlign.start,

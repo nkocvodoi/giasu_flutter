@@ -35,7 +35,7 @@ class Waiting_screenState extends State<Waiting_screen>{
             left: 60,
             width: 300,
             height: 500,
-            child: new Image.asset('lib/assets/Logo2.png'),
+            child: new Image.asset('assets/Logo2.png'),
           ),
           new Positioned(
             bottom: 200.0,

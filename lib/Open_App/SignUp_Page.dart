@@ -1,6 +1,7 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import 'SignIn_Page.dart';
 
@@ -116,6 +117,7 @@ class _SignUpPage extends State<SignUpPage> {
                                     recognizer: new TapGestureRecognizer()
                                       ..onTap = () {
                                         print('Log1');
+                                        launch('https://htcon.vn/quy-dinh-chung/');
                                       },
                                     style: TextStyle(
                                       fontStyle: FontStyle.italic,
@@ -129,6 +131,7 @@ class _SignUpPage extends State<SignUpPage> {
                                     recognizer: new TapGestureRecognizer()
                                       ..onTap = () {
                                         print('Log');
+                                        launch('https://htcon.vn/chinh-sach-bao-mat-thong-tin/');
                                       },
                                     style: TextStyle(
                                       fontStyle: FontStyle.italic,

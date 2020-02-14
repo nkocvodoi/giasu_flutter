@@ -77,7 +77,7 @@ class _PersonInforState extends State<PersonInfor> {
                     ),
                     child: GestureDetector(
                       onTap: () {},
-                      child: Image.asset('lib/assets/user.png'),
+                      child: Image.asset('assets/user.png'),
                     ),
                   ),
                   Column(

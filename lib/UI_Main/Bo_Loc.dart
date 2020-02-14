@@ -3,6 +3,7 @@ import 'dart:ui';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:test_giasu/UI_Main/BottomNavigationBar.dart';
 import 'package:test_giasu/UI_Main/Lists_Class.dart';
 
 class Bo_Loc extends StatefulWidget {
@@ -125,7 +126,7 @@ class _Bo_Loc_State extends State<Bo_Loc> {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => Lists_Class(),
+                          builder: (context) => MyBottomNavigationBar(currentIndex: 1,),
                         ),
                       );
                     },

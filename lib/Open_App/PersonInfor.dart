@@ -4,6 +4,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
+import 'SpecialtyInfor.dart';
+
 class PersonInfor extends StatefulWidget {
   @override
   State<StatefulWidget> createState() {
@@ -36,7 +38,7 @@ class _PersonInforState extends State<PersonInfor> {
   Widget build(BuildContext context) {
     ScreenUtil.instance = ScreenUtil.getInstance()..init(context);
     ScreenUtil.instance =
-        ScreenUtil(width: 750, height: 1334, allowFontScaling: true);
+        ScreenUtil(width: 900, height: 1334, allowFontScaling: true);
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Color.fromRGBO(47, 101, 174, 1),
@@ -126,7 +128,7 @@ class _PersonInforState extends State<PersonInfor> {
                                 },
                                 child: Row(
                                   children: <Widget>[
-                                    Image.asset('lib/assets/user.png'),
+                                    Image.asset('assets/user.png'),
                                     Column(
                                       crossAxisAlignment:
                                           CrossAxisAlignment.start,
@@ -180,7 +182,7 @@ class _PersonInforState extends State<PersonInfor> {
                                 },
                                 child: Row(
                                   children: <Widget>[
-                                    Image.asset('lib/assets/user.png'),
+                                    Image.asset('assets/user.png'),
                                     Column(
                                       crossAxisAlignment:
                                           CrossAxisAlignment.start,
@@ -255,9 +257,14 @@ class _PersonInforState extends State<PersonInfor> {
                             child: InkWell(
                               onTap: () {
                                 print('tap');
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) => SpecialtyInfor(),
+                                    ));
                               },
                               child: Image.asset(
-                                "lib/assets/next.png",
+                                "assets/next.png",
                                 width: ScreenUtil.getInstance().setWidth(200),
                                 fit: BoxFit.cover,
                               ),

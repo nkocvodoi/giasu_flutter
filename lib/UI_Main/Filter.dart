@@ -6,15 +6,15 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:test_giasu/UI_Main/BottomNavigationBar.dart';
 import 'package:test_giasu/UI_Main/Lists_Class.dart';
 
-class Bo_Loc extends StatefulWidget {
+class Filter extends StatefulWidget {
   @override
   State<StatefulWidget> createState() {
     // TODO: implement createState
-    return _Bo_Loc_State();
+    return _Filter_State();
   }
 }
 
-class _Bo_Loc_State extends State<Bo_Loc> {
+class _Filter_State extends State<Filter> {
   final Color _color = Color.fromRGBO(47, 101, 174, 1);
 
   var _slidervalue = 0.0;

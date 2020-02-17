@@ -5,7 +5,7 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:test_giasu/UI_Main/BottomNavigationBar.dart';
 
-import 'Bo_Loc.dart';
+import 'Filter.dart';
 import 'ClassDetail.dart';
 
 // ignore: camel_case_types
@@ -103,7 +103,7 @@ class _Lists_Class_State extends State<Lists_Class> {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (context) => Bo_Loc(),
+                            builder: (context) => Filter(),
                           ),
                         );
                       },

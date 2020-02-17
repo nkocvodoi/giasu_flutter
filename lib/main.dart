@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:test_giasu/Open_App/Waiting_screen.dart';
+import 'package:test_giasu/Students/Filter.dart';
 import 'package:test_giasu/UI_Main/ClassDetail.dart';
 import 'package:test_giasu/UI_Main/ClassDetail3.dart';
 import 'Open_App/SignIn_Page.dart';
@@ -19,7 +20,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'giasu',
      //home: MyBottomNavigationBar(currentIndex: 0,),
-      home: Waiting_screen(),
+      home: Filter(),
     );
   }
 }

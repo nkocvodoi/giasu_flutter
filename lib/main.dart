@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:test_giasu/Open_App/Waiting_screen.dart';
 import 'package:test_giasu/UI_Main/ClassDetail.dart';
 import 'package:test_giasu/UI_Main/ClassDetail3.dart';
+import 'package:test_giasu/UI_Main/Filter.dart';
 import 'Open_App/SignIn_Page.dart';
 import 'Open_App/SignUp_Page.dart';
 

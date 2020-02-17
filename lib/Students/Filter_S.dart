@@ -7,7 +7,7 @@ import 'package:test_giasu/Helper/previous_widget.dart';
 import 'package:test_giasu/UI_Main/BottomNavigationBar.dart';
 import 'package:test_giasu/UI_Main/Lists_Class.dart';
 
-class Filter extends StatefulWidget {
+class Filter_S extends StatefulWidget {
   @override
   State<StatefulWidget> createState() {
     // TODO: implement createState
@@ -15,7 +15,7 @@ class Filter extends StatefulWidget {
   }
 }
 
-class _Filter_State extends State<Filter> {
+class _Filter_State extends State<Filter_S> {
   final Color _color = Color.fromRGBO(47, 101, 174, 1);
 
   Widget _textField(String text) {

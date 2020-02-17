@@ -45,7 +45,7 @@ class _SignIn_PageState extends State<SignIn_Page> {
                   child: Column(
                     children: <Widget>[
                       SizedBox(
-                        height: 90,
+                        height: 50,
                       ),
                       Image.asset(
                         'assets/Logo2.png',

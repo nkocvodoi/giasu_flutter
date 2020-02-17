@@ -15,7 +15,7 @@ class Mails extends StatelessWidget {
     ScreenUtil.instance = ScreenUtil.getInstance()..init(context);
 
     ScreenUtil.instance =
-        ScreenUtil(width: 700, height: 1200, allowFontScaling: true);
+        ScreenUtil(width: 750, height: 1334, allowFontScaling: true);
     return Container(
       alignment: Alignment.center,
       width: ScreenUtil.getInstance().setWidth(700),

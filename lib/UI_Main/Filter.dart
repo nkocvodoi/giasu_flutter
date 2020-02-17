@@ -3,6 +3,8 @@ import 'dart:ui';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:test_giasu/Widgets/SmallTextField.dart';
+import 'package:test_giasu/Widgets/previous_widget.dart';
 import 'package:test_giasu/UI_Main/BottomNavigationBar.dart';
 import 'package:test_giasu/UI_Main/Lists_Class.dart';
 
@@ -74,11 +76,11 @@ class _FilterState extends State<Filter> {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: <Widget>[
-                        _textField('Địa điểm'),
-                        _textField('Môn học'),
-                        _textField('Chủ đề'),
-                        _textField('Hình thức học'),
-                        _textField('Đối tượng dạy'),
+                        SmallTextField('Địa điểm'),
+                        SmallTextField('Môn học'),
+                        SmallTextField('Chủ đề'),
+                        SmallTextField('Hình thức học'),
+                        SmallTextField('Đối tượng dạy'),
                       ],
                     ),
                   ),

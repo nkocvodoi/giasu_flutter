@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:test_giasu/Widgets/SelectedTimeColumn.dart';
 
 class ClassDetail4 extends StatefulWidget {
   @override
@@ -11,92 +12,12 @@ class ClassDetail4 extends StatefulWidget {
 }
 
 class ClassDetail4State extends State<ClassDetail4> {
-  final isSelected1 = [false, false, false];
-  final isSelected2 = [false, false, false];
-  final isSelected3 = [false, false, false];
-  final isSelected4 = [false, false, false];
-  final isSelected5 = [false, false, false];
-  final isSelected6 = [false, false, false];
-  final isSelected7 = [false, false, false];
-  Widget _selectedDay(String day, List<bool> isSelected, int space) {
-    return Padding(
-      padding: EdgeInsets.all(10.0),
-      child: Row(
-        children: <Widget>[
-          Text(
-            day,
-            textAlign: TextAlign.start,
-            style: TextStyle(
-              fontSize: ScreenUtil.getInstance().setSp(30),
-              fontStyle: FontStyle.normal,
-              color: Colors.black38,
-            ),
-          ),
-          SizedBox(
-            width: ScreenUtil.getInstance().setWidth(space),
-          ),
-          ToggleButtons(
-            borderWidth: 0.0,
-            borderRadius: BorderRadius.circular(30.0),
-            borderColor: Colors.blue,
-            selectedBorderColor: Colors.blue,
-            fillColor: Colors.orangeAccent,
-            highlightColor: Colors.white,
-            children: <Widget>[
-              Container(
-                width: ScreenUtil.getInstance().setWidth(170),
-                height: ScreenUtil.getInstance().setHeight(60),
-                child: Center(
-                  child: Text(
-                    'Buổi sáng',
-                    style: TextStyle(
-                      fontSize: ScreenUtil.getInstance().setSp(25),
-                    ),
-                  ),
-                ),
-              ),
-              Container(
-                width: ScreenUtil.getInstance().setWidth(160),
-                height: ScreenUtil.getInstance().setHeight(50),
-                child: Center(
-                  child: Text(
-                    'Buổi chiều',
-                    style: TextStyle(
-                      fontSize: ScreenUtil.getInstance().setSp(25),
-                    ),
-                  ),
-                ),
-              ),
-              Container(
-                width: ScreenUtil.getInstance().setWidth(140),
-                height: ScreenUtil.getInstance().setHeight(60),
-                child: Center(
-                  child: Text(
-                    'Buổi tối',
-                    style: TextStyle(
-                      fontSize: ScreenUtil.getInstance().setSp(25),
-                    ),
-                  ),
-                ),
-              ),
-            ],
-            onPressed: (int index) {
-              setState(() {
-                isSelected[index] = !isSelected[index];
-              });
-            },
-            isSelected: isSelected,
-          ),
-        ],
-      ),
-    );
-  }
-
+ 
   Widget _iconTextBox(Text text, Icon icon) {
     return Container(
       decoration: BoxDecoration(
-        // border: Border.all(color: Colors.grey),
-      ),
+          // border: Border.all(color: Colors.grey),
+          ),
       child: Row(
         children: <Widget>[
           icon,
@@ -386,13 +307,7 @@ class ClassDetail4State extends State<ClassDetail4> {
                     ],
                   ),
                 ),
-                _selectedDay('Thứ 2', isSelected1, 50),
-                _selectedDay('Thứ 3', isSelected2, 50),
-                _selectedDay('Thứ 4', isSelected3, 50),
-                _selectedDay('Thứ 5', isSelected4, 50),
-                _selectedDay('Thứ 6', isSelected5, 50),
-                _selectedDay('Thứ 7', isSelected6, 50),
-                _selectedDay('Chủ nhật', isSelected7, 9),
+                SelectedTimeColumn(),
                 SizedBox(
                   height: ScreenUtil.getInstance().setHeight(50),
                 ),
@@ -400,21 +315,21 @@ class ClassDetail4State extends State<ClassDetail4> {
                   alignment: Alignment.topLeft,
                   child: Container(
                     padding: EdgeInsets.all(5),
-                    // width: ScreenUtil.getInstance().setWidth(600),
+                   // width: ScreenUtil.getInstance().setWidth(600),
                     //height: ScreenUtil.getInstance().setHeight(60),
-
+                    
                     child: Container(
                       padding: EdgeInsets.all(5),
                       // width: ScreenUtil.getInstance().setWidth(80),
                       // height: ScreenUtil.getInstance().setHeight(50),
                       color: Colors.blue,
                       child: Text(
-                        'Lưu ý khi nhận lớp',
-                        style: TextStyle(
-                          fontSize: ScreenUtil.getInstance().setSp(27),
-                          color: Colors.white,
-                        ),
+                      'Lưu ý khi nhận lớp',
+                      style: TextStyle(
+                        fontSize: ScreenUtil.getInstance().setSp(27),
+                        color: Colors.white,
                       ),
+                    ),
                     ),
                   ),
                 ),

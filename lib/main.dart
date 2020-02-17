@@ -4,6 +4,7 @@ import 'package:test_giasu/Students/Filter_S.dart';
 import 'package:test_giasu/UI_Main/ClassDetail.dart';
 import 'package:test_giasu/UI_Main/ClassDetail3.dart';
 import 'package:test_giasu/UI_Main/Filter.dart';
+import 'package:test_giasu/testList_Class.dart';
 import 'Open_App/SignIn_Page.dart';
 import 'Open_App/SignUp_Page.dart';
 
@@ -22,7 +23,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'giasu',
      //home: MyBottomNavigationBar(currentIndex: 0,),
-      home: Filter(),
+      home: TestLists_Class(),
     );
   }
 }

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:test_giasu/UI_Main/Account.dart';
+import 'package:test_giasu/UI_Main/Anouncement.dart';
 import 'package:test_giasu/UI_Main/Bits_Manager.dart';
 import 'package:test_giasu/UI_Main/Lists_Class.dart';
 
@@ -18,10 +19,10 @@ class _BottomNavigationBarState extends State<MyBottomNavigationBar> {
   var currentIndex;
   _BottomNavigationBarState({this.currentIndex});
   final List<Widget> _children = [
-    Account(),
+    Lists_Class(),
     Lists_Class(),
     Bits_Manager(),
-    Account(),
+    Anouncement(),
     Account(),
   ];
   void _onTappedBar(int index) {

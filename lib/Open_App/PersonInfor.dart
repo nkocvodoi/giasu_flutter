@@ -3,6 +3,9 @@ import 'dart:ui';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:test_giasu/Widgets/SmallTextField.dart';
+
+import 'SpecialtyInfor.dart';
 
 class PersonInfor extends StatefulWidget {
   @override
@@ -13,25 +16,7 @@ class PersonInfor extends StatefulWidget {
 }
 
 class _PersonInforState extends State<PersonInfor> {
-  Widget _textField(String text) {
-    return Padding(
-      padding: EdgeInsets.all(8.0),
-      child: TextField(
-        decoration: InputDecoration(
-          hintText: text,
-          border: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(10.0),
-          ),
-          hintStyle: TextStyle(
-            fontSize: ScreenUtil.getInstance().setSp(30),
-            fontStyle: FontStyle.normal,
-            color: Colors.grey[400],
-          ),
-        ),
-      ),
-    );
-  }
-
+  
   @override
   Widget build(BuildContext context) {
     ScreenUtil.instance = ScreenUtil.getInstance()..init(context);
@@ -77,7 +62,7 @@ class _PersonInforState extends State<PersonInfor> {
                     ),
                     child: GestureDetector(
                       onTap: () {},
-                      child: Image.asset('lib/assets/user.png'),
+                      child: Image.asset('assets/user.png'),
                     ),
                   ),
                   Column(
@@ -90,16 +75,16 @@ class _PersonInforState extends State<PersonInfor> {
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: <Widget>[
-                            _textField('Họ và tên'),
-                            _textField('Giới tính'),
-                            _textField('Quê quán'),
-                            _textField('Ngày sinh'),
-                            _textField('Giọng nói'),
-                            _textField('Link Facebook của bạn'),
-                            _textField('Số điện thoại'),
-                            _textField('Email'),
-                            _textField('Địa chỉ dạy'),
-                            _textField('Địa chỉ hiện tại'),
+                            SmallTextField('Họ và tên'),
+                            SmallTextField('Giới tính'),
+                            SmallTextField('Quê quán'),
+                            SmallTextField('Ngày sinh'),
+                            SmallTextField('Giọng nói'),
+                            SmallTextField('Link Facebook của bạn'),
+                            SmallTextField('Số điện thoại'),
+                            SmallTextField('Email'),
+                            SmallTextField('Địa chỉ dạy'),
+                            SmallTextField('Địa chỉ hiện tại'),
                             Padding(
                               padding: EdgeInsets.only(
                                   left: 20.0, top: 10.0, bottom: 10.0),
@@ -126,7 +111,7 @@ class _PersonInforState extends State<PersonInfor> {
                                 },
                                 child: Row(
                                   children: <Widget>[
-                                    Image.asset('lib/assets/user.png'),
+                                    Image.asset('assets/user.png'),
                                     Column(
                                       crossAxisAlignment:
                                           CrossAxisAlignment.start,
@@ -168,7 +153,7 @@ class _PersonInforState extends State<PersonInfor> {
                             Container(
                               margin: EdgeInsets.all(10.0),
                               // padding: EdgeInsets.all(3.0),
-                               width: ScreenUtil.getInstance().setWidth(700),
+                              width: ScreenUtil.getInstance().setWidth(700),
                               height: ScreenUtil.getInstance().setHeight(200),
                               decoration: BoxDecoration(
                                 border: Border.all(color: Colors.blueAccent),
@@ -180,7 +165,7 @@ class _PersonInforState extends State<PersonInfor> {
                                 },
                                 child: Row(
                                   children: <Widget>[
-                                    Image.asset('lib/assets/user.png'),
+                                    Image.asset('assets/user.png'),
                                     Column(
                                       crossAxisAlignment:
                                           CrossAxisAlignment.start,
@@ -254,10 +239,15 @@ class _PersonInforState extends State<PersonInfor> {
                             color: Colors.transparent,
                             child: InkWell(
                               onTap: () {
-                                print('tap');
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => SpecialtyInfor(),
+                                  ),
+                                );
                               },
                               child: Image.asset(
-                                "lib/assets/next.png",
+                                "assets/next.png",
                                 width: ScreenUtil.getInstance().setWidth(200),
                                 fit: BoxFit.cover,
                               ),

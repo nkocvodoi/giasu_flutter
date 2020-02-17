@@ -17,7 +17,7 @@ class Waiting_screen extends StatefulWidget {
 class Waiting_screenState extends State<Waiting_screen>{
   Timer _timer;
   Waiting_screenState(){
-  _timer = new Timer(Duration(seconds: 2), (){
+  _timer = new Timer(Duration(seconds: 3), (){
     Navigator.push(context, MaterialPageRoute(
       builder: (context) => MyApp(),
     ),

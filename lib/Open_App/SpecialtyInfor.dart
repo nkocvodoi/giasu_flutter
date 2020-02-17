@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
-
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:test_giasu/Widgets/LargeTextField.dart';
+import 'package:test_giasu/Widgets/SelectedTimeColumn.dart';
+import 'package:test_giasu/Widgets/SmallTextField.dart';
+import 'SubjectChoice.dart';
+import 'package:test_giasu/Widgets/SelectedTime.dart';
 
 class SpecialtyInfor extends StatefulWidget {
   @override
@@ -11,144 +15,6 @@ class SpecialtyInfor extends StatefulWidget {
 }
 
 class _SpecialtyInforState extends State<SpecialtyInfor> {
-  final isSelected1 = [false, false, false];
-  final isSelected2 = [false, false, false];
-  final isSelected3 = [false, false, false];
-  final isSelected4 = [false, false, false];
-  final isSelected5 = [false, false, false];
-  final isSelected6 = [false, false, false];
-  final isSelected7 = [false, false, false];
-  Widget _selectedDay(String day, List<bool> isSelected, int space) {
-    return Padding(
-      padding: EdgeInsets.all(10.0),
-      child: Row(
-        children: <Widget>[
-          Text(
-            day,
-            textAlign: TextAlign.start,
-            style: TextStyle(
-              fontSize: ScreenUtil.getInstance().setSp(30),
-              fontStyle: FontStyle.normal,
-              color: Colors.black38,
-            ),
-          ),
-          SizedBox(
-            width: ScreenUtil.getInstance().setWidth(space),
-          ),
-          ToggleButtons(
-            borderWidth: 0.0,
-            borderRadius: BorderRadius.circular(30.0),
-            borderColor: Colors.blue,
-            selectedBorderColor: Colors.blue,
-            fillColor: Colors.orangeAccent,
-            highlightColor: Colors.white,
-            children: <Widget>[
-              Container(
-                width: ScreenUtil.getInstance().setWidth(140),
-                height: ScreenUtil.getInstance().setHeight(60),
-                child: Center(
-                  child: Text(
-                    'Buổi sáng',
-                    style: TextStyle(
-                      fontSize: ScreenUtil.getInstance().setSp(25),
-                    ),
-                  ),
-                ),
-              ),
-              Container(
-                width: ScreenUtil.getInstance().setWidth(140),
-                height: ScreenUtil.getInstance().setHeight(60),
-                child: Center(
-                  child: Text(
-                    'Buổi chiều',
-                    style: TextStyle(
-                      fontSize: ScreenUtil.getInstance().setSp(25),
-                    ),
-                  ),
-                ),
-              ),
-              Container(
-                width: ScreenUtil.getInstance().setWidth(140),
-                height: ScreenUtil.getInstance().setHeight(60),
-                child: Center(
-                  child: Text(
-                    'Buổi tối',
-                    style: TextStyle(
-                      fontSize: ScreenUtil.getInstance().setSp(25),
-                    ),
-                  ),
-                ),
-              ),
-            ],
-            onPressed: (int index) {
-              setState(() {
-                isSelected[index] = !isSelected[index];
-              });
-            },
-            isSelected: isSelected,
-          ),
-        ],
-      ),
-    );
-  }
-
-  Widget _textField(String text) {
-    return Padding(
-      padding: EdgeInsets.all(8.0),
-      child: TextField(
-        decoration: InputDecoration(
-          hintText: text,
-          border: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(10.0),
-          ),
-          hintStyle: TextStyle(
-            fontSize: ScreenUtil.getInstance().setSp(30),
-            fontStyle: FontStyle.normal,
-            color: Colors.grey[400],
-          ),
-        ),
-      ),
-    );
-  }
-
-  Widget _largeTextFied(String text) {
-    return Padding(
-      padding: EdgeInsets.all(10.0),
-      child: Container(
-        height: ScreenUtil.getInstance().setHeight(300),
-        child: new ConstrainedBox(
-          constraints: BoxConstraints(
-            maxHeight: ScreenUtil.getInstance().setHeight(300),
-          ),
-          child: new Scrollbar(
-            child: new SingleChildScrollView(
-              scrollDirection: Axis.vertical,
-              reverse: true,
-              child: SizedBox(
-                height: ScreenUtil.getInstance().setHeight(300),
-                child: new TextField(
-                  maxLines: 100,
-                  decoration: new InputDecoration(
-                    contentPadding: const EdgeInsets.symmetric(vertical: 120.0),
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(10.0),
-                    ),
-                    hintText: text,
-                    hintStyle: TextStyle(
-                      fontSize: ScreenUtil.getInstance().setSp(30),
-                      fontStyle: FontStyle.normal,
-                      color: Colors.grey[400],
-                    ),
-                  ),
-                ),
-              ),
-            ),
-          ),
-        ),
-      ),
-    );
-  }
-
   @override
   Widget build(BuildContext context) {
     ScreenUtil.instance = ScreenUtil.getInstance()..init(context);
@@ -178,13 +44,40 @@ class _SpecialtyInforState extends State<SpecialtyInfor> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: <Widget>[
-                  _largeTextFied('Kinh nghiệm gia sư & dạy học'),
-                  _largeTextFied('Thành tích học tập & dạy học'),
-                  _textField('Bạn đang là'),
-                  _textField('Hình thức dạy'),
-                  _textField('Học phí vnđ/buổi (VD: 150.000)'),
-                  _textField('Gia sư môn (Dạng lưới: Chọn tối đa 3)'),
-                  _textField('Số lượng lớp đã dạy (VD: 5)'),
+                  LargeTextField('Kinh nghiệm gia sư & dạy học'),
+                  LargeTextField('Thành tích học tập & dạy học'),
+                  SmallTextField('Bạn đang là'),
+                  SmallTextField('Hình thức dạy'),
+                  SmallTextField('Học phí vnđ/buổi (VD: 150.000)'),
+                  Container(
+                    height: ScreenUtil.getInstance().setHeight(100),
+                    width: ScreenUtil.getInstance().setWidth(640),
+                    decoration: BoxDecoration(
+                      border: Border.all(color: Colors.grey),
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                    child: FlatButton(
+                      color: Colors.white,
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => SubjectChoice(),
+                          ),
+                        );
+                      },
+                      child: Text(
+                        'Gia sư môn',
+                        style: TextStyle(
+                          fontSize: ScreenUtil.getInstance().setSp(30),
+                          fontStyle: FontStyle.normal,
+                          color: Colors.grey[400],
+                        ),
+                        textAlign: TextAlign.start,
+                      ),
+                    ),
+                  ),
+                  SmallTextField('Số lượng lớp đã dạy (VD: 5)'),
                   RichText(
                     textAlign: TextAlign.start,
                     text: TextSpan(
@@ -224,13 +117,7 @@ class _SpecialtyInforState extends State<SpecialtyInfor> {
                       ],
                     ),
                   ),
-                  _selectedDay('Thứ 2', isSelected1, 100),
-                  _selectedDay('Thứ 3', isSelected2, 100),
-                  _selectedDay('Thứ 4', isSelected3, 100),
-                  _selectedDay('Thứ 5', isSelected4, 100),
-                  _selectedDay('Thứ 6', isSelected5, 100),
-                  _selectedDay('Thứ 7', isSelected6, 100),
-                  _selectedDay('Chủ nhật', isSelected7, 59),
+                  SelectedTimeColumn(),
                   SizedBox(
                     height: ScreenUtil.getInstance().setHeight(50),
                   ),

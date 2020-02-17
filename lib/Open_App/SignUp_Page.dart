@@ -1,8 +1,9 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
-import 'package:test_giasu/Open_App/PassWord1.dart';
-import 'package:test_giasu/Open_App/SignIn_Page.dart';
+import 'package:url_launcher/url_launcher.dart';
+
+import 'SignIn_Page.dart';
 
 class SignUpPage extends StatefulWidget {
   @override
@@ -115,7 +116,7 @@ class _SignUpPage extends State<SignUpPage> {
                                     text: 'điều khoản',
                                     recognizer: new TapGestureRecognizer()
                                       ..onTap = () {
-                                        print('Log1');
+                                        launch('https://htcon.vn/quy-dinh-chung/');
                                       },
                                     style: TextStyle(
                                       fontStyle: FontStyle.italic,
@@ -128,7 +129,7 @@ class _SignUpPage extends State<SignUpPage> {
                                     text: 'chính sách',
                                     recognizer: new TapGestureRecognizer()
                                       ..onTap = () {
-                                        print('Log');
+                                        launch('https://htcon.vn/chinh-sach-bao-mat-thong-tin/');
                                       },
                                     style: TextStyle(
                                       fontStyle: FontStyle.italic,

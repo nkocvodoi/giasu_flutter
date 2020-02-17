@@ -3,6 +3,8 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:test_giasu/Open_App/Waiting_screen.dart';
 
+import 'SignIn_Page.dart';
+
 class PassWord2 extends StatefulWidget {
   @override
   State<StatefulWidget> createState() {
@@ -91,7 +93,7 @@ class _PassWord2State extends State<PassWord2> {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) => Waiting_screen()),
+                            builder: (context) => SignIn_Page()),
                       );
                     },
                   ),

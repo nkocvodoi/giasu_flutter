@@ -2,6 +2,7 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
+import 'package:test_giasu/UI_Main/BottomNavigationBar.dart';
 
 import 'PassWord1.dart';
 import 'SignUp_Page.dart';
@@ -149,7 +150,14 @@ class _SignIn_PageState extends State<SignIn_Page> {
                         child: Material(
                           color: Colors.transparent,
                           child: InkWell(
-                            onTap: () {},
+                            onTap: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => MyBottomNavigationBar(currentIndex: 0,),
+                                ),
+                              );
+                            },
                             child: Center(
                               child: Text(
                                 'Đăng nhập',

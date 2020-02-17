@@ -5,7 +5,7 @@ import 'package:provider/provider.dart';
 import 'Open_App/PassWord1.dart';
 import 'dart:ui';
 
-import 'lib/SignUp_Page.dart';
+import 'package:test_giasu/Open_App/SignUp_Page.dart';
 
 class MyApp extends StatefulWidget {
   @override

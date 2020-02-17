@@ -6,6 +6,8 @@ import 'package:test_giasu/Widgets/SmallTextField.dart';
 import 'SubjectChoice.dart';
 import 'package:test_giasu/Widgets/SelectedTime.dart';
 
+import 'SubjectChoice.dart';
+
 class SpecialtyInfor extends StatefulWidget {
   @override
   State<StatefulWidget> createState() {

@@ -1,6 +1,7 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
+import 'package:test_giasu/Open_App/PersonInfor.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import 'SignIn_Page.dart';
@@ -116,6 +117,7 @@ class _SignUpPage extends State<SignUpPage> {
                                     text: 'điều khoản',
                                     recognizer: new TapGestureRecognizer()
                                       ..onTap = () {
+                                        print('Log1');
                                         launch('https://htcon.vn/quy-dinh-chung/');
                                       },
                                     style: TextStyle(
@@ -129,6 +131,7 @@ class _SignUpPage extends State<SignUpPage> {
                                     text: 'chính sách',
                                     recognizer: new TapGestureRecognizer()
                                       ..onTap = () {
+                                        print('Log');
                                         launch('https://htcon.vn/chinh-sach-bao-mat-thong-tin/');
                                       },
                                     style: TextStyle(
@@ -152,7 +155,7 @@ class _SignUpPage extends State<SignUpPage> {
                               Navigator.push(
                                   context,
                                   MaterialPageRoute(
-                                    builder: (context) => SignIn_Page(),
+                                    builder: (context) => PersonInfor(),
                                   ));
                             },
                             color: _c,

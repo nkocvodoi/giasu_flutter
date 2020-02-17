@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:test_giasu/UI_Main/BottomNavigationBar.dart';
 
 import 'DetailRaisedButton.dart';
 
@@ -158,7 +159,7 @@ class SubjectChoiceDetailsState extends State<SubjectChoiceDetails> {
                         Navigator.push(
                             context,
                             MaterialPageRoute(
-                              builder: (context) => SubjectChoiceDetails(),
+                              builder: (context) => MyBottomNavigationBar(currentIndex: 0,),
                             ));
                       },
                     ),

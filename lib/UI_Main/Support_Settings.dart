@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class Support_Settings extends StatefulWidget {
   @override
@@ -61,35 +62,35 @@ class _Support_SettingsState extends State<Support_Settings> {
                 ),
               ),
             ),
-            _buildText('Tham gia cộng đồng HTcon gia sư'),
+            _buildText('Tham gia cộng đồng HTcon gia sư', 1),
             Divider(
               height: 0.0,
               thickness: 2,
               indent: 14.0,
               endIndent: 18.0,
             ),
-            _buildText('Hướng dẫn xử lí lớp phát sinh'),
+            _buildText('Hướng dẫn xử lí lớp phát sinh', 2),
             Divider(
               height: 0.0,
               thickness: 2,
               indent: 14.0,
               endIndent: 18.0,
             ),
-            _buildText('Hướng dẫn khiếu nại'),
+            _buildText('Hướng dẫn khiếu nại', 3),
             Divider(
               height: 0.0,
               thickness: 2,
               indent: 14.0,
               endIndent: 18.0,
             ),
-            _buildText('Những lưu ý quan trọng'),
+            _buildText('Những lưu ý quan trọng', 4),
             Divider(
               height: 0.0,
               thickness: 2,
               indent: 14.0,
               endIndent: 18.0,
             ),
-            _buildText('Liên hệ'),
+            _buildText('Liên hệ', 5),
             Divider(
               height: 0.0,
               thickness: 2,
@@ -102,7 +103,7 @@ class _Support_SettingsState extends State<Support_Settings> {
     );
   }
 
-  Widget _buildText(String _text) {
+  Widget _buildText(String _text, int _a) {
     return ListTile(
       title: Text(
         _text,
@@ -112,7 +113,36 @@ class _Support_SettingsState extends State<Support_Settings> {
           color: Colors.grey[500],
         ),
       ),
-      onTap: () {},
+      onTap: () {
+        switch (_a) {
+          case 1:
+            {
+              return launch('https://www.facebook.com/Giasubinhminh.club/');
+            }
+            break;
+          case 2:
+            {
+              return 1;
+            }
+            break;
+          case 3:
+            {
+              return 1;
+            }
+            break;
+          case 4:
+            {
+              return 1;
+            }
+            break;
+
+          default:
+            {
+              return 1;
+            }
+            break;
+        }
+      },
       trailing: Icon(Icons.arrow_forward_ios),
     );
   }

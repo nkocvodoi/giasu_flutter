@@ -3,10 +3,12 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:test_giasu/UI_Main/Bo_Loc.dart';
 import 'package:test_giasu/UI_Main/BottomNavigationBar.dart';
 import 'package:test_giasu/UI_Main/ClassDetail.dart';
 
-import 'Bo_Loc.dart';
+import 'Filter.dart';
+import 'ClassDetail.dart';
 
 // ignore: camel_case_types
 class Lists_Class extends StatefulWidget {
@@ -22,6 +24,8 @@ class _Lists_Class_State extends State<Lists_Class> {
 
   @override
   Widget build(BuildContext context) {
+    var width = MediaQuery.of(context).size.width.toInt();
+    var height = MediaQuery.of(context).size.height.toInt();
     ScreenUtil.instance = ScreenUtil.getInstance()..init(context);
     ScreenUtil.instance = ScreenUtil(
         width: MediaQuery.of(context).size.width.toInt(),

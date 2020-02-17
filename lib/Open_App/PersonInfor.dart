@@ -7,6 +7,8 @@ import 'package:test_giasu/Widgets/SmallTextField.dart';
 
 import 'SpecialtyInfor.dart';
 
+import 'SpecialtyInfor.dart';
+
 class PersonInfor extends StatefulWidget {
   @override
   State<StatefulWidget> createState() {
@@ -21,7 +23,7 @@ class _PersonInforState extends State<PersonInfor> {
   Widget build(BuildContext context) {
     ScreenUtil.instance = ScreenUtil.getInstance()..init(context);
     ScreenUtil.instance =
-        ScreenUtil(width: 750, height: 1334, allowFontScaling: true);
+        ScreenUtil(width: 900, height: 1334, allowFontScaling: true);
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Color.fromRGBO(47, 101, 174, 1),

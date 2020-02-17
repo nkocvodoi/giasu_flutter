@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import 'dart:async';
 import 'dart:core';
@@ -29,7 +30,9 @@ class Waiting_screenState extends State<Waiting_screen> {
   @override
   Widget build(BuildContext context) {
     _waitMe();
-    // TODO: implement build
+    ScreenUtil.instance = ScreenUtil.getInstance()..init(context);
+    ScreenUtil.instance =
+        ScreenUtil(width: 750, height: 1334, allowFontScaling: true);
     return new Container(
       decoration: BoxDecoration(color: Colors.blue[500]),
       child: Stack(
@@ -38,7 +41,10 @@ class Waiting_screenState extends State<Waiting_screen> {
             child: Column(
               children: <Widget>[
                 SizedBox(height: 200),
-                new Image.asset('assets/Logo2.png',height: 200,),
+                new Image.asset(
+                  'assets/Logo2.png',
+                  height: ScreenUtil.getInstance().setHeight(200),
+                ),
                 SizedBox(height: 40),
                 Text(
                   'Nền tảng kết nối gia sư, lớp hoc, khóa hoc',
@@ -51,6 +57,16 @@ class Waiting_screenState extends State<Waiting_screen> {
                 ),
               ],
             ),
+          ),
+          GestureDetector(
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => SignIn_Page(),
+                ),
+              );
+            },
           ),
         ],
       ),

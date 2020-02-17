@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:test_giasu/Widgets/SelectedTimeColumn.dart';
+import 'package:test_giasu/Widgets/TeacherBox.dart';
 
 class ClassDetail3 extends StatefulWidget {
   @override
@@ -11,161 +13,7 @@ class ClassDetail3 extends StatefulWidget {
 }
 
 class ClassDetail3State extends State<ClassDetail3> {
-  final isSelected1 = [false, false, false];
-  final isSelected2 = [false, false, false];
-  final isSelected3 = [false, false, false];
-  final isSelected4 = [false, false, false];
-  final isSelected5 = [false, false, false];
-  final isSelected6 = [false, false, false];
-  final isSelected7 = [false, false, false];
-  Widget _selectedDay(String day, List<bool> isSelected, int space) {
-    return Padding(
-      padding: EdgeInsets.all(10.0),
-      child: Row(
-        children: <Widget>[
-          Text(
-            day,
-            textAlign: TextAlign.start,
-            style: TextStyle(
-              fontSize: ScreenUtil.getInstance().setSp(30),
-              fontStyle: FontStyle.normal,
-              color: Colors.black38,
-            ),
-          ),
-          SizedBox(
-            width: ScreenUtil.getInstance().setWidth(space),
-          ),
-          ToggleButtons(
-            borderWidth: 0.0,
-            borderRadius: BorderRadius.circular(30.0),
-            borderColor: Colors.blue,
-            selectedBorderColor: Colors.blue,
-            fillColor: Colors.orangeAccent,
-            highlightColor: Colors.white,
-            children: <Widget>[
-              Container(
-                width: ScreenUtil.getInstance().setWidth(170),
-                height: ScreenUtil.getInstance().setHeight(60),
-                child: Center(
-                  child: Text(
-                    'Buổi sáng',
-                    style: TextStyle(
-                      fontSize: ScreenUtil.getInstance().setSp(25),
-                    ),
-                  ),
-                ),
-              ),
-              Container(
-                width: ScreenUtil.getInstance().setWidth(160),
-                height: ScreenUtil.getInstance().setHeight(50),
-                child: Center(
-                  child: Text(
-                    'Buổi chiều',
-                    style: TextStyle(
-                      fontSize: ScreenUtil.getInstance().setSp(25),
-                    ),
-                  ),
-                ),
-              ),
-              Container(
-                width: ScreenUtil.getInstance().setWidth(140),
-                height: ScreenUtil.getInstance().setHeight(60),
-                child: Center(
-                  child: Text(
-                    'Buổi tối',
-                    style: TextStyle(
-                      fontSize: ScreenUtil.getInstance().setSp(25),
-                    ),
-                  ),
-                ),
-              ),
-            ],
-            onPressed: (int index) {
-              setState(() {
-                isSelected[index] = !isSelected[index];
-              });
-            },
-            isSelected: isSelected,
-          ),
-        ],
-      ),
-    );
-  }
-
-  Widget _teacherListBox(Image image, String name, String place, String subject,
-      String fee, double distance, String moreInfor) {
-    return Container(
-      margin: EdgeInsets.all(5),
-      padding: EdgeInsets.only(
-        left: 10,
-        right: 10,
-      ),
-      decoration: BoxDecoration(
-        border: Border.all(color: Colors.blueGrey),
-      ),
-      child: Column(children: <Widget>[
-        Icon(
-          Icons.portrait,
-          size: 50,
-        ),
-        Text(
-          name,
-          textAlign: TextAlign.left,
-          style: TextStyle(
-            fontWeight: FontWeight.bold,
-            fontStyle: FontStyle.normal,
-            fontSize: ScreenUtil.getInstance().setSp(30),
-          ),
-        ),
-        Text(
-          '$place | $subject',
-          textAlign: TextAlign.left,
-        ),
-        Row(
-          children: <Widget>[
-            Expanded(
-              flex: 4,
-              child: Text('$fee vnđ/buổi'),
-            ),
-            Expanded(
-              child: SizedBox(),
-            ),
-            Expanded(
-              child: Icon(Icons.location_on),
-            ),
-            Expanded(
-              flex: 2,
-              child: Text('$distance km'),
-            ),
-          ],
-        ),
-        Divider(
-          thickness: 1,
-        ),
-        Text(
-          '$moreInfor',
-          maxLines: 2,
-        ),
-        Container(
-          //padding: EdgeInsets.only(left: 60),
-          child:RaisedButton(
-          
-          onPressed: () {},
-          color: Colors.blue[400],
-          child: Text(
-            'Mời dạy',
-            style: TextStyle(
-              color: Colors.white,
-              fontSize: ScreenUtil.getInstance().setSp(20),
-              fontStyle: FontStyle.normal,
-            ),
-          ),
-        ),
-        )
-      ]),
-    );
-  }
-
+  
   Widget _iconTextBox(Text text, Icon icon) {
     return Container(
       decoration: BoxDecoration(
@@ -234,9 +82,11 @@ class ClassDetail3State extends State<ClassDetail3> {
                               border: Border.all(),
                               color: Colors.white,
                             ),
-                            child: Text(
-                              'Tìm gia sư Tiếng Anh lớp 6 tại Cầu Giấy',
-                              textAlign: TextAlign.center,
+                            child: Center(
+                              child: Text(
+                                'Tìm gia sư Tiếng Anh lớp 6 tại Cầu Giấy',
+                                textAlign: TextAlign.center,
+                              ),
                             ),
                           ),
                         )
@@ -436,13 +286,7 @@ class ClassDetail3State extends State<ClassDetail3> {
                       ],
                     ),
                   ),
-                  _selectedDay('Thứ 2', isSelected1, 50),
-                  _selectedDay('Thứ 3', isSelected2, 50),
-                  _selectedDay('Thứ 4', isSelected3, 50),
-                  _selectedDay('Thứ 5', isSelected4, 50),
-                  _selectedDay('Thứ 6', isSelected5, 50),
-                  _selectedDay('Thứ 7', isSelected6, 50),
-                  _selectedDay('Chủ nhật', isSelected7, 9),
+                  SelectedTimeColumn(),
                   SizedBox(
                     height: ScreenUtil.getInstance().setHeight(10),
                   ),
@@ -516,21 +360,26 @@ class ClassDetail3State extends State<ClassDetail3> {
                     crossAxisCount: 2,
                     children: <Widget>[
                       Expanded(
-                        child: _teacherListBox(null, 'name', 'place', 'subject',
+                        child: TeacherBox(null, 'name', 'place', 'subject',
                             'fee', 8, 'moreInfor'),
                       ),
                       Expanded(
-                        child: _teacherListBox(null, 'name', 'place', 'subject',
+                        child: TeacherBox(null, 'name', 'place', 'subject',
                             'fee', 8, 'moreInfor'),
                       ),
                       Expanded(
-                        child: _teacherListBox(null, 'name', 'place', 'subject',
+                        child: TeacherBox(null, 'name', 'place', 'subject',
                             'fee', 8, 'moreInfor'),
                       ),
                       Expanded(
-                        child: _teacherListBox(null, 'name', 'place', 'subject',
+                        child: TeacherBox(null, 'name', 'place', 'subject',
                             'fee', 8, 'moreInfor'),
                       ),
+                      Expanded(
+                        child: TeacherBox(null, 'name', 'place', 'subject',
+                            'fee', 8, 'moreInfor'),
+                      ),
+                      
                     ],
                   ),
                 ],

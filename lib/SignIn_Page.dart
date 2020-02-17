@@ -2,19 +2,17 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
-import 'package:test_giasu/UI_Main/BottomNavigationBar.dart';
+import 'Open_App/PassWord1.dart';
+import 'dart:ui';
 
-import 'PassWord1.dart';
-import 'SignUp_Page.dart';
+import 'package:test_giasu/Open_App/SignUp_Page.dart';
 
-// ignore: camel_case_types
-class SignIn_Page extends StatefulWidget {
+class MyApp extends StatefulWidget {
   @override
-  _SignIn_PageState createState() => _SignIn_PageState();
+  _MyAppState createState() => _MyAppState();
 }
 
-// ignore: camel_case_types
-class _SignIn_PageState extends State<SignIn_Page> {
+class _MyAppState extends State<MyApp> {
   // bool _isHidden = true;
   // void _toggleVisibility() {
   //   setState(() {
@@ -25,8 +23,10 @@ class _SignIn_PageState extends State<SignIn_Page> {
   @override
   Widget build(BuildContext context) {
     ScreenUtil.instance = ScreenUtil.getInstance()..init(context);
+    print(window.physicalSize.toString());
     ScreenUtil.instance =
         ScreenUtil(width: 750, height: 1334, allowFontScaling: true);
+
     return Scaffold(
       backgroundColor: Colors.white,
       resizeToAvoidBottomPadding: true,
@@ -45,10 +45,10 @@ class _SignIn_PageState extends State<SignIn_Page> {
                   child: Column(
                     children: <Widget>[
                       SizedBox(
-                        height: 50,
+                        height: 90,
                       ),
                       Image.asset(
-                        'assets/Logo2.png',
+                        'lib/assets/Logo2.png',
                         cacheHeight: 90,
                         cacheWidth: 130,
                         height: ScreenUtil.getInstance().setHeight(200),
@@ -150,14 +150,7 @@ class _SignIn_PageState extends State<SignIn_Page> {
                         child: Material(
                           color: Colors.transparent,
                           child: InkWell(
-                            onTap: () {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) => MyBottomNavigationBar(currentIndex: 0,),
-                                ),
-                              );
-                            },
+                            onTap: () {},
                             child: Center(
                               child: Text(
                                 'Đăng nhập',

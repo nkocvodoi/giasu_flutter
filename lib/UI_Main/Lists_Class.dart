@@ -3,7 +3,11 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:test_giasu/UI_Main/Bo_Loc.dart';
 import 'package:test_giasu/UI_Main/BottomNavigationBar.dart';
+import 'package:test_giasu/UI_Main/ClassDetail.dart';
+
+import 'Filter.dart';
 import 'package:test_giasu/UI_Main/Filter.dart';
 import 'ClassDetail.dart';
 
@@ -24,8 +28,10 @@ class _Lists_Class_State extends State<Lists_Class> {
     var width = MediaQuery.of(context).size.width.toInt();
     var height = MediaQuery.of(context).size.height.toInt();
     ScreenUtil.instance = ScreenUtil.getInstance()..init(context);
-    ScreenUtil.instance =
-        ScreenUtil(width: width, height: height, allowFontScaling: true);
+    ScreenUtil.instance = ScreenUtil(
+        width: MediaQuery.of(context).size.width.toInt(),
+        height: MediaQuery.of(context).size.height.toInt(),
+        allowFontScaling: true);
 
     // TODO: implement build
     return Scaffold(
@@ -102,7 +108,7 @@ class _Lists_Class_State extends State<Lists_Class> {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (context) => Filter(),
+                            builder: (context) => Bo_Loc(),
                           ),
                         );
                       },
@@ -115,8 +121,9 @@ class _Lists_Class_State extends State<Lists_Class> {
                       color: _color,
                       border: Border.all(color: Colors.blueAccent),
                       borderRadius: BorderRadius.only(
-                          topRight: Radius.circular(40.0),
-                          bottomRight: Radius.circular(40.0)),
+                        topRight: Radius.circular(40.0),
+                        bottomRight: Radius.circular(40.0),
+                      ),
                     ),
                   )
                 ],
@@ -133,8 +140,8 @@ class _Lists_Class_State extends State<Lists_Class> {
       padding: EdgeInsets.all(0.0),
       child: Container(
         alignment: Alignment.center,
-        height: ScreenUtil.getInstance().setHeight(190),
-        width: ScreenUtil.getInstance().setWidth(380),
+        height: ScreenUtil.getInstance().setHeight(200),
+        width: ScreenUtil.getInstance().setWidth(400),
         child: Padding(
           padding: EdgeInsets.only(left: 5.0, top: 7.0),
           child: Row(
@@ -263,7 +270,7 @@ class _Lists_Class_State extends State<Lists_Class> {
           SizedBox(
             width: ScreenUtil.getInstance().setWidth(110),
           ),
-          Text(
+          Center(child: Text(
             '0/6 đề nghị',
             style: TextStyle(
               height: ScreenUtil.getInstance().setSp(1),
@@ -271,7 +278,7 @@ class _Lists_Class_State extends State<Lists_Class> {
               color: Colors.deepOrange,
               fontWeight: FontWeight.w400,
             ),
-          ),
+          ),),
         ],
       ),
     );

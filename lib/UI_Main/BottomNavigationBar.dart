@@ -19,7 +19,7 @@ class _BottomNavigationBarState extends State<MyBottomNavigationBar> {
   var currentIndex;
   _BottomNavigationBarState({this.currentIndex});
   final List<Widget> _children = [
-    Account(),
+    Lists_Class(),
     Lists_Class(),
     Bits_Manager(),
     Anouncement(),

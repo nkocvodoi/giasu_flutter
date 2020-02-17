@@ -3,20 +3,17 @@ import 'dart:ui';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:test_giasu/Widgets/SmallTextField.dart';
-import 'package:test_giasu/Widgets/previous_widget.dart';
-import 'package:test_giasu/UI_Main/BottomNavigationBar.dart';
 import 'package:test_giasu/UI_Main/Lists_Class.dart';
 
-class Filter extends StatefulWidget {
+class Bo_Loc extends StatefulWidget {
   @override
   State<StatefulWidget> createState() {
     // TODO: implement createState
-    return _FilterState();
+    return _Bo_Loc_State();
   }
 }
 
-class _FilterState extends State<Filter> {
+class _Bo_Loc_State extends State<Bo_Loc> {
   final Color _color = Color.fromRGBO(47, 101, 174, 1);
 
   var _slidervalue = 0.0;
@@ -76,11 +73,11 @@ class _FilterState extends State<Filter> {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: <Widget>[
-                        SmallTextField('Địa điểm'),
-                        SmallTextField('Môn học'),
-                        SmallTextField('Chủ đề'),
-                        SmallTextField('Hình thức học'),
-                        SmallTextField('Đối tượng dạy'),
+                        _textField('Địa điểm'),
+                        _textField('Môn học'),
+                        _textField('Chủ đề'),
+                        _textField('Hình thức học'),
+                        _textField('Đối tượng dạy'),
                       ],
                     ),
                   ),
@@ -103,7 +100,7 @@ class _FilterState extends State<Filter> {
                       trackHeight: 8.0,
                       thumbColor: _color,
                       //thumbShape: RoundSliderThumbShape(enabledThumbRadius: 12.0),
-                      // valueIndicatorShape: PaddleSliderValueIndicatorShape(),
+                     // valueIndicatorShape: PaddleSliderValueIndicatorShape(),
                       valueIndicatorColor: Colors.indigo,
                       valueIndicatorTextStyle: TextStyle(
                         fontSize: 15.0,
@@ -128,7 +125,7 @@ class _FilterState extends State<Filter> {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => MyBottomNavigationBar(currentIndex: 1,),
+                          builder: (context) => Lists_Class(),
                         ),
                       );
                     },

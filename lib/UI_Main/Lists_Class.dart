@@ -8,6 +8,7 @@ import 'package:test_giasu/UI_Main/BottomNavigationBar.dart';
 import 'package:test_giasu/UI_Main/ClassDetail.dart';
 
 import 'Filter.dart';
+import 'package:test_giasu/UI_Main/Filter.dart';
 import 'ClassDetail.dart';
 
 // ignore: camel_case_types

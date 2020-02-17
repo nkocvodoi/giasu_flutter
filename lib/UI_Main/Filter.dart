@@ -12,35 +12,29 @@ class Filter extends StatefulWidget {
   @override
   State<StatefulWidget> createState() {
     // TODO: implement createState
-    return _Filter_State();
+    return _FilterState();
   }
 }
 
-class _Filter_State extends State<Filter> {
+class _FilterState extends State<Filter> {
   final Color _color = Color.fromRGBO(47, 101, 174, 1);
+
+  var _slidervalue = 0.0;
 
   Widget _textField(String text) {
     return Padding(
-      padding: EdgeInsets.only(top: 4, bottom: 4, left: 10, right: 10),
-      child: Container(
-        height: 50,
-        width: 300,
-        child: TextField(
-          decoration: InputDecoration(
-            border: InputBorder.none,
-            hintText: text,
-            contentPadding: EdgeInsets.only(left: 12.0),
-            hintStyle: TextStyle(
-              fontSize: ScreenUtil.getInstance().setSp(37),
-              fontStyle: FontStyle.normal,
-              fontFamily: 'UTM',
-              color: Colors.grey[400],
-            ),
+      padding: EdgeInsets.all(8.0),
+      child: TextField(
+        decoration: InputDecoration(
+          hintText: text,
+          border: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(10.0),
           ),
-        ),
-        decoration: BoxDecoration(
-          border: Border.all(color: _color, width: 1.0),
-          borderRadius: BorderRadius.circular(10.0),
+          hintStyle: TextStyle(
+            fontSize: ScreenUtil.getInstance().setSp(30),
+            fontStyle: FontStyle.normal,
+            color: Colors.grey[400],
+          ),
         ),
       ),
     );
@@ -53,13 +47,11 @@ class _Filter_State extends State<Filter> {
         ScreenUtil(width: 750, height: 1334, allowFontScaling: true);
     return Scaffold(
       appBar: AppBar(
-        leading: buildPreviousButton(),
         backgroundColor: _color,
         title: Center(
           child: Text(
-            'Bộ lọc',
+            'BỘ LỌC',
             textAlign: TextAlign.center,
-            style: TextStyle(fontFamily: 'UTM', fontSize: 26),
           ),
         ),
       ),
@@ -77,7 +69,7 @@ class _Filter_State extends State<Filter> {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: <Widget>[
                   Container(
-                    margin: EdgeInsets.all(0),
+                    margin: EdgeInsets.all(15.0),
                     decoration: BoxDecoration(
                       color: Colors.white,
                     ),
@@ -92,24 +84,57 @@ class _Filter_State extends State<Filter> {
                       ],
                     ),
                   ),
-                  SizedBox(
-                    height: 15.0,
+//                  SizedBox(
+//                    height: ScreenUtil.getInstance().setHeight(10),
+//                  ),
+                  Text(
+                    'Khoảng cách',
+                    style: TextStyle(
+                      fontSize: ScreenUtil.getInstance().setSp(40),
+                      color: _color,
+                    ),
+                  ),
+                  SizedBox(height: 10.0,),
+                  SliderTheme(
+                    data: SliderTheme.of(context).copyWith(
+                      activeTrackColor: _color,
+                      //inactiveTrackColor: Colors.red[100],
+                      trackShape: RectangularSliderTrackShape(),
+                      trackHeight: 8.0,
+                      thumbColor: _color,
+                      //thumbShape: RoundSliderThumbShape(enabledThumbRadius: 12.0),
+                      // valueIndicatorShape: PaddleSliderValueIndicatorShape(),
+                      valueIndicatorColor: Colors.indigo,
+                      valueIndicatorTextStyle: TextStyle(
+                        fontSize: 15.0,
+                        color: Colors.white,
+                      ),
+                    ),
+                    child: Slider(
+                      value: _slidervalue,
+                      min: 0,
+                      max: 20,
+                      divisions: 20,
+                      label: '$_slidervalue'+ 'Km',
+                      onChanged: (newvalue) {
+                        setState(() {
+                          _slidervalue = newvalue;
+                        });
+                      },
+                    ),
                   ),
                   RaisedButton(
                     onPressed: () {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => MyBottomNavigationBar(
-                            currentIndex: 1,
-                          ),
+                          builder: (context) => MyBottomNavigationBar(currentIndex: 1,),
                         ),
                       );
                     },
                     color: _color,
                     child: new Padding(
-                      padding: EdgeInsets.only(
-                          right: 15.0, left: 15.0, bottom: 10.0, top: 10.0),
+                      padding: EdgeInsets.only(right: 15.0, left: 15.0, bottom: 10.0,top: 10.0),
                       child: Text(
                         'Tìm kiếm',
                         style: TextStyle(

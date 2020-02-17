@@ -2,8 +2,6 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:test_giasu/UI_Main/Account.dart';
 import 'package:test_giasu/UI_Main/Nap_Bits.dart';
-
-import 'Filter.dart';
 import 'BottomNavigationBar.dart';
 import 'General_Infor.dart';
 

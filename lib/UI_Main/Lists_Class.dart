@@ -24,8 +24,6 @@ class _Lists_Class_State extends State<Lists_Class> {
 
   @override
   Widget build(BuildContext context) {
-    var width = MediaQuery.of(context).size.width.toInt();
-    var height = MediaQuery.of(context).size.height.toInt();
     ScreenUtil.instance = ScreenUtil.getInstance()..init(context);
     ScreenUtil.instance = ScreenUtil(
         width: MediaQuery.of(context).size.width.toInt(),
@@ -135,81 +133,67 @@ class _Lists_Class_State extends State<Lists_Class> {
   }
 
   Widget _buildBox() {
-    return RaisedButton(
-      padding: EdgeInsets.all(0.0),
-      child: Container(
-        alignment: Alignment.center,
-        height: ScreenUtil.getInstance().setHeight(200),
-        width: ScreenUtil.getInstance().setWidth(400),
-        child: Padding(
-          padding: EdgeInsets.only(left: 5.0, top: 7.0),
-          child: Row(
-            children: <Widget>[
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: <Widget>[
-                  _iconTextBox(
-                    'Mã lớp: 522 - Tiếng Anh lớp 6',
-                    _color,
-                    20,
-                    Icon(Icons.account_box),
-                  ),
-                  _iconTextBox1(
-                    'Gia sư Bình Minh',
-                    Colors.deepOrange,
-                    20,
-                    Icon(Icons.account_box),
-                  ),
-                  _iconTextBox4(
-                    'Số 55 Ngõ 31 Cầu Giấy, Hà Nội',
-                    Colors.grey,
-                    20,
-                    Icon(Icons.account_box),
-                  ),
-                  _iconTextBox(
-                    '150.000 vnd/2h - 2 buổi/tuần',
-                    Colors.grey,
-                    21,
-                    Icon(Icons.account_box),
-                  ),
-                  _iconTextBox2(
-                    'Cách bạn: 2 km',
-                    Colors.grey,
-                    20,
-                    Icon(Icons.account_box),
-                  ),
-                  _iconTextBox3(
-                    'Phí nhận lớp: 480,000 vnđ',
-                    Colors.blue,
-                    20,
-                    Icon(Icons.account_box),
-                  ),
-                ],
-              ),
-//              Icon(Icons.arrow_forward_ios,
-//              size: 50,
-//                color: _color,
-//              ),
-            ],
-          ),
+    return Container(
+      alignment: Alignment.center,
+      margin: EdgeInsets.all(10.0),
+      height: 190,
+      child: RaisedButton(
+        onPressed: () {},
+        padding: EdgeInsets.all(5.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: <Widget>[
+            _iconTextBox(
+              'Mã lớp: 522 - Tiếng Anh lớp 6',
+              _color,
+              20,
+              Icon(Icons.account_box),
+            ),
+            _iconTextBox1(
+              'Gia sư Bình Minh',
+              Colors.deepOrange,
+              20,
+              Icon(Icons.account_box),
+            ),
+            _iconTextBox4(
+              'Số 55 Ngõ 31 Cầu Giấy, Hà Nội',
+              Colors.grey,
+              20,
+              Icon(Icons.account_box),
+            ),
+            _iconTextBox(
+              '150.000 vnd/2h - 2 buổi/tuần',
+              Colors.grey,
+              21,
+              Icon(Icons.account_box),
+            ),
+            _iconTextBox2(
+              'Cách bạn: 2 km',
+              Colors.grey,
+              20,
+              Icon(Icons.account_box),
+            ),
+            _iconTextBox3(
+              'Phí nhận lớp: 480,000 vnđ',
+              Colors.blue,
+              20,
+              Icon(Icons.account_box),
+            ),
+
+          ],
         ),
-        decoration: BoxDecoration(
-          color: Colors.white,
-          border: Border.all(
-              color: Colors.blueAccent,
-              width: ScreenUtil.getInstance().setWidth(2)),
+        color: Colors.white,
+        shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(10.0),
         ),
+
       ),
-      onPressed: () {
-        Navigator.push(
-          context,
-          MaterialPageRoute(
-            builder: (context) => ClassDetail(),
-          ),
-        );
-      },
-      shape: RoundedRectangleBorder(
+
+      decoration: BoxDecoration(
+        color: Colors.white,
+        border: Border.all(
+            color: Colors.blueAccent,
+            width: ScreenUtil.getInstance().setWidth(2)),
         borderRadius: BorderRadius.circular(10.0),
       ),
     );

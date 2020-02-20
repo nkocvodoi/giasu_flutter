@@ -1,7 +1,8 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
+
 import 'package:provider/provider.dart';
+import 'package:test_giasu/Helper/ScreenConfig.dart';
 import 'package:test_giasu/UI_Main/BottomNavigationBar.dart';
 
 import 'PassWord1.dart';
@@ -24,9 +25,7 @@ class _SignIn_PageState extends State<SignIn_Page> {
 
   @override
   Widget build(BuildContext context) {
-    ScreenUtil.instance = ScreenUtil.getInstance()..init(context);
-    ScreenUtil.instance =
-        ScreenUtil(width: 750, height: 1334, allowFontScaling: true);
+    SizeConfig().init(context);
     return Scaffold(
       backgroundColor: Colors.white,
       resizeToAvoidBottomPadding: true,
@@ -52,7 +51,7 @@ class _SignIn_PageState extends State<SignIn_Page> {
                           'assets/Logo2.png',
                           cacheHeight: 90,
                           cacheWidth: 130,
-                          height: ScreenUtil.getInstance().setHeight(200),
+                          height: SizeConfig.safeBlockVertical * 20,
                         ),
                       ],
                     )),
@@ -72,20 +71,21 @@ class _SignIn_PageState extends State<SignIn_Page> {
                           children: <Widget>[
                             TextField(
                               decoration: InputDecoration(
-                                  hintText: 'Email/ Số điện thoại',
-                                  border: OutlineInputBorder(),
-                                  hintStyle: TextStyle(
-                                    fontStyle: FontStyle.normal,
-                                    color: Colors.grey[400],
-                                    fontSize: ScreenUtil().setSp(30),
-                                  ),
-                                  suffixIcon: IconButton(
-                                    icon: Icon(Icons.mail),
-                                  )),
+                                hintText: 'Email/ Số điện thoại',
+                                border: OutlineInputBorder(),
+                                hintStyle: TextStyle(
+                                  fontStyle: FontStyle.normal,
+                                  color: Colors.grey[400],
+                                  fontSize: 20,
+                                ),
+                                suffixIcon: IconButton(
+                                  icon: Icon(Icons.mail),
+                                ),
+                              ),
                             ),
                             SizedBox(
                               width: double.infinity,
-                              height: ScreenUtil.getInstance().setHeight(60),
+                              height: SizeConfig.safeBlockVertical * 10,
                             ),
                             _buildBox('Mật khẩu', true),
                           ],
@@ -100,7 +100,7 @@ class _SignIn_PageState extends State<SignIn_Page> {
                                 color: Colors.black,
                                 fontWeight: FontWeight.normal,
                                 fontStyle: FontStyle.italic,
-                                fontSize: ScreenUtil().setSp(25),
+                                fontSize: 15,
                               ),
                               children: <TextSpan>[
                                 TextSpan(
@@ -134,13 +134,13 @@ class _SignIn_PageState extends State<SignIn_Page> {
                         ],
                       ),
                       SizedBox(
-                        height: ScreenUtil.getInstance().setHeight(40),
+                        height: SizeConfig.safeBlockVertical * 10,
                       ),
                       InkWell(
                         child: Center(
                           child: Container(
-                            width: ScreenUtil.getInstance().setWidth(300),
-                            height: ScreenUtil.getInstance().setHeight(80),
+                             width: SizeConfig.safeBlockHorizontal * 40,
+                            height: SizeConfig.safeBlockVertical * 8,
                             decoration: BoxDecoration(
                               color: Colors.orange[300],
                               borderRadius: BorderRadius.circular(6.0),
@@ -164,7 +164,7 @@ class _SignIn_PageState extends State<SignIn_Page> {
                                     'Đăng nhập',
                                     style: TextStyle(
                                       color: Colors.white,
-                                      fontSize: ScreenUtil().setSp(25),
+                                      fontSize: 20,
                                       letterSpacing: 1.0,
                                     ),
                                   ),
@@ -180,8 +180,8 @@ class _SignIn_PageState extends State<SignIn_Page> {
                       InkWell(
                         child: Center(
                           child: Container(
-                            width: ScreenUtil.getInstance().setWidth(300),
-                            height: ScreenUtil.getInstance().setHeight(80),
+                             width: SizeConfig.safeBlockHorizontal * 40,
+                            height: SizeConfig.safeBlockVertical * 8,
                             decoration: BoxDecoration(
                               color: Colors.blue,
                               borderRadius: BorderRadius.circular(6.0),
@@ -195,7 +195,7 @@ class _SignIn_PageState extends State<SignIn_Page> {
                                     'Đăng nhập bằng Facebook',
                                     style: TextStyle(
                                       color: Colors.white,
-                                      fontSize: ScreenUtil().setSp(20),
+                                      fontSize: 15,
                                       letterSpacing: 1.0,
                                     ),
                                     textAlign: TextAlign.center,
@@ -212,8 +212,8 @@ class _SignIn_PageState extends State<SignIn_Page> {
                       InkWell(
                         child: Center(
                           child: Container(
-                            width: ScreenUtil.getInstance().setWidth(300),
-                            height: ScreenUtil.getInstance().setHeight(80),
+                            width: SizeConfig.safeBlockHorizontal * 40,
+                            height: SizeConfig.safeBlockVertical * 8,
                             decoration: BoxDecoration(
                               color: Colors.deepOrange,
                               borderRadius: BorderRadius.circular(6.0),
@@ -227,7 +227,7 @@ class _SignIn_PageState extends State<SignIn_Page> {
                                     'Đăng nhập bằng Google +',
                                     style: TextStyle(
                                       color: Colors.white,
-                                      fontSize: ScreenUtil().setSp(20),
+                                      fontSize: 15,
                                       letterSpacing: 1.0,
                                     ),
                                     textAlign: TextAlign.center,
@@ -267,7 +267,7 @@ class _SignIn_PageState extends State<SignIn_Page> {
           hintStyle: TextStyle(
             fontStyle: FontStyle.normal,
             color: Colors.grey[400],
-            fontSize: ScreenUtil().setSp(30),
+            fontSize: 20,
           ),
           suffixIcon: IconButton(
             icon: counter.count

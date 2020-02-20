@@ -25,8 +25,6 @@ class _Lists_Class_State extends State<Lists_Class> {
 
   @override
   Widget build(BuildContext context) {
-    var width = MediaQuery.of(context).size.width.toInt();
-    var height = MediaQuery.of(context).size.height.toInt();
     ScreenUtil.instance = ScreenUtil.getInstance()..init(context);
     ScreenUtil.instance = ScreenUtil(
         width: MediaQuery.of(context).size.width.toInt(),
@@ -218,6 +216,7 @@ class _Lists_Class_State extends State<Lists_Class> {
 
   Widget _iconTextBox(String _text, Color _c, int _a, Icon _icon) {
     return Container(
+      height: ScreenUtil.getInstance().setHeight(27),
       child: Row(
         children: <Widget>[
           _icon,
@@ -236,6 +235,7 @@ class _Lists_Class_State extends State<Lists_Class> {
 
   Widget _iconTextBox1(String _text, Color _c, int _a, Icon _icon) {
     return Container(
+      height: ScreenUtil.getInstance().setHeight(27),
       child: Row(
         children: <Widget>[
           _icon,
@@ -255,6 +255,7 @@ class _Lists_Class_State extends State<Lists_Class> {
 
   Widget _iconTextBox2(String _text, Color _c, int _a, Icon _icon) {
     return Container(
+      height: ScreenUtil.getInstance().setHeight(27),
       child: Row(
         children: <Widget>[
           _icon,
@@ -286,6 +287,7 @@ class _Lists_Class_State extends State<Lists_Class> {
 
   Widget _iconTextBox3(String _text, Color _c, int _a, Icon _icon) {
     return Container(
+      height: ScreenUtil.getInstance().setHeight(33),
       child: Row(
         children: <Widget>[
           _icon,
@@ -322,6 +324,7 @@ class _Lists_Class_State extends State<Lists_Class> {
 
   Widget _iconTextBox4(String _text, Color _c, int _a, Icon _icon) {
     return Container(
+      height: ScreenUtil.getInstance().setHeight(27),
       child: Row(
         children: <Widget>[
           _icon,

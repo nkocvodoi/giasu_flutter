@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:test_giasu/Open_App/SpecialtyInfor.dart';
-import 'Test2.dart';
+import 'package:test_giasu/UI_Main/Payments.dart';
+import 'UI_Main/Nap_Bits.dart';
 import 'file:///D:/Code/test_giasu/lib/Students/StudentInfor.dart';
 import 'package:test_giasu/UI_Main/ClassDetail4.dart';
 import 'package:test_giasu/UI_Main/Lists_Class.dart';
@@ -31,8 +32,8 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'giasu',
 
-      home: Waiting_screen(),
-//      home: TestList_Class(),
+//      home: Waiting_screen(),
+      home: Lists_Class(),
     );
   }
 }

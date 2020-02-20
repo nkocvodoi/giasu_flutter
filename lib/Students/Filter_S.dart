@@ -3,9 +3,9 @@ import 'dart:ui';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:test_giasu/Helper/previous_widget.dart';
 import 'package:test_giasu/UI_Main/BottomNavigationBar.dart';
 import 'package:test_giasu/UI_Main/Lists_Class.dart';
+import 'package:test_giasu/Widgets/previous_widget.dart';
 
 class Filter_S extends StatefulWidget {
   @override

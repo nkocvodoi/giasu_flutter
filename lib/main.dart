@@ -31,7 +31,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'giasu',
   
-      home: SignIn_Page(),
+      home: ClassDetail4(),
     );
   }
 }

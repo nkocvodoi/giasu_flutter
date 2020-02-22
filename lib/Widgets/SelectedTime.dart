@@ -43,7 +43,7 @@ class SelectedTimeState extends State<SelectedTime> {
               day,
               textAlign: TextAlign.start,
               style: TextStyle(
-                fontSize: 15,
+                fontSize:  SizeConfig.safeBlockHorizontal *4,
                 fontStyle: FontStyle.normal,
                 color: Colors.black38,
               ),
@@ -68,36 +68,36 @@ class SelectedTimeState extends State<SelectedTime> {
               children: <Widget>[
                 Container(
                   width: SizeConfig.blockSizeHorizontal * (25),
-                  height: SizeConfig.blockSizeVertical * (5),
+                  height: SizeConfig.blockSizeVertical * (3),
                   child: Center(
                     child: Text(
                       'Buổi sáng',
                       style: TextStyle(
-                        fontSize: 15,
+                        fontSize:  SizeConfig.safeBlockHorizontal*3,
                       ),
                     ),
                   ),
                 ),
                 Container(
                   width: SizeConfig.blockSizeHorizontal * (25),
-                  height: SizeConfig.blockSizeVertical * (5),
+                  height: SizeConfig.blockSizeVertical * (3),
                   child: Center(
                     child: Text(
                       'Buổi chiều',
                       style: TextStyle(
-                        fontSize: 15,
+                        fontSize:  SizeConfig.safeBlockHorizontal*3,
                       ),
                     ),
                   ),
                 ),
                 Container(
                   width: SizeConfig.blockSizeHorizontal * (23),
-                  height: SizeConfig.blockSizeVertical * (5),
+                  height: SizeConfig.blockSizeVertical * (3),
                   child: Center(
                     child: Text(
                       'Buổi tối',
                       style: TextStyle(
-                        fontSize: 15,
+                        fontSize:  SizeConfig.safeBlockHorizontal*3,
                       ),
                     ),
                   ),

@@ -1,9 +1,11 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:test_giasu/Helper/ScreenConfig.dart';
 class RichTextLine extends StatelessWidget {
   RichTextLine();
   @override
   Widget build(BuildContext context) {
+    SizeConfig().init(context);
     // TODO: implement build
     return RichText(
       textAlign: TextAlign.start,
@@ -12,7 +14,7 @@ class RichTextLine extends StatelessWidget {
           TextSpan(
             text: 'Thời gian',
             style: TextStyle(
-              fontSize: 18,
+              fontSize:  SizeConfig.safeBlockHorizontal*3,
               color: Colors.grey,
               fontStyle: FontStyle.normal,
             ),
@@ -22,7 +24,7 @@ class RichTextLine extends StatelessWidget {
             style: TextStyle(
               fontStyle: FontStyle.normal,
               color: Colors.grey,
-              fontSize: 18,
+              fontSize:  SizeConfig.safeBlockHorizontal*3,
             ),
           ),
           TextSpan(
@@ -30,7 +32,7 @@ class RichTextLine extends StatelessWidget {
             style: TextStyle(
               fontStyle: FontStyle.normal,
               color: Colors.orange,
-              fontSize: 18,
+              fontSize:  SizeConfig.safeBlockHorizontal*3,
             ),
           ),
           TextSpan(
@@ -38,7 +40,7 @@ class RichTextLine extends StatelessWidget {
             style: TextStyle(
               color: Colors.grey,
               fontStyle: FontStyle.normal,
-              fontSize:18,
+              fontSize: SizeConfig.safeBlockHorizontal*3,
             ),
           ),
         ],

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:test_giasu/Widgets/SelectedTimeColumn.dart';
 
 class Request extends StatefulWidget {
   @override
@@ -8,15 +9,10 @@ class Request extends StatefulWidget {
     return _RequestState();
   }
 }
+
 class _RequestState extends State<Request> {
   final Color _color = Color.fromRGBO(47, 101, 174, 1);
-  final isSelected1 = [false, false, false];
-  final isSelected2 = [false, false, false];
-  final isSelected3 = [false, false, false];
-  final isSelected4 = [false, false, false];
-  final isSelected5 = [false, false, false];
-  final isSelected6 = [false, false, false];
-  final isSelected7 = [false, false, false];
+
   @override
   Widget build(BuildContext context) {
     ScreenUtil.instance = ScreenUtil.getInstance()..init(context);
@@ -46,35 +42,65 @@ class _RequestState extends State<Request> {
                     color: _color,
                   ),
                 ),
-                SizedBox(height: 25 ,),
+                SizedBox(
+                  height: 25,
+                ),
                 _textField('Môn học'),
-                SizedBox(height: 10,),
+                SizedBox(
+                  height: 10,
+                ),
                 _textField('Chủ đề học'),
-                SizedBox(height: 10,),
+                SizedBox(
+                  height: 10,
+                ),
                 _textField('Lớp'),
-                SizedBox(height: 10,),
+                SizedBox(
+                  height: 10,
+                ),
                 _textField('Số buổi hoc/tuần'),
-                SizedBox(height: 10,),
+                SizedBox(
+                  height: 10,
+                ),
                 _textField('Thời gian hoc/buổi'),
-                SizedBox(height: 10,),
+                SizedBox(
+                  height: 10,
+                ),
                 _textField('Số hoc viên/lớp'),
-                SizedBox(height: 10,),
+                SizedBox(
+                  height: 10,
+                ),
                 _textField('Đối tượng dạy'),
-                SizedBox(height: 10,),
+                SizedBox(
+                  height: 10,
+                ),
                 _textField('Giới tính gia sư'),
-                SizedBox(height: 10,),
+                SizedBox(
+                  height: 10,
+                ),
                 _textField('Hình thức dạy'),
-                SizedBox(height: 10,),
+                SizedBox(
+                  height: 10,
+                ),
                 _textField('Học phí/buổi(vnđ)'),
-                SizedBox(height: 10,),
+                SizedBox(
+                  height: 10,
+                ),
                 _textField('Điện thoại'),
-                SizedBox(height: 10,),
+                SizedBox(
+                  height: 10,
+                ),
                 _textField('Địa điểm'),
-                SizedBox(height: 10,),
+                SizedBox(
+                  height: 10,
+                ),
                 _textField('Địa chỉ học'),
-                SizedBox(height: 10,),
+                SizedBox(
+                  height: 10,
+                ),
                 _textLargeField('Nhập mô tả chi tiết nội dung muốn học'),
-                SizedBox(height: 10,),
+                SizedBox(
+                  height: 10,
+                ),
                 RichText(
                   textAlign: TextAlign.start,
                   text: TextSpan(
@@ -114,13 +140,7 @@ class _RequestState extends State<Request> {
                     ],
                   ),
                 ),
-                _selectedDay('Thứ 2', isSelected1, 100),
-                _selectedDay('Thứ 3', isSelected2, 100),
-                _selectedDay('Thứ 4', isSelected3, 100),
-                _selectedDay('Thứ 5', isSelected4, 100),
-                _selectedDay('Thứ 6', isSelected5, 100),
-                _selectedDay('Thứ 7', isSelected6, 100),
-                _selectedDay('Chủ nhật', isSelected7, 59),
+                SelectedTimeColumn(),
                 Divider(
                   thickness: 1,
                 ),
@@ -167,67 +187,42 @@ class _RequestState extends State<Request> {
               ],
             ),
             Positioned(
-                top:0,
-                child:Container(
-                  height:50,
+                top: 0,
+                child: Container(
+                  height: 50,
                   width: 385,
-                  child:TextField(
+                  child: TextField(
                     style: TextStyle(fontSize: 17.0),
                     decoration: InputDecoration(
                         border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(25.0),
                         ),
-                        hintText: 'VD:Tìm gia sư dạy kèm tiếng anh 6 tại Cầu Giấy'
-                    ),
+                        hintText:
+                            'VD:Tìm gia sư dạy kèm tiếng anh 6 tại Cầu Giấy'),
                   ),
                   decoration: BoxDecoration(
                     color: Colors.white,
                     border: Border.all(color: Colors.blueAccent),
                     borderRadius: BorderRadius.circular(25.0),
                   ),
-                )
-            )
+                ))
           ],
         ),
       ),
     );
   }
+
   Widget _textField(String _s) {
     return Container(
-      height:50,
+      height: 50,
       width: 380,
-      child:TextField(
+      child: TextField(
         style: TextStyle(fontSize: 19.0),
         decoration: InputDecoration(
             border: OutlineInputBorder(
               borderRadius: BorderRadius.circular(10.0),
             ),
-            hintText: _s
-        ),
-      ),
-      decoration: BoxDecoration(
-        color: Colors.white,
-        border: Border.all(color: Colors.blueAccent),
-        borderRadius: BorderRadius.circular(10.0),
-      ),
-    );
-  }
-  Widget _textLargeField(String _s) {
-    return Container(
-      height:120,
-      width: 380,
-      child:SizedBox(
-        height: 120,
-        child: TextField(
-          maxLines: 5,
-          style: TextStyle(fontSize: 19.0),
-          decoration: InputDecoration(
-              border: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(10.0),
-              ),
-              hintText: _s
-          ),
-        ),
+            hintText: _s),
       ),
       decoration: BoxDecoration(
         color: Colors.white,
@@ -237,6 +232,29 @@ class _RequestState extends State<Request> {
     );
   }
 
+  Widget _textLargeField(String _s) {
+    return Container(
+      height: 120,
+      width: 380,
+      child: SizedBox(
+        height: 120,
+        child: TextField(
+          maxLines: 5,
+          style: TextStyle(fontSize: 19.0),
+          decoration: InputDecoration(
+              border: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(10.0),
+              ),
+              hintText: _s),
+        ),
+      ),
+      decoration: BoxDecoration(
+        color: Colors.white,
+        border: Border.all(color: Colors.blueAccent),
+        borderRadius: BorderRadius.circular(10.0),
+      ),
+    );
+  }
 
   Widget _selectedDay(String day, List<bool> isSelected, int space) {
     return Padding(
@@ -270,7 +288,7 @@ class _RequestState extends State<Request> {
                   child: Text(
                     'Buổi sáng',
                     style: TextStyle(
-                     // color:  ? Colors.black87: Colors.white,
+                      // color:  ? Colors.black87: Colors.white,
                       fontSize: ScreenUtil.getInstance().setSp(30),
                     ),
                   ),
@@ -312,6 +330,4 @@ class _RequestState extends State<Request> {
       ),
     );
   }
-
-
 }

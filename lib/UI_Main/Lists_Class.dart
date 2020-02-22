@@ -1,4 +1,4 @@
-import 'dart:ui';
+//import 'dart:ui';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -10,6 +10,7 @@ import 'package:test_giasu/UI_Main/Filter.dart';
 import 'package:test_giasu/fetchData/List_ClassData.dart';
 
 final Color _color = Color.fromRGBO(47, 101, 174, 1);
+int _N;
 
 class _List_Box extends StatelessWidget {
   List<Data> box;
@@ -27,10 +28,10 @@ class _List_Box extends StatelessWidget {
           return Container(
             child: Stack(
               children: <Widget>[
-                Container(
-                  alignment: Alignment.center,
+                Expanded(child: Container(
+                  alignment: Alignment.centerLeft,
                   margin: EdgeInsets.all(10.0),
-                  height: 190,
+//                  height: 190,
                   child: SingleChildScrollView(
                     scrollDirection: Axis.horizontal,
                     child: RaisedButton(
@@ -38,51 +39,49 @@ class _List_Box extends StatelessWidget {
                         print(MediaQuery.of(context).size);
                       },
                       padding: EdgeInsets.all(5.0),
-                      child: Transform.scale(
-                        scale: 1,
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: <Widget>[
-                            _iconTextBox(
-                              box[index].name,
-                              _color,
-                              20,
-                              Icon(Icons.account_box),
-                            ),
-                            _iconTextBox(
-                              box[index].parent.full_name,
-                              Colors.deepOrange,
-                              20,
-                              Icon(Icons.account_box),
-                            ),
-                            _iconTextBox(
-                              box[index].address,
-                              Colors.grey,
-                              20,
-                              Icon(Icons.account_box),
-                            ),
-                            _iconTextBox(
-                              '150.000 vnd/2h - 2 buổi/tuần',
-                              Colors.grey,
-                              21,
-                              Icon(Icons.account_box),
-                            ),
-                            _iconTextBox2(
-                              //2
-                              'Cách bạn: 2 km',
-                              Colors.grey,
-                              20,
-                              Icon(Icons.account_box),
-                            ),
-                            _iconTextBox3(
-                              //3
-                              'Phí nhận lớp: 480,000 vnđ',
-                              Colors.blue,
-                              20,
-                              Icon(Icons.account_box),
-                            ),
-                          ],
-                        ),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: <Widget>[
+                          _iconTextBox(
+                            box[index].name,
+                            _color,
+                            20,
+                            Icon(Icons.account_box),
+                          ),
+                          _iconTextBox(
+                            box[index].parent.full_name,
+                            Colors.deepOrange,
+                            20,
+                            Icon(Icons.account_box),
+                          ),
+                          _iconTextBox(
+                            box[index].address,
+                            Colors.grey,
+                            20,
+                            Icon(Icons.account_box),
+                          ),
+                          _iconTextBox(
+                            '${box[index].tuition_fee} vnd/${box[index].time_per_lesson}h - ${box[index].lesson_per_week}/tuần',
+                            Colors.grey,
+                            21,
+                            Icon(Icons.account_box),
+                          ),
+                          _iconTextBox2(
+                            //2
+                            'Cách bạn: 2 km',
+                            Colors.grey,
+                            20,
+                            Icon(Icons.account_box),
+                            box[index].recommend_number,
+                          ),
+                          _iconTextBox3(
+                            //3
+                            'Phí nhận lớp: ${box[index].class_fee} vnđ',
+                            Colors.blue,
+                            20,
+                            Icon(Icons.account_box),
+                          ),
+                        ],
                       ),
                       color: Colors.white,
                       shape: RoundedRectangleBorder(
@@ -97,7 +96,7 @@ class _List_Box extends StatelessWidget {
                         width: 2),
                     borderRadius: BorderRadius.circular(10.0),
                   ),
-                ),
+                ),),
                 Positioned(
                   top: 90,
                   right: 10,
@@ -132,7 +131,7 @@ class _List_Box extends StatelessWidget {
     );
   }
 
-  Widget _iconTextBox2(String _text, Color _c, double _a, Icon _icon) {
+  Widget _iconTextBox2(String _text, Color _c, double _a, Icon _icon, int _b) {
     return Container(
       height: 27,
       child: Row(
@@ -152,7 +151,7 @@ class _List_Box extends StatelessWidget {
           ),
           Center(
             child: Text(
-              '0/6 đề nghị',
+              '${_b}/6 đề nghị',
               style: TextStyle(
                 height: 1.3,
                 fontSize: 16,
@@ -238,102 +237,105 @@ class _Lists_Class_State extends State<Lists_Class> {
         ),
       ),
       //bottomNavigationBar: MyBottomNavigationBar(),
-      body: SingleChildScrollView(
-        child: Stack(
-          alignment: Alignment.center,
-          children: <Widget>[
-            Column(
-              children: <Widget>[
-                Container(
-                  height: 40,
-                  decoration: BoxDecoration(
-                    color: _color,
-                  ),
+      body: Center(
+        child: FutureBuilder<CLassData>(
+          future: list_class,
+          builder: (context, snapshot) {
+            if (snapshot.hasData) {
+              _N = snapshot.data.total;
+              return SingleChildScrollView(
+                child: Stack(
+                  alignment: Alignment.center,
+                  children: <Widget>[
+                    Column(
+                      children: <Widget>[
+                        Container(
+                          height: 40,
+                          decoration: BoxDecoration(
+                            color: _color,
+                          ),
+                        ),
+                        SizedBox(
+                          height: 50,
+                        ),
+                        _List_Box(
+                          box: snapshot.data.data,
+                        )
+                      ],
+                    ),
+                    Positioned(
+                      top: 10,
+                      child: Row(
+                        children: <Widget>[
+                          Container(
+                            height: 55,
+                            width: 150,
+                            child: Center(
+                              child: Text(
+                                '${snapshot.data.total} kết quả',
+                                style: TextStyle(
+                                    fontSize: 25,
+                                    fontWeight: FontWeight.w400,
+                                    color: Colors.white),
+                                textAlign: TextAlign.center,
+                              ),
+                            ),
+                            decoration: BoxDecoration(
+                              color: _color,
+                              border: Border.all(color: Colors.blueAccent),
+                              borderRadius: BorderRadius.only(
+                                  topLeft: Radius.circular(40.0),
+                                  bottomLeft: Radius.circular(40.0)),
+                            ),
+                          ),
+                          Container(
+                            height: 55,
+                            width: 150,
+                            child: ListTile(
+                              title: Text(
+                                'Bộ lọc',
+                                style: TextStyle(
+                                    fontSize: 25,
+                                    fontWeight: FontWeight.w400,
+                                    color: Colors.white),
+                                textAlign: TextAlign.center,
+                              ),
+                              onTap: () {
+                                print('Tap');
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => Filter(),
+                                  ),
+                                );
+                              },
+                              trailing: Icon(
+                                Icons.arrow_forward_ios,
+                                color: Colors.white,
+                              ),
+                            ),
+                            decoration: BoxDecoration(
+                              color: _color,
+                              border: Border.all(color: Colors.blueAccent),
+                              borderRadius: BorderRadius.only(
+                                topRight: Radius.circular(40.0),
+                                bottomRight: Radius.circular(40.0),
+                              ),
+                            ),
+                          )
+                        ],
+                      ),
+                    )
+                  ],
                 ),
-                SizedBox(
-                  height: 50,
-                ),
-                FutureBuilder<CLassData>(
-                  future: list_class,
-                  builder: (context, snapshot) {
-                    if (snapshot.hasData) {
-                      return _List_Box(
-                        box: snapshot.data.data,
-                      );
-                    } else if (snapshot.hasError) {
-                      return Text("${snapshot.error}");
-                    }
+              );
+            } else if (snapshot.hasError) {
+              return Text("${snapshot.error}");
+            }
 
 // By default, show a loading spinner.
-                    return CircularProgressIndicator();
-                  },
-                )
-              ],
-            ),
-            Positioned(
-              top: 10,
-              child: Row(
-                children: <Widget>[
-                  Container(
-                    height: 55,
-                    width: 150,
-                    child: Center(
-                      child: Text(
-                        'N kết quả',
-                        style: TextStyle(
-                            fontSize: 25,
-                            fontWeight: FontWeight.w400,
-                            color: Colors.white),
-                        textAlign: TextAlign.center,
-                      ),
-                    ),
-                    decoration: BoxDecoration(
-                      color: _color,
-                      border: Border.all(color: Colors.blueAccent),
-                      borderRadius: BorderRadius.only(
-                          topLeft: Radius.circular(40.0),
-                          bottomLeft: Radius.circular(40.0)),
-                    ),
-                  ),
-                  Container(
-                    height: 55,
-                    width: 150,
-                    child: ListTile(
-                      title: Text(
-                        'Bộ lọc',
-                        style: TextStyle(
-                            fontSize: 25,
-                            fontWeight: FontWeight.w400,
-                            color: Colors.white),
-                        textAlign: TextAlign.center,
-                      ),
-                      onTap: () {
-                        print('Tap');
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => Filter(),
-                          ),
-                        );
-                      },
-                      trailing: Icon(
-                        Icons.arrow_forward_ios,
-                        color: Colors.white,
-                      ),
-                    ),
-                    decoration: BoxDecoration(
-                      color: _color,
-                      border: Border.all(color: Colors.blueAccent),
-                      borderRadius: BorderRadius.only(
-                        topRight: Radius.circular(40.0),
-                        bottomRight: Radius.circular(40.0),
-                      ),
-                    ),
-                  )
-                ],
-              ),
-            )
-          ],
+            return CircularProgressIndicator();
+          },
         ),
       ),
     );

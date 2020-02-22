@@ -48,6 +48,7 @@ class Waiting_screenState extends State<Waiting_screen> {
                 SizedBox(height: 40),
                 Text(
                   'Nền tảng kết nối gia sư, lớp hoc, khóa hoc',
+                
                   style: TextStyle(
                       decoration: TextDecoration.none,
                       color: Colors.white,

@@ -7,7 +7,7 @@ Future<CLassData> fetchClassData() async {
   final response =
   await http.get('https://giasu.htcon.vn/api/v1/parents/courses');
   Map<String, dynamic> mapResponse = json.decode(response.body);
-//  print(mapResponse["total"].runtimeType);
+  print(mapResponse["total"]);
   if (response.statusCode == 200) {
 //    Map<String, dynamic> mapResponse = json.decode(response.body);
     return CLassData.fromJson(mapResponse);
@@ -66,7 +66,7 @@ class Data {
   String lesson_per_week;
   int student_per_class;
   int tuition_fee;
-  int time_per_lesson;
+  double time_per_lesson;
   String phone_number;
   int form_teaching_id;
   String about_course;
@@ -77,6 +77,7 @@ class Data {
   String parent_number;
   String form_teaching_name;
   Parent parent;
+  int recommend_number;
 
   Data(
       {this.id,
@@ -99,7 +100,9 @@ class Data {
         this.class_fee,
         this.parent_number,
         this.form_teaching_name,
-        this.parent});
+        this.parent,
+        this.recommend_number
+        });
 
   factory Data.fromJson(Map<String, dynamic> json) => Data(
     id: json['id'],
@@ -123,6 +126,7 @@ class Data {
     parent_number: json['parent_number'],
     form_teaching_name: json['form_teaching_name'],
     parent: Parent.fromJson(json['parent']),
+    recommend_number: json['recommend_number'],
   );
 
 //  Map<String, dynamic> toJson() => <String, dynamic> {

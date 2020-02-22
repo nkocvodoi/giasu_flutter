@@ -38,7 +38,7 @@ class _SignIn_PageState extends State<SignIn_Page> {
               children: <Widget>[
                 Container(
                     width: double.infinity,
-                    height: 200.0,
+                    height: SizeConfig.safeBlockVertical * 40,
                     decoration: BoxDecoration(
                       color: Colors.blue,
                     ),
@@ -51,194 +51,185 @@ class _SignIn_PageState extends State<SignIn_Page> {
                           'assets/Logo2.png',
                           cacheHeight: 90,
                           cacheWidth: 130,
-                          height: SizeConfig.safeBlockVertical * 20,
+                          height: 130,
                         ),
                       ],
-                    )),
-                Padding(
-                  padding: EdgeInsets.only(left: 28.0, right: 28.0, top: 250.0),
+                    ),),
+                    SizedBox(height: SizeConfig.safeBlockVertical * 5),
+                Container(
+                  padding: EdgeInsets.all(20),
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                  ),
                   child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
-                      Container(
-                        decoration: BoxDecoration(
-                          color: Colors.white,
-                        ),
-                        // child: Padding(
-                        //   padding:
-                        //       EdgeInsets.only(left: 16.0, right: 16.0, top: 16.0),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: <Widget>[
-                            TextField(
-                              decoration: InputDecoration(
-                                hintText: 'Email/ Số điện thoại',
-                                border: OutlineInputBorder(),
-                                hintStyle: TextStyle(
-                                  fontStyle: FontStyle.normal,
-                                  color: Colors.grey[400],
-                                  fontSize: 20,
-                                ),
-                                suffixIcon: IconButton(
-                                  icon: Icon(Icons.mail),
-                                ),
-                              ),
-                            ),
-                            SizedBox(
-                              width: double.infinity,
-                              height: SizeConfig.safeBlockVertical * 10,
-                            ),
-                            _buildBox('Mật khẩu', true),
-                          ],
+                      TextField(
+                        decoration: InputDecoration(
+                          hintText: 'Email/ Số điện thoại',
+                          border: OutlineInputBorder(),
+                          hintStyle: TextStyle(
+                            fontStyle: FontStyle.normal,
+                            color: Colors.grey[400],
+                            fontSize: 20,
+                          ),
+                          suffixIcon: IconButton(
+                            icon: Icon(Icons.mail),
+                          ),
                         ),
                       ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.end,
-                        children: <Widget>[
-                          RichText(
-                            text: TextSpan(
-                              style: TextStyle(
-                                color: Colors.black,
-                                fontWeight: FontWeight.normal,
-                                fontStyle: FontStyle.italic,
-                                fontSize: 15,
-                              ),
-                              children: <TextSpan>[
-                                TextSpan(
-                                  text: 'Đăng ký ',
-                                  recognizer: TapGestureRecognizer()
-                                    ..onTap = () {
-                                      Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                          builder: (context) => SignUpPage(),
-                                        ),
-                                      );
-                                    },
-                                ),
-                                TextSpan(text: '|'),
-                                TextSpan(
-                                  text: ' Quên mật khẩu ?',
-                                  recognizer: TapGestureRecognizer()
-                                    ..onTap = () {
-                                      Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                          builder: (context) => PassWord1(),
-                                        ),
-                                      );
-                                    },
-                                ),
-                              ],
-                            ),
+                      SizedBox(
+                        width: double.infinity,
+                        height: SizeConfig.safeBlockVertical * 2,
+                      ),
+                      _buildBox('Mật khẩu', true),
+                    ],
+                  ),
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: <Widget>[
+                    RichText(
+                      text: TextSpan(
+                        style: TextStyle(
+                          color: Colors.black,
+                          fontWeight: FontWeight.normal,
+                          fontStyle: FontStyle.italic,
+                          fontSize: 15,
+                        ),
+                        children: <TextSpan>[
+                          TextSpan(
+                            text: 'Đăng ký ',
+                            recognizer: TapGestureRecognizer()
+                              ..onTap = () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => SignUpPage(),
+                                  ),
+                                );
+                              },
+                          ),
+                          TextSpan(text: '|'),
+                          TextSpan(
+                            text: ' Quên mật khẩu ?',
+                            recognizer: TapGestureRecognizer()
+                              ..onTap = () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => PassWord1(),
+                                  ),
+                                );
+                              },
                           ),
                         ],
                       ),
-                      SizedBox(
-                        height: SizeConfig.safeBlockVertical * 10,
+                    ),
+                  ],
+                ),
+                SizedBox(
+                  height: SizeConfig.safeBlockVertical * 5,
+                ),
+                InkWell(
+                  child: Center(
+                    child: Container(
+                      width: SizeConfig.safeBlockHorizontal * 40,
+                      height: SizeConfig.safeBlockVertical * 6,
+                      decoration: BoxDecoration(
+                        color: Colors.orange[300],
+                        borderRadius: BorderRadius.circular(6.0),
                       ),
-                      InkWell(
-                        child: Center(
-                          child: Container(
-                             width: SizeConfig.safeBlockHorizontal * 40,
-                            height: SizeConfig.safeBlockVertical * 8,
-                            decoration: BoxDecoration(
-                              color: Colors.orange[300],
-                              borderRadius: BorderRadius.circular(6.0),
-                            ),
-                            child: Material(
-                              color: Colors.transparent,
-                              child: InkWell(
-                                onTap: () {
-                                  Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                      builder: (context) =>
-                                          MyBottomNavigationBar(
-                                        currentIndex: 0,
-                                      ),
-                                    ),
-                                  );
-                                },
-                                child: Center(
-                                  child: Text(
-                                    'Đăng nhập',
-                                    style: TextStyle(
-                                      color: Colors.white,
-                                      fontSize: 20,
-                                      letterSpacing: 1.0,
-                                    ),
-                                  ),
+                      child: Material(
+                        color: Colors.transparent,
+                        child: InkWell(
+                          onTap: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => MyBottomNavigationBar(
+                                  currentIndex: 0,
                                 ),
+                              ),
+                            );
+                          },
+                          child: Center(
+                            child: Text(
+                              'Đăng nhập',
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 20,
+                                letterSpacing: 1.0,
                               ),
                             ),
                           ),
                         ),
                       ),
-                      SizedBox(
-                        height: 10,
+                    ),
+                  ),
+                ),
+                SizedBox(
+                  height: 10,
+                ),
+                InkWell(
+                  child: Center(
+                    child: Container(
+                      width: SizeConfig.safeBlockHorizontal * 40,
+                      height: SizeConfig.safeBlockVertical * 6,
+                      decoration: BoxDecoration(
+                        color: Colors.blue,
+                        borderRadius: BorderRadius.circular(6.0),
                       ),
-                      InkWell(
-                        child: Center(
-                          child: Container(
-                             width: SizeConfig.safeBlockHorizontal * 40,
-                            height: SizeConfig.safeBlockVertical * 8,
-                            decoration: BoxDecoration(
-                              color: Colors.blue,
-                              borderRadius: BorderRadius.circular(6.0),
-                            ),
-                            child: Material(
-                              color: Colors.transparent,
-                              child: InkWell(
-                                onTap: () {},
-                                child: Center(
-                                  child: Text(
-                                    'Đăng nhập bằng Facebook',
-                                    style: TextStyle(
-                                      color: Colors.white,
-                                      fontSize: 15,
-                                      letterSpacing: 1.0,
-                                    ),
-                                    textAlign: TextAlign.center,
-                                  ),
-                                ),
+                      child: Material(
+                        color: Colors.transparent,
+                        child: InkWell(
+                          onTap: () {},
+                          child: Center(
+                            child: Text(
+                              'Đăng nhập bằng Facebook',
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 13,
+                                letterSpacing: 1.0,
                               ),
+                              textAlign: TextAlign.center,
                             ),
                           ),
                         ),
                       ),
-                      SizedBox(
-                        height: 10,
+                    ),
+                  ),
+                ),
+                SizedBox(
+                  height: 10,
+                ),
+                InkWell(
+                  child: Center(
+                    child: Container(
+                      width: SizeConfig.safeBlockHorizontal * 40,
+                      height: SizeConfig.safeBlockVertical * 6,
+                      decoration: BoxDecoration(
+                        color: Colors.deepOrange,
+                        borderRadius: BorderRadius.circular(6.0),
                       ),
-                      InkWell(
-                        child: Center(
-                          child: Container(
-                            width: SizeConfig.safeBlockHorizontal * 40,
-                            height: SizeConfig.safeBlockVertical * 8,
-                            decoration: BoxDecoration(
-                              color: Colors.deepOrange,
-                              borderRadius: BorderRadius.circular(6.0),
-                            ),
-                            child: Material(
-                              color: Colors.transparent,
-                              child: InkWell(
-                                onTap: () {},
-                                child: Center(
-                                  child: Text(
-                                    'Đăng nhập bằng Google +',
-                                    style: TextStyle(
-                                      color: Colors.white,
-                                      fontSize: 15,
-                                      letterSpacing: 1.0,
-                                    ),
-                                    textAlign: TextAlign.center,
-                                  ),
-                                ),
+                      child: Material(
+                        color: Colors.transparent,
+                        child: InkWell(
+                          onTap: () {},
+                          child: Center(
+                            child: Text(
+                              'Đăng nhập bằng Google +',
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 15,
+                                letterSpacing: 1.0,
                               ),
+                              textAlign: TextAlign.center,
                             ),
                           ),
                         ),
                       ),
-                    ],
+                    ),
                   ),
                 ),
               ],

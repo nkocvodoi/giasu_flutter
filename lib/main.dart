@@ -30,9 +30,9 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'giasu',
+  
+      home: ClassDetail4(),
 
-//      home: Waiting_screen(),
-      home: Lists_Class(),
     );
   }
 }

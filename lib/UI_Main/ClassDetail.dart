@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:test_giasu/Helper/ScreenConfig.dart';
+import 'package:test_giasu/Widgets/ARichTextLine.dart';
 import 'package:test_giasu/Widgets/SelectedTimeColumn.dart';
 
 class ClassDetail extends StatefulWidget {
@@ -12,7 +13,6 @@ class ClassDetail extends StatefulWidget {
 }
 
 class ClassDetailState extends State<ClassDetail> {
-  
   Widget _iconTextBox(Text text, Icon icon) {
     return Container(
       decoration: BoxDecoration(
@@ -32,6 +32,7 @@ class ClassDetailState extends State<ClassDetail> {
 
   @override
   Widget build(BuildContext context) {
+    SizeConfig().init(context);
     ScreenUtil.instance = ScreenUtil.getInstance()..init(context);
     ScreenUtil.instance =
         ScreenUtil(width: 750, height: 1334, allowFontScaling: true);
@@ -46,27 +47,21 @@ class ClassDetailState extends State<ClassDetail> {
           ),
         ),
       ),
-      body: Stack(
-        fit: StackFit.expand,
-        children: <Widget>[
-          SingleChildScrollView(
-            // child: Padding(
-            //   padding: EdgeInsets.only(
-            //     left: 28.0,
-            //     right: 28.0,
-            //     top: 10.0,
-            //   ),
-            child: Column(
+      body: SingleChildScrollView(
+        child: Stack(
+          alignment: Alignment.center,
+          children: <Widget>[
+            Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: <Widget>[
                 Container(
                   width: double.infinity,
-                  height: ScreenUtil.getInstance().setHeight(180),
+                  height: SizeConfig.safeBlockVertical * 20,
                   child: Stack(
                     children: <Widget>[
                       Container(
                         width: double.infinity,
-                        height: ScreenUtil.getInstance().setHeight(150),
+                        height: SizeConfig.safeBlockVertical * 17.5,
                         alignment: Alignment.center,
                         color: Color.fromRGBO(47, 101, 174, 1),
                         child: Icon(Icons.portrait),
@@ -74,17 +69,23 @@ class ClassDetailState extends State<ClassDetail> {
                       Align(
                         alignment: Alignment.bottomCenter,
                         child: Container(
-                          width: ScreenUtil.getInstance().setWidth(600),
-                          height: ScreenUtil.getInstance().setHeight(60),
+                          width: SizeConfig.safeBlockHorizontal * 80,
+                          height: SizeConfig.safeBlockVertical * 5,
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(20.0),
                             border: Border.all(),
                             color: Colors.white,
                           ),
-                          child: Center(child: Text(
+                          child: Center(
+                            child: Text(
                               'Tìm gia sư Tiếng Anh lớp 6 tại Cầu Giấy',
+                              style: TextStyle(
+                                  fontStyle: FontStyle.normal,
+                                  fontSize: SizeConfig.safeBlockHorizontal * 3,
+                                  ),
                               textAlign: TextAlign.center,
-                            ),),
+                            ),
+                          ),
                         ),
                       )
                     ],
@@ -95,8 +96,9 @@ class ClassDetailState extends State<ClassDetail> {
                 ),
                 Container(
                   padding: EdgeInsets.all(10.0),
+                  alignment: Alignment.center,
                   // alignment: Alignment.center,
-                  width: ScreenUtil.getInstance().setWidth(580),
+                  width: SizeConfig.safeBlockHorizontal * 95,
                   decoration: BoxDecoration(
                     border: Border.all(color: Colors.blue),
                     borderRadius: BorderRadius.circular(10),
@@ -107,12 +109,14 @@ class ClassDetailState extends State<ClassDetail> {
                         Text(
                           'Trạng thái: Đang tìm gia sư',
                           style: TextStyle(
-                              color: Colors.green,
-                              fontSize: ScreenUtil.getInstance().setSp(30)),
+                            color: Colors.green,
+                            fontSize: SizeConfig.safeBlockHorizontal * 4,
+                          ),
                         ),
                         Icon(
                           Icons.portrait,
                           color: Colors.grey,
+                          size: SizeConfig.safeBlockHorizontal * 3,
                         ),
                       ),
                       _iconTextBox(
@@ -120,12 +124,13 @@ class ClassDetailState extends State<ClassDetail> {
                           'Mã lớp: 522 - Tiếng Anh |Lớp 6',
                           style: TextStyle(
                             color: Colors.grey,
-                            fontSize: ScreenUtil.getInstance().setSp(30),
+                            fontSize: SizeConfig.safeBlockHorizontal * 4,
                           ),
                         ),
                         Icon(
                           Icons.home,
                           color: Colors.grey,
+                          size: SizeConfig.safeBlockHorizontal * 3,
                         ),
                       ),
                       _iconTextBox(
@@ -133,12 +138,13 @@ class ClassDetailState extends State<ClassDetail> {
                           'Hình thức học: Offline',
                           style: TextStyle(
                             color: Colors.grey,
-                            fontSize: ScreenUtil.getInstance().setSp(30),
+                            fontSize: SizeConfig.safeBlockHorizontal * 4,
                           ),
                         ),
                         Icon(
                           Icons.school,
                           color: Colors.grey,
+                          size: SizeConfig.safeBlockHorizontal * 3,
                         ),
                       ),
                       _iconTextBox(
@@ -146,12 +152,13 @@ class ClassDetailState extends State<ClassDetail> {
                           'Số buổi/tuần: 2 (2h/buổi)',
                           style: TextStyle(
                             color: Colors.grey,
-                            fontSize: ScreenUtil.getInstance().setSp(30),
+                            fontSize: SizeConfig.safeBlockHorizontal * 4,
                           ),
                         ),
                         Icon(
                           Icons.timelapse,
                           color: Colors.grey,
+                          size: SizeConfig.safeBlockHorizontal * 3,
                         ),
                       ),
                       _iconTextBox(
@@ -159,12 +166,13 @@ class ClassDetailState extends State<ClassDetail> {
                           'Số học viên: 1',
                           style: TextStyle(
                             color: Colors.grey,
-                            fontSize: ScreenUtil.getInstance().setSp(30),
+                            fontSize: SizeConfig.safeBlockHorizontal * 4,
                           ),
                         ),
                         Icon(
                           Icons.person_outline,
                           color: Colors.grey,
+                          size: SizeConfig.safeBlockHorizontal * 3,
                         ),
                       ),
                       _iconTextBox(
@@ -172,12 +180,13 @@ class ClassDetailState extends State<ClassDetail> {
                           'Địa chỉ: 155 Cầu Giấy, Hà Nội',
                           style: TextStyle(
                             color: Colors.grey,
-                            fontSize: ScreenUtil.getInstance().setSp(30),
+                            fontSize: SizeConfig.safeBlockHorizontal * 4,
                           ),
                         ),
                         Icon(
                           Icons.map,
                           color: Colors.grey,
+                          size: SizeConfig.safeBlockHorizontal * 3,
                         ),
                       ),
                       _iconTextBox(
@@ -185,12 +194,13 @@ class ClassDetailState extends State<ClassDetail> {
                           'Cách bạn: 2km',
                           style: TextStyle(
                             color: Colors.grey,
-                            fontSize: ScreenUtil.getInstance().setSp(30),
+                            fontSize: SizeConfig.safeBlockHorizontal * 4,
                           ),
                         ),
                         Icon(
                           Icons.radio_button_checked,
                           color: Colors.grey,
+                          size: SizeConfig.safeBlockHorizontal * 3,
                         ),
                       ),
                       _iconTextBox(
@@ -198,12 +208,13 @@ class ClassDetailState extends State<ClassDetail> {
                           'Học phí/buổi: 150.000 vnđ/2h',
                           style: TextStyle(
                             color: Colors.orange,
-                            fontSize: ScreenUtil.getInstance().setSp(30),
+                            fontSize: SizeConfig.safeBlockHorizontal * 4,
                           ),
                         ),
                         Icon(
                           Icons.monetization_on,
                           color: Colors.grey,
+                          size: SizeConfig.safeBlockHorizontal * 3,
                         ),
                       ),
                       _iconTextBox(
@@ -211,12 +222,13 @@ class ClassDetailState extends State<ClassDetail> {
                           'Phí nhận lớp: 490.000 vnđ',
                           style: TextStyle(
                             color: Colors.blue[400],
-                            fontSize: ScreenUtil.getInstance().setSp(30),
+                            fontSize: SizeConfig.safeBlockHorizontal * 4,
                           ),
                         ),
                         Icon(
                           Icons.attach_money,
                           color: Colors.grey,
+                          size: SizeConfig.safeBlockHorizontal * 3,
                         ),
                       ),
                     ],
@@ -226,8 +238,8 @@ class ClassDetailState extends State<ClassDetail> {
                   height: ScreenUtil.getInstance().setHeight(20),
                 ),
                 Container(
-                  width: ScreenUtil.getInstance().setWidth(580),
-                  height: ScreenUtil.getInstance().setHeight(150),
+                  width:  SizeConfig.safeBlockHorizontal * 95,
+                  height:  SizeConfig.safeBlockHorizontal * 25,
                   decoration: BoxDecoration(
                     border: Border.all(color: Colors.blue),
                     borderRadius: BorderRadius.circular(10.0),
@@ -235,52 +247,16 @@ class ClassDetailState extends State<ClassDetail> {
                   child: Text(
                     'Chi tiết nội dung yêu cầu',
                     style: TextStyle(
-                      fontSize: ScreenUtil.getInstance().setSp(30),
+                      fontSize: SizeConfig.safeBlockHorizontal * 4,
                       fontStyle: FontStyle.normal,
                       color: Colors.grey[400],
                     ),
                   ),
                 ),
-                SizedBox(height: ScreenUtil.getInstance().setHeight(10),),
-                RichText(
-                  textAlign: TextAlign.start,
-                  text: TextSpan(
-                    children: <TextSpan>[
-                      TextSpan(
-                        text: 'Thời gian',
-                        style: TextStyle(
-                          fontSize: ScreenUtil.getInstance().setSp(30),
-                          color: Colors.grey,
-                          fontStyle: FontStyle.normal,
-                        ),
-                      ),
-                      TextSpan(
-                        text: '(màu',
-                        style: TextStyle(
-                          fontStyle: FontStyle.normal,
-                          color: Colors.grey,
-                          fontSize: ScreenUtil.getInstance().setSp(30),
-                        ),
-                      ),
-                      TextSpan(
-                        text: ' cam ',
-                        style: TextStyle(
-                          fontStyle: FontStyle.normal,
-                          color: Colors.orange,
-                          fontSize: ScreenUtil.getInstance().setSp(30),
-                        ),
-                      ),
-                      TextSpan(
-                        text: 'hiển thị thời gian có thể dạy)',
-                        style: TextStyle(
-                          color: Colors.grey,
-                          fontStyle: FontStyle.normal,
-                          fontSize: ScreenUtil.getInstance().setSp(30),
-                        ),
-                      ),
-                    ],
-                  ),
+                SizedBox(
+                  height: ScreenUtil.getInstance().setHeight(10),
                 ),
+                RichTextLine(),
                 SelectedTimeColumn(),
                 SizedBox(
                   height: ScreenUtil.getInstance().setHeight(50),
@@ -289,53 +265,56 @@ class ClassDetailState extends State<ClassDetail> {
                   thickness: 1,
                 ),
                 Container(
-                  width: ScreenUtil.getInstance().setWidth(700),
-                  height: ScreenUtil.getInstance().setHeight(100),
-                  decoration: BoxDecoration(
-                    border: Border.all(color: Colors.grey),
-                  ),
-                child: Row(
-                  children: <Widget>[
-                    Wrap(
-                      children: <Widget>[
-                        Container(
-                          width: ScreenUtil.getInstance().setWidth(145),
-                          height: ScreenUtil.getInstance().setHeight(150),
-                          margin: EdgeInsets.all(5.0),
-                          child: Text(
-                            'Đã có 3/6 đề nghị dạy',
-                            textAlign: TextAlign.center,
-                            style: TextStyle(
-                              color: Colors.black38,
-                              fontSize: ScreenUtil.getInstance().setSp(26),
+                  width:  SizeConfig.safeBlockHorizontal * 90,
+                  height:  SizeConfig.safeBlockVertical * 10,
+                 
+                  child: Row(
+                    children: <Widget>[
+                      Wrap(
+                        children: <Widget>[
+                          Container(
+                            width: ScreenUtil.getInstance().setWidth(145),
+                            
+                            margin: EdgeInsets.all(5.0),
+                            child: Text(
+                              'Đã có 3/6 đề nghị dạy',
+                              textAlign: TextAlign.center,
+                              style: TextStyle(
+                                color: Colors.black38,
+                                fontSize:  SizeConfig.safeBlockHorizontal * 3,
+                              ),
                             ),
                           ),
-                        ),
-                      ],
-                    ),
-                    SizedBox(
-                      width: ScreenUtil.getInstance().setWidth(280),
-                    ),
-                    RaisedButton(
-                      color: Colors.blue,
-                      onPressed: () {
-                        print('tap');
-                      },
-                      child: Text(
-                        'Đề nghị dạy',
-                        style: TextStyle(
-                          fontSize: ScreenUtil.getInstance().setSp(27),
-                          color: Colors.white,
-                        ),
+                        ],
                       ),
-                    ),
-                  ],
-                ),
+                      SizedBox(
+                        width:  SizeConfig.safeBlockHorizontal * 40,
+                      ),
+                      RaisedButton(
+                        color: Colors.blue,
+                        onPressed: () {
+                          print('tap');
+                        },
+                        child: Container(
+                          alignment: Alignment.center,
+                          height: SizeConfig.safeBlockVertical *5,
+                          child: Text(
+                          'Đề nghị dạy',
+                          style: TextStyle(
+                            fontSize:  SizeConfig.safeBlockHorizontal* 3,
+                            color: Colors.white,
+                            fontStyle: FontStyle.normal,
+                          ),
+                        ),
+                        )
+                      ),
+                    ],
+                  ),
                 ),
               ],
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }

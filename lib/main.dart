@@ -1,12 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:test_giasu/Open_App/SpecialtyInfor.dart';
 import 'package:test_giasu/UI_Main/Anouncement.dart';
-import 'Test2.dart';
+
 import 'package:test_giasu/UI_Main/ClassDetail4.dart';
 import 'package:test_giasu/UI_Main/Lists_Class.dart';
 import 'package:test_giasu/UI_Main/Request.dart';
-import 'package:test_giasu/UI_Main/TutorInfor.dart';
-import 'package:test_giasu/fetchData/testList_Class.dart';
 import 'Open_App/PersonInfor.dart';
 import 'package:test_giasu/Open_App/Waiting_screen.dart';
 import 'package:test_giasu/Students/Filter_S.dart';

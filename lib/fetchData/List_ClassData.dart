@@ -19,7 +19,7 @@ Future<CLassData> fetchClassData() async {
 
 class CLassData {
   int code;
-  List<Data> data;
+  List<Data_class> data;
   String status;
   String page;
   int per_page;
@@ -38,7 +38,7 @@ class CLassData {
     code: json['code'],
     data: (json['data'] as List)
         ?.map((e) =>
-    e == null ? null : Data.fromJson(e as Map<String, dynamic>))
+    e == null ? null : Data_class.fromJson(e as Map<String, dynamic>))
         ?.toList(),
     status: json['status'],
     page: json['page'],
@@ -55,7 +55,7 @@ class CLassData {
 //  };
 }
 
-class Data {
+class Data_class {
   int id;
   String name;
   String grade;
@@ -79,7 +79,7 @@ class Data {
   Parent parent;
   int recommend_number;
 
-  Data(
+  Data_class(
       {this.id,
         this.name,
         this.grade,
@@ -104,7 +104,7 @@ class Data {
         this.recommend_number
         });
 
-  factory Data.fromJson(Map<String, dynamic> json) => Data(
+  factory Data_class.fromJson(Map<String, dynamic> json) => Data_class(
     id: json['id'],
     name: json['name'],
     grade: json['grade'],
@@ -118,7 +118,7 @@ class Data {
     time_per_lesson: json['time_per_lesson'],
     phone_number: json['phone_number'],
     form_teaching_id: json['form_teaching_id'],
-    about_course: json['aboubt_course'],
+    about_course: json['about_course'],
     address: json['address'],
     tutor_gender: json['tutor_gender'],
     debt: json['debt'],

@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:test_giasu/Open_App/PassWord1.dart';
+import 'package:test_giasu/Open_App/ForgotPassWord1.dart';
 import 'package:test_giasu/Open_App/Waiting_screen.dart';
 import 'package:test_giasu/UI_Main/BottomNavigationBar.dart';
 import 'package:test_giasu/UI_Main/Support_Settings.dart';
+import 'package:test_giasu/UI_Main/TutorInfor.dart';
 import 'package:url_launcher/url_launcher.dart';
+
+import 'ResetPass.dart';
 
 class Account extends StatefulWidget {
   @override
@@ -100,7 +103,11 @@ class _Account_State extends State<Account> {
         switch (_a) {
           case 1: //Trang cá nhân
             {
-              return launch('https://www.facebook.com/Giasubinhminh.club/');
+              return Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => TutorInfor(),
+                  ));
             }
             break;
           case 2: //Cập nhật thông tin
@@ -113,7 +120,7 @@ class _Account_State extends State<Account> {
               return Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => PassWord1(),
+                    builder: (context) => ResetPass(),
                   ));
             }
             break;

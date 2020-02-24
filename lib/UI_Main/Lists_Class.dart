@@ -13,7 +13,7 @@ final Color _color = Color.fromRGBO(47, 101, 174, 1);
 int _N;
 
 class _List_Box extends StatelessWidget {
-  List<Data> box;
+  List<Data_class> box;
 
   _List_Box({Key key, this.box}) : super(key: key);
 
@@ -36,7 +36,12 @@ class _List_Box extends StatelessWidget {
                     scrollDirection: Axis.horizontal,
                     child: RaisedButton(
                       onPressed: () {
-                        print(MediaQuery.of(context).size);
+                        print(box[index].about_course);
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => ClassDetail(key: key,class1: box[index],),
+                            ));
                       },
                       padding: EdgeInsets.all(5.0),
                       child: Column(

@@ -85,6 +85,7 @@ class _Payments_State extends State<Payments> {
               child: Padding(
                   padding: EdgeInsets.only(left: 15.0, right: 15.0, top: 5.0),
                 child: DropdownButton<String>(
+
                   underline: Container(color: Colors.transparent,),
                   icon: Icon(Icons.keyboard_arrow_down, color: Colors.grey,),
                   iconSize: 36,

@@ -13,12 +13,11 @@ class ClassDetail4 extends StatefulWidget {
 }
 
 class ClassDetail4State extends State<ClassDetail4> {
- 
   Widget _iconTextBox(Text text, Icon icon) {
     return Container(
       decoration: BoxDecoration(
-        // border: Border.all(color: Colors.grey),
-      ),
+          // border: Border.all(color: Colors.grey),
+          ),
       child: Row(
         children: <Widget>[
           icon,
@@ -281,7 +280,6 @@ class ClassDetail4State extends State<ClassDetail4> {
                     ),
                   ),
                 ),
-
                 RichTextLine(),
                 SelectedTimeColumn(),
                 SizedBox(
@@ -322,7 +320,6 @@ class ClassDetail4State extends State<ClassDetail4> {
                       ),
                       Container(
                         height: SizeConfig.safeBlockVertical * 5,
-
                         child: RaisedButton(
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(5),
@@ -345,8 +342,8 @@ class ClassDetail4State extends State<ClassDetail4> {
                 ),
               ],
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }

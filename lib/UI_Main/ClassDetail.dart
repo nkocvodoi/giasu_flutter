@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
-
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:test_giasu/Helper/ScreenConfig.dart';
+import 'package:test_giasu/UI_Main/General_Infor.dart';
 import 'package:test_giasu/Widgets/ARichTextLine.dart';
+import 'package:test_giasu/Widgets/RoundedImageNameBox.dart';
 import 'package:test_giasu/Widgets/SelectedTimeColumn.dart';
 import 'package:test_giasu/fetchData/List_ClassData.dart';
 
@@ -22,12 +23,11 @@ class _ClassDetailState extends State<ClassDetail> {
   Data_class class1;
 
   _ClassDetailState({this.class1});
-
   Widget _iconTextBox(Text text, Icon icon) {
     return Container(
       decoration: BoxDecoration(
-          // border: Border.all(color: Colors.grey),
-          ),
+        // border: Border.all(color: Colors.grey),
+      ),
       child: Row(
         children: <Widget>[
           icon,
@@ -66,21 +66,21 @@ class _ClassDetailState extends State<ClassDetail> {
               children: <Widget>[
                 Container(
                   width: double.infinity,
-                  height: SizeConfig.safeBlockVertical * 20,
+                  height: SizeConfig.safeBlockVertical * 24,
                   child: Stack(
                     children: <Widget>[
                       Container(
                         width: double.infinity,
-                        height: SizeConfig.safeBlockVertical * 16,
+                        height: SizeConfig.safeBlockVertical * 21,
                         alignment: Alignment.center,
-                        color: Color.fromRGBO(47, 101, 174, 1),
-                        child: Icon(Icons.portrait),
+                        color: colorApp,
+                        child: RoundedImageNameBox('assets/red.jpg','Logo2'),
                       ),
                       Align(
                         alignment: Alignment.bottomCenter,
                         child: Container(
                           width: SizeConfig.safeBlockHorizontal * 80,
-                          height: SizeConfig.safeBlockVertical * 8,
+                          height: SizeConfig.safeBlockVertical * 6,
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(20.0),
                             border: Border.all(),
@@ -91,7 +91,7 @@ class _ClassDetailState extends State<ClassDetail> {
                               'Tìm gia sư Tiếng Anh lớp 6 tại Cầu Giấy',
                               style: TextStyle(
                                 fontStyle: FontStyle.normal,
-                                fontSize: SizeConfig.safeBlockHorizontal * 3.5,
+                                fontSize: SizeConfig.safeBlockHorizontal * 3,
                               ),
                               textAlign: TextAlign.center,
                             ),
@@ -145,7 +145,7 @@ class _ClassDetailState extends State<ClassDetail> {
                       ),
                       _iconTextBox(
                         Text(
-                          'Hình thức học: ${class1.form_teaching_name}',
+                          'Hình thức học: Offline',
                           style: TextStyle(
                             color: Colors.grey,
                             fontSize: SizeConfig.safeBlockHorizontal * 4,
@@ -159,7 +159,7 @@ class _ClassDetailState extends State<ClassDetail> {
                       ),
                       _iconTextBox(
                         Text(
-                          'Số buổi/tuần: ${class1.lesson_per_week} (${class1.time_per_lesson}h/buổi)',
+                          'Số buổi/tuần: 2 (2h/buổi)',
                           style: TextStyle(
                             color: Colors.grey,
                             fontSize: SizeConfig.safeBlockHorizontal * 4,
@@ -173,7 +173,7 @@ class _ClassDetailState extends State<ClassDetail> {
                       ),
                       _iconTextBox(
                         Text(
-                          'Số học viên: ${class1.student_per_class}',
+                          'Số học viên: 1',
                           style: TextStyle(
                             color: Colors.grey,
                             fontSize: SizeConfig.safeBlockHorizontal * 4,
@@ -215,7 +215,7 @@ class _ClassDetailState extends State<ClassDetail> {
                       ),
                       _iconTextBox(
                         Text(
-                          'Học phí/buổi: ${class1.tuition_fee} vnđ/${class1.time_per_lesson}h',
+                          'Học phí/buổi: 150.000 vnđ/2h',
                           style: TextStyle(
                             color: Colors.orange,
                             fontSize: SizeConfig.safeBlockHorizontal * 4,
@@ -229,7 +229,7 @@ class _ClassDetailState extends State<ClassDetail> {
                       ),
                       _iconTextBox(
                         Text(
-                          'Phí nhận lớp: ${class1.class_fee} vnđ',
+                          'Phí nhận lớp: 490.000 vnđ',
                           style: TextStyle(
                             color: Colors.blue[400],
                             fontSize: SizeConfig.safeBlockHorizontal * 4,
@@ -247,36 +247,19 @@ class _ClassDetailState extends State<ClassDetail> {
                 SizedBox(
                   height: ScreenUtil.getInstance().setHeight(20),
                 ),
-                Align(
-                  alignment: Alignment.centerLeft,
-                  child: Padding(
-                    padding: EdgeInsets.only(left: 10.0),
-                    child: Text(
-                      'Chi tiết nội dung yêu cầu',
-                      style: TextStyle(
-                        fontSize: SizeConfig.safeBlockHorizontal * 5,
-                        fontStyle: FontStyle.normal,
-                        color: Colors.grey[500],
-                      ),
-                    ),
-                  ),
-                ),
                 Container(
-                  width: SizeConfig.safeBlockHorizontal * 95,
-                  height: SizeConfig.safeBlockHorizontal * 25,
+                  width:  SizeConfig.safeBlockHorizontal * 95,
+                  height:  SizeConfig.safeBlockHorizontal * 25,
                   decoration: BoxDecoration(
                     border: Border.all(color: Colors.blue),
                     borderRadius: BorderRadius.circular(10.0),
                   ),
-                  child: Padding(
-                    padding: EdgeInsets.all(5.0),
-                    child: Text(
-                      '${class1.about_course}',
-                      style: TextStyle(
-                        fontSize: SizeConfig.safeBlockHorizontal * 4,
-                        fontStyle: FontStyle.normal,
-                        color: Colors.grey[400],
-                      ),
+                  child: Text(
+                    'Chi tiết nội dung yêu cầu',
+                    style: TextStyle(
+                      fontSize: SizeConfig.safeBlockHorizontal * 4,
+                      fontStyle: FontStyle.normal,
+                      color: Colors.grey[400],
                     ),
                   ),
                 ),
@@ -292,54 +275,56 @@ class _ClassDetailState extends State<ClassDetail> {
                   thickness: 1,
                 ),
                 Container(
-                  width: SizeConfig.safeBlockHorizontal * 90,
-                  height: SizeConfig.safeBlockVertical * 10,
+                  width:  SizeConfig.safeBlockHorizontal * 90,
+                  height:  SizeConfig.safeBlockVertical * 10,
+
                   child: Row(
                     children: <Widget>[
                       Wrap(
                         children: <Widget>[
                           Container(
                             width: ScreenUtil.getInstance().setWidth(145),
+
                             margin: EdgeInsets.all(5.0),
                             child: Text(
-                              'Đã có ${class1.recommend_number}/6 đề nghị dạy',
+                              'Đã có 3/6 đề nghị dạy',
                               textAlign: TextAlign.center,
                               style: TextStyle(
                                 color: Colors.black38,
-                                fontSize: SizeConfig.safeBlockHorizontal * 3,
+                                fontSize:  SizeConfig.safeBlockHorizontal * 3,
                               ),
                             ),
                           ),
                         ],
                       ),
                       SizedBox(
-                        width: SizeConfig.safeBlockHorizontal * 40,
+                        width:  SizeConfig.safeBlockHorizontal * 40,
                       ),
                       RaisedButton(
                           color: Colors.blue,
                           onPressed: () {
                             print('tap');
-                            print(class1.about_course);
                           },
                           child: Container(
                             alignment: Alignment.center,
-                            height: SizeConfig.safeBlockVertical * 5,
+                            height: SizeConfig.safeBlockVertical *5,
                             child: Text(
                               'Đề nghị dạy',
                               style: TextStyle(
-                                fontSize: SizeConfig.safeBlockHorizontal * 3,
+                                fontSize:  SizeConfig.safeBlockHorizontal* 3,
                                 color: Colors.white,
                                 fontStyle: FontStyle.normal,
                               ),
                             ),
-                          )),
+                          )
+                      ),
                     ],
                   ),
                 ),
               ],
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }

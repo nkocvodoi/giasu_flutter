@@ -5,7 +5,7 @@ import 'package:provider/provider.dart';
 import 'package:test_giasu/Helper/ScreenConfig.dart';
 import 'package:test_giasu/UI_Main/BottomNavigationBar.dart';
 
-import 'ForgotPassWord1.dart';
+import 'ForgotPass1.dart';
 import 'SignUp_Page.dart';
 
 // ignore: camel_case_types
@@ -118,7 +118,7 @@ class _SignIn_PageState extends State<SignIn_Page> {
                                 Navigator.push(
                                   context,
                                   MaterialPageRoute(
-                                    builder: (context) => ForgotPassWord1(),
+                                    builder: (context) => ForgotPass1(),
                                   ),
                                 );
                               },

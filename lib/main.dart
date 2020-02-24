@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:test_giasu/Open_App/SpecialtyInfor.dart';
-import 'package:test_giasu/UI_Main/Payments.dart';
-import 'UI_Main/Nap_Bits.dart';
-import 'file:///D:/Code/test_giasu/lib/Students/StudentInfor.dart';
+import 'package:test_giasu/UI_Main/Anouncement.dart';
+
 import 'package:test_giasu/UI_Main/ClassDetail4.dart';
 import 'package:test_giasu/UI_Main/Lists_Class.dart';
 import 'package:test_giasu/UI_Main/Request.dart';
@@ -39,3 +38,5 @@ class MyApp extends StatelessWidget {
     );
   }
 }
+
+

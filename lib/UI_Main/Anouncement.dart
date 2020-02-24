@@ -1,6 +1,7 @@
 // ignore: avoid_web_libraries_in_flutter
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter/material.dart';
+import 'package:test_giasu/Helper/ScreenConfig.dart';
 import 'Mails.dart';
 
 class Anouncement extends StatefulWidget {
@@ -20,6 +21,7 @@ class _AnouncementState extends State<Anouncement> {
         width: MediaQuery.of(context).size.width.toInt(),
         height: MediaQuery.of(context).size.height.toInt(),
         allowFontScaling: true);
+    SizeConfig().init(context);
     // TODO: implement build
     return Scaffold(
       appBar: AppBar(
@@ -27,10 +29,6 @@ class _AnouncementState extends State<Anouncement> {
         title: Center(
           child: Text(
             'Hộp thư',
-            style: TextStyle(
-              fontSize: ScreenUtil.getInstance().setSp(40),
-              fontStyle: FontStyle.normal,
-            ),
             textAlign: TextAlign.center,
           ),
         ),
@@ -41,7 +39,7 @@ class _AnouncementState extends State<Anouncement> {
         children: <Widget>[
           Column(children: <Widget>[
             SizedBox(
-              height: ScreenUtil.getInstance().setHeight(20),
+              height: SizeConfig.safeBlockVertical * 5,
             ),
             Mails(
                 Icons.bookmark,

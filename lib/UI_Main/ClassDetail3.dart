@@ -15,12 +15,11 @@ class ClassDetail3 extends StatefulWidget {
 }
 
 class ClassDetail3State extends State<ClassDetail3> {
-  
   Widget _iconTextBox(Text text, Icon icon) {
     return Container(
       decoration: BoxDecoration(
-        // border: Border.all(color: Colors.grey),
-      ),
+          // border: Border.all(color: Colors.grey),
+          ),
       child: Row(
         children: <Widget>[
           icon,
@@ -291,7 +290,10 @@ class ClassDetail3State extends State<ClassDetail3> {
                             border: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(15.0),
                             ),
-                            hintText: 'Tìm kiếm từ khóa/ID gia sư',hintStyle: TextStyle(fontStyle: FontStyle.normal,fontSize: SizeConfig.safeBlockHorizontal*3),
+                            hintText: 'Tìm kiếm từ khóa/ID gia sư',
+                            hintStyle: TextStyle(
+                                fontStyle: FontStyle.normal,
+                                fontSize: SizeConfig.safeBlockHorizontal * 3),
                           ),
                         ),
                       ),
@@ -299,7 +301,6 @@ class ClassDetail3State extends State<ClassDetail3> {
                     Expanded(
                       child: SizedBox(),
                     ),
-
                     Container(
                       height: SizeConfig.safeBlockVertical * 5,
                       width: SizeConfig.safeBlockHorizontal * 23,
@@ -317,7 +318,6 @@ class ClassDetail3State extends State<ClassDetail3> {
                             fontSize: SizeConfig.safeBlockHorizontal * 3,
                           ),
                         ),
-
                       ),
                     ),
                     Expanded(
@@ -335,30 +335,13 @@ class ClassDetail3State extends State<ClassDetail3> {
                     crossAxisCount: 2,
                     children: <Widget>[
                       Expanded(
-                        child: TeacherBox(null, 'name', 'place', 'subject',
-                            'fee', 8, 'moreInfor'),
+                        child: TeacherBox('assets/red.jpg', 'name', 'place',
+                            'subject', 'fee', 8, 'moreInfor'),
                       ),
-                      Expanded(
-                        child: TeacherBox(null, 'name', 'place', 'subject',
-                            'fee', 8, 'moreInfor'),
-                      ),
-                      Expanded(
-                        child: TeacherBox(null, 'name', 'place', 'subject',
-                            'fee', 8, 'moreInfor'),
-                      ),
-                      Expanded(
-                        child: TeacherBox(null, 'name', 'place', 'subject',
-                            'fee', 8, 'moreInfor'),
-                      ),
-                      Expanded(
-                        child: TeacherBox(null, 'name', 'place', 'subject',
-                            'fee', 8, 'moreInfor'),
-                      ),
-
                     ],
                   ),
-                ],
-              ),
+                ),
+              ],
             ),
           ],
         ),

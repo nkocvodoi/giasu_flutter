@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:test_giasu/Open_App/ForgotPassWord1.dart';
 import 'package:test_giasu/Open_App/Waiting_screen.dart';
 import 'package:test_giasu/UI_Main/BottomNavigationBar.dart';
 import 'package:test_giasu/UI_Main/Support_Settings.dart';

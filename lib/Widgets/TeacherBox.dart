@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:test_giasu/Helper/ScreenConfig.dart';
+import 'package:test_giasu/UI_Main/General_Infor.dart';
+import 'package:test_giasu/Widgets/RectangleImageNameBox.dart';
 
 class TeacherBox extends StatelessWidget {
-  Image image;
+  String image;
   String name, place, subject, fee, moreInfor;
   double distance;
   TeacherBox(this.image, this.name, this.place, this.subject, this.fee,
@@ -13,7 +15,7 @@ class TeacherBox extends StatelessWidget {
     SizeConfig().init(context);
     // TODO: implement build
     return Container(
-      height: SizeConfig.safeBlockVertical * 30,
+      
       margin: EdgeInsets.all(5),
       padding: EdgeInsets.only(
         left: 10,
@@ -23,19 +25,7 @@ class TeacherBox extends StatelessWidget {
         border: Border.all(color: Colors.blueGrey),
       ),
       child: Column(children: <Widget>[
-        Icon(
-          Icons.portrait,
-          size: SizeConfig.safeBlockHorizontal * 5,
-        ),
-        Text(
-          name,
-          textAlign: TextAlign.left,
-          style: TextStyle(
-            fontWeight: FontWeight.bold,
-            fontStyle: FontStyle.normal,
-            fontSize: SizeConfig.safeBlockHorizontal * 3,
-          ),
-        ),
+        RectangleImageNameBox(image, name),
         Text(
           '$place | $subject',
           textAlign: TextAlign.left,
@@ -84,13 +74,21 @@ class TeacherBox extends StatelessWidget {
             fontStyle: FontStyle.normal,
           ),
         ),
+        SizedBox(
+          height: 10,
+        ),
+
         Container(
+          alignment: Alignment.bottomRight,
+          width: SizeConfig.safeBlockHorizontal* 40, 
+          child: Container(
           //padding: EdgeInsets.only(left: 60),
+          
           height: SizeConfig.safeBlockVertical * 3,
           width: SizeConfig.blockSizeHorizontal * 17,
           child: RaisedButton(
             onPressed: () {},
-            color: Colors.blue[400],
+            color:colorApp,
             child: Text(
               'Mời dạy',
               style: TextStyle(
@@ -100,6 +98,7 @@ class TeacherBox extends StatelessWidget {
               ),
             ),
           ),
+        ),
         )
       ]),
     );

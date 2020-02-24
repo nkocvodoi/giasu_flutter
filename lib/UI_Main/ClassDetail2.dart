@@ -13,6 +13,7 @@ class ClassDetail2 extends StatefulWidget {
 }
 
 class ClassDetail2State extends State<ClassDetail2> {
+ 
   Widget _iconTextBox(Text text, Icon icon) {
     return Container(
       decoration: BoxDecoration(
@@ -288,7 +289,7 @@ class ClassDetail2State extends State<ClassDetail2> {
                           child: Text('Từ chối'),
                         ),
                       ),
-                      Expanded(child: SizedBox(),flex: 2,),
+                      SizedBox(width: ScreenUtil.getInstance().setWidth(250),),
                       Container(
                         height: SizeConfig.safeBlockVertical * 5,
 

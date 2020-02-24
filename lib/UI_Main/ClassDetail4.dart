@@ -13,6 +13,7 @@ class ClassDetail4 extends StatefulWidget {
 }
 
 class ClassDetail4State extends State<ClassDetail4> {
+ 
   Widget _iconTextBox(Text text, Icon icon) {
     return Container(
       decoration: BoxDecoration(
@@ -172,7 +173,6 @@ class ClassDetail4State extends State<ClassDetail4> {
                         Icon(
                           Icons.school,
                           color: Colors.grey,
-                          size: SizeConfig.safeBlockHorizontal * 3,
                         ),
                       ),
                       _iconTextBox(
@@ -208,7 +208,7 @@ class ClassDetail4State extends State<ClassDetail4> {
                           'Địa chỉ: 155 Cầu Giấy, Hà Nội',
                           style: TextStyle(
                             color: Colors.grey,
-                            fontSize: SizeConfig.safeBlockHorizontal * 4,
+                            fontSize: ScreenUtil.getInstance().setSp(30),
                           ),
                         ),
                         Icon(
@@ -345,8 +345,8 @@ class ClassDetail4State extends State<ClassDetail4> {
                 ),
               ],
             ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }

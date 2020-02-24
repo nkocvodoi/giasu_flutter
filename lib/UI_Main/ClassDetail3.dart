@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:test_giasu/Helper/ScreenConfig.dart';
 import 'package:test_giasu/Widgets/ARichTextLine.dart';
@@ -14,6 +15,7 @@ class ClassDetail3 extends StatefulWidget {
 }
 
 class ClassDetail3State extends State<ClassDetail3> {
+  
   Widget _iconTextBox(Text text, Icon icon) {
     return Container(
       decoration: BoxDecoration(
@@ -352,10 +354,11 @@ class ClassDetail3State extends State<ClassDetail3> {
                         child: TeacherBox(null, 'name', 'place', 'subject',
                             'fee', 8, 'moreInfor'),
                       ),
+
                     ],
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
           ],
         ),

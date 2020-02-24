@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:test_giasu/Helper/ScreenConfig.dart';
 import 'package:test_giasu/Widgets/ARichTextLine.dart';
@@ -337,8 +338,8 @@ class _ClassDetailState extends State<ClassDetail> {
                 ),
               ],
             ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }

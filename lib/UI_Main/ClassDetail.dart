@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:test_giasu/Helper/ScreenConfig.dart';
 import 'package:test_giasu/Widgets/ARichTextLine.dart';
+import 'package:test_giasu/Widgets/RoundedImageNameBox.dart';
 import 'package:test_giasu/Widgets/SelectedTimeColumn.dart';
 
 class ClassDetail extends StatefulWidget {
@@ -56,21 +57,21 @@ class ClassDetailState extends State<ClassDetail> {
               children: <Widget>[
                 Container(
                   width: double.infinity,
-                  height: SizeConfig.safeBlockVertical * 20,
+                  height: SizeConfig.safeBlockVertical * 24,
                   child: Stack(
                     children: <Widget>[
                       Container(
                         width: double.infinity,
-                        height: SizeConfig.safeBlockVertical * 17.5,
+                        height: SizeConfig.safeBlockVertical * 21,
                         alignment: Alignment.center,
                         color: Color.fromRGBO(47, 101, 174, 1),
-                        child: Icon(Icons.portrait),
+                        child: RoundedImageNameBox('assets/red.jpg','Logo2'),
                       ),
                       Align(
                         alignment: Alignment.bottomCenter,
                         child: Container(
                           width: SizeConfig.safeBlockHorizontal * 80,
-                          height: SizeConfig.safeBlockVertical * 5,
+                          height: SizeConfig.safeBlockVertical * 6,
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(20.0),
                             border: Border.all(),

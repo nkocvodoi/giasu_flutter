@@ -30,7 +30,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'giasu',
   
-      home: Anouncement(),
+      home: ClassDetail3(),
     );
   }
 }

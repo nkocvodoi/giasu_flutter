@@ -333,25 +333,10 @@ class ClassDetail3State extends State<ClassDetail3> {
                     crossAxisCount: 2,
                     children: <Widget>[
                       Expanded(
-                        child: TeacherBox(null, 'name', 'place', 'subject',
+                        child: TeacherBox('assets/red.jpg', 'name', 'place', 'subject',
                             'fee', 8, 'moreInfor'),
                       ),
-                      Expanded(
-                        child: TeacherBox(null, 'name', 'place', 'subject',
-                            'fee', 8, 'moreInfor'),
-                      ),
-                      Expanded(
-                        child: TeacherBox(null, 'name', 'place', 'subject',
-                            'fee', 8, 'moreInfor'),
-                      ),
-                      Expanded(
-                        child: TeacherBox(null, 'name', 'place', 'subject',
-                            'fee', 8, 'moreInfor'),
-                      ),
-                      Expanded(
-                        child: TeacherBox(null, 'name', 'place', 'subject',
-                            'fee', 8, 'moreInfor'),
-                      ),
+                      
                     ],
                   ),
                 ),

@@ -10,18 +10,18 @@ class RectangleImageNameBox extends StatelessWidget {
   Widget build(BuildContext context) {
     // TODO: implement build
     return Container(
-      padding: EdgeInsets.all(10),
+      padding: EdgeInsets.only(top: 5),
       width: double.infinity,
       
         child: Column(
       children: <Widget>[
         Container(
-          child: Image.asset(urlString,height: 100,width: double.infinity,),
+          child: Image.network(urlString,height: 100,),
         ),
-        Text(
+         Text(
           name,
           style: TextStyle(
-            fontSize: SizeConfig.safeBlockHorizontal * 3,
+            fontSize: 15,
             fontStyle: FontStyle.normal,
             fontWeight: FontWeight.bold,
           ),

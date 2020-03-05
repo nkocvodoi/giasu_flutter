@@ -17,7 +17,7 @@ class RoundedImageNameBox extends StatelessWidget {
          borderRadius: BorderRadius.circular(90),
           
          
-          child: Image.asset(urlString,height: 100,),
+          child: Image.asset(urlString,height:SizeConfig.safeBlockVertical* 13,),
         ),
         Text(
           name,

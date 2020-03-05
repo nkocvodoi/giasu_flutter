@@ -1,11 +1,10 @@
-//import 'dart:ui';
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:test_giasu/UI_Main/BottomNavigationBar.dart';
 import 'package:test_giasu/UI_Main/ClassDetail.dart';
+import 'package:test_giasu/UI_Main/ClassDetailWithMoreTutorInfor.dart';
 import 'package:test_giasu/UI_Main/Filter.dart';
 import 'package:test_giasu/fetchData/List_ClassData.dart';
 
@@ -13,7 +12,7 @@ final Color _color = Color.fromRGBO(47, 101, 174, 1);
 int _N;
 
 class _List_Box extends StatelessWidget {
-  List<Data> box;
+  List<Data_class> box;
 
   _List_Box({Key key, this.box}) : super(key: key);
 
@@ -36,7 +35,12 @@ class _List_Box extends StatelessWidget {
                     scrollDirection: Axis.horizontal,
                     child: RaisedButton(
                       onPressed: () {
-                        print(MediaQuery.of(context).size);
+                        print(box[index].about_course);
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => ClassDetailWithMoreTutorInfor( box[index],),
+                            ));
                       },
                       padding: EdgeInsets.all(5.0),
                       child: Column(

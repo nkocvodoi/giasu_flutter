@@ -5,17 +5,25 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:test_giasu/Helper/ScreenConfig.dart';
 import 'package:test_giasu/Widgets/ARichTextLine.dart';
 import 'package:test_giasu/Widgets/SelectedTimeColumn.dart';
+import 'package:test_giasu/Widgets/SmallTextBox.dart';
+import 'package:test_giasu/Widgets/SmallTextBoxWithBold.dart';
+import 'package:test_giasu/fetchData/List_TeacherData.dart';
+import 'package:test_giasu/fetchData/List_TeacherDetail.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class TutorInfor extends StatefulWidget {
+  Detail_teacher teacherData;
+  TutorInfor(this.teacherData);
   @override
   State<StatefulWidget> createState() {
     // TODO: implement createState
-    return TutorInforState();
+    return TutorInforState(teacherData);
   }
 }
 
 class TutorInforState extends State<TutorInfor> {
+  Detail_teacher teacherData;
+  TutorInforState(this.teacherData);
   Widget _box(int number, String detail) {
     return Container(
       width: SizeConfig.blockSizeHorizontal * 25,
@@ -86,6 +94,12 @@ class TutorInforState extends State<TutorInfor> {
     );
   }
 
+  String getGender(String gender) {
+    if (gender == 'female') return 'Nữ';
+    if (gender == 'male') return 'Nam';
+    return null;
+  }
+
   @override
   Widget build(BuildContext context) {
     SizeConfig().init(context);
@@ -100,7 +114,7 @@ class TutorInforState extends State<TutorInfor> {
         backgroundColor: Color.fromRGBO(47, 101, 174, 1),
         title: Center(
           child: Text(
-            '',
+            'Chi tiết ',
             textAlign: TextAlign.start,
           ),
         ),
@@ -120,12 +134,12 @@ class TutorInforState extends State<TutorInfor> {
               children: <Widget>[
                 Container(
                   width: double.infinity,
-                  height:  SizeConfig.safeBlockVertical * 35,
+                  height: SizeConfig.safeBlockVertical * 35,
                   child: Stack(
                     children: <Widget>[
                       Container(
                         width: double.infinity,
-                        height:  SizeConfig.safeBlockVertical * 27,
+                        height: SizeConfig.safeBlockVertical * 27,
                         alignment: Alignment.center,
                         color: Color.fromRGBO(47, 101, 174, 1),
                       ),
@@ -133,10 +147,14 @@ class TutorInforState extends State<TutorInfor> {
                         alignment: Alignment.bottomCenter,
                         child: Container(
                           width: ScreenUtil.getInstance().setWidth(150),
-                          height:  ScreenUtil.getInstance().setHeight(150),
+                          height: ScreenUtil.getInstance().setHeight(150),
                           decoration: BoxDecoration(
                             border: Border.all(width: 3, color: Colors.white),
                             color: Colors.white,
+                          ),
+                          child: Expanded(
+                            child: Image.network(
+                                'https://giasu.htcon.vn' + teacherData.avatar),
                           ),
                         ),
                       )
@@ -170,7 +188,7 @@ class TutorInforState extends State<TutorInfor> {
                               ),
                             ),
                             TextSpan(
-                              text: '522',
+                              text: ' ${teacherData.id}',
                               style: TextStyle(
                                 fontStyle: FontStyle.normal,
                                 color: Colors.black,
@@ -196,7 +214,7 @@ class TutorInforState extends State<TutorInfor> {
                           child: SizedBox(),
                         ),
                         Text(
-                          'Mã Gia Hưng',
+                          '${teacherData.full_name}',
                           style: TextStyle(
                             color: Colors.blue[400],
                             fontStyle: FontStyle.normal,
@@ -214,7 +232,7 @@ class TutorInforState extends State<TutorInfor> {
                               style: TextStyle(
                                   fontSize: 15, fontStyle: FontStyle.normal),
                             ),
-                            Icon(MaterialCommunityIcons.heart,size: 15 ),
+                            Icon(MaterialCommunityIcons.heart, size: 15),
                             null,
                             50),
                         Expanded(
@@ -228,7 +246,7 @@ class TutorInforState extends State<TutorInfor> {
                                   fontStyle: FontStyle.normal,
                                   color: Colors.white),
                             ),
-                            Icon(MaterialCommunityIcons.thumb_up,size: 15),
+                            Icon(MaterialCommunityIcons.thumb_up, size: 15),
                             Color.fromRGBO(47, 101, 174, 1),
                             50),
                         Expanded(child: SizedBox()),
@@ -260,7 +278,7 @@ class TutorInforState extends State<TutorInfor> {
                     children: <Widget>[
                       _iconTextBoxNoBorder(
                           Text(
-                            'Thể thao',
+                            '${teacherData.subject_text}',
                             style: TextStyle(
                               fontWeight: FontWeight.bold,
                               fontStyle: FontStyle.normal,
@@ -275,7 +293,7 @@ class TutorInforState extends State<TutorInfor> {
                       ),
                       _iconTextBoxNoBorder(
                           Text(
-                            '150,000 vnđ/buổi',
+                            '${(teacherData.tuition_fee / 1000).toInt()},000 vnđ/buổi',
                             style: TextStyle(
                                 color: Colors.red,
                                 fontSize: 15,
@@ -300,7 +318,7 @@ class TutorInforState extends State<TutorInfor> {
                     children: <Widget>[
                       _iconTextBoxNoBorder(
                           Text(
-                            'Hà Nội',
+                            '${teacherData.location.name}',
                             style: TextStyle(
                               color: Colors.blue,
                               fontWeight: FontWeight.bold,
@@ -339,16 +357,15 @@ class TutorInforState extends State<TutorInfor> {
                   thickness: 1,
                 ),
                 Container(
-                 
                   child: Row(
                     mainAxisSize: MainAxisSize.max,
                     children: <Widget>[
                       Expanded(child: SizedBox()),
-                      _box(4, 'Lớp đã dạy'),
+                      _box(teacherData.course_count, 'Lớp đã dạy'),
                       Expanded(child: SizedBox()),
-                      _box(6, 'Lượt thích'),
+                      _box(teacherData.like_count, 'Lượt thích'),
                       Expanded(child: SizedBox()),
-                      _box(2, 'Lượt đánh giá'),
+                      _box(teacherData.promotion_coin, 'Lượt đánh giá'),
                       Expanded(child: SizedBox()),
                     ],
                   ),
@@ -370,12 +387,40 @@ class TutorInforState extends State<TutorInfor> {
                 ),
                 Divider(
                   thickness: 1,
-                
                   indent: SizeConfig.safeBlockHorizontal * 5,
-                  endIndent: SizeConfig.safeBlockHorizontal * 5 ,
+                  endIndent: SizeConfig.safeBlockHorizontal * 5,
                 ),
                 SizedBox(
-                  height: ScreenUtil.getInstance().setHeight(50),
+                  height: ScreenUtil.getInstance().setHeight(10),
+                ),
+                Container(
+                  padding: EdgeInsets.only(
+                      left: SizeConfig.safeBlockHorizontal * 5,
+                      right: SizeConfig.safeBlockHorizontal * 5,
+                      bottom: 20),
+                  width: double.infinity,
+                  alignment: Alignment.topLeft,
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: <Widget>[
+                      SmallTextBoxWithBold('Thông tin cơ bản'),
+                      SmallTextBox(
+                        'Năm sinh: ' + teacherData.birthdate.substring(0, 4),
+                      ),
+                      SmallTextBox(
+                        'Giới tính: ' + getGender(teacherData.gender),
+                      ),
+                      SmallTextBox('Quê quán: ' + teacherData.location.name),
+                      SmallTextBox('Giọng nói: '),
+                      SmallTextBox('Học vấn: '),
+                      SmallTextBox(
+                          'Đại học năm ${teacherData.school_year} - ${teacherData.specialism} - ${teacherData.university}'),
+                      SmallTextBoxWithBold('Kinh nghiệm gia sư, giảng dạy'),
+                      SmallTextBox('${teacherData.experience}'),
+                      SmallTextBoxWithBold('Thành tích trong học tập và dạy học'),
+                      SmallTextBox('${teacherData.achievement}'),
+                    ],
+                  ),
                 ),
                 Container(
                   width: SizeConfig.safeBlockHorizontal * 90,
@@ -391,9 +436,8 @@ class TutorInforState extends State<TutorInfor> {
                 ),
                 Divider(
                   thickness: 1,
-                
                   indent: SizeConfig.safeBlockHorizontal * 5,
-                  endIndent: SizeConfig.safeBlockHorizontal * 5 ,
+                  endIndent: SizeConfig.safeBlockHorizontal * 5,
                 ),
                 SizedBox(
                   height: ScreenUtil.getInstance().setHeight(50),
@@ -412,19 +456,18 @@ class TutorInforState extends State<TutorInfor> {
                 ),
                 Divider(
                   thickness: 1,
-                
                   indent: SizeConfig.safeBlockHorizontal * 5,
-                  endIndent: SizeConfig.safeBlockHorizontal * 5 ,
+                  endIndent: SizeConfig.safeBlockHorizontal * 5,
                 ),
                 SizedBox(
-                  height: ScreenUtil.getInstance().setHeight(50),
+                  height: 10
                 ),
-                 RichTextLine(),
+                RichTextLine(),
                 SelectedTimeColumn(),
                 SizedBox(height: 20),
                 Container(
-                  width: SizeConfig.safeBlockHorizontal *100,
-                  height: SizeConfig.safeBlockVertical *10,
+                  width: SizeConfig.safeBlockHorizontal * 100,
+                  height: SizeConfig.safeBlockVertical * 10,
                   alignment: Alignment.bottomLeft,
                   child: Row(
                     children: <Widget>[
@@ -442,21 +485,18 @@ class TutorInforState extends State<TutorInfor> {
                       ),
                       SizedBox(
                         width: 15,
-
                       ),
-                     
                       Container(
                         alignment: Alignment.bottomRight,
                         width: SizeConfig.safeBlockHorizontal * 65,
-                        height: SizeConfig.safeBlockVertical * 20,
+                        // height: SizeConfig.safeBlockVertical * 20,
                         child: RichText(
-                          
                           textAlign: TextAlign.start,
                           text: TextSpan(
                             children: <TextSpan>[
                               TextSpan(
                                 text:
-                                    '38 Trần Quý Kiên, Dịch Vọng, Cầu Giấy, Hà Nội, Việt Nam ',
+                                    '${teacherData.address} ',
                                 style: TextStyle(
                                   fontSize: 15,
                                   color: Colors.grey,
@@ -485,7 +525,6 @@ class TutorInforState extends State<TutorInfor> {
                 ),
                 Divider(
                   thickness: 1,
-                 
                   indent: SizeConfig.safeBlockHorizontal * 3,
                   endIndent: SizeConfig.safeBlockHorizontal * 3,
                 ),
@@ -506,9 +545,8 @@ class TutorInforState extends State<TutorInfor> {
                 ),
                 Divider(
                   thickness: 1,
-                
                   indent: SizeConfig.safeBlockHorizontal * 5,
-                  endIndent: SizeConfig.safeBlockHorizontal * 5 ,
+                  endIndent: SizeConfig.safeBlockHorizontal * 5,
                 ),
                 SizedBox(
                   height: ScreenUtil.getInstance().setHeight(50),

@@ -3,17 +3,21 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:test_giasu/Helper/ScreenConfig.dart';
 import 'package:test_giasu/Widgets/ARichTextLine.dart';
 import 'package:test_giasu/Widgets/SelectedTimeColumn.dart';
-import 'package:test_giasu/Widgets/TeacherBox.dart';
+import 'package:test_giasu/fetchData/List_ClassData.dart';
 
-class ClassDetail3 extends StatefulWidget {
+class ClassDetailRequest extends StatefulWidget {
+  Data_class classData;
+  ClassDetailRequest(this.classData);
   @override
   State<StatefulWidget> createState() {
     // TODO: implement createState
-    return ClassDetail3State();
+    return ClassDetailRequestState(classData);
   }
 }
 
-class ClassDetail3State extends State<ClassDetail3> {
+class ClassDetailRequestState extends State<ClassDetailRequest> {
+  Data_class classData;
+  ClassDetailRequestState(this.classData);
   Widget _iconTextBox(Text text, Icon icon) {
     return Container(
       decoration: BoxDecoration(
@@ -81,9 +85,9 @@ class ClassDetail3State extends State<ClassDetail3> {
                             child: Text(
                               'Tìm gia sư Tiếng Anh lớp 6 tại Cầu Giấy',
                               style: TextStyle(
-                                fontStyle: FontStyle.normal,
-                                fontSize: SizeConfig.safeBlockHorizontal * 3,
-                              ),
+                                  fontStyle: FontStyle.normal,
+                                  fontSize: SizeConfig.safeBlockHorizontal * 3,
+                                  ),
                               textAlign: TextAlign.center,
                             ),
                           ),
@@ -108,7 +112,7 @@ class ClassDetail3State extends State<ClassDetail3> {
                     children: <Widget>[
                       _iconTextBox(
                         Text(
-                          'Trạng thái: Đang tìm gia sư',
+                          'Trạng thái: ${classData.status}',
                           style: TextStyle(
                             color: Colors.green,
                             fontSize: SizeConfig.safeBlockHorizontal * 4,
@@ -117,12 +121,12 @@ class ClassDetail3State extends State<ClassDetail3> {
                         Icon(
                           Icons.portrait,
                           color: Colors.grey,
-                          size: SizeConfig.safeBlockHorizontal * 3,
+                          size: SizeConfig.safeBlockHorizontal * 4,
                         ),
                       ),
                       _iconTextBox(
                         Text(
-                          'Mã lớp: 522 - Tiếng Anh |Lớp 6',
+                          'Mã lớp: ${classData.id} - ${classData.subject.name} | Lớp ${classData.grade}',
                           style: TextStyle(
                             color: Colors.grey,
                             fontSize: SizeConfig.safeBlockHorizontal * 4,
@@ -131,12 +135,12 @@ class ClassDetail3State extends State<ClassDetail3> {
                         Icon(
                           Icons.home,
                           color: Colors.grey,
-                          size: SizeConfig.safeBlockHorizontal * 3,
+                          size: SizeConfig.safeBlockHorizontal * 4,
                         ),
                       ),
                       _iconTextBox(
                         Text(
-                          'Hình thức học: Offline',
+                          'Hình thức học: ${classData.form_teaching_name}',
                           style: TextStyle(
                             color: Colors.grey,
                             fontSize: SizeConfig.safeBlockHorizontal * 4,
@@ -145,12 +149,12 @@ class ClassDetail3State extends State<ClassDetail3> {
                         Icon(
                           Icons.school,
                           color: Colors.grey,
-                          size: SizeConfig.safeBlockHorizontal * 3,
+                          size: SizeConfig.safeBlockHorizontal * 4,
                         ),
                       ),
                       _iconTextBox(
                         Text(
-                          'Số buổi/tuần: 2 (2h/buổi)',
+                          'Số buổi/tuần: ${classData.lesson_per_week} (${(classData.time_per_lesson).toInt()}h/buổi)',
                           style: TextStyle(
                             color: Colors.grey,
                             fontSize: SizeConfig.safeBlockHorizontal * 4,
@@ -159,12 +163,12 @@ class ClassDetail3State extends State<ClassDetail3> {
                         Icon(
                           Icons.timelapse,
                           color: Colors.grey,
-                          size: SizeConfig.safeBlockHorizontal * 3,
+                          size: SizeConfig.safeBlockHorizontal * 4,
                         ),
                       ),
                       _iconTextBox(
                         Text(
-                          'Số học viên: 1',
+                          'Số học viên: ${classData.student_per_class}',
                           style: TextStyle(
                             color: Colors.grey,
                             fontSize: SizeConfig.safeBlockHorizontal * 4,
@@ -173,12 +177,12 @@ class ClassDetail3State extends State<ClassDetail3> {
                         Icon(
                           Icons.person_outline,
                           color: Colors.grey,
-                          size: SizeConfig.safeBlockHorizontal * 3,
+                          size: SizeConfig.safeBlockHorizontal * 4,
                         ),
                       ),
                       _iconTextBox(
                         Text(
-                          'Địa chỉ: 155 Cầu Giấy, Hà Nội',
+                          'Địa chỉ: ${classData.address}',
                           style: TextStyle(
                             color: Colors.grey,
                             fontSize: SizeConfig.safeBlockHorizontal * 4,
@@ -187,7 +191,7 @@ class ClassDetail3State extends State<ClassDetail3> {
                         Icon(
                           Icons.map,
                           color: Colors.grey,
-                          size: SizeConfig.safeBlockHorizontal * 3,
+                          size: SizeConfig.safeBlockHorizontal * 4,
                         ),
                       ),
                       _iconTextBox(
@@ -201,12 +205,12 @@ class ClassDetail3State extends State<ClassDetail3> {
                         Icon(
                           Icons.radio_button_checked,
                           color: Colors.grey,
-                          size: SizeConfig.safeBlockHorizontal * 3,
+                          size: SizeConfig.safeBlockHorizontal * 4,
                         ),
                       ),
                       _iconTextBox(
                         Text(
-                          'Học phí/buổi: 150.000 vnđ/2h',
+                          'Học phí/buổi: ${(classData.tuition_fee / 1000).toInt()},000 vnđ/2h',
                           style: TextStyle(
                             color: Colors.orange,
                             fontSize: SizeConfig.safeBlockHorizontal * 4,
@@ -215,12 +219,12 @@ class ClassDetail3State extends State<ClassDetail3> {
                         Icon(
                           Icons.monetization_on,
                           color: Colors.grey,
-                          size: SizeConfig.safeBlockHorizontal * 3,
+                          size: SizeConfig.safeBlockHorizontal * 4,
                         ),
                       ),
                       _iconTextBox(
                         Text(
-                          'Phí nhận lớp: 490.000 vnđ',
+                          'Phí nhận lớp: ${(classData.class_fee /1000).toInt()},000 vnđ',
                           style: TextStyle(
                             color: Colors.blue[400],
                             fontSize: SizeConfig.safeBlockHorizontal * 4,
@@ -229,7 +233,7 @@ class ClassDetail3State extends State<ClassDetail3> {
                         Icon(
                           Icons.attach_money,
                           color: Colors.grey,
-                          size: SizeConfig.safeBlockHorizontal * 3,
+                          size: SizeConfig.safeBlockHorizontal * 4,
                         ),
                       ),
                     ],
@@ -239,8 +243,8 @@ class ClassDetail3State extends State<ClassDetail3> {
                   height: ScreenUtil.getInstance().setHeight(20),
                 ),
                 Container(
-                  width: SizeConfig.safeBlockHorizontal * 95,
-                  height: SizeConfig.safeBlockHorizontal * 25,
+                  width:  SizeConfig.safeBlockHorizontal * 95,
+                  height:  SizeConfig.safeBlockHorizontal * 25,
                   decoration: BoxDecoration(
                     border: Border.all(color: Colors.blue),
                     borderRadius: BorderRadius.circular(10.0),
@@ -262,88 +266,57 @@ class ClassDetail3State extends State<ClassDetail3> {
                 SizedBox(
                   height: ScreenUtil.getInstance().setHeight(50),
                 ),
-                Text(
-                  'Gợi ý gia sư phù hợp',
-                  textAlign: TextAlign.start,
-                  style: TextStyle(
-                    color: Colors.blue,
-                    fontSize: SizeConfig.safeBlockHorizontal * 4,
-                  ),
+                Divider(
+                  thickness: 1,
                 ),
-                SizedBox(
-                  height: SizeConfig.safeBlockVertical * 5,
-                ),
-                Row(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: <Widget>[
-                    Expanded(
-                      child: SizedBox(),
-                    ),
-                    Expanded(
-                      flex: 6,
-                      child: Container(
-                        width: SizeConfig.safeBlockHorizontal * 60,
-                        height: SizeConfig.safeBlockVertical * 5,
-                        child: TextField(
-                          decoration: InputDecoration(
-                            border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(15.0),
-                            ),
-                            hintText: 'Tìm kiếm từ khóa/ID gia sư',hintStyle: TextStyle(fontStyle: FontStyle.normal,fontSize: SizeConfig.safeBlockHorizontal*3),
-                          ),
-                        ),
-                      ),
-                    ),
-                    Expanded(
-                      child: SizedBox(),
-                    ),
-                    
-                       Container(
-                        height: SizeConfig.safeBlockVertical * 5,
-                        width: SizeConfig.safeBlockHorizontal * 23,
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(15.0),
-                        ),
-                        child: RaisedButton(
-                          onPressed: () {},
-                          color: Colors.blue[400],
-                          child: Text(
-                            'Tìm kiếm',
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontStyle: FontStyle.normal,
-                              fontSize: SizeConfig.safeBlockHorizontal * 3,
-                            ),
-                          ),
-                        
-                      ),
-                    ),
-                    Expanded(
-                      child: SizedBox(),
-                      flex: 1,
-                    ),
-                  ],
-                ),
-                SizedBox(height: SizeConfig.safeBlockVertical * 10),
+                
                 Container(
-                  child: GridView.count(
-                    scrollDirection: Axis.vertical,
-                    physics: NeverScrollableScrollPhysics(),
-                    shrinkWrap: true,
-                    crossAxisCount: 2,
+                  alignment: Alignment.center,
+                  width: ScreenUtil.getInstance().setWidth(700),
+                  height: ScreenUtil.getInstance().setHeight(100),
+                  
+                  child: Row(
+                    crossAxisAlignment: CrossAxisAlignment.center,
                     children: <Widget>[
-                      Expanded(
-                        child: TeacherBox('assets/red.jpg', 'name', 'place', 'subject',
-                            'fee', 8, 'moreInfor'),
+                      Expanded(child: SizedBox(),flex: 1,),
+                      Container(
+                        height: SizeConfig.safeBlockVertical * 5,
+                       
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(20.0),
+                        ),
+                        child:RaisedButton(
+                        
+                        color: Colors.orange,
+                        onPressed: (){},
+                        textColor: Colors.white,
+                        child: Text('Từ chối'),
                       ),
-                      
+                      ),
+                      Expanded(child: SizedBox(),flex: 2,),
+                      Container(
+                        height: SizeConfig.safeBlockVertical * 5,
+                   
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(20.0),
+                        ),
+                        child:RaisedButton(
+                        
+                        color: Colors.blue,
+                        onPressed: (){},
+                        textColor: Colors.white,
+                        child: Text('Đồng ý'),
+                      ),
+                      ),
+                      Expanded(child: SizedBox(),flex: 1,),
                     ],
                   ),
                 ),
               ],
             ),
           ],
-        ),
+          ),
+      
       ),
     );
   }

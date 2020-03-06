@@ -6,6 +6,7 @@ class NapBitsModel extends ChangeNotifier {
   void setGroup1(int val) {
     if(val != _group1) {
       _group1 = val;
+      notifyListeners();
     }
   }
   int _group2 = 0;
@@ -13,6 +14,7 @@ class NapBitsModel extends ChangeNotifier {
   void setGroup2(int val) {
     if(val != _group2) {
       _group2 = val;
+      notifyListeners();
     }
   }
 

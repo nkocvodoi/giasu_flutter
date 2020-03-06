@@ -4,10 +4,6 @@ import 'package:test_giasu/core/view_model/paymentModel.dart';
 import 'package:test_giasu/core/view_model/forgotPassModel.dart';
 import 'package:test_giasu/core/view_model/signinModel.dart';
 import 'package:test_giasu/core/view_model/subjectchoiceModel.dart';
-import 'package:test_giasu/ui/Open_App/Waiting_screen.dart';
-import 'package:test_giasu/ui/UI_Main/Filter.dart';
-
-import 'core/model/api.dart';
 import 'core/view_model/bottombarModel.dart';
 import 'core/view_model/napbitsModel.dart';
 import 'core/view_model/selectedModel.dart';
@@ -40,33 +36,20 @@ ChangeNotifierProvider(
 
   ];
 
-//  List<SingleChildCloneableWidget> dependentServices = [
-//    // ChangeNotifierProxyProvider<AccountModel, FollowDao>(
-//    //   builder: (_, accountModel, __) => FollowDao(accountModel: accountModel),
-//    // ),
-//    // ChangeNotifierProxyProvider<AccountModel, LikeDao>(
-//    //   builder: (_, accountModel, __) => LikeDao(accountModel: accountModel),
-//    // ),
-//    // ChangeNotifierProxyProvider<AccountModel, SearchDao>(
-//    //   builder: (_, accountModel, __) => SearchDao(accountModel: accountModel),
-//    // ),
-//    // ChangeNotifierProxyProvider<AccountModel, BasePageModel>(
-//    //   builder: (_, accountModel, __) =>
-//    //       BasePageModel(accountModel: accountModel),
-//    // ),
-//    ChangeNotifierProxyProvider<AccountModel, SettingsPageModel>(
-//      builder: (_, accountModel, __) =>
-//          SettingsPageModel(accountModel: accountModel),
-//    ),
-//    ChangeNotifierProxyProvider<FollowDao, FollowedPageModel>(
-//      builder: (_, followDao, __) => FollowedPageModel(followDao: followDao),
-//    ),
+  List<SingleChildCloneableWidget> dependentServices = [
+//     ChangeNotifierProxyProvider<SelectedTimeModel,SelectedColumnModel>(
+//       builder: (_, selectedtimeModel, __) => SelectedColumnModel(selectedTimeModel: selectedtimeModel),
+//     ),
 //  ];
+//ChangeNotifierProxyProvider<SelectedColumnModel,SelectedTimeModel>(
+//       builder: (_, selectedcolumnModel, __) => SelectedTimeModel(selectedColumnModel: selectedcolumnModel),
+//     ),
+  ];
 
 
   List<SingleChildCloneableWidget> providers = [
     ...independentServices,
-//    ...dependentServices,
+    ...dependentServices,
     // ...uiConsumableProviders
   ];
 

@@ -37,7 +37,7 @@ class MyApp extends StatelessWidget {
 //        'signUp': (context) => SignUpPage(),
 //      },
 //        home: Waiting_screen(),
-        home: Lists_Class(),
+        home: Filter(),
       ),
     );
   }

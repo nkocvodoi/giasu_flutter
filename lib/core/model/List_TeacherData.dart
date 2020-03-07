@@ -308,19 +308,19 @@ class Subject {
   };
 }
 class Location {
-int id;
+int id ;
 String name;
 String group;
 
 Location({this.id, this.name, this.group});
 
 factory Location.fromJson(Map<String, dynamic> json) => Location(
-id: json['id'],
+id: json['id'] ,
 name: json['name'],
 group: json['group'],
 );
 Map<String, dynamic> toJson() => <String, dynamic>{
-  'id': id,
+  'id': id ,
   'name': name,
   'group': group,
 };

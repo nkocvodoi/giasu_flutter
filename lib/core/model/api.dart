@@ -1,8 +1,8 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
-import 'package:test_giasu/core/model/location.dart';
-import 'package:test_giasu/core/model/subject.dart';
+import 'package:test_giasu/core/model/locationservice.dart';
+import 'package:test_giasu/core/model/subjectservice.dart';
 
 import 'List_ClassData.dart';
 import 'List_TeacherData.dart';
@@ -65,31 +65,6 @@ Future<bool> signup(String role, String full_name, String phone_number, String e
 
   }
 
-  Future<Location> fetchLocation() async {
-    final response =
-    await http.get('https://giasu.htcon.vn/api/v1/locations');
-    Map<String, dynamic> mapResponse = json.decode(response.body);
-    print(mapResponse["total"]);
-    if (response.statusCode == 200) {
-//    Map<String, dynamic> mapResponse = json.decode(response.body);
-      return Location.fromJson(mapResponse["data"]);
-    } else {
-      // If that call was not successful, throw an error.
-      throw Exception('Failed to load ');
-    }
-  }
-Future<Subjects> fetchSubject() async {
-    final response =
-    await http.get('https://giasu.htcon.vn/api/v1/locations');
-    Map<String, dynamic> mapResponse = json.decode(response.body);
-    print(mapResponse["total"]);
-    if (response.statusCode == 200) {
-//    Map<String, dynamic> mapResponse = json.decode(response.body);
-      return Subjects.fromJson(mapResponse["data"]);
-    } else {
-      // If that call was not successful, throw an error.
-      throw Exception('Failed to load ');
-    }
-  }
+
 
 }

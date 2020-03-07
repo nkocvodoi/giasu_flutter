@@ -1,10 +1,11 @@
 import 'package:flutter/cupertino.dart';
 import 'package:test_giasu/core/model/List_TeacherData.dart' as filter;
-import 'package:test_giasu/core/model/location.dart';
+import 'package:test_giasu/core/model/locationservice.dart';
+import 'package:test_giasu/core/model/subjectservice.dart';
 
 class FilterModel extends ChangeNotifier {
-  FilterPageModel() {
-//    init();
+  FilterModel() {
+    init();
   }
 
   bool _busy = false;
@@ -39,18 +40,32 @@ int _education;
     _city = city;
   }
 
-  String _idCity;
-  String get idCity => _idCity;
-  void setIdCity(String value) {
+  int _idCity;
+  int get idCity => _idCity;
+  void setIdCity(int value) {
     _idCity = value;
+    notifyListeners();
+  }
+
+
+  List<Subjects> _subject = [];
+  List<Subjects> get subject => _subject;
+  void setSubject(List<Subjects> subject) {
+    _subject = subject;
+  }
+
+  int _idSubject;
+  int get idSubject => _idSubject;
+  void setIdSubject(int value) {
+    _idSubject = value;
     notifyListeners();
   }
 
   void init() async {
     setBusy(true);
-//     _city= await LocationService.;
+    _city= await LocationService.instance.fetchLocation();
+    _subject = await SubjectService.instance.fetchSubject();
     setBusy(false);
   }
-
 
 }

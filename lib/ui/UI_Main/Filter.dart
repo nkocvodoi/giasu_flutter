@@ -21,8 +21,6 @@ class Filter extends StatefulWidget {
 }
 
 class _FilterState extends State<Filter> {
-  String _selectedvalue = 'Thanh toán đủ phí';
-
   var _slidervalue = 0.0;
   @override
   Widget build(BuildContext context) {
@@ -53,6 +51,87 @@ class _FilterState extends State<Filter> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: <Widget>[
+                    Container(
+                      margin: EdgeInsets.only(top: 10.0, bottom: 10.0),
+                      padding: EdgeInsets.only(left: 20),
+                      height: 50,
+                      width: 320,
+                      child: DropdownButton<int>(
+                        underline: Container(
+                          color: Colors.transparent,
+                        ),
+                        isExpanded: true,
+                        value: model.idCity,
+                        items: [
+                          DropdownMenuItem(
+                            child: Text('Địa điểm',
+                                style: TextStyle(
+                                    fontSize: 23.0, color: Colors.grey)),
+                            value: null,
+                          ),
+                          ...List.generate(model.city.length, (index) {
+                            return DropdownMenuItem(
+                              child: Text('${model.city[index].name}',
+                                  style: TextStyle(
+                                      fontSize: 23.0, color: Colors.grey)),
+                              value: model.city[index].id,
+                            );
+                          }),
+                        ],
+                        onChanged: (int value) {
+                          if (value != model.idCity) {
+                            model.setIdCity(value);
+                          }
+                        },
+                      ),
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        border:
+                            Border.all(color: Colors.blueAccent, width: 1.5),
+                        borderRadius: BorderRadius.circular(10.0),
+                      ),
+                    ),
+                    Container(
+                      margin: EdgeInsets.only(top: 10.0, bottom: 10.0),
+                      padding: EdgeInsets.only(left: 20),
+                      height: 50,
+                      width: 320,
+                      child: DropdownButton<int>(
+                        underline: Container(
+                          color: Colors.transparent,
+                        ),
+                        isExpanded: true,
+                        value: model.idSubject,
+                        items: [
+                          DropdownMenuItem(
+                            child: Text('Môn học',
+                                style: TextStyle(
+                                    fontSize: 23.0, color: Colors.grey)),
+                            value: null,
+                          ),
+                          ...List.generate(model.subject.length, (index) {
+                            return DropdownMenuItem(
+                              child: Text('${model.subject[index].name}',
+                                  style: TextStyle(
+                                      fontSize: 23.0, color: Colors.grey)),
+                              value: model.subject[index].id,
+                            );
+                          }),
+                        ],
+                        onChanged: (int value) {
+                          if (value != model.idSubject) {
+                            model.setIdSubject(value);
+                          }
+                        },
+                      ),
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        border:
+                            Border.all(color: Colors.blueAccent, width: 1.5),
+                        borderRadius: BorderRadius.circular(10.0),
+                      ),
+                    ),
+
                     Container(
                       margin: EdgeInsets.only(top: 10.0, bottom: 10.0),
                       padding: EdgeInsets.only(left: 20),
@@ -91,7 +170,7 @@ class _FilterState extends State<Filter> {
                       decoration: BoxDecoration(
                         color: Colors.white,
                         border:
-                        Border.all(color: Colors.blueAccent, width: 1.5),
+                            Border.all(color: Colors.blueAccent, width: 1.5),
                         borderRadius: BorderRadius.circular(10.0),
                       ),
                     ),
@@ -179,8 +258,6 @@ class _FilterState extends State<Filter> {
                         borderRadius: BorderRadius.circular(10.0),
                       ),
                     ),
-
-
                     Text(
                       'Khoảng cách',
                       style: TextStyle(

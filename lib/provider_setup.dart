@@ -5,33 +5,37 @@ import 'package:test_giasu/core/view_model/forgotPassModel.dart';
 import 'package:test_giasu/core/view_model/signinModel.dart';
 import 'package:test_giasu/core/view_model/subjectchoiceModel.dart';
 import 'core/view_model/bottombarModel.dart';
+import 'core/view_model/classModel.dart';
 import 'core/view_model/napbitsModel.dart';
 import 'core/view_model/selectedModel.dart';
 List<SingleChildCloneableWidget> getProviders() {
   List<SingleChildCloneableWidget> independentServices = [
     ChangeNotifierProvider(
-      builder: (context) => PaymentModel(),
+      create: (context) => PaymentModel(),
     ),
     ChangeNotifierProvider(
-      builder: (context) => FilterModel(),
+      create: (context) => FilterModel(),
     ),
     ChangeNotifierProvider(
-      builder: (context) => SignInModel(),
+      create: (context) => SignInModel(),
     ),
  ChangeNotifierProvider(
-      builder: (context) => ForgotPassModel(),
+   create: (context) => ForgotPassModel(),
     ),
 ChangeNotifierProvider(
-      builder: (context) => BottomBarModel(),
+  create: (context) => BottomBarModel(),
     ),
 ChangeNotifierProvider(
-      builder: (context) => NapBitsModel(),
+  create: (context) => NapBitsModel(),
     ),
 ChangeNotifierProvider(
-      builder: (context) => SelectedTimeModel(),
+  create: (context) => SelectedTimeModel(),
     ),
 ChangeNotifierProvider(
-      builder: (context) => SubjectChoiceModel(),
+  create: (context) => SubjectChoiceModel(),
+    ),
+ChangeNotifierProvider(
+  create: (context) => ClassModel(),
     ),
 
   ];

@@ -5,8 +5,9 @@ import 'package:provider/provider.dart';
 import 'package:test_giasu/core/view_model/signinModel.dart';
 import 'package:test_giasu/ui/Helper/ScreenConfig.dart';
 import 'package:test_giasu/ui/UI_Main/BottomNavigationBar.dart';
+import 'package:test_giasu/ui/UI_Main/General_Infor.dart';
 
-
+import '../../route.dart';
 import 'ForgotPass1.dart';
 import 'SignUp_Page.dart';
 
@@ -26,7 +27,8 @@ class _SignIn_PageState extends State<SignIn_Page> {
   // }
   GlobalKey<FormState> _key = new GlobalKey();
   bool _validate = false;
-  TextEditingController _phone_number, _pass;
+  TextEditingController _phone_number = TextEditingController();
+TextEditingController _pass = TextEditingController();
 
   String validatePass(String value) {
     String patttern = r'(^[a-zA-Z ]*$)';
@@ -47,13 +49,14 @@ class _SignIn_PageState extends State<SignIn_Page> {
   }
 
   String validateEmail(String value) {
-    String pattern = r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$';
+    String pattern =
+        r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$';
     RegExp regExp = new RegExp(pattern);
     if (value.length == 0) {
       return "Email is Required";
-    } else if(!regExp.hasMatch(value)){
+    } else if (!regExp.hasMatch(value)) {
       return "Invalid Email";
-    }else {
+    } else {
       return null;
     }
   }
@@ -80,9 +83,10 @@ class _SignIn_PageState extends State<SignIn_Page> {
       backgroundColor: Colors.white,
       resizeToAvoidBottomPadding: true,
       body: SingleChildScrollView(
-        child: Form(
-          key: _key,
-          autovalidate: _validate,
+        child: Consumer<SignInModel>(builder: (_, model, __) {
+          return Form(
+            key: _key,
+            autovalidate: _validate,
             child: Stack(
               alignment: Alignment.center,
               children: <Widget>[
@@ -107,7 +111,8 @@ class _SignIn_PageState extends State<SignIn_Page> {
                             height: 130,
                           ),
                         ],
-                      ),),
+                      ),
+                    ),
                     SizedBox(height: SizeConfig.safeBlockVertical * 5),
                     Container(
                       padding: EdgeInsets.all(20),
@@ -118,25 +123,24 @@ class _SignIn_PageState extends State<SignIn_Page> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: <Widget>[
                           TextFormField(
-                            decoration: InputDecoration(
-                              hintText: 'Email/ Số điện thoại',
-                              border: OutlineInputBorder(),
-                              hintStyle: TextStyle(
-                                fontStyle: FontStyle.normal,
-                                color: Colors.grey[400],
-                                fontSize: 20,
+                              decoration: InputDecoration(
+                                hintText: 'Email/ Số điện thoại',
+                                border: OutlineInputBorder(),
+                                hintStyle: TextStyle(
+                                  fontStyle: FontStyle.normal,
+                                  color: Colors.grey[400],
+                                  fontSize: 20,
+                                ),
+                                suffixIcon: IconButton(
+                                  icon: Icon(Icons.mail),
+                                ),
                               ),
-                              suffixIcon: IconButton(
-                                icon: Icon(Icons.mail),
-                              ),
-                            ),
                               keyboardType: TextInputType.phone,
 //                            maxLength: 10,
                               validator: validateMobile,
                               onSaved: (String val) {
                                 _phone_number.text = val;
-                              }
-                          ),
+                              }),
                           SizedBox(
                             width: double.infinity,
                             height: SizeConfig.safeBlockVertical * 2,
@@ -190,44 +194,108 @@ class _SignIn_PageState extends State<SignIn_Page> {
                     SizedBox(
                       height: SizeConfig.safeBlockVertical * 5,
                     ),
-                    InkWell(
+                    Padding(
+                      padding: EdgeInsets.all(15.0),
                       child: Center(
-                        child: Container(
-                          width: SizeConfig.safeBlockHorizontal * 40,
-                          height: SizeConfig.safeBlockVertical * 6,
-                          decoration: BoxDecoration(
-                            color: Colors.orange[300],
-                            borderRadius: BorderRadius.circular(6.0),
-                          ),
-                          child: Material(
-                            color: Colors.transparent,
-                            child: InkWell(
-                              onTap: () {
-                                _sendToServer;
-//                                Navigator.push(
-//                                  context,
-//                                  MaterialPageRoute(
-//                                    builder: (context) => MyBottomNavigationBar(
-//                                      currentIndex: 0,
-//                                    ),
-//                                  ),
-//                                );
-                              },
-                              child: Center(
-                                child: Text(
-                                  'Đăng nhập',
-                                  style: TextStyle(
-                                    color: Colors.white,
-                                    fontSize: 20,
-                                    letterSpacing: 1.0,
+                        child: RaisedButton(
+                          onPressed: () async {
+                            _sendToServer();
+//                            Navigator.push(
+//                              context,
+//                              MaterialPageRoute(
+//                                builder: (context) => MyBottomNavigationBar(
+//                                  currentIndex: 0,
+//                                ),
+//                              ),
+//                            );
+
+                            print(_phone_number.text);
+                            var loginSuccess1 = await model.login1(
+                                _phone_number.text, _pass.text);
+
+                            print(loginSuccess1);
+                            if (loginSuccess1) {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => MyBottomNavigationBar(
+                                    currentIndex: 0,
                                   ),
                                 ),
-                              ),
+                              );
+                            } else {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => SignUpPage()
+                                ),
+                              );
+                            }
+                          },
+                          color: Colors.orange[300],
+                          child: new Padding(
+                            padding: EdgeInsets.all(10.0),
+                            child: Text(
+                              'Đăng Nhập',
+                              style: TextStyle(
+                                  fontSize: 20,
+                                  fontWeight: FontWeight.w400,
+                                  color: Colors.white),
                             ),
+                          ),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(6.0),
                           ),
                         ),
                       ),
                     ),
+//                        InkWell(
+//                          child: Center(
+//                            child: Container(
+//                              width: SizeConfig.safeBlockHorizontal * 40,
+//                              height: SizeConfig.safeBlockVertical * 6,
+//                              decoration: BoxDecoration(
+//                                color: Colors.orange[300],
+//                                borderRadius: BorderRadius.circular(6.0),
+//                              ),
+//                              child: Material(
+//                                color: Colors.transparent,
+//                                child: InkWell(
+//                                  onLongPress: () async {
+//                                    var loginSuccess1 = await model.login(_phone_number.text, _pass.text);
+//
+//                                    if (loginSuccess1) {
+//                                      Navigator.pushNamed(context, RoutePaths.Home);
+//                                    }
+//                                    else {
+//                                      Navigator.pushNamed(context, RoutePaths.SignUp);
+//                                    }
+////                                _sendToServer;
+//
+////                                Navigator.push(
+////                                  context,
+////                                  MaterialPageRoute(
+////                                    builder: (context) => MyBottomNavigationBar(
+////                                      currentIndex: 0,
+////                                    ),
+////                                  ),
+////                                );
+//                                  },
+//                                  child: Center(
+//                                    child: Text(
+//                                      'Đăng nhập',
+//                                      style: TextStyle(
+//                                        color: Colors.white,
+//                                        fontSize: 20,
+//                                        letterSpacing: 1.0,
+//                                      ),
+//                                    ),
+//                                  ),
+//                                ),
+//                              ),
+//                            ),
+//                          ),
+//                        ),
                     SizedBox(
                       height: 10,
                     ),
@@ -296,7 +364,8 @@ class _SignIn_PageState extends State<SignIn_Page> {
                 ),
               ],
             ),
-        ),
+          );
+        }),
       ),
     );
   }
@@ -311,37 +380,31 @@ class _SignIn_PageState extends State<SignIn_Page> {
 //  }
 
   Widget _buildBox(String _a, bool _b) {
-    return Consumer<SignInModel>(
-        builder: (_, model, __) {
-          return TextFormField(
-            obscureText: model.count,
-            decoration: InputDecoration(
-                hintText: 'Mật khẩu',
-                border: OutlineInputBorder(),
-                hintStyle: TextStyle(
-                  fontStyle: FontStyle.normal,
-                  color: Colors.grey[400],
-                  fontSize: 20,
-                ),
-                suffixIcon: IconButton(
-                  icon: model.count
-                      ? Icon(Icons.visibility_off)
-                      : Icon(Icons.visibility),
-                  onPressed: () {
-                    model.change();
-                  },
-                )),
-              keyboardType: TextInputType.visiblePassword,
+    return Consumer<SignInModel>(builder: (_, model, __) {
+      return TextFormField(
+          obscureText: model.count,
+          decoration: InputDecoration(
+              hintText: 'Mật khẩu',
+              border: OutlineInputBorder(),
+              hintStyle: TextStyle(
+                fontStyle: FontStyle.normal,
+                color: Colors.grey[400],
+                fontSize: 20,
+              ),
+              suffixIcon: IconButton(
+                icon: model.count
+                    ? Icon(Icons.visibility_off)
+                    : Icon(Icons.visibility),
+                onPressed: () {
+                  model.change();
+                },
+              )),
+          keyboardType: TextInputType.visiblePassword,
 //                            maxLength: 10,
-              validator: validatePass,
-              onSaved: (String val) {
-                _pass.text = val;
-              }
-          );
-
-        }
-    );
+          validator: validatePass,
+          onSaved: (String val) {
+            _pass.text = val;
+          });
+    });
   }
 }
-
-

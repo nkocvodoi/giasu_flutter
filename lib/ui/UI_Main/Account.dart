@@ -3,6 +3,7 @@ import 'package:test_giasu/ui/Open_App/Waiting_screen.dart';
 
 import 'package:url_launcher/url_launcher.dart';
 
+import 'Request.dart';
 import 'ResetPass.dart';
 import 'Support_Settings.dart';
 import 'TutorInfor.dart';
@@ -222,9 +223,13 @@ class _Account_State extends State<Account> {
           ),
           onTap: () {
             if (_a == 1)
-              return launch('https://www.facebook.com/Giasubinhminh.club/');
+              return Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => Request(),
+                  ));
             else
-              return launch('https://www.facebook.com/Giasubinhminh.club/');
+              return 1;
           },
         ),
         ListTile(
@@ -234,9 +239,9 @@ class _Account_State extends State<Account> {
           ),
           onTap: () {
             if (_a == 1)
-              return launch('https://www.facebook.com/Giasubinhminh.club/');
+              return 1;
             else
-              return launch('https://www.facebook.com/Giasubinhminh.club/');
+              return 1;
           },
         ),
       ],

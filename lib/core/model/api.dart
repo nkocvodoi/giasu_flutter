@@ -8,7 +8,9 @@ import 'List_ClassData.dart';
 import 'List_TeacherData.dart';
 //import 'List_TeacherData.dart';
 class Api {
-
+  static final Api instance = Api.internal();
+  Api.internal();
+  factory Api() => instance;
 
 
 

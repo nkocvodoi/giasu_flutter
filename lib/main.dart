@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:test_giasu/TestList_Class.dart';
 import 'package:test_giasu/ui/UI_Main/ClassDetailRequest.dart';
+import 'package:test_giasu/ui/UI_Main/ClassDetailWithMoreTutorInfor.dart';
 import 'package:test_giasu/ui/UI_Main/Lists_Class.dart';
 import 'package:test_giasu/ui/UI_Main/Nap_Bits.dart';
 import 'package:test_giasu/ui/UI_Main/Request.dart';
@@ -37,7 +39,7 @@ class MyApp extends StatelessWidget {
 //        'signUp': (context) => SignUpPage(),
 //      },
 //        home: Waiting_screen(),
-        home: Filter(),
+        home: TestLists_Class(),
       ),
     );
   }

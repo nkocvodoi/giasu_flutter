@@ -14,9 +14,7 @@ class LocationService {
     await http.get('https://giasu.htcon.vn/api/v1/locations');
     if(response.statusCode == 200) {
       Map<String, dynamic> mapResponse = json.decode(response.body);
-      print(mapResponse["code"]);
       if(mapResponse["code"] == 1) {
-        print(mapResponse["data"][1]);
         final location = mapResponse["data"].cast<Map<String, dynamic>>();
         final listOfLocation = await location.map<filter.Location>((json) {
           return filter.Location.fromJson(json);

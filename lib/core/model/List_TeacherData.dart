@@ -6,7 +6,7 @@ import 'package:http/http.dart' as http;
 // ignore: missing_return
 Future<TeacherData> fetchTeacherData() async {
   final response =
-  await http.get('https://giasu.htcon.vn/api/v1/parents/tutors?page=1&search_tutor=%7B%22location_id%22:1%7D');
+  await http.get('https://giasu.htcon.vn/api/v1/parents/tutors');
   Map<String, dynamic> mapResponse = json.decode(response.body);
   print(mapResponse["total"]);
   if (response.statusCode == 200) {

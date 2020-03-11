@@ -4,7 +4,8 @@ import 'package:test_giasu/ui/Helper/ScreenConfig.dart';
 
 class SmallTextField extends StatelessWidget{
   String infor;
-  SmallTextField(this.infor);
+  TextEditingController _controller;
+  SmallTextField(this.infor,this._controller);
   @override
   Widget build(BuildContext context) {
     SizeConfig().init(context);
@@ -13,6 +14,7 @@ class SmallTextField extends StatelessWidget{
       width: SizeConfig.safeBlockHorizontal * 90,
       height: 60,
       child: TextField(
+        controller: _controller,
         enableSuggestions: true,
         decoration: InputDecoration(
           contentPadding: EdgeInsets.only(left: 10),

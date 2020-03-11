@@ -3,10 +3,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:test_giasu/core/model/api.dart';
-import 'package:test_giasu/ui/UI_Main/BottomNavigationBar.dart';
-import 'package:test_giasu/ui/UI_Main/ClassDetail.dart';
 import 'package:test_giasu/ui/UI_Main/ClassDetailWithMoreTutorInfor.dart';
 import 'package:test_giasu/ui/UI_Main/Filter.dart';
 import 'package:test_giasu/core/model/List_ClassData.dart';

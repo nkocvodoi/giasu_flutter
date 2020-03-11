@@ -211,11 +211,7 @@ class _SignUpPage extends State<SignUpPage> {
                           child: RaisedButton(
                             onPressed: () {
                               _sendToServer;
-//                              Navigator.push(
-//                                  context,
-//                                  MaterialPageRoute(
-//                                    builder: (context) => PersonInfor(),
-//                                  ));
+                              
                             },
                             color: _c,
                             child: new Padding(

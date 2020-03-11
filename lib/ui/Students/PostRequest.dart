@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:test_giasu/ui/Helper/ScreenConfig.dart';
 import 'package:test_giasu/ui/UI_Main/General_Infor.dart';
 import 'package:test_giasu/ui/Widgets/LargeTextField.dart';
@@ -8,7 +6,7 @@ import 'package:test_giasu/ui/Widgets/SelectedTimeColumn.dart';
 import 'package:test_giasu/ui/Widgets/SmallTextField.dart';
 
 
-class PostRequest extends StatefulWidget {
+class Post extends StatefulWidget {
   @override
   State<StatefulWidget> createState() {
     // TODO: implement createState
@@ -16,7 +14,21 @@ class PostRequest extends StatefulWidget {
   }
 }
 
-class PostRequestState extends State<PostRequest> {
+class PostRequestState extends State<Post> {
+    final TextEditingController _controller = TextEditingController();
+  final TextEditingController _controller1 = TextEditingController();
+  final TextEditingController _controller2 = TextEditingController();
+  final TextEditingController _controller3 = TextEditingController();
+  final TextEditingController _controller4 = TextEditingController();
+  final TextEditingController _controller5 = TextEditingController();
+  final TextEditingController _controller6 = TextEditingController();
+    final TextEditingController _controller7 = TextEditingController();
+  final TextEditingController _controller8 = TextEditingController();
+  final TextEditingController _controller9 = TextEditingController();
+  final TextEditingController _controller10 = TextEditingController();
+  final TextEditingController _controller11 = TextEditingController();
+  final TextEditingController _controller12 = TextEditingController();
+  final TextEditingController _controller13 = TextEditingController();
   @override
   Widget build(BuildContext context) {
     SizeConfig().init(context);
@@ -108,20 +120,20 @@ class PostRequestState extends State<PostRequest> {
                     padding: EdgeInsets.only(right: 20, left: 20),
                     child: Column(
                       children: <Widget>[
-                        SmallTextField('Môn học'),
-                        SmallTextField('Chủ đề học'),
-                        SmallTextField('Lớp'),
-                        SmallTextField('Số buổi học/tuần'),
-                        SmallTextField('Thời gian học/buổi'),
-                        SmallTextField('Số học viên/lớp'),
-                        SmallTextField('Đối tượng dạy'),
-                        SmallTextField('Giới tính gia sư'),
-                        SmallTextField('Hình thức dạy'),
-                        SmallTextField('Học phí/buổi (vnđ)'),
-                        SmallTextField('Điện thoại'),
-                        SmallTextField('Địa điểm'),
-                        SmallTextField('Địa chỉ học'),
-                        LargeTextField('Nhập mô tả chi tiết nội dung muốn học'),
+                        SmallTextField('Môn học',_controller),
+                        SmallTextField('Chủ đề học',_controller1),
+                        SmallTextField('Lớp',_controller2),
+                        SmallTextField('Số buổi học/tuần',_controller3),
+                        SmallTextField('Thời gian học/buổi',_controller4),
+                        SmallTextField('Số học viên/lớp',_controller5),
+                        SmallTextField('Đối tượng dạy',_controller6),
+                        SmallTextField('Giới tính gia sư',_controller7),
+                        SmallTextField('Hình thức dạy',_controller8),
+                        SmallTextField('Học phí/buổi (vnđ)',_controller9),
+                        SmallTextField('Điện thoại',_controller10),
+                        SmallTextField('Địa điểm',_controller11),
+                        SmallTextField('Địa chỉ học',_controller12),
+                        LargeTextField('Nhập mô tả chi tiết nội dung muốn học',_controller13),
                       ],
                     ),
                   ),

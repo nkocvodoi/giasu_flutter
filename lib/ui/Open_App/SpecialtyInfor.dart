@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:test_giasu/ui/Helper/ScreenConfig.dart';
+import 'package:test_giasu/ui/Widgets/ARichTextLine.dart';
 import 'package:test_giasu/ui/Widgets/LargeTextField.dart';
 import 'package:test_giasu/ui/Widgets/SelectedTimeColumn.dart';
 import 'package:test_giasu/ui/Widgets/SmallTextField.dart';
@@ -17,6 +19,16 @@ class SpecialtyInfor extends StatefulWidget {
 }
 
 class _SpecialtyInforState extends State<SpecialtyInfor> {
+  final TextEditingController _controller = TextEditingController();
+  final TextEditingController _controller1 = TextEditingController();
+  final TextEditingController _controller2 = TextEditingController();
+  final TextEditingController _controller3 = TextEditingController();
+  final TextEditingController _controller4 = TextEditingController();
+  final TextEditingController _controller5 = TextEditingController();
+  final TextEditingController _controller6 = TextEditingController();
+  final TextEditingController _controller7 = TextEditingController();
+  final TextEditingController _controller8 = TextEditingController();
+  final TextEditingController _controller9 = TextEditingController();
   @override
   Widget build(BuildContext context) {
     ScreenUtil.instance = ScreenUtil.getInstance()..init(context);
@@ -38,36 +50,39 @@ class _SpecialtyInforState extends State<SpecialtyInfor> {
         children: <Widget>[
           SingleChildScrollView(
             child: Padding(
-              padding: EdgeInsets.only(
-                left: 28.0,
-                right: 28.0,
-                top: 10.0,
-              ),
+              padding: EdgeInsets.all(5),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: <Widget>[
-                  LargeTextField('Kinh nghiệm gia sư & dạy học'),
-                  LargeTextField('Thành tích học tập & dạy học'),
-                  SmallTextField('Bạn đang là'),
-                  SmallTextField('Hình thức dạy'),
-                  SmallTextField('Học phí vnđ/buổi (VD: 150.000)'),
+                  LargeTextField('Kinh nghiệm gia sư & dạy học',_controller7),
+                  LargeTextField('Thành tích học tập & dạy học',_controller8),
+                  SmallTextField('Bạn đang là', _controller),
+                  SmallTextField('Hình thức dạy', _controller1),
+                  SmallTextField(
+                      'Học phí vnđ/buổi (VD: 150.000)', _controller2),
                   Container(
-                    height: ScreenUtil.getInstance().setHeight(100),
-                    width: ScreenUtil.getInstance().setWidth(640),
-                    decoration: BoxDecoration(
-                      border: Border.all(color: Colors.grey),
-                      borderRadius: BorderRadius.circular(10),
-                    ),
+                    width: double.infinity,
+                    padding: EdgeInsets.only(top: 3, bottom: 3),
                     child: FlatButton(
-                      color: Colors.white,
-                      onPressed: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => SubjectChoice(),
-                          ),
-                        );
-                      },
+                    // shape: RoundedRectangleBorder(
+                    //     borderRadius: BorderRadius.circular(10.0)),
+                    color: Colors.white,
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => SubjectChoice(),
+                        ),
+                      );
+                    },
+                    child: Container(
+                      padding: EdgeInsets.only(top: 3.0, bottom: 3.0),
+                      width: SizeConfig.safeBlockHorizontal * (90),
+                      height: 60,
+                      decoration: BoxDecoration(
+                        border: Border.all(color: Colors.grey),
+                        borderRadius: BorderRadius.circular(10),
+                      ),
                       child: Text(
                         'Gia sư môn',
                         style: TextStyle(
@@ -78,47 +93,9 @@ class _SpecialtyInforState extends State<SpecialtyInfor> {
                         textAlign: TextAlign.start,
                       ),
                     ),
-                  ),
-                  SmallTextField('Số lượng lớp đã dạy (VD: 5)'),
-                  RichText(
-                    textAlign: TextAlign.start,
-                    text: TextSpan(
-                      children: <TextSpan>[
-                        TextSpan(
-                          text: 'Chọn thời gian',
-                          style: TextStyle(
-                            fontSize: ScreenUtil.getInstance().setSp(30),
-                            color: Colors.black,
-                            fontStyle: FontStyle.normal,
-                          ),
-                        ),
-                        TextSpan(
-                          text: '(màu',
-                          style: TextStyle(
-                            fontStyle: FontStyle.normal,
-                            color: Colors.black,
-                            fontSize: ScreenUtil.getInstance().setSp(25),
-                          ),
-                        ),
-                        TextSpan(
-                          text: ' cam ',
-                          style: TextStyle(
-                            fontStyle: FontStyle.normal,
-                            color: Colors.orange,
-                            fontSize: ScreenUtil.getInstance().setSp(25),
-                          ),
-                        ),
-                        TextSpan(
-                          text: 'hiển thị thời gian có thể dạy)',
-                          style: TextStyle(
-                            color: Colors.black,
-                            fontStyle: FontStyle.normal,
-                            fontSize: ScreenUtil.getInstance().setSp(25),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
+                  ),),
+                  SmallTextField('Số lượng lớp đã dạy (VD: 5)', _controller3),
+                  RichTextLine(),
                   SelectedTimeColumn(),
                   SizedBox(
                     height: ScreenUtil.getInstance().setHeight(50),

@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:test_giasu/ui/Open_App/PersonInfor.dart';
 import 'package:test_giasu/ui/UI_Main/ClassDetailRequest.dart';
 import 'package:test_giasu/ui/UI_Main/Lists_Class.dart';
 import 'package:test_giasu/ui/UI_Main/Nap_Bits.dart';
 import 'package:test_giasu/ui/UI_Main/Request.dart';
 import 'package:test_giasu/ui/Widgets/SelectedTime.dart';
+import 'TestList_Class.dart';
 import 'provider_setup.dart' as ProviderSetup;
 
 import 'package:test_giasu/ui/UI_Main/Filter.dart';
@@ -14,10 +16,10 @@ import 'ui/Open_App/SignIn_Page.dart';
 import 'ui/Open_App/SignUp_Page.dart';
 import 'ui/Open_App/Waiting_screen.dart';
 import 'ui/UI_Main/BottomNavigationBar.dart';
-import 'ui/UI_Main/Lists_Class.dart';
-
-void main() => runApp(new MyApp());
-
+import 'core/view_model/sendDataExample.dart';
+void main() {
+  runApp(MyApp());
+}
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -38,7 +40,7 @@ class MyApp extends StatelessWidget {
 //        'signUp': (context) => SignUpPage(),
 //      },
 //        home: Waiting_screen(),
-        home: Lists_Class(),
+        home: PersonInfor(),
       ),
     );
   }

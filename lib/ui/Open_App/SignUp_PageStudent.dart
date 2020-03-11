@@ -3,20 +3,21 @@ import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
 import 'package:provider/provider.dart';
 import 'package:test_giasu/core/view_model/signupModel.dart';
+import 'package:test_giasu/ui/Students/StudentInfor.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import 'PersonInfor.dart';
 import 'SignIn_Page.dart';
 
-class SignUpPage extends StatefulWidget {
+class SignUpPageStudent extends StatefulWidget {
   @override
   State<StatefulWidget> createState() {
     // TODO: implement createState
-    return new _SignUpPage();
+    return new _SignUpPageStudent();
   }
 }
 
-class _SignUpPage extends State<SignUpPage> {
+class _SignUpPageStudent extends State<SignUpPageStudent> {
   final Color _c = Colors.blue[800];
 
   final TextEditingController _email = new TextEditingController();
@@ -99,7 +100,7 @@ class _SignUpPage extends State<SignUpPage> {
           padding: EdgeInsets.only(top: 20.0, bottom: 5.0),
           child: Text(
             'Đăng Ký',
-            style: TextStyle(fontSize: 35, fontWeight: FontWeight.w400),
+            // style: TextStyle(fontSize: 35, fontWeight: FontWeight.w400),
           ),
         ),
         centerTitle: true,
@@ -116,7 +117,7 @@ class _SignUpPage extends State<SignUpPage> {
                 new Container(
                   color: _c,
                   child: new Text(
-                    'Tạo tài khoản dành cho Gia sư',
+                    'Tạo tài khoản dành cho Học viên',
                     style: TextStyle(fontSize: 20.0, color: Colors.white),
                   ),
                   alignment: Alignment.center,
@@ -206,12 +207,16 @@ class _SignUpPage extends State<SignUpPage> {
                         ],
                       ),
                       new Padding(
-                        padding: EdgeInsets.all(15.0),
+                        padding: EdgeInsets.all(20.0),
                         child: Center(
                           child: RaisedButton(
                             onPressed: () {
                               _sendToServer;
-                              
+                             Navigator.push(
+                                 context,
+                                 MaterialPageRoute(
+                                   builder: (context) => StudentInfor(),
+                                 ));
                             },
                             color: _c,
                             child: new Padding(
@@ -230,6 +235,9 @@ class _SignUpPage extends State<SignUpPage> {
                           ),
                         ),
                       ),
+                      SizedBox(
+                        height: 20,
+                      )
                     ],
                   ),
                 ),

@@ -15,7 +15,7 @@ class RectangleImageNameBox extends StatelessWidget {
         child: Column(
           children: <Widget>[
             Container(
-              child: Image.asset(
+              child: Image.network(
                 urlString,
                 height: SizeConfig.safeBlockVertical * 10,
                 width: double.infinity,

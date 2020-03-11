@@ -27,7 +27,7 @@ class TeacherBox extends StatelessWidget {
       child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
-            RectangleImageNameBox('https://giasu.htcon.vn' + image, name),
+            RectangleImageNameBox('https://giasu.htcon.vn${image}', name),
             Text(
               '$place | $subject',
               textAlign: TextAlign.left,

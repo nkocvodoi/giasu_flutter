@@ -4,31 +4,33 @@ import 'package:test_giasu/ui/Helper/ScreenConfig.dart';
 
 class LargeTextField extends StatefulWidget {
   String text;
-
-  LargeTextField(this.text);
+  TextEditingController _controller;
+  LargeTextField(this.text,this._controller);
 
   @override
   State<StatefulWidget> createState() {
     // TODO: implement createState
-    return LargeTextFieldState(text);
+    return LargeTextFieldState(text,_controller);
   }
 }
 
 class LargeTextFieldState extends State<LargeTextField> {
   String text;
-
-  LargeTextFieldState(this.text);
+  TextEditingController _controller;
+  LargeTextFieldState(this.text,this._controller);
 
   @override
   Widget build(BuildContext context) {
     SizeConfig().init(context);
     // TODO: implement build
     return Container(
+      padding: EdgeInsets.only(top: 3,bottom: 3),
 //      height: SizeConfig.blockSizeHorizontal * 20,
       width: SizeConfig.blockSizeHorizontal * 90,
-      child: SizedBox(
+      
         height: 120,
         child: TextField(
+          controller: _controller,
           maxLines: 5,
           style: TextStyle(fontSize: 19.0),
           decoration: InputDecoration(
@@ -37,12 +39,9 @@ class LargeTextFieldState extends State<LargeTextField> {
               ),
               hintText: text),
         ),
-      ),
-      decoration: BoxDecoration(
-        color: Colors.white,
-        border: Border.all(color: Colors.blueAccent),
-        borderRadius: BorderRadius.circular(10.0),
-      ),
+      
+   
+      
     );
   }
 }

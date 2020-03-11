@@ -54,9 +54,6 @@ class TeacherListBoxState extends State<TeacherListBox> {
       child: GridView.builder(
         physics: NeverScrollableScrollPhysics(),
         shrinkWrap: true,
-
-        // physics: NeverScrollableScrollPhysics(),
-        // shrinkWrap: true,
         itemCount: teacherBox.length,
         gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
           crossAxisCount: (orientation == Orientation.portrait) ? 2 : 3,
@@ -64,17 +61,17 @@ class TeacherListBoxState extends State<TeacherListBox> {
         ),
 
         itemBuilder: (BuildContext context, int index) {
-          return FutureBuilder<TeacherDetail>(
-            future: fetchTeacherDetail(teacherBox[index]),
-            builder: (BuildContext context, snapshot) {
-              if (snapshot.hasData) {
+          // return FutureBuilder<TeacherDetail>(
+          //   future: fetchTeacherDetail(teacherBox[index]),
+          //   builder: (BuildContext context, snapshot) {
+          //     if (snapshot.hasData) {
                 return GestureDetector(
                   onTap: () {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
                         builder: (context) => TutorInfor(
-                          snapshot.data.data,
+                          teacherBox[index],
                         ),
                       ),
                     );
@@ -90,12 +87,12 @@ class TeacherListBoxState extends State<TeacherListBox> {
                         teacherBox[index].achievement),
                   ),
                 );
-              } else if (snapshot.hasError) {
-                return Text("${snapshot.error}");
-              }
-              return CircularProgressIndicator();
-            },
-          );
+          //     } else if (snapshot.hasError) {
+          //       return Text("${snapshot.error}");
+          //     }
+          //     return CircularProgressIndicator();
+          //   },
+          // );
         },
       ),
     );

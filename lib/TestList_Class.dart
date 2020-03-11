@@ -46,7 +46,7 @@ class _Lists_Class_State extends State<TestLists_Class> {
       Consumer<ClassModel>(
           builder: (_ ,model, __) {
             list_class = fetchClassDataNext(2);
-            return list_class
+            // return list_class;
           }
       );
       }

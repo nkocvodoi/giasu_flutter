@@ -8,15 +8,15 @@ import 'package:url_launcher/url_launcher.dart';
 import 'PersonInfor.dart';
 import 'SignIn_Page.dart';
 
-class SignUpPage extends StatefulWidget {
+class SignUpPageTutor extends StatefulWidget {
   @override
   State<StatefulWidget> createState() {
     // TODO: implement createState
-    return new _SignUpPage();
+    return new _SignUpPageTutor();
   }
 }
 
-class _SignUpPage extends State<SignUpPage> {
+class _SignUpPageTutor extends State<SignUpPageTutor> {
   final Color _c = Colors.blue[800];
 
   final TextEditingController _email = new TextEditingController();
@@ -99,7 +99,7 @@ class _SignUpPage extends State<SignUpPage> {
           padding: EdgeInsets.only(top: 20.0, bottom: 5.0),
           child: Text(
             'Đăng Ký',
-            style: TextStyle(fontSize: 35, fontWeight: FontWeight.w400),
+            // style: TextStyle(fontSize: 35, fontWeight: FontWeight.w400),
           ),
         ),
         centerTitle: true,
@@ -206,12 +206,16 @@ class _SignUpPage extends State<SignUpPage> {
                         ],
                       ),
                       new Padding(
-                        padding: EdgeInsets.all(15.0),
+                        padding: EdgeInsets.all(20.0),
                         child: Center(
                           child: RaisedButton(
                             onPressed: () {
                               _sendToServer;
-                              
+                             Navigator.push(
+                                 context,
+                                 MaterialPageRoute(
+                                   builder: (context) => PersonInfor(),
+                                 ));
                             },
                             color: _c,
                             child: new Padding(
@@ -230,6 +234,9 @@ class _SignUpPage extends State<SignUpPage> {
                           ),
                         ),
                       ),
+                      SizedBox(
+                        height: 20,
+                      )
                     ],
                   ),
                 ),

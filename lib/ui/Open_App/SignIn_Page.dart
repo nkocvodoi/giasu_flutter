@@ -28,7 +28,7 @@ class _SignIn_PageState extends State<SignIn_Page> {
   GlobalKey<FormState> _key = new GlobalKey();
   bool _validate = false;
   TextEditingController _phone_number = TextEditingController();
-TextEditingController _pass = TextEditingController();
+  TextEditingController _pass = TextEditingController();
 
   String validatePass(String value) {
     String patttern = r'(^[a-zA-Z ]*$)';
@@ -194,8 +194,7 @@ TextEditingController _pass = TextEditingController();
                     SizedBox(
                       height: SizeConfig.safeBlockVertical * 5,
                     ),
-                    Padding(
-                      padding: EdgeInsets.all(15.0),
+                    Container(
                       child: Center(
                         child: RaisedButton(
                           onPressed: () async {
@@ -227,21 +226,21 @@ TextEditingController _pass = TextEditingController();
                               Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                  builder: (context) => SignUpPage()
-                                ),
+                                    builder: (context) => SignUpPage()),
                               );
                             }
                           },
                           color: Colors.orange[300],
-                          child: new Padding(
-                            padding: EdgeInsets.all(10.0),
-                            child: Text(
+                          child: Container(
+                            width: SizeConfig.safeBlockHorizontal * 35,
+                            height: SizeConfig.safeBlockVertical * 6,
+                            child: Center(child: Text(
                               'Đăng Nhập',
                               style: TextStyle(
                                   fontSize: 20,
                                   fontWeight: FontWeight.w400,
                                   color: Colors.white),
-                            ),
+                            ),),
                           ),
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(6.0),

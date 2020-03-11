@@ -10,8 +10,10 @@ import 'package:test_giasu/ui/Widgets/SmallTextBox.dart';
 import 'package:test_giasu/ui/Widgets/SmallTextBoxWithBold.dart';
 import 'package:url_launcher/url_launcher.dart';
 
+import '../../core/model/List_TeacherData.dart';
+
 class TutorInfor extends StatefulWidget {
-  Detail_teacher teacherData;
+  Data_teacher teacherData;
   TutorInfor(this.teacherData);
   @override
   State<StatefulWidget> createState() {
@@ -21,7 +23,7 @@ class TutorInfor extends StatefulWidget {
 }
 
 class TutorInforState extends State<TutorInfor> {
-  Detail_teacher teacherData;
+  Data_teacher teacherData;
   TutorInforState(this.teacherData);
   Widget _box(int number, String detail) {
     return Container(
@@ -410,8 +412,8 @@ class TutorInforState extends State<TutorInfor> {
                         'Giới tính: ' + getGender(teacherData.gender),
                       ),
                       SmallTextBox('Quê quán: ' + teacherData.location.name),
-                      SmallTextBox('Giọng nói: ' + teacherData.voice.name),
-                      SmallTextBox('Học vấn: '+ teacherData.education_level.name),
+                      SmallTextBox('Giọng nói: ' ),
+                      SmallTextBox('Học vấn: '),
                       SmallTextBox(
                           'Đại học năm ${teacherData.school_year} - ${teacherData.specialism} - ${teacherData.university}'),
                       SmallTextBoxWithBold('Kinh nghiệm gia sư, giảng dạy'),

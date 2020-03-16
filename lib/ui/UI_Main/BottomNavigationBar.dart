@@ -34,6 +34,7 @@ class _BottomNavigationBarState extends State<MyBottomNavigationBar> {
   Widget build(BuildContext context) {
     // TODO: implement build
     return Scaffold(
+      
         body: _children[currentIndex],
         bottomNavigationBar: BottomNavigationBar(
           type: BottomNavigationBarType.fixed,
@@ -43,7 +44,7 @@ class _BottomNavigationBarState extends State<MyBottomNavigationBar> {
             BottomNavigationBarItem(
               icon: Icon(
                 Icons.home,
-                size: 45.0,
+                size: 30,
               ),
               title: Text(
                 'Trang chủ',
@@ -53,7 +54,7 @@ class _BottomNavigationBarState extends State<MyBottomNavigationBar> {
             BottomNavigationBarItem(
               icon: Icon(
                 Icons.view_list,
-                size: 45.0,
+                size: 30,
               ),
               title: Text(
                 'Danh sách lớp',
@@ -63,7 +64,7 @@ class _BottomNavigationBarState extends State<MyBottomNavigationBar> {
             BottomNavigationBarItem(
               icon: Icon(
                 Icons.credit_card,
-                size: 45.0,
+                size: 30,
               ),
               title: Text(
                 'Thanh toán',
@@ -73,7 +74,7 @@ class _BottomNavigationBarState extends State<MyBottomNavigationBar> {
             BottomNavigationBarItem(
               icon: Icon(
                 Icons.mail,
-                size: 45.0,
+                size: 30,
               ),
               title: Text(
                 'Hộp thư',
@@ -83,7 +84,7 @@ class _BottomNavigationBarState extends State<MyBottomNavigationBar> {
             BottomNavigationBarItem(
               icon: Icon(
                 Icons.person,
-                size: 45.0,
+                size: 30,
               ),
               title: Text(
                 'Tài khoản',

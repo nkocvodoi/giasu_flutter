@@ -147,6 +147,7 @@ class List_Box extends StatelessWidget {
               fontSize: _a,
               color: _c,
               fontWeight: FontWeight.w500,
+               fontFamily: 'UTM',
             ),
           ),
         ],

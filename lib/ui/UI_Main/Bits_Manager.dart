@@ -2,6 +2,7 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:test_giasu/ui/UI_Main/Account.dart';
 import 'package:test_giasu/ui/UI_Main/Nap_Bits.dart';
+import 'package:test_giasu/ui/Widgets/previous_widget.dart';
 import 'BottomNavigationBar.dart';
 import 'General_Infor.dart';
 
@@ -19,15 +20,15 @@ class _Bits_Manager_State extends State<Bits_Manager> {
     // TODO: implement build
     return Scaffold(
       appBar: AppBar(
+        automaticallyImplyLeading: false,
+        centerTitle: true,
         backgroundColor: colorApp,
-        title: Center(
-          child: Text(
-            'Quản lý Bits',
-            style: TextStyle(fontSize: 25, fontWeight: FontWeight.w400),
-            textAlign: TextAlign.center,
-          ),
+        title: Text(
+          'Quản lý Bits',
+          textAlign: TextAlign.center,
         ),
       ),
+
 //      bottomNavigationBar: MyBottomNavigationBar(),
       body: SingleChildScrollView(
         child: Stack(
@@ -48,34 +49,36 @@ class _Bits_Manager_State extends State<Bits_Manager> {
                 ),
                 _Infor_Box('Bits khả dụng', '300'),
                 SizedBox(
-                  height: 7,
+                  height: 10,
                 ),
                 _Infor_Box('Bits nợ', '300'),
                 SizedBox(
-                  height: 7,
+                  height: 10,
                 ),
                 _Infor_Box('Bits chờ rút', '0'),
                 SizedBox(
-                  height: 7,
+                  height: 15,
                 ),
                 _infor_text(),
+                SizedBox(height: 5),
                 Container(
                   alignment: Alignment.center,
                   margin: EdgeInsets.all(7),
-                  width: 310,
+                  width: 300,
                   height: 35,
                   color: colorApp,
                   child: Text(
                     'LỊCH SỬ GIAO DỊCH BITS',
-                    style: TextStyle(color: Colors.white, fontSize: 22.0),
+                    style: TextStyle(color: Colors.white, fontSize: 20),
                   ),
                 ),
                 _textField('Chọn giao dịch'),
                 _textField('Ngày giao dịch'),
                 _textField('Trạng thái'),
+                SizedBox(height: 20),
                 _button(),
                 SizedBox(
-                  height: 10,
+                  height: 20,
                 ),
               ],
             ),
@@ -123,7 +126,7 @@ class _Bits_Manager_State extends State<Bits_Manager> {
   Widget _Infor_Box(String _s, String _a) {
     return Container(
       height: 45.0,
-      width: 310,
+      width: 300,
       child: Padding(
         padding: EdgeInsets.only(left: 15.0, right: 15.0),
         child: Row(
@@ -132,7 +135,7 @@ class _Bits_Manager_State extends State<Bits_Manager> {
               child: Text(
                 _s,
                 style: TextStyle(
-                    fontSize: 23.0,
+                    fontSize: 20.0,
                     color: Colors.grey,
                     fontWeight: FontWeight.w400),
               ),
@@ -140,7 +143,7 @@ class _Bits_Manager_State extends State<Bits_Manager> {
             Text(
               _a,
               style: TextStyle(
-                  fontSize: 23.0,
+                  fontSize: 20.0,
                   color: Colors.grey,
                   fontWeight: FontWeight.w400),
             ),
@@ -156,51 +159,56 @@ class _Bits_Manager_State extends State<Bits_Manager> {
   }
 
   Widget _textField(String _text) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: <Widget>[
-        Text(
-          _text,
-          style: TextStyle(
-              fontSize: 23.0, color: Colors.grey, fontWeight: FontWeight.w400),
-        ),
-        Container(
-          margin: EdgeInsets.only(top: 7.0, bottom: 7),
-          height: 45.0,
-          width: 310,
-          child: TextField(
-            style: TextStyle(fontSize: 23.0, height: 0.7),
-            decoration: InputDecoration(
-              border: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(6.0),
-              ),
-              hintStyle: TextStyle(fontSize: 23.0),
+    return Container(
+        padding: EdgeInsets.only(top: 5, bottom: 5),
+        width: 300,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: <Widget>[
+            Text(
+              _text,
+              style: TextStyle(
+                  fontSize: 20.0,
+                  color: Colors.grey,
+                  fontWeight: FontWeight.w400),
             ),
-          ),
-          decoration: BoxDecoration(
-            color: Colors.white,
-            border: Border.all(color: colorApp),
-            borderRadius: BorderRadius.circular(6.0),
-          ),
-        ),
-      ],
-    );
+            SizedBox(height: 5),
+            SizedBox(
+              height: 40,
+              child: TextField(
+                style: TextStyle(fontSize: 20),
+                decoration: InputDecoration(
+                  contentPadding: EdgeInsets.zero,
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(6.0),
+                  ),
+                  hintStyle: TextStyle(fontSize: 20.0),
+                ),
+              ),
+            ),
+            // decoration: BoxDecoration(
+            //   color: Colors.white,
+            //   border: Border.all(color: colorApp),
+            //   borderRadius: BorderRadius.circular(6.0),
+            // ),
+          ],
+        ));
   }
 
   Widget _infor_text() {
     return Container(
-      width: 310,
+      width: 300,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
           Text(
             Infor_Bits_Manager,
-            style: TextStyle(color: Colors.grey[700], fontSize: 18.0),
+            style: TextStyle(color: Colors.grey[700], fontSize: 15),
           ),
           RichText(
             text: TextSpan(
               text: 'Xem hướng dẫn,',
-              style: TextStyle(color: Colors.grey[700], fontSize: 18.0),
+              style: TextStyle(color: Colors.grey[700], fontSize: 15),
               children: <TextSpan>[
                 TextSpan(
                   text: ' tại đây!',
@@ -221,24 +229,22 @@ class _Bits_Manager_State extends State<Bits_Manager> {
   }
 
   Widget _button() {
-    return Container(
-      alignment: Alignment.center,
-      child: RaisedButton(
+    return RaisedButton(
         onPressed: () {},
         color: colorApp,
         child: new Padding(
           padding:
-              EdgeInsets.only(right: 10.0, left: 10.0, bottom: 10.0, top: 10.0),
+              EdgeInsets.all(5),
           child: Text(
             'Tìm kiếm',
             style: TextStyle(
-                fontSize: 20, fontWeight: FontWeight.w400, color: Colors.white),
+                fontSize: 18, fontWeight: FontWeight.w400, color: Colors.white),
           ),
         ),
         shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(18.0),
+          borderRadius: BorderRadius.circular(10.0),
         ),
-      ),
+      
     );
   }
 
@@ -247,41 +253,42 @@ class _Bits_Manager_State extends State<Bits_Manager> {
     String _s,
     var _a,
   ) {
-    return Container(
-      //alignment: Alignment.center,
-      height: 100,
-      width: 110,
-      child: RaisedButton(
-        padding: EdgeInsets.all(0.0),
-        onPressed: () {
-          Navigator.push(
-            context,
-            MaterialPageRoute(
-              builder: (context) {
-                print(_a);
-            switch (_a) {
-              case 1:
-                {
-                  return Nap_Bits();
-                }
-                break;
-              default:
-                {
-                  return MyBottomNavigationBar(currentIndex: 4,);
-                }
-                break;
-            }
-              },
-            ),
-          );
-        },
-        color: Colors.white,
+    return RaisedButton(
+      padding: EdgeInsets.all(0.0),
+      onPressed: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) {
+              print(_a);
+              switch (_a) {
+                case 1:
+                  {
+                    return Nap_Bits();
+                  }
+                  break;
+                default:
+                  {
+                    return MyBottomNavigationBar(
+                      currentIndex: 2,
+                    );
+                  }
+                  break;
+              }
+            },
+          ),
+        );
+      },
+      color: Colors.white,
+      child: Container(
+        height: 90,
+        padding: EdgeInsets.all(5),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: <Widget>[
             _icon,
             SizedBox(
-              height: 20.0,
+              height: 10,
             ),
             Text(
               _s,
@@ -290,13 +297,8 @@ class _Bits_Manager_State extends State<Bits_Manager> {
             ),
           ],
         ),
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(10.0),
-        ),
       ),
-      decoration: BoxDecoration(
-        color: Colors.white,
-        border: Border.all(color: Colors.blueAccent),
+      shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(10.0),
       ),
     );

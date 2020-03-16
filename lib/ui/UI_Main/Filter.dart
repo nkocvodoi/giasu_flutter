@@ -29,13 +29,14 @@ class _FilterState extends State<Filter> {
         ScreenUtil(width: 750, height: 1334, allowFontScaling: true);
     return Scaffold(
       appBar: AppBar(
+        leading: buildPreviousButton(),
+        centerTitle: true,
         backgroundColor: colorApp,
-        title: Center(
-          child: Text(
+        title: Text(
             'BỘ LỌC',
             textAlign: TextAlign.center,
           ),
-        ),
+        
       ),
       body: Consumer<FilterModel>(builder: (_, model, __) {
         return Stack(
@@ -66,14 +67,14 @@ class _FilterState extends State<Filter> {
                           DropdownMenuItem(
                             child: Text('Địa điểm',
                                 style: TextStyle(
-                                    fontSize: 23.0, color: Colors.grey)),
+                                    fontSize: 18.0, color: Colors.grey)),
                             value: null,
                           ),
                           ...List.generate(model.city.length, (index) {
                             return DropdownMenuItem(
                               child: Text('${model.city[index].name}',
                                   style: TextStyle(
-                                      fontSize: 23.0, color: Colors.grey)),
+                                      fontSize: 18.0, color: Colors.grey)),
                               value: model.city[index].id,
                             );
                           }),
@@ -106,14 +107,14 @@ class _FilterState extends State<Filter> {
                           DropdownMenuItem(
                             child: Text('Môn học',
                                 style: TextStyle(
-                                    fontSize: 23.0, color: Colors.grey)),
+                                    fontSize: 18.0, color: Colors.grey)),
                             value: null,
                           ),
                           ...List.generate(model.subject.length, (index) {
                             return DropdownMenuItem(
                               child: Text('${model.subject[index].name}',
                                   style: TextStyle(
-                                      fontSize: 23.0, color: Colors.grey)),
+                                      fontSize: 18.0, color: Colors.grey)),
                               value: model.subject[index].id,
                             );
                           }),
@@ -147,7 +148,7 @@ class _FilterState extends State<Filter> {
                           DropdownMenuItem(
                             child: Text('Chủ đề',
                                 style: TextStyle(
-                                    fontSize: 23.0, color: Colors.grey)),
+                                    fontSize: 18.0, color: Colors.grey)),
                             value: null,
                           ),
 //                          ...List.generate(topic.length, (index) {
@@ -189,7 +190,7 @@ class _FilterState extends State<Filter> {
                           DropdownMenuItem(
                             child: Text('Hình thức dạy',
                                 style: TextStyle(
-                                    fontSize: 23.0, color: Colors.grey)),
+                                    fontSize: 18.0, color: Colors.grey)),
                             value: null,
                           ),
                           ...List.generate(form_teachings.length, (index) {
@@ -197,7 +198,7 @@ class _FilterState extends State<Filter> {
                               child: Text(
                                 '${form_teachings[index].value}',
                                 style: TextStyle(
-                                    fontSize: 23.0, color: Colors.grey),
+                                    fontSize: 18.0, color: Colors.grey),
                               ),
                               value: form_teachings[index].key,
                             );
@@ -231,7 +232,7 @@ class _FilterState extends State<Filter> {
                           DropdownMenuItem(
                             child: Text('Đối tượng dạy',
                                 style: TextStyle(
-                                    fontSize: 23.0, color: Colors.grey)),
+                                    fontSize: 18.0, color: Colors.grey)),
                             value: null,
                           ),
                           ...List.generate(education.length, (index) {
@@ -239,7 +240,7 @@ class _FilterState extends State<Filter> {
                               child: Text(
                                 '${education[index].value}',
                                 style: TextStyle(
-                                    fontSize: 23.0, color: Colors.grey),
+                                    fontSize: 18.0, color: Colors.grey),
                               ),
                               value: education[index].key,
                             );
@@ -261,7 +262,7 @@ class _FilterState extends State<Filter> {
                     Text(
                       'Khoảng cách',
                       style: TextStyle(
-                        fontSize: ScreenUtil.getInstance().setSp(40),
+                        fontSize: 18,
                         color: colorApp,
                       ),
                     ),
@@ -296,6 +297,7 @@ class _FilterState extends State<Filter> {
                         },
                       ),
                     ),
+                    SizedBox(height: 20,),
                     RaisedButton(
                       onPressed: () {
                         Navigator.push(
@@ -308,19 +310,19 @@ class _FilterState extends State<Filter> {
                         );
                       },
                       color: colorApp,
-                      child: new Padding(
-                        padding: EdgeInsets.only(
-                            right: 15.0, left: 15.0, bottom: 10.0, top: 10.0),
+                      child: Container(
+                        padding: EdgeInsets.all(5),
+                          
                         child: Text(
                           'Tìm kiếm',
                           style: TextStyle(
-                              fontSize: 20,
+                              fontSize: 18,
                               fontWeight: FontWeight.w400,
                               color: Colors.white),
                         ),
                       ),
                       shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(17.0),
+                        borderRadius: BorderRadius.circular(10.0),
                       ),
                     ),
                   ],

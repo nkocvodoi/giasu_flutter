@@ -15,17 +15,17 @@ class RoundedImageNameBox extends StatelessWidget {
           children: <Widget>[
             ClipRRect(
               borderRadius: BorderRadius.circular(90),
-              child: Image.asset(
-                urlString,
-                height: 100,
+              child: Image.network(
+                'https://giasu.htcon.vn${urlString}',
+                height: 90,
               ),
             ),
             Text(
               name,
               style: TextStyle(
                 color: Colors.white,
-                fontSize: SizeConfig.safeBlockHorizontal * 3,
-                fontStyle: FontStyle.normal,
+                fontSize: 15,
+                 fontFamily: 'UTM',
                 fontWeight: FontWeight.bold,
               ),
             ),

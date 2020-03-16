@@ -29,9 +29,13 @@ class TeacherBox extends StatelessWidget {
           children: <Widget>[
             RectangleImageNameBox('https://giasu.htcon.vn${image}', name),
             Text(
+              
               '$place | $subject',
+              maxLines: 2,
               textAlign: TextAlign.left,
-              style: TextStyle(),
+              style: TextStyle(
+                 fontFamily: 'UTM',
+              ),
             ),
             Row(
               children: <Widget>[
@@ -41,7 +45,7 @@ class TeacherBox extends StatelessWidget {
                     '$fee vnđ/buổi',
                     style: TextStyle(
                         fontSize: 13,
-                        fontStyle: FontStyle.normal,
+                         fontFamily: 'UTM',
                         color: Colors.orange),
                   ),
                 ),
@@ -61,7 +65,7 @@ class TeacherBox extends StatelessWidget {
                     '$distance km',
                     style: TextStyle(
                       fontSize: 10,
-                      fontStyle: FontStyle.normal,
+                       fontFamily: 'UTM',
                       color: colorApp,
                     ),
                   ),
@@ -76,7 +80,7 @@ class TeacherBox extends StatelessWidget {
               maxLines: 2,
               style: TextStyle(
                 fontSize: 13,
-                fontStyle: FontStyle.normal,
+                 fontFamily: 'UTM',
               ),
             ),
             Divider(thickness: 1),
@@ -100,7 +104,7 @@ class TeacherBox extends StatelessWidget {
                     style: TextStyle(
                       color: Colors.white,
                       fontSize: 13,
-                      fontStyle: FontStyle.normal,
+                       fontFamily: 'UTM',
                     ),
                   ),
                 ),

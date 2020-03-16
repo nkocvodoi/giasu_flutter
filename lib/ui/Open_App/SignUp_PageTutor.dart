@@ -86,6 +86,7 @@ class _SignUpPageTutor extends State<SignUpPageTutor> {
         _validate = true;
       });
     }
+    
   }
 
   @override
@@ -95,14 +96,12 @@ class _SignUpPageTutor extends State<SignUpPageTutor> {
       appBar: AppBar(
         //leading: FlatButton.icon( icon: Icon(Icons.arrow_back_ios, textDirection: TextDirection.ltr,)),
         backgroundColor: _c,
-        title: new Padding(
-          padding: EdgeInsets.only(top: 20.0, bottom: 5.0),
+        title: Center(
           child: Text(
             'Đăng Ký',
             // style: TextStyle(fontSize: 35, fontWeight: FontWeight.w400),
           ),
         ),
-        centerTitle: true,
       ),
       body: new SingleChildScrollView(
         //physics: const NeverScrollableScrollPhysics(),
@@ -211,11 +210,11 @@ class _SignUpPageTutor extends State<SignUpPageTutor> {
                           child: RaisedButton(
                             onPressed: () {
                               _sendToServer;
-                             Navigator.push(
-                                 context,
-                                 MaterialPageRoute(
-                                   builder: (context) => PersonInfor(),
-                                 ));
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => PersonInfor(),
+                                  ));
                             },
                             color: _c,
                             child: new Padding(

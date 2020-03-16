@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:test_giasu/ui/Open_App/ForgotPass1.dart';
 import 'package:test_giasu/ui/Open_App/PersonInfor.dart';
+import 'package:test_giasu/ui/Students/Filter_S.dart';
+import 'package:test_giasu/ui/UI_Main/Bits_Manager.dart';
 import 'package:test_giasu/ui/UI_Main/ClassDetailRequest.dart';
 import 'package:test_giasu/ui/UI_Main/Lists_Class.dart';
 import 'package:test_giasu/ui/UI_Main/Nap_Bits.dart';
@@ -28,8 +31,9 @@ class MyApp extends StatelessWidget {
       providers: ProviderSetup.getProviders(),
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
-        title: 'giasu',
+        title: 'HTcon',
         theme: ThemeData(fontFamily: 'UTM'),
+        
 //      initialRoute: 'open',
 //      routes: {
 //        '/': (context) => MyBottomNavigationBar(
@@ -40,7 +44,7 @@ class MyApp extends StatelessWidget {
 //        'signUp': (context) => SignUpPage(),
 //      },
 //        home: Waiting_screen(),
-        home: PersonInfor(),
+        home: Waiting_screen(),
       ),
     );
   }

@@ -18,7 +18,7 @@ Future<PersonalInfor> createPersonalInfor(
   String address,
 ) async {
   final http.Response response = await http.post(
-    'https://giasu.htcon.vn/api/v1/users/2708',
+    'http://192.168.0.106:3300/api/v1/users/2',
     headers: <String, String>{
       'Content-Type': 'application/json; charset=UTF-8',
     },
@@ -38,7 +38,7 @@ Future<PersonalInfor> createPersonalInfor(
   if (response.statusCode == 201) {
     return PersonalInfor.fromJson(json.decode(response.body));
   } else {
-    throw Exception('Failed to create album.');
+    throw Exception('Failed to create personal information.');
   }
 }
 

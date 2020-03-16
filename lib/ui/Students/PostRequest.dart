@@ -1,9 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:test_giasu/ui/Helper/ScreenConfig.dart';
+import 'package:test_giasu/ui/UI_Main/BottomNavigationBarStudent.dart';
+import 'package:test_giasu/ui/UI_Main/ClassDetailWithMoreTutorInforDemo.dart';
 import 'package:test_giasu/ui/UI_Main/General_Infor.dart';
+import 'package:test_giasu/ui/Widgets/ARichTextLine.dart';
 import 'package:test_giasu/ui/Widgets/LargeTextField.dart';
 import 'package:test_giasu/ui/Widgets/SelectedTimeColumn.dart';
 import 'package:test_giasu/ui/Widgets/SmallTextField.dart';
+import 'package:test_giasu/ui/Widgets/previous_widget.dart';
 
 
 class Post extends StatefulWidget {
@@ -15,14 +19,15 @@ class Post extends StatefulWidget {
 }
 
 class PostRequestState extends State<Post> {
-    final TextEditingController _controller = TextEditingController();
+  final TextEditingController _controller14 = TextEditingController();
+  final TextEditingController _controller = TextEditingController();
   final TextEditingController _controller1 = TextEditingController();
   final TextEditingController _controller2 = TextEditingController();
   final TextEditingController _controller3 = TextEditingController();
   final TextEditingController _controller4 = TextEditingController();
   final TextEditingController _controller5 = TextEditingController();
   final TextEditingController _controller6 = TextEditingController();
-    final TextEditingController _controller7 = TextEditingController();
+  final TextEditingController _controller7 = TextEditingController();
   final TextEditingController _controller8 = TextEditingController();
   final TextEditingController _controller9 = TextEditingController();
   final TextEditingController _controller10 = TextEditingController();
@@ -40,6 +45,7 @@ class PostRequestState extends State<Post> {
             SliverAppBar(
               backgroundColor: colorApp,
               expandedHeight: 40,
+              leading: buildPreviousButton(),
 //              floating: false,
               pinned: true,
               flexibleSpace: FlexibleSpaceBar(
@@ -83,6 +89,7 @@ class PostRequestState extends State<Post> {
                               ),
                               child: Center(
                                 child: TextField(
+                                  controller: _controller14,
                                   textAlign: TextAlign.center,
                                   decoration: InputDecoration(
                                     hintText:
@@ -140,45 +147,7 @@ class PostRequestState extends State<Post> {
                   SizedBox(
                     height: 10,
                   ),
-                  RichText(
-                    textAlign: TextAlign.center,
-                    text: TextSpan(
-                      children: <TextSpan>[
-                        TextSpan(
-                          text: 'Thời gian',
-                          style: TextStyle(
-                            fontSize: 15,
-                            color: Colors.grey,
-                            fontStyle: FontStyle.normal,
-                          ),
-                        ),
-                        TextSpan(
-                          text: '(màu',
-                          style: TextStyle(
-                            fontStyle: FontStyle.normal,
-                            color: Colors.grey,
-                            fontSize: 15,
-                          ),
-                        ),
-                        TextSpan(
-                          text: ' cam ',
-                          style: TextStyle(
-                            fontStyle: FontStyle.normal,
-                            color: Colors.orange,
-                            fontSize: 15,
-                          ),
-                        ),
-                        TextSpan(
-                          text: 'hiển thị thời gian có thể dạy)',
-                          style: TextStyle(
-                            color: Colors.grey,
-                            fontStyle: FontStyle.normal,
-                            fontSize: 15,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
+                  RichTextLine(),
                   SelectedTimeColumn(),
                 ],
               ),
@@ -221,7 +190,7 @@ class PostRequestState extends State<Post> {
                 shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(10)),
                 onPressed: () {
-                  print('tap');
+                 Navigator.push(context, MaterialPageRoute(builder: (context) => MyBottomNavigationBarStudent(0,_controller14.text, 'Đang tìm gia sư', "1980", _controller.text, _controller2.text, _controller8.text, _controller3.text, _controller4.text , _controller5.text, _controller11.text, _controller9.text, '260,000', _controller13.text)));
                 },
                 child: Text(
                   'Đăng yêu cầu',

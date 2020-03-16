@@ -1,6 +1,8 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:test_giasu/ui/UI_Main/General_Infor.dart';
+import 'package:test_giasu/ui/Widgets/previous_widget.dart';
 
 import 'SignIn_Page.dart';
 
@@ -25,6 +27,7 @@ class _ForgotPass2State extends State<ForgotPass2> {
     // TODO: implement build
     return Scaffold(
       appBar: AppBar(
+        leading: buildPreviousButton(),
         backgroundColor: Colors.blue[800],
       ),
       body: new Column(
@@ -36,7 +39,7 @@ class _ForgotPass2State extends State<ForgotPass2> {
             alignment: Alignment.center,
             child: Text(
               'Nhập mã của bạn',
-              style: TextStyle(fontSize: 30.0, color: Colors.indigo),
+              style: TextStyle(fontSize: 25, color: blue),
             ),
           ),
           new Padding(
@@ -44,7 +47,7 @@ class _ForgotPass2State extends State<ForgotPass2> {
             child: new Text(
               'Hãy kiểm tra hộp thư SMS/Email của bạn',
               style: TextStyle(
-                  fontSize: 18.0, color: Colors.black.withOpacity(0.8)),
+                  fontSize: 15.0, color: Colors.black.withOpacity(0.8)),
             ),
           ),
           new Column(
@@ -74,16 +77,16 @@ class _ForgotPass2State extends State<ForgotPass2> {
                   _buildBox_last(focus5),
                 ],
               ),
-              new Padding(
-                padding: EdgeInsets.all(20.0),
-                child: Container(
+              SizedBox(height: 30),
+              Container(
+                width: 300,
                   //color: Colors.deepOrange,
                   child: ListTile(
                     title: new Center(
                       child: Text(
                         'Tiếp tục',
                         style: TextStyle(
-                          fontSize: 30.0,
+                          fontSize: 25,
                           color: Colors.white,
                         ),
                       ),
@@ -97,10 +100,10 @@ class _ForgotPass2State extends State<ForgotPass2> {
                     },
                   ),
                   decoration: BoxDecoration(
-                    color: Colors.deepOrange[300],
+                    color: orange,
                   ),
                 ),
-              ),
+              
             ],
           ),
         ],
@@ -111,13 +114,15 @@ class _ForgotPass2State extends State<ForgotPass2> {
   Widget _buildBox(FocusNode _a, FocusNode _b) {
     final TextEditingController _Box1 = new TextEditingController();
     return new Container(
-      color: Colors.deepOrange[300],
-      width: 52.0,
-      height: 52.0,
+      color: orange,
+      width: 40,
+      height:  40,
       child: new TextFormField(
         //keyboardType: TextInputType.emailAddress,
         controller: _Box1,
-        style: TextStyle(fontSize: 25.0),
+        style: TextStyle(fontSize: 20,),
+        textAlign: TextAlign.center,
+        keyboardType: TextInputType.phone,
         maxLength: 1,
         autofocus: true,
         focusNode: _a,
@@ -127,7 +132,7 @@ class _ForgotPass2State extends State<ForgotPass2> {
         textInputAction: TextInputAction.next,
         decoration: InputDecoration(
           counterText: '',
-          contentPadding: EdgeInsets.fromLTRB(21.0, 10.0, 10.0, 10.0),
+          // contentPadding: EdgeInsets.fromLTRB(21.0, 10.0, 10.0, 10.0),
           //border: OutlineInputBorder(borderRadius: BorderRadius.circular(32.0)),
         ),
       ),
@@ -137,14 +142,16 @@ class _ForgotPass2State extends State<ForgotPass2> {
   Widget _buildBox_first(FocusNode _a) {
     final TextEditingController _Box1 = new TextEditingController();
     return new Container(
-      color: Colors.deepOrange[300],
-      width: 52.0,
-      height: 52.0,
+      color: orange,
+      width: 40,
+      height:  40,
       child: new TextFormField(
         //keyboardType: TextInputType.emailAddress,
         controller: _Box1,
-        style: TextStyle(fontSize: 25.0),
+        style: TextStyle(fontSize: 20),
+        textAlign: TextAlign.center,
         maxLength: 1,
+        keyboardType: TextInputType.phone,
         autofocus: true,
         onFieldSubmitted: (v) {
           FocusScope.of(context).requestFocus(_a);
@@ -152,7 +159,7 @@ class _ForgotPass2State extends State<ForgotPass2> {
         textInputAction: TextInputAction.next,
         decoration: InputDecoration(
           counterText: '',
-          contentPadding: EdgeInsets.fromLTRB(21.0, 10.0, 10.0, 10.0),
+          // contentPadding: EdgeInsets.fromLTRB(21.0, 10.0, 10.0, 10.0),
           //border: OutlineInputBorder(borderRadius: BorderRadius.circular(32.0)),
         ),
       ),
@@ -162,19 +169,22 @@ class _ForgotPass2State extends State<ForgotPass2> {
   Widget _buildBox_last(FocusNode _a) {
     final TextEditingController _Box1 = new TextEditingController();
     return new Container(
-      color: Colors.deepOrange[300],
-      width: 52.0,
-      height: 52.0,
+      color: orange,
+      width: 40,
+      height: 40,
       child: new TextFormField(
         //keyboardType: TextInputType.emailAddress,
         controller: _Box1,
-        style: TextStyle(fontSize: 25.0),
+        style: TextStyle(fontSize: 20),
+        keyboardType: TextInputType.phone,
+        textAlign: TextAlign.center,
         maxLength: 1,
         autofocus: true,
         focusNode: _a,
+        textInputAction: TextInputAction.done,
         decoration: InputDecoration(
           counterText: '',
-          contentPadding: EdgeInsets.fromLTRB(21.0, 10.0, 10.0, 10.0),
+          // contentPadding: EdgeInsets.fromLTRB(21.0, 10.0, 10.0, 10.0),
           //border: OutlineInputBorder(borderRadius: BorderRadius.circular(32.0)),
         ),
       ),

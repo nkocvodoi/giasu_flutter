@@ -3,7 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
 import 'package:test_giasu/core/view_model/subjectchoiceModel.dart';
+import 'package:test_giasu/ui/Open_App/SpecialtyInfor.dart';
 import 'package:test_giasu/ui/UI_Main/BottomNavigationBar.dart';
+import 'package:test_giasu/ui/Widgets/previous_widget.dart';
 
 import 'DetailRaisedButton.dart';
 
@@ -126,9 +128,10 @@ class SubjectChoiceDetailsState extends State<SubjectChoiceDetails> {
 
     return Scaffold(
       appBar: AppBar(
+        leading: buildPreviousButton(),
         backgroundColor: Color.fromRGBO(47, 101, 174, 1),
-        title: Center(
-          child: Text(
+        centerTitle: true,
+        title: Text(
             'Lựa chọn chủ đề',
             style: TextStyle(
               fontStyle: FontStyle.normal,
@@ -136,7 +139,7 @@ class SubjectChoiceDetailsState extends State<SubjectChoiceDetails> {
             textAlign: TextAlign.start,
           ),
         ),
-      ),
+      
       body: SafeArea(
         child: Stack(
           children: <Widget>[
@@ -170,7 +173,7 @@ class SubjectChoiceDetailsState extends State<SubjectChoiceDetails> {
                         Navigator.push(
                             context,
                             MaterialPageRoute(
-                              builder: (context) => MyBottomNavigationBar(currentIndex: 0,),
+                              builder: (context) => SpecialtyInfor(),
                             ));
                       },
                     ),

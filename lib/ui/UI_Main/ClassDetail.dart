@@ -3,8 +3,10 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:test_giasu/core/model/List_ClassData.dart';
 import 'package:test_giasu/ui/Helper/ScreenConfig.dart';
 import 'package:test_giasu/ui/Widgets/ARichTextLine.dart';
+import 'package:test_giasu/ui/Widgets/LargeTextBox.dart';
 import 'package:test_giasu/ui/Widgets/RoundedImageNameBox.dart';
 import 'package:test_giasu/ui/Widgets/SelectedTimeColumn.dart';
+import 'package:test_giasu/ui/Widgets/previous_widget.dart';
 
 import 'General_Infor.dart';
 
@@ -51,13 +53,13 @@ class ClassDetailState extends State<ClassDetail> {
         ScreenUtil(width: 750, height: 1334, allowFontScaling: true);
     // TODO: implement build
     return Scaffold(
-      appBar: AppBar(
+      appBar: AppBar(centerTitle: true,
+      leading: buildPreviousButton(),
         backgroundColor: Color.fromRGBO(47, 101, 174, 1),
-        title: Center(
-          child: Text(
+        title:  Text(
             'Chi tiết lớp học',
             textAlign: TextAlign.start,
-          ),
+          
         ),
       ),
       body: SingleChildScrollView(
@@ -77,13 +79,16 @@ class ClassDetailState extends State<ClassDetail> {
                         height: SizeConfig.safeBlockVertical * 21,
                         alignment: Alignment.center,
                         color: Color.fromRGBO(47, 101, 174, 1),
-                        child: RoundedImageNameBox('assets/red.jpg', 'Logo2'),
+                        child: RoundedImageNameBox(
+                                  classData.parent.avatar,
+                                  classData.parent.full_name,
+                                ),
                       ),
                       Align(
                         alignment: Alignment.bottomCenter,
                         child: Container(
                           width: SizeConfig.safeBlockHorizontal * 80,
-                          height: SizeConfig.safeBlockVertical * 6,
+                          height: SizeConfig.safeBlockVertical * 5,
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(20.0),
                             border: Border.all(),
@@ -94,7 +99,7 @@ class ClassDetailState extends State<ClassDetail> {
                               '${classData.name}',
                               style: TextStyle(
                                 fontStyle: FontStyle.normal,
-                                fontSize: SizeConfig.safeBlockHorizontal * 3,
+                                fontSize: 13,
                               ),
                               textAlign: TextAlign.center,
                             ),
@@ -123,13 +128,13 @@ class ClassDetailState extends State<ClassDetail> {
                           'Trạng thái: ${classData.status}',
                           style: TextStyle(
                             color: Colors.green,
-                            fontSize: SizeConfig.safeBlockHorizontal * 4,
+                            fontSize: 15,
                           ),
                         ),
                         Icon(
                           Icons.portrait,
                           color: Colors.grey,
-                          size: SizeConfig.safeBlockHorizontal * 4,
+                          size: 15,
                         ),
                       ),
                       _iconTextBox(
@@ -137,13 +142,13 @@ class ClassDetailState extends State<ClassDetail> {
                           'Mã lớp: ${classData.id} - ${classData.subject.name} | Lớp ${classData.grade}',
                           style: TextStyle(
                             color: Colors.grey,
-                            fontSize: SizeConfig.safeBlockHorizontal * 4,
+                            fontSize: 15,
                           ),
                         ),
                         Icon(
                           Icons.home,
                           color: Colors.grey,
-                          size: SizeConfig.safeBlockHorizontal * 4,
+                          size: 15,
                         ),
                       ),
                       _iconTextBox(
@@ -151,13 +156,13 @@ class ClassDetailState extends State<ClassDetail> {
                           'Hình thức học: ${classData.form_teaching_name}',
                           style: TextStyle(
                             color: Colors.grey,
-                            fontSize: SizeConfig.safeBlockHorizontal * 4,
+                            fontSize: 15,
                           ),
                         ),
                         Icon(
                           Icons.school,
                           color: Colors.grey,
-                          size: SizeConfig.safeBlockHorizontal * 4,
+                          size: 15,
                         ),
                       ),
                       _iconTextBox(
@@ -165,13 +170,13 @@ class ClassDetailState extends State<ClassDetail> {
                           'Số buổi/tuần: ${classData.lesson_per_week} (${(classData.time_per_lesson).toInt()}h/buổi)',
                           style: TextStyle(
                             color: Colors.grey,
-                            fontSize: SizeConfig.safeBlockHorizontal * 4,
+                            fontSize: 15,
                           ),
                         ),
                         Icon(
                           Icons.timelapse,
                           color: Colors.grey,
-                          size: SizeConfig.safeBlockHorizontal * 4,
+                          size: 15,
                         ),
                       ),
                       _iconTextBox(
@@ -179,13 +184,13 @@ class ClassDetailState extends State<ClassDetail> {
                           'Số học viên: ${classData.student_per_class}',
                           style: TextStyle(
                             color: Colors.grey,
-                            fontSize: SizeConfig.safeBlockHorizontal * 4,
+                            fontSize: 15,
                           ),
                         ),
                         Icon(
                           Icons.person_outline,
                           color: Colors.grey,
-                          size: SizeConfig.safeBlockHorizontal * 4,
+                          size: 15,
                         ),
                       ),
                       _iconTextBox(
@@ -193,13 +198,13 @@ class ClassDetailState extends State<ClassDetail> {
                           'Địa chỉ: ${classData.address}',
                           style: TextStyle(
                             color: Colors.grey,
-                            fontSize: SizeConfig.safeBlockHorizontal * 4,
+                            fontSize: 15,
                           ),
                         ),
                         Icon(
                           Icons.map,
                           color: Colors.grey,
-                          size: SizeConfig.safeBlockHorizontal * 4,
+                          size: 15,
                         ),
                       ),
                       _iconTextBox(
@@ -207,13 +212,13 @@ class ClassDetailState extends State<ClassDetail> {
                           'Cách bạn: 2km',
                           style: TextStyle(
                             color: Colors.grey,
-                            fontSize: SizeConfig.safeBlockHorizontal * 4,
+                            fontSize: 15,
                           ),
                         ),
                         Icon(
                           Icons.radio_button_checked,
                           color: Colors.grey,
-                          size: SizeConfig.safeBlockHorizontal * 4,
+                          size: 15,
                         ),
                       ),
                       _iconTextBox(
@@ -221,13 +226,13 @@ class ClassDetailState extends State<ClassDetail> {
                           'Học phí/buổi: ${(classData.tuition_fee / 1000).toInt()},000 vnđ/2h',
                           style: TextStyle(
                             color: Colors.orange,
-                            fontSize: SizeConfig.safeBlockHorizontal * 4,
+                            fontSize: 15,
                           ),
                         ),
                         Icon(
                           Icons.monetization_on,
                           color: Colors.grey,
-                          size: SizeConfig.safeBlockHorizontal * 4,
+                          size: 15,
                         ),
                       ),
                       _iconTextBox(
@@ -235,13 +240,13 @@ class ClassDetailState extends State<ClassDetail> {
                           'Phí nhận lớp: ${(classData.class_fee / 1000).toInt()},000 vnđ',
                           style: TextStyle(
                             color: Colors.blue[400],
-                            fontSize: SizeConfig.safeBlockHorizontal * 4,
+                            fontSize: 15,
                           ),
                         ),
                         Icon(
                           Icons.attach_money,
                           color: Colors.grey,
-                          size: SizeConfig.safeBlockHorizontal * 4,
+                          size: 15,
                         ),
                       ),
                     ],
@@ -250,22 +255,7 @@ class ClassDetailState extends State<ClassDetail> {
                 SizedBox(
                   height: ScreenUtil.getInstance().setHeight(20),
                 ),
-                Container(
-                  width: SizeConfig.safeBlockHorizontal * 95,
-                  height: SizeConfig.safeBlockHorizontal * 25,
-                  decoration: BoxDecoration(
-                    border: Border.all(color: Colors.blue),
-                    borderRadius: BorderRadius.circular(10.0),
-                  ),
-                  child: Text(
-                    '${classData.about_course}',
-                    style: TextStyle(
-                      fontSize: SizeConfig.safeBlockHorizontal * 4,
-                      fontStyle: FontStyle.normal,
-                      color: Colors.grey,
-                    ),
-                  ),
-                ),
+                LargeTextBox(classData.about_course),
                 SizedBox(
                   height: ScreenUtil.getInstance().setHeight(10),
                 ),
@@ -292,7 +282,7 @@ class ClassDetailState extends State<ClassDetail> {
                               textAlign: TextAlign.center,
                               style: TextStyle(
                                 color: Colors.black38,
-                                fontSize: SizeConfig.safeBlockHorizontal * 3,
+                                fontSize: 13,
                               ),
                             ),
                           ),
@@ -312,7 +302,7 @@ class ClassDetailState extends State<ClassDetail> {
                             child: Text(
                               'Đề nghị dạy',
                               style: TextStyle(
-                                fontSize: SizeConfig.safeBlockHorizontal * 3,
+                                fontSize: 15,
                                 color: Colors.white,
                                 fontStyle: FontStyle.normal,
                               ),

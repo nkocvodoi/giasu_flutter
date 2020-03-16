@@ -25,12 +25,12 @@ class _AnouncementState extends State<Anouncement> {
     // TODO: implement build
     return Scaffold(
       appBar: AppBar(
+        automaticallyImplyLeading: false,
+        centerTitle: true,
         backgroundColor: Color.fromRGBO(47, 101, 174, 1),
-        title: Center(
-          child: Text(
-            'Hộp thư',
-            textAlign: TextAlign.center,
-          ),
+        title: Text(
+          'Hộp thư',
+          textAlign: TextAlign.center,
         ),
       ),
       body: SingleChildScrollView(
@@ -39,7 +39,7 @@ class _AnouncementState extends State<Anouncement> {
         children: <Widget>[
           Column(children: <Widget>[
             SizedBox(
-              height: SizeConfig.safeBlockVertical * 5,
+              height: 20,
             ),
             Mails(
                 Icons.bookmark,

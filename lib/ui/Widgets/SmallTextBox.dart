@@ -17,7 +17,7 @@ class SmallTextBox extends StatelessWidget {
         infor,
         style: TextStyle(
           fontSize: 15,
-          fontStyle: FontStyle.normal,
+           fontFamily: 'UTM',
         ),
       ),
     );

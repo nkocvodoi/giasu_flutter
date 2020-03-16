@@ -3,6 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
 import 'package:test_giasu/core/view_model/selectedModel.dart';
 import 'package:test_giasu/ui/Helper/ScreenConfig.dart';
+import 'package:test_giasu/ui/UI_Main/General_Infor.dart';
 
 class SelectedTime extends StatefulWidget {
 //  List<bool> isSelected;
@@ -44,7 +45,7 @@ class SelectedTimeState extends State<SelectedTime> {
                 textAlign: TextAlign.start,
                 style: TextStyle(
                   fontSize: SizeConfig.safeBlockHorizontal * 4,
-                  fontStyle: FontStyle.normal,
+                   fontFamily: 'UTM',
                   color: Colors.black38,
                 ),
               ),
@@ -63,7 +64,7 @@ class SelectedTimeState extends State<SelectedTime> {
                 borderRadius: BorderRadius.circular(30.0),
                 borderColor: Colors.blue,
                 selectedBorderColor: Colors.blue,
-                fillColor: Colors.orangeAccent,
+                fillColor: orange,
                 highlightColor: Colors.white,
                 children: <Widget>[
                   Container(
@@ -73,7 +74,8 @@ class SelectedTimeState extends State<SelectedTime> {
                       child: Text(
                         'Buổi sáng',
                         style: TextStyle(
-                          fontSize: SizeConfig.safeBlockHorizontal * 3,
+                          fontSize: 13,
+                           fontFamily: 'UTM',
                         ),
                       ),
                     ),
@@ -85,7 +87,8 @@ class SelectedTimeState extends State<SelectedTime> {
                       child: Text(
                         'Buổi chiều',
                         style: TextStyle(
-                          fontSize: SizeConfig.safeBlockHorizontal * 3,
+                          fontSize: 13,
+                           fontFamily: 'UTM',
                         ),
                       ),
                     ),
@@ -97,7 +100,8 @@ class SelectedTimeState extends State<SelectedTime> {
                       child: Text(
                         'Buổi tối',
                         style: TextStyle(
-                          fontSize: SizeConfig.safeBlockHorizontal * 3,
+                          fontSize: 13,
+                           fontFamily: 'UTM',
                         ),
                       ),
                     ),

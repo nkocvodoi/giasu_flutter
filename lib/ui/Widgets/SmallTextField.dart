@@ -24,7 +24,7 @@ class SmallTextField extends StatelessWidget{
           ),
           hintStyle: TextStyle(
             fontSize: 20,
-            fontStyle: FontStyle.normal,
+             fontFamily: 'UTM',
             color: Colors.grey[400],
           ),
         ),

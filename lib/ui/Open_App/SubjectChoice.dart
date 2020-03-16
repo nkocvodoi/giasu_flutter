@@ -2,6 +2,7 @@
 //setState
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:test_giasu/ui/Widgets/previous_widget.dart';
 //import 'package:flutter_vector_icons/flutter_vector_icons.dart';
 import 'DetailRaisedButton.dart';
 import 'SubjectChoiceDetails.dart';
@@ -102,6 +103,7 @@ class SubjectChoiceState extends State<SubjectChoice> {
     return Scaffold(
       key: _scaffoldKey,
       appBar: AppBar(
+        leading: buildPreviousButton(),
         backgroundColor: Color.fromRGBO(47, 101, 174, 1),
         title: Center(
           child: Text(

@@ -37,7 +37,13 @@ class LargeTextFieldState extends State<LargeTextField> {
               border: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(10.0),
               ),
-              hintText: text),
+              hintText: text,
+              hintStyle: TextStyle(
+            fontSize: 20,
+            fontStyle: FontStyle.normal,
+            color: Colors.grey[400],
+          ),
+              ),
         ),
       
    

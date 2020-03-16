@@ -2,9 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:test_giasu/core/model/List_ClassData.dart';
 import 'package:test_giasu/ui/Helper/ScreenConfig.dart';
+import 'package:test_giasu/ui/UI_Main/BottomNavigationBar.dart';
+import 'package:test_giasu/ui/UI_Main/General_Infor.dart';
 import 'package:test_giasu/ui/Widgets/ARichTextLine.dart';
+import 'package:test_giasu/ui/Widgets/LargeTextBox.dart';
+import 'package:test_giasu/ui/Widgets/RoundedImageNameBox.dart';
 import 'package:test_giasu/ui/Widgets/SelectedTimeColumn.dart';
-
+import 'package:test_giasu/ui/Widgets/previous_widget.dart';
 
 class ClassDetailRequest extends StatefulWidget {
   Data_class classData;
@@ -20,19 +24,24 @@ class _ClassDetailRequestState extends State<ClassDetailRequest> {
   Data_class classData;
   _ClassDetailRequestState(this.classData);
   Widget _iconTextBox(Text text, Icon icon) {
-    return Container(
-      decoration: BoxDecoration(
-          // border: Border.all(color: Colors.grey),
-          ),
-      child: Row(
-        children: <Widget>[
-          icon,
-          SizedBox(
+    return Row(
+      children: <Widget>[
+        Expanded(child: icon),
+        Expanded(
+          child: SizedBox(
             width: ScreenUtil.getInstance().setWidth(20),
           ),
-          text,
-        ],
-      ),
+        ),
+        Expanded(
+          flex: 20,
+          child: Container(
+            child: text,
+          ),
+        ),
+        Expanded(
+          child: SizedBox(width: 10),
+        ),
+      ],
     );
   }
 
@@ -45,12 +54,13 @@ class _ClassDetailRequestState extends State<ClassDetailRequest> {
     // TODO: implement build
     return Scaffold(
       appBar: AppBar(
+        centerTitle: true,
+        leading: buildPreviousButton(),
         backgroundColor: Color.fromRGBO(47, 101, 174, 1),
-        title: Center(
-          child: Text(
+        title:Text(
             'Chi tiết lớp học',
             textAlign: TextAlign.start,
-          ),
+          
         ),
       ),
       body: SingleChildScrollView(
@@ -70,7 +80,10 @@ class _ClassDetailRequestState extends State<ClassDetailRequest> {
                         height: SizeConfig.safeBlockVertical * 17.5,
                         alignment: Alignment.center,
                         color: Color.fromRGBO(47, 101, 174, 1),
-                        child: Icon(Icons.portrait),
+                        child: RoundedImageNameBox(
+                          classData.parent.avatar,
+                          classData.parent.full_name,
+                        ),
                       ),
                       Align(
                         alignment: Alignment.bottomCenter,
@@ -84,11 +97,11 @@ class _ClassDetailRequestState extends State<ClassDetailRequest> {
                           ),
                           child: Center(
                             child: Text(
-                              'Tìm gia sư Tiếng Anh lớp 6 tại Cầu Giấy',
+                              classData.name,
                               style: TextStyle(
-                                  fontStyle: FontStyle.normal,
-                                  fontSize: SizeConfig.safeBlockHorizontal * 3,
-                                  ),
+                                fontStyle: FontStyle.normal,
+                                fontSize: 13,
+                              ),
                               textAlign: TextAlign.center,
                             ),
                           ),
@@ -116,13 +129,13 @@ class _ClassDetailRequestState extends State<ClassDetailRequest> {
                           'Trạng thái: ${classData.status}',
                           style: TextStyle(
                             color: Colors.green,
-                            fontSize: SizeConfig.safeBlockHorizontal * 4,
+                            fontSize: 15,
                           ),
                         ),
                         Icon(
                           Icons.portrait,
                           color: Colors.grey,
-                          size: SizeConfig.safeBlockHorizontal * 4,
+                          size: 15,
                         ),
                       ),
                       _iconTextBox(
@@ -130,13 +143,13 @@ class _ClassDetailRequestState extends State<ClassDetailRequest> {
                           'Mã lớp: ${classData.id} - ${classData.subject.name} | Lớp ${classData.grade}',
                           style: TextStyle(
                             color: Colors.grey,
-                            fontSize: SizeConfig.safeBlockHorizontal * 4,
+                            fontSize: 15,
                           ),
                         ),
                         Icon(
                           Icons.home,
                           color: Colors.grey,
-                          size: SizeConfig.safeBlockHorizontal * 4,
+                          size: 15,
                         ),
                       ),
                       _iconTextBox(
@@ -144,13 +157,13 @@ class _ClassDetailRequestState extends State<ClassDetailRequest> {
                           'Hình thức học: ${classData.form_teaching_name}',
                           style: TextStyle(
                             color: Colors.grey,
-                            fontSize: SizeConfig.safeBlockHorizontal * 4,
+                            fontSize: 15,
                           ),
                         ),
                         Icon(
                           Icons.school,
                           color: Colors.grey,
-                          size: SizeConfig.safeBlockHorizontal * 4,
+                          size: 15,
                         ),
                       ),
                       _iconTextBox(
@@ -158,13 +171,13 @@ class _ClassDetailRequestState extends State<ClassDetailRequest> {
                           'Số buổi/tuần: ${classData.lesson_per_week} (${(classData.time_per_lesson).toInt()}h/buổi)',
                           style: TextStyle(
                             color: Colors.grey,
-                            fontSize: SizeConfig.safeBlockHorizontal * 4,
+                            fontSize: 15,
                           ),
                         ),
                         Icon(
                           Icons.timelapse,
                           color: Colors.grey,
-                          size: SizeConfig.safeBlockHorizontal * 4,
+                          size: 15,
                         ),
                       ),
                       _iconTextBox(
@@ -172,13 +185,13 @@ class _ClassDetailRequestState extends State<ClassDetailRequest> {
                           'Số học viên: ${classData.student_per_class}',
                           style: TextStyle(
                             color: Colors.grey,
-                            fontSize: SizeConfig.safeBlockHorizontal * 4,
+                            fontSize: 15,
                           ),
                         ),
                         Icon(
                           Icons.person_outline,
                           color: Colors.grey,
-                          size: SizeConfig.safeBlockHorizontal * 4,
+                          size: 15,
                         ),
                       ),
                       _iconTextBox(
@@ -186,13 +199,13 @@ class _ClassDetailRequestState extends State<ClassDetailRequest> {
                           'Địa chỉ: ${classData.address}',
                           style: TextStyle(
                             color: Colors.grey,
-                            fontSize: SizeConfig.safeBlockHorizontal * 4,
+                            fontSize: 15,
                           ),
                         ),
                         Icon(
                           Icons.map,
                           color: Colors.grey,
-                          size: SizeConfig.safeBlockHorizontal * 4,
+                          size: 15,
                         ),
                       ),
                       _iconTextBox(
@@ -200,13 +213,13 @@ class _ClassDetailRequestState extends State<ClassDetailRequest> {
                           'Cách bạn: 2km',
                           style: TextStyle(
                             color: Colors.grey,
-                            fontSize: SizeConfig.safeBlockHorizontal * 4,
+                            fontSize: 15,
                           ),
                         ),
                         Icon(
                           Icons.radio_button_checked,
                           color: Colors.grey,
-                          size: SizeConfig.safeBlockHorizontal * 4,
+                          size: 15,
                         ),
                       ),
                       _iconTextBox(
@@ -214,27 +227,27 @@ class _ClassDetailRequestState extends State<ClassDetailRequest> {
                           'Học phí/buổi: ${(classData.tuition_fee / 1000).toInt()},000 vnđ/2h',
                           style: TextStyle(
                             color: Colors.orange,
-                            fontSize: SizeConfig.safeBlockHorizontal * 4,
+                            fontSize: 15,
                           ),
                         ),
                         Icon(
                           Icons.monetization_on,
                           color: Colors.grey,
-                          size: SizeConfig.safeBlockHorizontal * 4,
+                          size: 15,
                         ),
                       ),
                       _iconTextBox(
                         Text(
-                          'Phí nhận lớp: ${(classData.class_fee /1000).toInt()},000 vnđ',
+                          'Phí nhận lớp: ${(classData.class_fee / 1000).toInt()},000 vnđ',
                           style: TextStyle(
                             color: Colors.blue[400],
-                            fontSize: SizeConfig.safeBlockHorizontal * 4,
+                            fontSize: 15,
                           ),
                         ),
                         Icon(
                           Icons.attach_money,
                           color: Colors.grey,
-                          size: SizeConfig.safeBlockHorizontal * 4,
+                          size: 15,
                         ),
                       ),
                     ],
@@ -243,22 +256,7 @@ class _ClassDetailRequestState extends State<ClassDetailRequest> {
                 SizedBox(
                   height: ScreenUtil.getInstance().setHeight(20),
                 ),
-                Container(
-                  width:  SizeConfig.safeBlockHorizontal * 95,
-                  height:  SizeConfig.safeBlockHorizontal * 25,
-                  decoration: BoxDecoration(
-                    border: Border.all(color: Colors.blue),
-                    borderRadius: BorderRadius.circular(10.0),
-                  ),
-                  child: Text(
-                    'Chi tiết nội dung yêu cầu',
-                    style: TextStyle(
-                      fontSize: SizeConfig.safeBlockHorizontal * 4,
-                      fontStyle: FontStyle.normal,
-                      color: Colors.grey[400],
-                    ),
-                  ),
-                ),
+                LargeTextBox(classData.about_course),
                 SizedBox(
                   height: ScreenUtil.getInstance().setHeight(10),
                 ),
@@ -270,54 +268,68 @@ class _ClassDetailRequestState extends State<ClassDetailRequest> {
                 Divider(
                   thickness: 1,
                 ),
-                
                 Container(
                   alignment: Alignment.center,
                   width: ScreenUtil.getInstance().setWidth(700),
                   height: ScreenUtil.getInstance().setHeight(100),
-                  
                   child: Row(
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: <Widget>[
-                      Expanded(child: SizedBox(),flex: 1,),
+                      Expanded(
+                        child: SizedBox(),
+                        flex: 1,
+                      ),
                       Container(
                         height: SizeConfig.safeBlockVertical * 5,
-                       
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(20.0),
                         ),
-                        child:RaisedButton(
-                        
-                        color: Colors.orange,
-                        onPressed: (){},
-                        textColor: Colors.white,
-                        child: Text('Từ chối'),
+                        child: RaisedButton(
+                          color: orange,
+                          onPressed: () {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => MyBottomNavigationBar(
+                                        currentIndex: 0)));
+                          },
+                          textColor: Colors.white,
+                          child: Text('Từ chối'),
+                        ),
                       ),
+                      Expanded(
+                        child: SizedBox(),
+                        flex: 2,
                       ),
-                      Expanded(child: SizedBox(),flex: 2,),
                       Container(
                         height: SizeConfig.safeBlockVertical * 5,
-                   
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(20.0),
                         ),
-                        child:RaisedButton(
-                        
-                        color: Colors.blue,
-                        onPressed: (){},
-                        textColor: Colors.white,
-                        child: Text('Đồng ý'),
+                        child: RaisedButton(
+                          color: colorApp,
+                          onPressed: () {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => MyBottomNavigationBar(
+                                        currentIndex: 0)));
+                          },
+                          textColor: Colors.white,
+                          child: Text('Đồng ý'),
+                        ),
                       ),
+                      Expanded(
+                        child: SizedBox(),
+                        flex: 1,
                       ),
-                      Expanded(child: SizedBox(),flex: 1,),
                     ],
                   ),
                 ),
               ],
             ),
           ],
-          ),
-      
+        ),
       ),
     );
   }

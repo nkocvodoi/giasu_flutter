@@ -17,12 +17,12 @@ class _Invite_Friend_State extends State<Invite_Friend> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: colorApp,
-        title: Center(
-          child: Text(
+        centerTitle: true,
+        title:Text(
             'Mời bạn bè làm gia sư',
             style: TextStyle(fontSize: 25, fontWeight: FontWeight.w400),
             textAlign: TextAlign.center,
-          ),
+          
         ),
       ),
       body: Column(

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:test_giasu/ui/Widgets/previous_widget.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class Support_Settings extends StatefulWidget {
@@ -24,12 +25,13 @@ class _Support_SettingsState extends State<Support_Settings> {
     // TODO: implement build
     return Scaffold(
       appBar: AppBar(
+        leading: buildPreviousButton(),
         backgroundColor: _color,
+        centerTitle: true,
         title: Center(
           child: Text(
             'Trợ giúp & Cài đặt',
-            style: TextStyle(fontSize: 30, fontWeight: FontWeight.w400),
-            textAlign: TextAlign.center,
+           
           ),
         ),
       ),
@@ -49,7 +51,7 @@ class _Support_SettingsState extends State<Support_Settings> {
                 'Thông báo',
                 style: TextStyle(
                   fontSize: 20.0,
-                  fontStyle: FontStyle.normal,
+                  fontFamily: 'UTM',
                   color: Colors.grey[600],
                 ),
               ),
@@ -109,7 +111,7 @@ class _Support_SettingsState extends State<Support_Settings> {
         _text,
         style: TextStyle(
           fontSize: 20.0,
-          fontStyle: FontStyle.normal,
+          fontFamily: 'UTM',
           color: Colors.grey[500],
         ),
       ),

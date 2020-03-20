@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:test_giasu/ui/UI_Main/Account.dart';
 import 'package:test_giasu/ui/UI_Main/Anouncement.dart';
 import 'package:test_giasu/ui/UI_Main/Bits_Manager.dart';
+import 'package:test_giasu/ui/UI_Main/General_Infor.dart';
 import 'package:test_giasu/ui/UI_Main/Lists_Class.dart';
 
 class MyBottomNavigationBar extends StatefulWidget {
@@ -37,6 +38,8 @@ class _BottomNavigationBarState extends State<MyBottomNavigationBar> {
       
         body: _children[currentIndex],
         bottomNavigationBar: BottomNavigationBar(
+          selectedItemColor: activateColor,
+          unselectedItemColor: deactivateColor,
           type: BottomNavigationBarType.fixed,
           onTap: _onTappedBar,
           currentIndex: currentIndex,
@@ -57,7 +60,7 @@ class _BottomNavigationBarState extends State<MyBottomNavigationBar> {
                 size: 30,
               ),
               title: Text(
-                'Danh sách lớp',
+                'Lớp mới',
                 style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
               ),
             ),

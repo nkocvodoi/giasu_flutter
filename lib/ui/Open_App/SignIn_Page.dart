@@ -181,7 +181,7 @@ class _SignIn_PageState extends State<SignIn_Page> {
                                     Navigator.push(
                                       context,
                                       MaterialPageRoute(
-                                        builder: (context) => SignUpPage(),
+                                        builder: (context) => SignUpPageTutor(),
                                       ),
                                     );
                                   },
@@ -377,7 +377,7 @@ class _SignIn_PageState extends State<SignIn_Page> {
                         height: SizeConfig.safeBlockHorizontal *10,
                         child: Center(
                           child: Row(children: <Widget>[
-                            Image.asset('assets/google_logo.png',cacheHeight: 20,),
+                            Image.asset('assets/google_logo.png',cacheHeight: 18,),
                              Text(
                             '  Đăng nhập bằng Google+',
                             style: TextStyle(

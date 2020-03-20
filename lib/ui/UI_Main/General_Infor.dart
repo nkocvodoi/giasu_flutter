@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
-
+final Color black = Color.fromRGBO(153,153,153,1);
+final Color deactivateColor = Color.fromRGBO(204,204,204,1);
+final Color activateColor = Color.fromRGBO(51,102,153,1);
 final Color colorApp = Color.fromRGBO(47, 101, 174, 1);
 final Color blue = Color.fromRGBO(51, 102, 153, 1);
 final Color orange = Color.fromRGBO(255, 153, 51, 1);

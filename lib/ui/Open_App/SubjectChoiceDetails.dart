@@ -23,48 +23,60 @@ class SubjectChoiceDetailsState extends State<SubjectChoiceDetails> {
   final List<String> data;
   SubjectChoiceDetailsState(this.data);
   List<bool> listBools = List.filled(37, true, growable: true);
-
+  List<String> listSubject = List();
+  void onPressed(int n, String m) {
+    setState(() => listBools[n] = !listBools[n]);
+    if (listBools[n] == false) listSubject.add(m);
+    if (listBools[n] == true) listSubject.remove(m);
+  }
   // ignore: missing_return
   Widget _checkData(List data) {
     switch (data.length) {
       case 1:
-        return Column(children: <Widget>[
-          _subject('${data[0]}', 0),
-        ],);
+        return Column(
+          children: <Widget>[
+            _subject('${data[0]}', 0),
+          ],
+        );
         break;
       case 2:
-      return Column(children: <Widget>[
-          _subject('${data[0]}', 0),
-          _subject('${data[1]}', 6),
-        ],);
+        return Column(
+          children: <Widget>[
+            _subject('${data[0]}', 0),
+            _subject('${data[1]}', 6),
+          ],
+        );
         break;
       case 3:
-      return Column(children: <Widget>[
-          _subject('${data[0]}', 0),
-          _subject('${data[1]}', 6),
-          _subject('${data[2]}', 12),
-        ],);
+        return Column(
+          children: <Widget>[
+            _subject('${data[0]}', 0),
+            _subject('${data[1]}', 6),
+            _subject('${data[2]}', 12),
+          ],
+        );
         break;
     }
   }
+
   Widget _subject(String subject, int n) {
     return Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
           SizedBox(
-            height: ScreenUtil.getInstance().setHeight(20),
+            height: 30,
           ),
           Container(
             child: Text(
               '     Môn $subject',
               style: TextStyle(
                   fontStyle: FontStyle.normal,
-                  fontSize: ScreenUtil.getInstance().setSp(40),
+                  fontSize: 20,
                   color: Colors.blue),
             ),
           ),
           SizedBox(
-            height: ScreenUtil.getInstance().setHeight(20),
+            height: 20,
           ),
           _rowOfChoices(n, '$subject cấp 3', 30, '$subject cấp 2', 30),
           _rowOfChoices(
@@ -76,48 +88,45 @@ class SubjectChoiceDetailsState extends State<SubjectChoiceDetails> {
 
   Widget _rowOfChoices(
       int n, String firstChoice, int size1, String secondChoice, int size2) {
-    return Consumer<SubjectChoiceModel>(
-        builder: (_ ,model, __) {
-          return Row(
-            children: <Widget>[
-              Expanded(
-                flex: 1,
-                child: SizedBox(),
-              ),
-              Expanded(
-                flex: 5,
-                child: DetailRaisedButton(
-                  subject: firstChoice,
-                  size: size1,
-                  selected: model.count,
-//                  listBools[n],
-                  onPressed: ()
-//                  => setState(() => listBools[n] = !listBools[n])
-                => model.change()
-                  ,
-                ),
-              ),
-              Expanded(
-                child: SizedBox(),
-              ),
-              Expanded(
-                flex: 5,
-                child: DetailRaisedButton(
-                  subject: secondChoice,
-                  size: size2,
-                  selected: listBools[n + 1],
-                  onPressed: () =>
-                      setState(() => listBools[n + 1] = !listBools[n + 1]),
-                ),
-              ),
-              Expanded(
-                flex: 1,
-                child: SizedBox(),
-              ),
-            ],
-          );
-        }
-    );
+    return Consumer<SubjectChoiceModel>(builder: (_, model, __) {
+      return Row(
+        children: <Widget>[
+          Expanded(
+            flex: 1,
+            child: SizedBox(),
+          ),
+          Expanded(
+            flex: 8,
+            child: DetailRaisedButton(
+              subject: firstChoice,
+              size: size1,
+              selected: listBools[n],
+              // model.count,
+              onPressed: () => setState(() => listBools[n] = !listBools[n])
+              // => model.change()
+              ,
+            ),
+          ),
+          Expanded(
+            child: SizedBox(),
+          ),
+          Expanded(
+            flex: 8,
+            child: DetailRaisedButton(
+              subject: secondChoice,
+              size: size2,
+              selected: listBools[n + 1],
+              onPressed: () =>
+                  setState(() => listBools[n + 1] = !listBools[n + 1]),
+            ),
+          ),
+          Expanded(
+            flex: 1,
+            child: SizedBox(),
+          ),
+        ],
+      );
+    });
   }
 
   @override
@@ -132,14 +141,13 @@ class SubjectChoiceDetailsState extends State<SubjectChoiceDetails> {
         backgroundColor: Color.fromRGBO(47, 101, 174, 1),
         centerTitle: true,
         title: Text(
-            'Lựa chọn chủ đề',
-            style: TextStyle(
-              fontStyle: FontStyle.normal,
-            ),
-            textAlign: TextAlign.start,
+          'Lựa chọn chủ đề',
+          style: TextStyle(
+            fontStyle: FontStyle.normal,
           ),
+          textAlign: TextAlign.start,
         ),
-      
+      ),
       body: SafeArea(
         child: Stack(
           children: <Widget>[
@@ -179,7 +187,7 @@ class SubjectChoiceDetailsState extends State<SubjectChoiceDetails> {
                     ),
                   ),
                   SizedBox(
-                    height: ScreenUtil.getInstance().setHeight(30),
+                    height: 20,
                   ),
                 ],
               ),

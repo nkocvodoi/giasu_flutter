@@ -140,7 +140,7 @@ class _StudentInforState extends State<StudentInfor> {
                             child: RaisedButton(
                               color: colorApp,
                               onPressed: () {
-                                Navigator.push(context, MaterialPageRoute(builder: (context)=> Post()));
+                                Navigator.push(context, MaterialPageRoute(builder: (context)=> PostRequest()));
                               },
                               child: Text(
                                 'Lưu lại',

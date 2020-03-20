@@ -12,7 +12,6 @@ import 'package:test_giasu/ui/Widgets/SelectedTimeColumn.dart';
 import 'package:test_giasu/ui/Widgets/previous_widget.dart';
 
 class ClassDetailWhenAcceptedDemo extends StatefulWidget {
-
   @override
   State<StatefulWidget> createState() {
     // TODO: implement createState
@@ -21,7 +20,6 @@ class ClassDetailWhenAcceptedDemo extends StatefulWidget {
 }
 
 class _ClassDetailRequestDemoState extends State<ClassDetailWhenAcceptedDemo> {
-  
   Widget _iconTextBox(Text text, Icon icon) {
     return Row(
       children: <Widget>[
@@ -56,10 +54,9 @@ class _ClassDetailRequestDemoState extends State<ClassDetailWhenAcceptedDemo> {
         centerTitle: true,
         leading: buildPreviousButton(),
         backgroundColor: Color.fromRGBO(47, 101, 174, 1),
-        title:Text(
-            'Chi tiết lớp học',
-            textAlign: TextAlign.start,
-          
+        title: Text(
+          'Chi tiết lớp học',
+          textAlign: TextAlign.start,
         ),
       ),
       body: SingleChildScrollView(
@@ -225,7 +222,7 @@ class _ClassDetailRequestDemoState extends State<ClassDetailWhenAcceptedDemo> {
                         Text(
                           'Học phí/buổi: 130,000 vnđ/2h',
                           style: TextStyle(
-                            color: Colors.orange,
+                            color: orange,
                             fontSize: 15,
                           ),
                         ),
@@ -239,7 +236,7 @@ class _ClassDetailRequestDemoState extends State<ClassDetailWhenAcceptedDemo> {
                         Text(
                           'Phí nhận lớp: 260,000 vnđ',
                           style: TextStyle(
-                            color: Colors.blue[400],
+                            color: blue,
                             fontSize: 15,
                           ),
                         ),
@@ -264,47 +261,42 @@ class _ClassDetailRequestDemoState extends State<ClassDetailWhenAcceptedDemo> {
                 SizedBox(
                   height: ScreenUtil.getInstance().setHeight(50),
                 ),
-                Divider(
-                  thickness: 1,
-                ),
-                Container(
-                  alignment: Alignment.center,
-                  width: ScreenUtil.getInstance().setWidth(700),
-                  height: ScreenUtil.getInstance().setHeight(100),
-                  child: Row(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: <Widget>[
-                      Expanded(
-                        child: SizedBox(),
-                        flex: 6,
-                      ),
-                      
-                      Container(
-                        height: SizeConfig.safeBlockVertical * 5,
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(20.0),
-                        ),
-                        child: RaisedButton(
-                          color: colorApp,
-                          onPressed: () {
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => Payments()));
-                          },
-                          textColor: Colors.white,
-                          child: Text('Thanh toán'),
-                        ),
-                      ),
-                      Expanded(
-                        child: SizedBox(),
-                        flex: 1,
-                      ),
-                    ],
-                  ),
-                ),
-                SizedBox(height: 20,),
               ],
+            ),
+          ],
+        ),
+      ),
+      bottomNavigationBar: Container(
+        alignment: Alignment.center,
+        width: ScreenUtil.getInstance().setWidth(700),
+        height: ScreenUtil.getInstance().setHeight(100),
+        child: Row(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: <Widget>[
+            Expanded(
+              child: SizedBox(),
+              flex: 6,
+            ),
+            Container(
+              height: SizeConfig.safeBlockVertical * 5,
+              width: SizeConfig.safeBlockVertical *14,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(20.0),
+              ),
+              child: RaisedButton(
+                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+                color: colorApp,
+                onPressed: () {
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => Payments()));
+                },
+                textColor: Colors.white,
+                child: Text('Thanh toán'),
+              ),
+            ),
+            Expanded(
+              child: SizedBox(),
+              flex: 1,
             ),
           ],
         ),

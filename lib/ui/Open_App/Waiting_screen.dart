@@ -43,17 +43,18 @@ class Waiting_screenState extends State<Waiting_screen> {
             'assets/logo3.png',
             cacheHeight: 100,
           ),
-          SizedBox(height: 50),
+          SizedBox(height: 100),
           Text(
             'Nền tảng kết nối gia sư, lớp học, khóa học',
             style: TextStyle(
                 decoration: TextDecoration.none,
                 color: Colors.white,
+                fontFamily: "UTM",
                 fontStyle: FontStyle.normal,
-                fontSize: 13,
+                fontSize: 15,
             ),
           ),
-          Expanded(child: SizedBox(),flex: 3,),
+          Expanded(child: SizedBox(),flex: 2,),
         ],
 
       ),

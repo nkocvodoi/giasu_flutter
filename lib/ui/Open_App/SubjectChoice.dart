@@ -53,7 +53,7 @@ class SubjectChoiceState extends State<SubjectChoice> {
           child: SizedBox(),
         ),
         Expanded(
-          flex: 5,
+          flex: 8,
           child: DetailRaisedButton(
             selected: listsBool[n],
             onPressed: () => onPressed(n, subject1),
@@ -65,7 +65,7 @@ class SubjectChoiceState extends State<SubjectChoice> {
           child: SizedBox(),
         ),
         Expanded(
-          flex: 5,
+          flex: 8,
           child: DetailRaisedButton(
             subject: subject2,
             size: size2,
@@ -78,7 +78,7 @@ class SubjectChoiceState extends State<SubjectChoice> {
           child: SizedBox(),
         ),
         Expanded(
-          flex: 5,
+          flex: 8,
           child: DetailRaisedButton(
             subject: subject3,
             size: size3,
@@ -128,15 +128,15 @@ class SubjectChoiceState extends State<SubjectChoice> {
                       children: <Widget>[
                         Container(
                           width: double.infinity,
-                          height: ScreenUtil.getInstance().setHeight(100),
+                          height: 65,
                           alignment: Alignment.center,
                           color: Color.fromRGBO(47, 101, 174, 1),
                         ),
                         Align(
                           alignment: Alignment.bottomCenter,
                           child: Container(
-                            width: ScreenUtil.getInstance().setWidth(600),
-                            height: ScreenUtil.getInstance().setHeight(100),
+                            width: 350,
+                            height: 40,
                             decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(10.0),
                               border: Border.all(color: Colors.blue[400]),
@@ -147,7 +147,7 @@ class SubjectChoiceState extends State<SubjectChoice> {
                                 'Lựa chọn tối đa 3 môn',
                                 style: TextStyle(
                                   fontStyle: FontStyle.normal,
-                                  fontSize: ScreenUtil.getInstance().setSp(30),
+                                  fontSize: 18,
                                   color: Colors.grey,
                                 ),
                                 textAlign: TextAlign.center,
@@ -177,7 +177,7 @@ class SubjectChoiceState extends State<SubjectChoice> {
                         ),
                       ),
                       SizedBox(
-                        height: ScreenUtil.getInstance().setHeight(20),
+                        height: 20,
                       ),
                       _subjectChoice(0, 'Toán', 30, 'Lý', 30, 'Hóa', 30),
                       _subjectChoice(3, 'Văn', 30, 'Tiếng Việt', 25,
@@ -187,7 +187,7 @@ class SubjectChoiceState extends State<SubjectChoice> {
                       _subjectChoice(
                           9, 'Luyện chữ', 24, 'Tin học', 27, 'Môn khác', 24),
                       SizedBox(
-                        height: ScreenUtil.getInstance().setHeight(20),
+                        height: 30,
                       ),
                       Container(
                         child: Text(
@@ -199,7 +199,7 @@ class SubjectChoiceState extends State<SubjectChoice> {
                         ),
                       ),
                       SizedBox(
-                        height: ScreenUtil.getInstance().setHeight(20),
+                        height: 20,
                       ),
                       _subjectChoice(12, 'Tiếng Anh', 25, 'Tiếng Nhật', 25,
                           'Tiếng Hàn', 25),
@@ -209,7 +209,7 @@ class SubjectChoiceState extends State<SubjectChoice> {
                         children: <Widget>[
                           Expanded(flex: 1, child: SizedBox()),
                           Expanded(
-                              flex: 5,
+                              flex: 8,
                               child: DetailRaisedButton(
                                 subject: 'Ngoại ngữ khác',
                                 size: 17,
@@ -218,13 +218,13 @@ class SubjectChoiceState extends State<SubjectChoice> {
                                 selected: listsBool[18],
                               )),
                           Expanded(
-                            flex: 13,
+                            flex: 19,
                             child: SizedBox(),
                           ),
                         ],
                       ),
                       SizedBox(
-                        height: ScreenUtil.getInstance().setHeight(20),
+                        height: 30,
                       ),
                       Container(
                         child: Text(
@@ -236,17 +236,18 @@ class SubjectChoiceState extends State<SubjectChoice> {
                         ),
                       ),
                       SizedBox(
-                        height: ScreenUtil.getInstance().setHeight(20),
+                        height: 20,
                       ),
                       _subjectChoice(
                           19, 'Âm nhạc', 25, 'Hội họa', 26, 'Dance', 27),
                       Row(
                         children: <Widget>[
                           Expanded(
+                            flex: 1,
                             child: SizedBox(),
                           ),
                           Expanded(
-                              flex: 5,
+                              flex: 8,
                               child: DetailRaisedButton(
                                 subject: 'Thể thao',
                                 size: 25,
@@ -254,10 +255,11 @@ class SubjectChoiceState extends State<SubjectChoice> {
                                 onPressed: () => onPressed(22, 'Thể thao'),
                               )),
                           Expanded(
+                            flex: 1,
                             child: SizedBox(),
                           ),
                           Expanded(
-                              flex: 5,
+                              flex: 8,
                               child: DetailRaisedButton(
                                 subject: 'Nghệ thuật khác',
                                 size: 20,
@@ -266,7 +268,7 @@ class SubjectChoiceState extends State<SubjectChoice> {
                                     onPressed(23, 'Nghệ thuật khác'),
                               )),
                           Expanded(
-                            flex: 7,
+                            flex: 10,
                             child: SizedBox(),
                           ),
                         ],

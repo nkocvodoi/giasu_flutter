@@ -79,7 +79,7 @@ class _ClassDetailRequestState extends State<ClassDetailRequest> {
                         width: double.infinity,
                         height: SizeConfig.safeBlockVertical * 17.5,
                         alignment: Alignment.center,
-                        color: Color.fromRGBO(47, 101, 174, 1),
+                        color: colorApp,
                         child: RoundedImageNameBox(
                           classData.parent.avatar,
                           classData.parent.full_name,

@@ -286,7 +286,7 @@ class _Account_State extends State<Account> {
               return Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => Post(),
+                    builder: (context) => PostRequest(),
                   ));
             else
               return 1;

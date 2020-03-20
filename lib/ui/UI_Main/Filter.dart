@@ -6,6 +6,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
 import 'package:test_giasu/core/view_model/filterModel.dart';
 import 'package:test_giasu/ui/UI_Main/General_Infor.dart';
+import 'package:test_giasu/ui/Widgets/dropDownMenu.dart';
 import 'package:test_giasu/ui/Widgets/previous_widget.dart';
 import 'package:test_giasu/ui/UI_Main/BottomNavigationBar.dart';
 import 'package:test_giasu/ui/UI_Main/Lists_Class.dart';
@@ -52,6 +53,7 @@ class _FilterState extends State<Filter> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: <Widget>[
+                   
                     Container(
                       margin: EdgeInsets.only(top: 10.0, bottom: 10.0),
                       padding: EdgeInsets.only(left: 20),
@@ -132,7 +134,7 @@ class _FilterState extends State<Filter> {
                         borderRadius: BorderRadius.circular(10.0),
                       ),
                     ),
-
+                    
                     Container(
                       margin: EdgeInsets.only(top: 10.0, bottom: 10.0),
                       padding: EdgeInsets.only(left: 20),
@@ -165,6 +167,7 @@ class _FilterState extends State<Filter> {
                         onChanged: (int value) {
                           if (value != model.topic) {
                             model.setTopic(value);
+
                           }
                         },
                       ),
@@ -185,7 +188,7 @@ class _FilterState extends State<Filter> {
                         underline: Container(
                           color: Colors.transparent,
                         ),
-                        value: model.form_teaching,
+                        value: model.idFormTeaching,
                         items: [
                           DropdownMenuItem(
                             child: Text('Hình thức dạy',
@@ -193,10 +196,10 @@ class _FilterState extends State<Filter> {
                                     fontSize: 18.0, color: Colors.grey)),
                             value: null,
                           ),
-                          ...List.generate(form_teachings.length, (index) {
+                          ...List.generate(model.form_teaching.length, (index) {
                             return DropdownMenuItem(
                               child: Text(
-                                '${form_teachings[index].value}',
+                                '${model.form_teaching[index].name}',
                                 style: TextStyle(
                                     fontSize: 18.0, color: Colors.grey),
                               ),
@@ -205,8 +208,8 @@ class _FilterState extends State<Filter> {
                           }),
                         ],
                         onChanged: (int value) {
-                          if (value != model.form_teaching) {
-                            model.setForm_teaching(value);
+                          if (value != model.idFormTeaching) {
+                            model.setIdFormTeaching(value);
                           }
                         },
                       ),
@@ -227,7 +230,7 @@ class _FilterState extends State<Filter> {
                         underline: Container(
                           color: Colors.transparent,
                         ),
-                        value: model.education,
+                        value: model.idEducation,
                         items: [
                           DropdownMenuItem(
                             child: Text('Đối tượng dạy',
@@ -235,10 +238,10 @@ class _FilterState extends State<Filter> {
                                     fontSize: 18.0, color: Colors.grey)),
                             value: null,
                           ),
-                          ...List.generate(education.length, (index) {
+                          ...List.generate(model.education.length, (index) {
                             return DropdownMenuItem(
                               child: Text(
-                                '${education[index].value}',
+                                '${model.education[index].name}',
                                 style: TextStyle(
                                     fontSize: 18.0, color: Colors.grey),
                               ),
@@ -247,8 +250,9 @@ class _FilterState extends State<Filter> {
                           }),
                         ],
                         onChanged: (int value) {
-                          if (value != model.education) {
-                            model.setEducation(value);
+                          if (value != model.idEducation) {
+                            
+                            model.setIdEducation(value);
                           }
                         },
                       ),

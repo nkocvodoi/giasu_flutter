@@ -76,7 +76,7 @@ class _Payments_State extends State<Payments> {
                         child: Text(
                           'Thanh toán',
                           style: TextStyle(
-                            fontSize: 18,
+                            
                             fontWeight: FontWeight.w400,
                             color: Colors.white,
                           ),

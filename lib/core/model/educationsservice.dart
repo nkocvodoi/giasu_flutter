@@ -4,21 +4,21 @@ import 'package:http/http.dart' as http;
 
 //import 'List_ClassData.dart' as filter;
 
-class SubjectService {
-  static final SubjectService instance = SubjectService.internal();
-  SubjectService.internal();
-  factory SubjectService() => instance;
-  Future<List<Subjects>> fetchSubject() async {
+class EducationService {
+  static final EducationService instance = EducationService.internal();
+  EducationService.internal();
+  factory EducationService() => instance;
+  Future<List<Educations>> fetchEducation() async {
     final response =
-    await http.get('https://giasu.htcon.vn/api/v1/subjects');
+    await http.get('https://giasu.htcon.vn/api/v1/educations');
     if(response.statusCode == 200) {
       Map<String, dynamic> mapResponse = json.decode(response.body);
       if(mapResponse["code"] == 1) {
-        final subject = mapResponse["data"].cast<Map<String, dynamic>>();
-        final listOfSubject = await subject.map<Subjects>((json) {
-          return Subjects.fromJson(json);
+        final education = mapResponse["data"].cast<Map<String, dynamic>>();
+        final listOfEducation = await education.map<Educations>((json) {
+          return Educations.fromJson(json);
         }).toList();
-        return listOfSubject;
+        return listOfEducation;
       } else {
         return [];
       }
@@ -28,16 +28,16 @@ class SubjectService {
   }
 }
 
-class Subjects {
+class Educations {
   final int id;
   final String name;
 
-  Subjects({
+  Educations({
     this.id,
     this.name,
   });
 
-  factory Subjects.fromJson(Map<dynamic, dynamic> json) => Subjects(
+  factory Educations.fromJson(Map<dynamic, dynamic> json) => Educations(
     id: json['id'],
     name: json['name'] as String,
   );

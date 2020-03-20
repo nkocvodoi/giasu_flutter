@@ -215,7 +215,7 @@ class _SignUpPage extends State<SignUpPage> {
                           child: Center(
                             child: RaisedButton(
                               onPressed: () {
-                                _sendToServer;
+                                _sendToServer();
                                 model.setRole();
                                 signupInfor["role"] = model.role;
                                 signupInfor["full_name"] = _name.text;
@@ -324,7 +324,7 @@ class _SignUpPage extends State<SignUpPage> {
       child: new TextFormField(
 //          controller: _emailFilter,
           autofocus: true,
-          textCapitalization: TextCapitalization.characters,
+          // textCapitalization: TextCapitalization.characters,
           style: TextStyle(fontSize: 20.0),
           decoration: new InputDecoration(
               hintText: _text,

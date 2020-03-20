@@ -13,7 +13,7 @@ class RichTextLine extends StatelessWidget {
       text: TextSpan(
         children: <TextSpan>[
           TextSpan(
-            text: 'Thời gian',
+            text: 'Thời gian ',
             style: TextStyle(
               fontSize:  15,
               color: Colors.grey,
@@ -37,7 +37,7 @@ class RichTextLine extends StatelessWidget {
             ),
           ),
           TextSpan(
-            text: 'hiển thị thời gian có thể dạy)',
+            text: 'hiển thị thời gian có thể học)',
             style: TextStyle(
               color: Colors.grey,
               fontFamily: 'UTM',

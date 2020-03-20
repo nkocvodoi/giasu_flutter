@@ -12,7 +12,6 @@ import 'package:test_giasu/ui/Widgets/SelectedTimeColumn.dart';
 import 'package:test_giasu/ui/Widgets/previous_widget.dart';
 
 class ClassDetailRequestDemo extends StatefulWidget {
-
   @override
   State<StatefulWidget> createState() {
     // TODO: implement createState
@@ -21,7 +20,6 @@ class ClassDetailRequestDemo extends StatefulWidget {
 }
 
 class _ClassDetailRequestDemoState extends State<ClassDetailRequestDemo> {
-  
   Widget _iconTextBox(Text text, Icon icon) {
     return Row(
       children: <Widget>[
@@ -57,9 +55,8 @@ class _ClassDetailRequestDemoState extends State<ClassDetailRequestDemo> {
         automaticallyImplyLeading: false,
         backgroundColor: Color.fromRGBO(47, 101, 174, 1),
         title: Text(
-            'Lời mời dạy',
-            textAlign: TextAlign.start,
-          
+          'Lời mời dạy',
+          textAlign: TextAlign.start,
         ),
       ),
       body: SingleChildScrollView(
@@ -100,6 +97,7 @@ class _ClassDetailRequestDemoState extends State<ClassDetailRequestDemo> {
                               style: TextStyle(
                                 fontStyle: FontStyle.normal,
                                 fontSize: 13,
+                                color: black
                               ),
                               textAlign: TextAlign.center,
                             ),
@@ -225,7 +223,7 @@ class _ClassDetailRequestDemoState extends State<ClassDetailRequestDemo> {
                         Text(
                           'Học phí/buổi: 130,000 vnđ/2h',
                           style: TextStyle(
-                            color: Colors.orange,
+                            color: orange,
                             fontSize: 15,
                           ),
                         ),
@@ -239,7 +237,7 @@ class _ClassDetailRequestDemoState extends State<ClassDetailRequestDemo> {
                         Text(
                           'Phí nhận lớp: 260,000 vnđ',
                           style: TextStyle(
-                            color: Colors.blue[400],
+                            color: blue,
                             fontSize: 15,
                           ),
                         ),
@@ -264,68 +262,70 @@ class _ClassDetailRequestDemoState extends State<ClassDetailRequestDemo> {
                 SizedBox(
                   height: ScreenUtil.getInstance().setHeight(50),
                 ),
-                Divider(
-                  thickness: 1,
-                ),
-                Container(
-                  alignment: Alignment.center,
-                  width: ScreenUtil.getInstance().setWidth(700),
-                  height: ScreenUtil.getInstance().setHeight(100),
-                  child: Row(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: <Widget>[
-                      Expanded(
-                        child: SizedBox(),
-                        flex: 1,
-                      ),
-                      Container(
-                        height: SizeConfig.safeBlockVertical * 5,
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(20.0),
-                        ),
-                        child: RaisedButton(
-                          color: orange,
-                          onPressed: () {
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => MyBottomNavigationBar(
-                                        currentIndex: 0)));
-                          },
-                          textColor: Colors.white,
-                          child: Text('Từ chối'),
-                        ),
-                      ),
-                      Expanded(
-                        child: SizedBox(),
-                        flex: 2,
-                      ),
-                      Container(
-                        height: SizeConfig.safeBlockVertical * 5,
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(20.0),
-                        ),
-                        child: RaisedButton(
-                          color: colorApp,
-                          onPressed: () {
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => ClassDetailWhenAcceptedDemo()));
-                          },
-                          textColor: Colors.white,
-                          child: Text('Đồng ý'),
-                        ),
-                      ),
-                      Expanded(
-                        child: SizedBox(),
-                        flex: 1,
-                      ),
-                    ],
-                  ),
-                ),
-                SizedBox(height: 20,),
               ],
+            ),
+          ],
+        ),
+      ),
+      bottomNavigationBar: Container(
+        alignment: Alignment.center,
+
+        width: ScreenUtil.getInstance().setWidth(700),
+        height: ScreenUtil.getInstance().setHeight(100),
+        child: Row(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: <Widget>[
+            Expanded(
+              child: SizedBox(),
+              flex: 1,
+            ),
+            Container(
+              height: SizeConfig.safeBlockVertical * 5,
+              width: SizeConfig.safeBlockHorizontal* 20,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(20.0),
+              ),
+              child: RaisedButton(
+                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10.0)),
+                color: orange,
+                onPressed: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) =>
+                              MyBottomNavigationBar(currentIndex: 0)));
+                },
+                textColor: Colors.white,
+                child: Text('Từ chối'),
+              ),
+            ),
+            Expanded(
+              child: SizedBox(),
+              flex: 2,
+            ),
+            Container(
+              height: SizeConfig.safeBlockVertical * 5,
+              width: SizeConfig.safeBlockHorizontal* 20,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(20.0),
+              ),
+              child: RaisedButton(
+                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10.0)),
+                color: colorApp,
+                onPressed: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => ClassDetailWhenAcceptedDemo()));
+                },
+                textColor: Colors.white,
+                child: Container(
+                  child: Text('Đồng ý'),),
+              ),
+            ),
+            Expanded(
+              child: SizedBox(),
+              flex: 1,
             ),
           ],
         ),

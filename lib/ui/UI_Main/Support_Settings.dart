@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:provider/provider.dart';
+import 'package:test_giasu/core/view_model/support_settingModel.dart';
+import 'package:test_giasu/ui/UI_Main/General_Infor.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class Support_Settings extends StatefulWidget {
@@ -11,93 +14,95 @@ class Support_Settings extends StatefulWidget {
 }
 
 class _Support_SettingsState extends State<Support_Settings> {
-  final Color _color = Color.fromRGBO(47, 101, 174, 1);
-  bool value = false;
-  void onChangedValue(bool a) {
-    setState(() {
-      value = a;
-    });
-  }
+
 
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: _color,
+        backgroundColor: colorApp,
         title: Center(
           child: Text(
             'Trợ giúp & Cài đặt',
-            style: TextStyle(fontSize: 30, fontWeight: FontWeight.w400),
+            style: TextStyle(fontSize: 25, fontWeight: FontWeight.w400),
             textAlign: TextAlign.center,
           ),
         ),
       ),
       body: Padding(
         padding: EdgeInsets.all(15.0),
-        child: Column(
-          children: <Widget>[
-            SwitchListTile(
-              value: value,
-              onChanged: onChangedValue,
-              secondary: Icon(
-                Icons.notifications,
-                color: Colors.blue,
-                size: 40.0,
-              ),
-              title: Text(
-                'Thông báo',
-                style: TextStyle(
-                  fontSize: 20.0,
-                  fontStyle: FontStyle.normal,
-                  color: Colors.grey[600],
-                ),
-              ),
-              subtitle: Text(
-                'Nhận thông báo từ hệ thống',
-                style: TextStyle(
-                  fontSize: 15.0,
-                  fontStyle: FontStyle.italic,
-                  color: Colors.grey[600],
-                ),
-              ),
-            ),
-            _buildText('Tham gia cộng đồng HTcon gia sư', 1),
-            Divider(
-              height: 0.0,
-              thickness: 2,
-              indent: 14.0,
-              endIndent: 18.0,
-            ),
-            _buildText('Hướng dẫn xử lí lớp phát sinh', 2),
-            Divider(
-              height: 0.0,
-              thickness: 2,
-              indent: 14.0,
-              endIndent: 18.0,
-            ),
-            _buildText('Hướng dẫn khiếu nại', 3),
-            Divider(
-              height: 0.0,
-              thickness: 2,
-              indent: 14.0,
-              endIndent: 18.0,
-            ),
-            _buildText('Những lưu ý quan trọng', 4),
-            Divider(
-              height: 0.0,
-              thickness: 2,
-              indent: 14.0,
-              endIndent: 18.0,
-            ),
-            _buildText('Liên hệ', 5),
-            Divider(
-              height: 0.0,
-              thickness: 2,
-              indent: 14.0,
-              endIndent: 18.0,
-            ),
-          ],
+        child: Consumer<Support_SettingModel>(
+            builder: (_ ,model, __) {
+              return Column(
+                children: <Widget>[
+                  SwitchListTile(
+                    value: model.count,
+                    onChanged:(bool _val) {
+                      model.setCount(_val);
+                      model.setNotifi();
+
+                    },
+                    secondary: Icon(
+                      Icons.notifications,
+                      color: Colors.blue,
+                      size: 40.0,
+                    ),
+                    title: Text(
+                      'Thông báo',
+                      style: TextStyle(
+                        fontSize: 20.0,
+                        fontStyle: FontStyle.normal,
+                        color: Colors.grey[600],
+                      ),
+                    ),
+                    subtitle: Text(
+                      '${model.notifi} thông báo từ hệ thống',
+                      style: TextStyle(
+                        fontSize: 15.0,
+                        fontStyle: FontStyle.italic,
+                        color: Colors.grey[600],
+                      ),
+                    ),
+                  ),
+                  _buildText('Tham gia cộng đồng HTcon gia sư', 1),
+                  Divider(
+                    height: 0.0,
+                    thickness: 2,
+                    indent: 14.0,
+                    endIndent: 18.0,
+                  ),
+                  _buildText('Hướng dẫn xử lí lớp phát sinh', 2),
+                  Divider(
+                    height: 0.0,
+                    thickness: 2,
+                    indent: 14.0,
+                    endIndent: 18.0,
+                  ),
+                  _buildText('Hướng dẫn khiếu nại', 3),
+                  Divider(
+                    height: 0.0,
+                    thickness: 2,
+                    indent: 14.0,
+                    endIndent: 18.0,
+                  ),
+                  _buildText('Những lưu ý quan trọng', 4),
+                  Divider(
+                    height: 0.0,
+                    thickness: 2,
+                    indent: 14.0,
+                    endIndent: 18.0,
+                  ),
+                  _buildText('Liên hệ', 5),
+                  Divider(
+                    height: 0.0,
+                    thickness: 2,
+                    indent: 14.0,
+                    endIndent: 18.0,
+                  ),
+                ],
+              );
+            }
         ),
       ),
     );

@@ -302,7 +302,6 @@ class _FilterState extends State<Filter> {
                           context,
                           MaterialPageRoute(
                             builder: (context) => MyBottomNavigationBar(
-                              currentIndex: 1,
                             ),
                           ),
                         );

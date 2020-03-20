@@ -170,7 +170,7 @@ class SubjectChoiceDetailsState extends State<SubjectChoiceDetails> {
                         Navigator.push(
                             context,
                             MaterialPageRoute(
-                              builder: (context) => MyBottomNavigationBar(currentIndex: 0,),
+                              builder: (context) => MyBottomNavigationBar(),
                             ));
                       },
                     ),

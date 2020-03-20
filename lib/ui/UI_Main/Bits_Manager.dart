@@ -1,5 +1,8 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:test_giasu/core/model/currentUser.dart';
+import 'package:test_giasu/core/view_model/bitsmanagerModel.dart';
 import 'package:test_giasu/ui/UI_Main/Account.dart';
 import 'package:test_giasu/ui/UI_Main/Nap_Bits.dart';
 import 'BottomNavigationBar.dart';
@@ -30,91 +33,95 @@ class _Bits_Manager_State extends State<Bits_Manager> {
       ),
 //      bottomNavigationBar: MyBottomNavigationBar(),
       body: SingleChildScrollView(
-        child: Stack(
-          alignment: Alignment.center,
-          children: <Widget>[
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: <Widget>[
-                Container(
-                  alignment: Alignment.center,
-                  height: 60.0,
-                  decoration: BoxDecoration(
-                    color: colorApp,
-                  ),
-                ),
-                SizedBox(
-                  height: 70,
-                ),
-                _Infor_Box('Bits khả dụng', '300'),
-                SizedBox(
-                  height: 7,
-                ),
-                _Infor_Box('Bits nợ', '300'),
-                SizedBox(
-                  height: 7,
-                ),
-                _Infor_Box('Bits chờ rút', '0'),
-                SizedBox(
-                  height: 7,
-                ),
-                _infor_text(),
-                Container(
-                  alignment: Alignment.center,
-                  margin: EdgeInsets.all(7),
-                  width: 310,
-                  height: 35,
-                  color: colorApp,
-                  child: Text(
-                    'LỊCH SỬ GIAO DỊCH BITS',
-                    style: TextStyle(color: Colors.white, fontSize: 22.0),
-                  ),
-                ),
-                _textField('Chọn giao dịch'),
-                _textField('Ngày giao dịch'),
-                _textField('Trạng thái'),
-                _button(),
-                SizedBox(
-                  height: 10,
-                ),
-              ],
-            ),
-            Positioned(
-              top: 10.0,
-              child: Row(
+        child: Consumer<BitsManagerModel>(
+            builder: (_ ,model, __) {
+              return Stack(
+                alignment: Alignment.center,
                 children: <Widget>[
-                  _header_box(
-                      Icon(
-                        Icons.account_box,
-                        size: 40.0,
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: <Widget>[
+                      Container(
+                        alignment: Alignment.center,
+                        height: 60.0,
+                        decoration: BoxDecoration(
+                          color: colorApp,
+                        ),
                       ),
-                      'Nạp Bits',
-                      1),
-                  SizedBox(
-                    width: 15.0,
+                      SizedBox(
+                        height: 70,
+                      ),
+                      _Infor_Box('Bits khả dụng',model.authenticationService.currentUser.available_coin.toString()),
+                      SizedBox(
+                        height: 7,
+                      ),
+                      _Infor_Box('Bits nợ', model.authenticationService.currentUser.debt.toString()),
+                      SizedBox(
+                        height: 7,
+                      ),
+                      _Infor_Box('Bits chờ rút', model.authenticationService.currentUser.booking.toString()),
+                      SizedBox(
+                        height: 7,
+                      ),
+                      _infor_text(),
+                      Container(
+                        alignment: Alignment.center,
+                        margin: EdgeInsets.all(7),
+                        width: 310,
+                        height: 35,
+                        color: colorApp,
+                        child: Text(
+                          'LỊCH SỬ GIAO DỊCH BITS',
+                          style: TextStyle(color: Colors.white, fontSize: 22.0),
+                        ),
+                      ),
+                      _textField('Chọn giao dịch'),
+                      _textField('Ngày giao dịch'),
+                      _textField('Trạng thái'),
+                      _button(),
+                      SizedBox(
+                        height: 10,
+                      ),
+                    ],
                   ),
-                  _header_box(
-                      Icon(
-                        Icons.account_box,
-                        size: 40.0,
-                      ),
-                      'Chuyển Bits',
-                      2),
-                  SizedBox(
-                    width: 15.0,
+                  Positioned(
+                    top: 10.0,
+                    child: Row(
+                      children: <Widget>[
+                        _header_box(
+                            Icon(
+                              Icons.account_box,
+                              size: 40.0,
+                            ),
+                            'Nạp Bits',
+                            1),
+                        SizedBox(
+                          width: 15.0,
+                        ),
+                        _header_box(
+                            Icon(
+                              Icons.account_box,
+                              size: 40.0,
+                            ),
+                            'Chuyển Bits',
+                            2),
+                        SizedBox(
+                          width: 15.0,
+                        ),
+                        _header_box(
+                            Icon(
+                              Icons.account_box,
+                              size: 40.0,
+                            ),
+                            'Rút Bits',
+                            3),
+                      ],
+                    ),
+                    //child: _header_box(Icon(Icons.account_box, size: 40.0,), 'Nạp Bits')
                   ),
-                  _header_box(
-                      Icon(
-                        Icons.account_box,
-                        size: 40.0,
-                      ),
-                      'Rút Bits',
-                      3),
                 ],
-              ),
-              //child: _header_box(Icon(Icons.account_box, size: 40.0,), 'Nạp Bits')
-            ),
-          ],
+              );
+            }
         ),
       ),
     );
@@ -267,7 +274,7 @@ class _Bits_Manager_State extends State<Bits_Manager> {
                 break;
               default:
                 {
-                  return MyBottomNavigationBar(currentIndex: 4,);
+                  return MyBottomNavigationBar();
                 }
                 break;
             }

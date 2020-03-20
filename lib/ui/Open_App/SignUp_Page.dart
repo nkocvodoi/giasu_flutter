@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
 import 'package:provider/provider.dart';
 import 'package:test_giasu/core/view_model/signupModel.dart';
+import 'package:test_giasu/ui/UI_Main/General_Infor.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import 'PersonInfor.dart';
@@ -17,13 +18,9 @@ class SignUpPage extends StatefulWidget {
 }
 
 class _SignUpPage extends State<SignUpPage> {
-  final Color _c = Colors.blue[800];
+  Map signupInfor = new Map();
 
-  final TextEditingController _email = new TextEditingController();
-  final TextEditingController _name = new TextEditingController();
-  final TextEditingController _phone = new TextEditingController();
-  final TextEditingController _password = new TextEditingController();
-  final TextEditingController _password2 = new TextEditingController();
+
 
   String _name_hint = 'Họ và Tên *',
       _email_hint = 'Email * ',
@@ -31,8 +28,24 @@ class _SignUpPage extends State<SignUpPage> {
       _password_hint = 'Mật khẩu *',
       _password2_hint = 'Xác nhận mật khẩu *';
 
-  GlobalKey<FormState> _key = new GlobalKey();
+  GlobalKey<FormState> _key1 = new GlobalKey();
   bool _validate = false;
+   TextEditingController _email = new TextEditingController();
+   TextEditingController _name = new TextEditingController();
+   TextEditingController _phone = new TextEditingController();
+   TextEditingController _password = new TextEditingController();
+   TextEditingController _password_confirm = new TextEditingController();
+
+  final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
+   void showInSnackBar(String value) {
+    _scaffoldKey.currentState.showSnackBar(
+      SnackBar(
+        content: new Text(value, textAlign: TextAlign.start),
+        duration: Duration(seconds: 1),
+      ),
+    );
+  }
+
   String validatePass(String value) {
     String patttern = r'(^[a-zA-Z ]*$)';
     RegExp regExp = new RegExp(patttern);
@@ -52,6 +65,7 @@ class _SignUpPage extends State<SignUpPage> {
   }
 
   String validateMobile(String value) {
+
     String patttern = r'(^[0-9]*$)';
     RegExp regExp = new RegExp(patttern);
     if (value.length == 0) {
@@ -73,13 +87,10 @@ class _SignUpPage extends State<SignUpPage> {
     }
   }
 
-  _sendToServer() {
-    if (_key.currentState.validate()) {
+  _saveToServer() {
+    if (_key1.currentState.validate()) {
       // No any error in validation
-      _key.currentState.save();
-//      print("Name $name");
-//      print("Mobile $mobile");
-//      print("Email $email");
+      _key1.currentState.save();
     } else {
       // validation error
       setState(() {
@@ -92,14 +103,15 @@ class _SignUpPage extends State<SignUpPage> {
   Widget build(BuildContext context) {
     // TODO: implement build
     return Scaffold(
+      key: _scaffoldKey,
       appBar: AppBar(
         //leading: FlatButton.icon( icon: Icon(Icons.arrow_back_ios, textDirection: TextDirection.ltr,)),
-        backgroundColor: _c,
+        backgroundColor: colorApp,
         title: new Padding(
           padding: EdgeInsets.only(top: 20.0, bottom: 5.0),
           child: Text(
             'Đăng Ký',
-            style: TextStyle(fontSize: 35, fontWeight: FontWeight.w400),
+            style: TextStyle(fontSize: 27, fontWeight: FontWeight.w400),
           ),
         ),
         centerTitle: true,
@@ -107,22 +119,13 @@ class _SignUpPage extends State<SignUpPage> {
       body: new SingleChildScrollView(
         //physics: const NeverScrollableScrollPhysics(),
         child: Form(
-          key: _key,
+          key: _key1,
           autovalidate: _validate,
           child: Container(
             //child: new Padding(padding: EdgeInsets.all(30.0),
-            child: new Wrap(
+            child: new Column(
               children: <Widget>[
-                new Container(
-                  color: _c,
-                  child: new Text(
-                    'Tạo tài khoản dành cho Gia sư',
-                    style: TextStyle(fontSize: 20.0, color: Colors.white),
-                  ),
-                  alignment: Alignment.center,
-                  width: double.infinity,
-                  height: 75,
-                ),
+                _Chooserole(),
                 new Container(
                   child: new Padding(
                     padding: EdgeInsets.all(10.0),
@@ -140,8 +143,8 @@ class _SignUpPage extends State<SignUpPage> {
                       _TextFieldsName(_name_hint),
                       _TextFieldsPhone(_phone_hint),
                       _TextFieldsEmail(_email_hint),
-                      _TextFieldsPass(_password_hint),
-                      _TextFieldsPass(_password2_hint),
+                      _TextFieldsPass(_password_hint, _password),
+                      _TextFieldsPass(_password2_hint, _password_confirm),
                       new Padding(
                         padding: EdgeInsets.all(10.0),
                         child: Text(
@@ -156,7 +159,7 @@ class _SignUpPage extends State<SignUpPage> {
                             padding: EdgeInsets.only(bottom: 22.0),
                             child: new Icon(
                               Icons.brightness_1,
-                              color: _c,
+                              color: colorApp,
                               size: 18,
                             ),
                           ),
@@ -180,7 +183,7 @@ class _SignUpPage extends State<SignUpPage> {
                                     style: TextStyle(
                                       fontStyle: FontStyle.italic,
                                       decoration: TextDecoration.underline,
-                                      decorationColor: _c,
+                                      decorationColor: colorApp,
                                     ),
                                   ),
                                   TextSpan(text: ' & '),
@@ -195,7 +198,7 @@ class _SignUpPage extends State<SignUpPage> {
                                     style: TextStyle(
                                       fontStyle: FontStyle.italic,
                                       decoration: TextDecoration.underline,
-                                      decorationColor: _c,
+                                      decorationColor: colorApp,
                                     ),
                                   ),
                                   TextSpan(text: ' sử dụng của HTcon'),
@@ -205,35 +208,52 @@ class _SignUpPage extends State<SignUpPage> {
                           ),
                         ],
                       ),
-                      new Padding(
-                        padding: EdgeInsets.all(15.0),
-                        child: Center(
-                          child: RaisedButton(
-                            onPressed: () {
-                              _sendToServer;
-                              Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                    builder: (context) => PersonInfor(),
-                                  ));
-                            },
-                            color: _c,
-                            child: new Padding(
-                              padding: EdgeInsets.all(10.0),
-                              child: Text(
-                                'Đăng Ký',
-                                style: TextStyle(
-                                    fontSize: 20,
-                                    fontWeight: FontWeight.w400,
-                                    color: Colors.white),
+                      new Consumer<SignUpModel>(builder: (_, model, __) {
+                        return Padding(
+                          padding: EdgeInsets.all(15.0),
+                          child: Center(
+                            child: RaisedButton(
+                              onPressed: () async {
+                                _saveToServer();
+                                model.setRole();
+                                signupInfor["role"] = 'tutor';
+                                signupInfor["full_name"] = _name.text;
+                                signupInfor["phone_number"] = _phone.text;
+                                signupInfor["email"] = _email.text;
+                                signupInfor["password"] = _password.text;
+                                signupInfor["password_confirmation"] =
+                                    _password_confirm.text;
+                                var success = await model.checksignup(signupInfor);
+                                if (success) {
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (context) => PersonInfor(),
+                                      ));
+                                }
+                                else {
+                                  var _message = await model.Infor;
+                                  showInSnackBar(_message);
+                                }
+                              },
+                              color: colorApp,
+                              child: new Padding(
+                                padding: EdgeInsets.all(10.0),
+                                child: Text(
+                                  'Đăng Ký',
+                                  style: TextStyle(
+                                      fontSize: 20,
+                                      fontWeight: FontWeight.w400,
+                                      color: Colors.white),
+                                ),
+                              ),
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(20.0),
                               ),
                             ),
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(20.0),
-                            ),
                           ),
-                        ),
-                      ),
+                        );
+                      }),
                     ],
                   ),
                 ),
@@ -246,12 +266,56 @@ class _SignUpPage extends State<SignUpPage> {
     );
   }
 
+  Widget _Chooserole() {
+    return Consumer<SignUpModel>(builder: (_, model, __) {
+      return Container(
+        height: 75,
+        child: Row(
+          children: <Widget>[
+            Radio(
+              value: 0,
+              groupValue: model.group,
+              onChanged: (T) {
+//                      setState(() {
+//                        group1 = T;
+//                      });
+//                    print(model.group1);
+//                    print(T);
+                model.setGroup(T);
+              },
+            ),
+            Text(
+              'Học viên',
+              style: TextStyle(fontSize: 20),
+            ),
+            Radio(
+              value: 1,
+              groupValue: model.group,
+              onChanged: (T) {
+//                      setState(() {
+//                        group1 = T;
+//                      });
+//                    print(model.group1);
+//                    print(T);
+                model.setGroup(T);
+              },
+            ),
+            Text(
+              'Gia sư',
+              style: TextStyle(fontSize: 20),
+            ),
+          ],
+        ),
+      );
+    });
+  }
+
   Widget _TextFieldsName(
     String _text,
   ) {
     return new Container(
       child: new TextFormField(
-          //controller: _emailFilter,
+//          controller: _emailFilter,
           autofocus: true,
           style: TextStyle(fontSize: 25.0),
           decoration: new InputDecoration(
@@ -272,6 +336,7 @@ class _SignUpPage extends State<SignUpPage> {
           autofocus: true,
           style: TextStyle(fontSize: 25.0),
           decoration: new InputDecoration(
+            contentPadding: EdgeInsets.zero,
               labelStyle: TextStyle(fontSize: 25.0), labelText: _text),
           keyboardType: TextInputType.emailAddress,
 //                            maxLength: 10,
@@ -299,9 +364,7 @@ class _SignUpPage extends State<SignUpPage> {
     );
   }
 
-  Widget _TextFieldsPass(
-    String _text,
-  ) {
+  Widget _TextFieldsPass(String _text, TextEditingController _pass) {
     return new Container(
       child: new TextFormField(
           //controller: _emailFilter,
@@ -314,7 +377,7 @@ class _SignUpPage extends State<SignUpPage> {
 //                            maxLength: 10,
           validator: validatePass,
           onSaved: (String val) {
-            _password.text = val;
+            _pass.text = val;
           }),
     );
   }

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:test_giasu/ui/Open_App/SignIn_Page.dart';
 import 'package:test_giasu/ui/Open_App/Waiting_screen.dart';
 
 import 'package:url_launcher/url_launcher.dart';
@@ -150,7 +151,7 @@ class _Account_State extends State<Account> {
               return Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => Waiting_screen(),
+                    builder: (context) => SignIn_Page(),
                   ));
             }
             break;

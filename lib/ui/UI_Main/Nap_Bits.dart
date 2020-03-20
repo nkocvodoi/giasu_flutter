@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:test_giasu/core/model/currentUser.dart';
+import 'package:test_giasu/core/service/authentication_service.dart';
 import 'package:test_giasu/core/view_model/napbitsModel.dart';
 
 class Nap_Bits extends StatefulWidget {
@@ -73,6 +75,7 @@ class _Nap_Bits_State extends State<Nap_Bits> {
   }
 
   Widget _Box1() {
+    CurrentUser _user = Provider.of<AuthenticationService>(context).currentUser;
     return Container(
       margin: EdgeInsets.only(top: 10.0),
       height: 165,
@@ -94,10 +97,10 @@ class _Nap_Bits_State extends State<Nap_Bits> {
                   width: 40.0,
                 ),
                 _Infor(
-                  'INFOR',
-                  'INFOR',
-                  'INFOR',
-                  'INFOR',
+                  _user.full_name,
+                  _user.id.toString(),
+                  _user.email,
+                  _user.identification_number,
                 ),
               ],
             ),

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:test_giasu/TestList_Class.dart';
+import 'package:test_giasu/Test.dart';
 import 'package:test_giasu/ui/UI_Main/ClassDetailRequest.dart';
 import 'package:test_giasu/ui/UI_Main/ClassDetailWithMoreTutorInfor.dart';
 import 'package:test_giasu/ui/UI_Main/Lists_Class.dart';
@@ -28,7 +28,8 @@ class MyApp extends StatelessWidget {
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
         title: 'giasu',
-        theme: ThemeData(fontFamily: 'UTM'),
+        theme: ThemeData(fontFamily: 'UTM',
+        ),
 //      initialRoute: 'open',
 //      routes: {
 //        '/': (context) => MyBottomNavigationBar(
@@ -38,8 +39,8 @@ class MyApp extends StatelessWidget {
 //        'signIn': (context) => SignIn_Page(),
 //        'signUp': (context) => SignUpPage(),
 //      },
-//        home: Waiting_screen(),
-        home: TestLists_Class(),
+        home: SignIn_Page(),
+//        home: TestSignIn(),
       ),
     );
   }

@@ -9,33 +9,23 @@ import 'package:test_giasu/ui/Open_App/ForgotPass1.dart';
 import 'package:test_giasu/ui/Open_App/SignUp_Page.dart';
 import 'package:test_giasu/ui/UI_Main/BottomNavigationBar.dart';
 import 'package:test_giasu/ui/UI_Main/General_Infor.dart';
-import 'package:test_giasu/ui/UI_Main/TutorInfor.dart';
+
+
 
 // ignore: camel_case_types
-class SignIn_Page extends StatefulWidget {
+class TestSignIn extends StatefulWidget {
   @override
   _SignIn_PageState createState() => _SignIn_PageState();
 }
 
 // ignore: camel_case_types
-class _SignIn_PageState extends State<SignIn_Page> {
-
-//  void initState() {
-//    if (Provider.of<SignInModel>(context).authenticationService.isLogined) {
-//      Navigator.push(
-//        context,
-//        MaterialPageRoute(
-//          builder: (context) => MyBottomNavigationBar(),
-//        ),
-//      );
-//    }
-//  }
-
+class _SignIn_PageState extends State<TestSignIn> {
   Map _loginmap = new Map();
   GlobalKey<FormState> _key = new GlobalKey();
   bool _validate = false;
   TextEditingController _phone_number = TextEditingController();
   TextEditingController _pass = TextEditingController();
+
 
   String validatePass(String value) {
     String patttern = r'(^[a-zA-Z ]*$)';
@@ -84,7 +74,6 @@ class _SignIn_PageState extends State<SignIn_Page> {
   }
 
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
-
   void showInSnackBar(String value) {
     _scaffoldKey.currentState.showSnackBar(
       SnackBar(
@@ -160,7 +149,7 @@ class _SignIn_PageState extends State<SignIn_Page> {
 //                            maxLength: 10,
                               validator: validateMobile,
                               onSaved: (String val) {
-                                _phone_number.text = val.trim();
+                                _phone_number.text = val;
                               }),
                           SizedBox(
                             width: double.infinity,
@@ -234,16 +223,15 @@ class _SignIn_PageState extends State<SignIn_Page> {
                             var loginSuccess1 = await model.login1(_loginmap);
 //                            var loginSuccess1 = model.authenticationService.isLogined;
 //                            print(loginSuccess1);
-//                            var a = await model.authenticationService.id;
-//                            print(a);
-                            if (loginSuccess1) {
+                            if (model.authenticationService.isLogined) {
                               Navigator.push(
                                 context,
                                 MaterialPageRoute(
                                   builder: (context) => MyBottomNavigationBar(),
                                 ),
                               );
-                            } else {
+                            }
+                            else {
                               var _message = await model.Infor;
                               showInSnackBar(_message);
                             }
@@ -397,34 +385,35 @@ class _SignIn_PageState extends State<SignIn_Page> {
 
   Widget _buildBox(String _a, bool _b) {
     return Consumer<SignInModel>(builder: (_, model, __) {
-      return TextFormField(
-          obscureText: model.count,
-          decoration: InputDecoration(
-              contentPadding: EdgeInsets.zero,
-              hintText: 'Mật khẩu',
-              border: OutlineInputBorder(),
-              hintStyle: TextStyle(
-//                fontFamily: 'HI',
-                color: Colors.grey[400],
-                fontSize: 20,
-              ),
-              suffixIcon: IconButton(
-                icon: model.count
-                    ? Icon(Icons.visibility_off)
-                    : Icon(Icons.visibility),
-                onPressed: () {
-                  model.change();
+      return
+        TextFormField(
+            obscureText: model.count,
+            decoration: InputDecoration(
+                contentPadding: EdgeInsets.zero,
+                hintText: 'Mật khẩu',
+                border: OutlineInputBorder(),
+                hintStyle: TextStyle(
+                  fontStyle: FontStyle.normal,
+                  color: Colors.grey[400],
+                  fontSize: 20,
+                ),
+                suffixIcon: IconButton(
+                  icon: model.count
+                      ? Icon(Icons.visibility_off)
+                      : Icon(Icons.visibility),
+                  onPressed: () {
+                    model.change();
 //                  print(model.Count);
 //                model.Count = !model.Count;
 //                print(model.Count);
-                },
-              )),
-          keyboardType: TextInputType.visiblePassword,
+                  },
+                )),
+            keyboardType: TextInputType.visiblePassword,
 //                            maxLength: 10,
-          validator: validatePass,
-          onSaved: (String val) {
-            _pass.text = val.trim();
-          });
+            validator: validatePass,
+            onSaved: (String val) {
+              _pass.text = val;
+            });
     });
   }
 }

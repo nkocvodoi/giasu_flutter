@@ -17,72 +17,71 @@ class List_Box extends StatelessWidget {
         shrinkWrap: true,
         itemCount: box.length,
         itemBuilder: (BuildContext context, int index) {
+//          print(box[index].id);
           return Container(
             child: Stack(
               children: <Widget>[
-                Expanded(
-                  child: Container(
-                    alignment: Alignment.centerLeft,
-                    margin: EdgeInsets.all(10.0),
+                Container(
+                  alignment: Alignment.centerLeft,
+                  margin: EdgeInsets.all(10.0),
 //                  height: 190,
-                    child: SingleChildScrollView(
-                      scrollDirection: Axis.horizontal,
-                      child: RaisedButton(
-                        onPressed: () {
-                        },
-                        padding: EdgeInsets.all(5.0),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: <Widget>[
-                            _iconTextBox(
-                              box[index].name,
-                              colorApp,
-                              20,
-                              Icon(Icons.account_box),
-                            ),
-                            _iconTextBox(
-                              box[index].parent.full_name,
-                              Colors.deepOrange,
-                              20,
-                              Icon(Icons.account_box),
-                            ),
-                            _iconTextBox(
-                              box[index].address,
-                              Colors.grey,
-                              20,
-                              Icon(Icons.account_box),
-                            ),
-                            _iconTextBox(
-                              '${box[index].tuition_fee} vnd/${box[index].time_per_lesson}h - ${box[index].lesson_per_week}/tuần',
-                              Colors.grey,
-                              21,
-                              Icon(Icons.account_box),
-                            ),
-                            _iconTextBox(
-                              'Cách bạn: 2 km',
-                              Colors.grey,
-                              20,
-                              Icon(Icons.account_box),
-                            ),
-                            _iconTextBox(
-                              'Phí nhận lớp: ${box[index].class_fee} vnđ',
-                              Colors.blue,
-                              20,
-                              Icon(Icons.account_box),
-                            ),
-                          ],
-                        ),
-                        color: Colors.white,
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(10.0),
-                        ),
+                  child: SingleChildScrollView(
+                    scrollDirection: Axis.horizontal,
+                    child: RaisedButton(
+                      onPressed: () {
+                      },
+                      padding: EdgeInsets.all(5.0),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: <Widget>[
+                          _iconTextBox(
+                            box[index].name,
+                            colorApp,
+                            20,
+                            Icon(Icons.account_box),
+                          ),
+                          _iconTextBox(
+                            box[index].parent.full_name,
+                            Colors.deepOrange,
+                            20,
+                            Icon(Icons.account_box),
+                          ),
+                          _iconTextBox(
+                            box[index].address,
+                            Colors.grey,
+                            20,
+                            Icon(Icons.account_box),
+                          ),
+                          _iconTextBox(
+                            '${box[index].tuition_fee} vnd/${box[index].time_per_lesson}h - ${box[index].lesson_per_week}/tuần',
+                            Colors.grey,
+                            21,
+                            Icon(Icons.account_box),
+                          ),
+                          _iconTextBox(
+                            'Cách bạn: 2 km',
+                            Colors.grey,
+                            20,
+                            Icon(Icons.account_box),
+                          ),
+                          _iconTextBox(
+                            'Phí nhận lớp: ${box[index].class_fee} vnđ',
+                            Colors.blue,
+                            20,
+                            Icon(Icons.account_box),
+                          ),
+                        ],
+                      ),
+                      color: Colors.white,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10.0),
                       ),
                     ),
-                    decoration: BoxDecoration(
-                      color: Colors.white,
-                      border: Border.all(color: Colors.blueAccent, width: 2),
-                      borderRadius: BorderRadius.circular(10.0),
-                    ),
+                  ),
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    border: Border.all(color: Colors.blueAccent, width: 2),
+                    borderRadius: BorderRadius.circular(10.0),
                   ),
                 ),
                 Positioned(

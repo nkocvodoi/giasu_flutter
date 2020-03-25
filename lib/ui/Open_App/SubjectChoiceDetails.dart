@@ -11,17 +11,19 @@ import 'DetailRaisedButton.dart';
 
 class SubjectChoiceDetails extends StatefulWidget {
   final List<String> data;
-  SubjectChoiceDetails({Key key, @required this.data});
+  Map personalInfor = new Map();
+  SubjectChoiceDetails({Key key, @required this.data,this.personalInfor});
   @override
   State<StatefulWidget> createState() {
     // TODO: implement createState
-    return SubjectChoiceDetailsState(data);
+    return SubjectChoiceDetailsState(data,personalInfor);
   }
 }
 
 class SubjectChoiceDetailsState extends State<SubjectChoiceDetails> {
   final List<String> data;
-  SubjectChoiceDetailsState(this.data);
+  Map personalInfor = new Map();
+  SubjectChoiceDetailsState(this.data,this.personalInfor);
   List<bool> listBools = List.filled(37, true, growable: true);
   List<String> listSubject = List();
   void onPressed(int n, String m) {
@@ -181,7 +183,7 @@ class SubjectChoiceDetailsState extends State<SubjectChoiceDetails> {
                         Navigator.push(
                             context,
                             MaterialPageRoute(
-                              builder: (context) => SpecialtyInfor(),
+                              builder: (context) => SpecialtyInfor(personalInfor),
                             ));
                       },
                     ),

@@ -3,25 +3,26 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:test_giasu/core/view_model/filterModel.dart';
 
-class DropDownMenu extends StatelessWidget {
+class DropDown extends StatefulWidget {
   List list = List();
   int id;
   String subject;
   int type;
-  DropDownMenu(this.list, this.subject, this.id,this.type);
+  DropDown(this.list, this.subject, this.id, this.type);
 
-//   @override
-//   State<StatefulWidget> createState() {
-//     // TODO: implement createState
-//     return DropDownMenuState(list, subject, id);
-//   }
-// }
+  @override
+  State<StatefulWidget> createState() {
+    // TODO: implement createState
+    return DropDownMenuState(list, subject, id, type);
+  }
+}
 
-// class DropDownMenuState extends State<DropDownMenu> {
-//   List list = List();
-//   int id;
-//   String subject;
-//   DropDownMenuState(this.list, this.subject, this.id);
+class DropDownMenuState extends State<DropDown> {
+  List list = List();
+  int id;
+  String subject;
+  int type;
+  DropDownMenuState(this.list, this.subject, this.id, this.type);
   @override
   Widget build(BuildContext context) {
     return Consumer<FilterModel>(builder: (_, model, __) {
@@ -52,10 +53,14 @@ class DropDownMenu extends StatelessWidget {
             }),
           ],
           onChanged: (int value) {
-            if(value != id){
-              
-             model.setIdSubject(value);
-            }
+            // if (value != id && type == 1) {
+            //   model.setIdCity(value);
+            // }else if(value != id && type == 2){
+            //   model.setIdSubject(value);
+            // }
+            setState(() {
+              id = value;
+            });
           },
         ),
         decoration: BoxDecoration(

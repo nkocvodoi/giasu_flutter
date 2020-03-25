@@ -18,6 +18,14 @@ class LargeTextFieldState extends State<LargeTextField> {
   String text;
   TextEditingController _controller;
   LargeTextFieldState(this.text,this._controller);
+  String validate(String value) {
+    String patttern = r'(^[a-zA-Z ]*$)';
+    RegExp regExp = new RegExp(patttern);
+    if (value.length == 0) {
+      return "Trường này không được để trống";
+    }
+    return null;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -29,7 +37,11 @@ class LargeTextFieldState extends State<LargeTextField> {
       width: SizeConfig.blockSizeHorizontal * 90,
       
         height: 120,
-        child: TextField(
+        child: TextFormField(
+          validator: validate,
+          onSaved: (String val){
+            _controller.text = val;
+          },
           controller: _controller,
           maxLines: 5,
           style: TextStyle(fontSize: 19.0),
@@ -39,7 +51,7 @@ class LargeTextFieldState extends State<LargeTextField> {
               ),
               hintText: text,
               hintStyle: TextStyle(
-            fontSize: 20,
+            fontSize: 18,
             fontStyle: FontStyle.normal,
             color: Colors.grey[400],
           ),

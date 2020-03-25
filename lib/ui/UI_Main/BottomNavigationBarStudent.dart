@@ -5,6 +5,7 @@ import 'package:test_giasu/ui/UI_Main/Account.dart';
 import 'package:test_giasu/ui/UI_Main/Anouncement.dart';
 import 'package:test_giasu/ui/UI_Main/Bits_Manager.dart';
 import 'package:test_giasu/ui/UI_Main/ClassDetailWithMoreTutorInforDemo.dart';
+import 'package:test_giasu/ui/UI_Main/General_Infor.dart';
 import 'package:test_giasu/ui/UI_Main/Lists_Class.dart';
 
 class MyBottomNavigationBarStudent extends StatefulWidget {
@@ -103,6 +104,8 @@ String name, subject, grade, form_teaching;
     return Scaffold(
         body: _children[currentIndex],
         bottomNavigationBar: BottomNavigationBar(
+          selectedItemColor: blue,
+          unselectedItemColor: black,
           type: BottomNavigationBarType.fixed,
           onTap: _onTappedBar,
           currentIndex: currentIndex,

@@ -57,10 +57,9 @@ class _ClassDetailRequestState extends State<ClassDetailRequest> {
         centerTitle: true,
         leading: buildPreviousButton(),
         backgroundColor: Color.fromRGBO(47, 101, 174, 1),
-        title:Text(
-            'Chi tiết lớp học',
-            textAlign: TextAlign.start,
-          
+        title: Text(
+          'Chi tiết lớp học',
+          textAlign: TextAlign.start,
         ),
       ),
       body: SingleChildScrollView(
@@ -290,8 +289,8 @@ class _ClassDetailRequestState extends State<ClassDetailRequest> {
                             Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                    builder: (context) => MyBottomNavigationBar(
-                                        currentIndex: 0)));
+                                    builder: (context) =>
+                                        MyBottomNavigationBar()));
                           },
                           textColor: Colors.white,
                           child: Text('Từ chối'),
@@ -312,8 +311,8 @@ class _ClassDetailRequestState extends State<ClassDetailRequest> {
                             Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                    builder: (context) => MyBottomNavigationBar(
-                                        currentIndex: 0)));
+                                    builder: (context) =>
+                                        MyBottomNavigationBar()));
                           },
                           textColor: Colors.white,
                           child: Text('Đồng ý'),

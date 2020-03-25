@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:test_giasu/ui/Helper/ScreenConfig.dart';
+import 'package:test_giasu/ui/Open_App/PersonInfor.dart';
 import 'package:test_giasu/ui/UI_Main/General_Infor.dart';
 
 import 'dart:async';

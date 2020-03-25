@@ -110,8 +110,6 @@ class Detail_teacher {
       this.birthdate,
       this.form_teachings});
   factory Detail_teacher.fromJson(Map<String, dynamic> json) {
-    print(json['native_country'].toString());
-    print(json['voice'].toString());
     return Detail_teacher(
       education: Education.fromJson(json['education']),
       voice: json['voice'],

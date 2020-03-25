@@ -91,13 +91,14 @@ class ClassDetailState extends State<ClassDetail> {
                           height: SizeConfig.safeBlockVertical * 5,
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(20.0),
-                            border: Border.all(),
+                            border: Border.all(color: black),
                             color: Colors.white,
                           ),
                           child: Center(
                             child: Text(
                               '${classData.name}',
                               style: TextStyle(
+                                color: black,
                                 fontStyle: FontStyle.normal,
                                 fontSize: 13,
                               ),
@@ -133,7 +134,7 @@ class ClassDetailState extends State<ClassDetail> {
                         ),
                         Icon(
                           Icons.portrait,
-                          color: Colors.grey,
+                          color: black,
                           size: 15,
                         ),
                       ),
@@ -141,13 +142,13 @@ class ClassDetailState extends State<ClassDetail> {
                         Text(
                           'Mã lớp: ${classData.id} - ${classData.subject.name} | Lớp ${classData.grade}',
                           style: TextStyle(
-                            color: Colors.grey,
+                            color: black,
                             fontSize: 15,
                           ),
                         ),
                         Icon(
                           Icons.home,
-                          color: Colors.grey,
+                          color: black,
                           size: 15,
                         ),
                       ),
@@ -155,13 +156,13 @@ class ClassDetailState extends State<ClassDetail> {
                         Text(
                           'Hình thức học: ${classData.form_teaching_name}',
                           style: TextStyle(
-                            color: Colors.grey,
+                            color: black,
                             fontSize: 15,
                           ),
                         ),
                         Icon(
                           Icons.school,
-                          color: Colors.grey,
+                          color: black,
                           size: 15,
                         ),
                       ),
@@ -169,13 +170,13 @@ class ClassDetailState extends State<ClassDetail> {
                         Text(
                           'Số buổi/tuần: ${classData.lesson_per_week} (${(classData.time_per_lesson).toInt()}h/buổi)',
                           style: TextStyle(
-                            color: Colors.grey,
+                            color: black,
                             fontSize: 15,
                           ),
                         ),
                         Icon(
                           Icons.timelapse,
-                          color: Colors.grey,
+                          color: black,
                           size: 15,
                         ),
                       ),
@@ -183,13 +184,13 @@ class ClassDetailState extends State<ClassDetail> {
                         Text(
                           'Số học viên: ${classData.student_per_class}',
                           style: TextStyle(
-                            color: Colors.grey,
+                            color: black,
                             fontSize: 15,
                           ),
                         ),
                         Icon(
                           Icons.person_outline,
-                          color: Colors.grey,
+                          color: black,
                           size: 15,
                         ),
                       ),
@@ -197,13 +198,13 @@ class ClassDetailState extends State<ClassDetail> {
                         Text(
                           'Địa chỉ: ${classData.address}',
                           style: TextStyle(
-                            color: Colors.grey,
+                            color: black,
                             fontSize: 15,
                           ),
                         ),
                         Icon(
                           Icons.map,
-                          color: Colors.grey,
+                          color: black,
                           size: 15,
                         ),
                       ),
@@ -211,13 +212,13 @@ class ClassDetailState extends State<ClassDetail> {
                         Text(
                           'Cách bạn: 2km',
                           style: TextStyle(
-                            color: Colors.grey,
+                            color: black,
                             fontSize: 15,
                           ),
                         ),
                         Icon(
                           Icons.radio_button_checked,
-                          color: Colors.grey,
+                          color: black,
                           size: 15,
                         ),
                       ),
@@ -225,13 +226,13 @@ class ClassDetailState extends State<ClassDetail> {
                         Text(
                           'Học phí/buổi: ${(classData.tuition_fee / 1000).toInt()},000 vnđ/2h',
                           style: TextStyle(
-                            color: Colors.orange,
+                            color: orange,
                             fontSize: 15,
                           ),
                         ),
                         Icon(
                           Icons.monetization_on,
-                          color: Colors.grey,
+                          color: black,
                           size: 15,
                         ),
                       ),
@@ -239,13 +240,13 @@ class ClassDetailState extends State<ClassDetail> {
                         Text(
                           'Phí nhận lớp: ${(classData.class_fee / 1000).toInt()},000 vnđ',
                           style: TextStyle(
-                            color: Colors.blue[400],
+                            color: blue,
                             fontSize: 15,
                           ),
                         ),
                         Icon(
                           Icons.attach_money,
-                          color: Colors.grey,
+                          color: black,
                           size: 15,
                         ),
                       ),
@@ -292,17 +293,19 @@ class ClassDetailState extends State<ClassDetail> {
                         width: SizeConfig.safeBlockHorizontal * 40,
                       ),
                       RaisedButton(
+                        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+                        
                           color: colorApp,
                           onPressed: () {
                             print('tap');
                           },
                           child: Container(
+                          
                             alignment: Alignment.center,
-                            height: SizeConfig.safeBlockVertical * 5,
+                            height: SizeConfig.safeBlockHorizontal * 10,
                             child: Text(
                               'Đề nghị dạy',
                               style: TextStyle(
-                                fontSize: 15,
                                 color: Colors.white,
                                 fontStyle: FontStyle.normal,
                               ),

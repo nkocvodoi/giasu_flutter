@@ -184,8 +184,46 @@ class SubjectChoiceState extends State<SubjectChoice> {
                           'Toán + Tiếng Việt', 18),
                       _subjectChoice(
                           6, 'Lịch sử', 25, 'Địa lý', 27, 'Sinh học', 25),
-                      _subjectChoice(
-                          9, 'Luyện chữ', 24, 'Tin học', 27, 'Môn khác', 24),
+                      Row(
+                        children: <Widget>[
+                          Expanded(
+                            flex: 1,
+                            child: SizedBox(),
+                          ),
+                          Expanded(
+                              flex: 8,
+                              child: DetailRaisedButton(
+                                subject: 'Luyện chữ',
+                                size: 25,
+                                selected: listsBool[9],
+                                onPressed: () => onPressed(9, 'Luyện chữ'),
+                              )),
+                          Expanded(
+                            flex: 1,
+                            child: SizedBox(),
+                          ),
+                          Expanded(
+                              flex: 8,
+                              child: DetailRaisedButton(
+                                subject: 'Tin học',
+                                size: 25,
+                                selected: listsBool[10],
+                                onPressed: () =>
+                                    onPressed(10, 'Tin học'),
+                              )),
+                          Expanded(
+                            flex: 1,
+                            child: SizedBox(),
+                          ),
+                          Expanded(
+                              flex: 8,
+                              child: RaisedButton(
+                                child: Text("Môn khác", style: TextStyle(color: Colors.white),),
+                                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+                              )),
+                          Expanded(child: SizedBox(),flex: 1),
+                        ],
+                      ),
                       SizedBox(
                         height: 30,
                       ),
@@ -201,21 +239,21 @@ class SubjectChoiceState extends State<SubjectChoice> {
                       SizedBox(
                         height: 20,
                       ),
-                      _subjectChoice(12, 'Tiếng Anh', 25, 'Tiếng Nhật', 25,
+                      _subjectChoice(11, 'Tiếng Anh', 25, 'Tiếng Nhật', 25,
                           'Tiếng Hàn', 25),
-                      _subjectChoice(15, 'Tiếng Trung', 25, 'Tiếng Đức', 25,
+                      _subjectChoice(14, 'Tiếng Trung', 25, 'Tiếng Đức', 25,
                           'Tiếng Pháp', 25),
                       Row(
                         children: <Widget>[
                           Expanded(flex: 1, child: SizedBox()),
                           Expanded(
                               flex: 8,
-                              child: DetailRaisedButton(
-                                subject: 'Ngoại ngữ khác',
-                                size: 17,
-                                onPressed: () =>
-                                    onPressed(18, 'Ngoại ngữ khác'),
-                                selected: listsBool[18],
+                              child: RaisedButton(
+                                child: Text("Ngoại ngữ khác",style: TextStyle(color: Colors.white),
+                                ),
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(10),
+                                ),
                               )),
                           Expanded(
                             flex: 19,
@@ -239,7 +277,7 @@ class SubjectChoiceState extends State<SubjectChoice> {
                         height: 20,
                       ),
                       _subjectChoice(
-                          19, 'Âm nhạc', 25, 'Hội họa', 26, 'Dance', 27),
+                          15, 'Âm nhạc', 25, 'Hội họa', 26, 'Dance', 27),
                       Row(
                         children: <Widget>[
                           Expanded(
@@ -251,8 +289,8 @@ class SubjectChoiceState extends State<SubjectChoice> {
                               child: DetailRaisedButton(
                                 subject: 'Thể thao',
                                 size: 25,
-                                selected: listsBool[22],
-                                onPressed: () => onPressed(22, 'Thể thao'),
+                                selected: listsBool[18],
+                                onPressed: () => onPressed(18, 'Thể thao'),
                               )),
                           Expanded(
                             flex: 1,
@@ -263,9 +301,9 @@ class SubjectChoiceState extends State<SubjectChoice> {
                               child: DetailRaisedButton(
                                 subject: 'Nghệ thuật khác',
                                 size: 20,
-                                selected: listsBool[23],
+                                selected: listsBool[19],
                                 onPressed: () =>
-                                    onPressed(23, 'Nghệ thuật khác'),
+                                    onPressed(19, 'Nghệ thuật khác'),
                               )),
                           Expanded(
                             flex: 10,

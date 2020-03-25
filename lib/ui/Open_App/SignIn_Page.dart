@@ -5,19 +5,18 @@ import 'package:provider/provider.dart';
 import 'package:test_giasu/core/model/List_ClassData.dart';
 import 'package:test_giasu/core/view_model/signinModel.dart';
 import 'package:test_giasu/ui/Helper/ScreenConfig.dart';
-import 'package:test_giasu/ui/Open_App/SignUp_PageStudent.dart';
-import 'package:test_giasu/ui/Open_App/SignUp_PageTutor.dart';
-import 'package:test_giasu/ui/Students/PostRequest.dart';
-import 'package:test_giasu/ui/UI_Main/Account.dart';
-import 'package:test_giasu/ui/UI_Main/BottomNavigationBar.dart';
-import 'package:test_giasu/ui/UI_Main/BottomNavigationBarStudent.dart';
-import 'package:test_giasu/ui/UI_Main/ClassDetailRequest.dart';
-import 'package:test_giasu/ui/UI_Main/ClassDetailRequestDemo.dart';
-import 'package:test_giasu/ui/UI_Main/General_Infor.dart';
+import 'package:test_giasu/ui/Open_App/SignUp_Page.dart';
 
-import '../../route.dart';
-import 'ForgotPass1.dart';
-import 'SignUp_Page.dart';
+import 'package:test_giasu/ui/Open_App/SignUp_PageTutor.dart';
+
+import 'package:test_giasu/core/view_model/signinModel.dart';
+import 'package:test_giasu/ui/Helper/ScreenConfig.dart';
+import 'package:test_giasu/ui/Open_App/ForgotPass1.dart';
+
+import 'package:test_giasu/ui/UI_Main/BottomNavigationBar.dart';
+import 'package:test_giasu/ui/UI_Main/ClassDetailRequestDemo.dart';
+
+import 'package:test_giasu/ui/UI_Main/General_Infor.dart';
 
 // ignore: camel_case_types
 class SignIn_Page extends StatefulWidget {
@@ -42,6 +41,18 @@ class _SignIn_PageState extends State<SignIn_Page> {
     list_class = fetchClassData();
   }
 
+//  void initState() {
+//    if (Provider.of<SignInModel>(context).authenticationService.isLogined) {
+//      Navigator.push(
+//        context,
+//        MaterialPageRoute(
+//          builder: (context) => MyBottomNavigationBar(),
+//        ),
+//      );
+//    }
+//  }
+
+  Map _loginmap = new Map();
   GlobalKey<FormState> _key = new GlobalKey();
   bool _validate = false;
   TextEditingController _phone_number = TextEditingController();
@@ -94,10 +105,22 @@ class _SignIn_PageState extends State<SignIn_Page> {
   }
 
   TextEditingController _controller = TextEditingController();
+  final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
+
+  void showInSnackBar(String value) {
+    _scaffoldKey.currentState.showSnackBar(
+      SnackBar(
+        content: new Text(value, textAlign: TextAlign.start),
+        duration: Duration(seconds: 1),
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     SizeConfig().init(context);
     return Scaffold(
+      key: _scaffoldKey,
       backgroundColor: Colors.white,
       resizeToAvoidBottomPadding: true,
       body: SingleChildScrollView(
@@ -105,6 +128,7 @@ class _SignIn_PageState extends State<SignIn_Page> {
           return Form(
             key: _key,
             autovalidate: _validate,
+//            onChanged: ,
             child: Stack(
               alignment: Alignment.center,
               children: <Widget>[
@@ -132,9 +156,7 @@ class _SignIn_PageState extends State<SignIn_Page> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: <Widget>[
                           TextFormField(
-                            
                               controller: _controller,
-                              
                               decoration: InputDecoration(
                                 hintText: 'Email/ Số điện thoại',
                                 border: OutlineInputBorder(),
@@ -152,10 +174,9 @@ class _SignIn_PageState extends State<SignIn_Page> {
 //                            maxLength: 10,
                               validator: validateMobile,
                               onSaved: (String val) {
-                                _phone_number.text = val;
+                                _phone_number.text = val.trim();
                               }),
                           SizedBox(
-                            width: double.infinity,
                             height: SizeConfig.safeBlockVertical * 2,
                           ),
                           _buildBox('Mật khẩu', true),
@@ -202,7 +223,7 @@ class _SignIn_PageState extends State<SignIn_Page> {
                               // ),
                               // TextSpan(text: '|'),
                               TextSpan(
-                                text: ' Quên mật khẩu?  ',
+                                text: ' Quên mật khẩu?   ',
                                 recognizer: TapGestureRecognizer()
                                   ..onTap = () {
                                     Navigator.push(
@@ -216,7 +237,6 @@ class _SignIn_PageState extends State<SignIn_Page> {
                             ],
                           ),
                         ),
-                        SizedBox(width: 20),
                       ],
                     ),
                     SizedBox(
@@ -234,8 +254,8 @@ class _SignIn_PageState extends State<SignIn_Page> {
                       //             builder: (context) =>
                       //                 ClassDetailRequestDemo()));
                       //   }
-                          onPressed: () async {
-                            _sendToServer();
+                      onPressed: () async {
+                        _sendToServer();
 //                            Navigator.push(
 //                              context,
 //                              MaterialPageRoute(
@@ -244,37 +264,36 @@ class _SignIn_PageState extends State<SignIn_Page> {
 //                                ),
 //                              ),
 //                            );
-
-                            print(_phone_number.text);
-                            var loginSuccess1 = await model.login1(
-                                _phone_number.text, _pass.text);
-
-                            print(loginSuccess1);
-                            if (loginSuccess1) {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) => ClassDetailRequestDemo()
-                                ),
-                              );}
-                        //  else {
-                        //   Navigator.push(
-                        //     context,
-                        //     MaterialPageRoute(
-                        //         builder: (context) => MyBottomNavigationBarStudent(0, 'name', 'status', 'id', 'subject', 'grade', 'form_teaching', 'lesson_per_week', 'time_per_lesson', 'student_per_class', 'address', 'tuition_fee', 'class_fee', 'about_course')),
-                        //   );
-                        //}
+                        _loginmap["phone_number"] = _phone_number.text;
+                        _loginmap["password"] = _pass.text;
+                        var loginSuccess1 = await model.login1(_loginmap);
+//                            var loginSuccess1 = model.authenticationService.isLogined;
+//                            print(loginSuccess1);
+//                            var a = await model.authenticationService.id;
+//                            print(a);
+                        if (loginSuccess1) {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => ClassDetailRequestDemo(),
+                            ),
+                          );
+                        } else {
+                          var _message = await model.Infor;
+                          showInSnackBar(_message);
+                        }
                       },
                       color: orange,
                       child: Container(
-                       width: SizeConfig.safeBlockHorizontal* 40,
-                        height: SizeConfig.safeBlockHorizontal* 10,
+                        width: SizeConfig.safeBlockHorizontal * 40,
+                        height: SizeConfig.safeBlockHorizontal * 10,
                         child: Center(
                           child: Text(
-                            'Đăng nhập',
+                            'Đăng Nhập',
+                           
                             style: TextStyle(
-                                fontSize: SizeConfig.safeBlockVertical* 3,
-                                fontWeight: FontWeight.w400,
+                                fontSize: SizeConfig.safeBlockHorizontal * 5,
+                                
                                 color: Colors.white),
                           ),
                         ),
@@ -335,12 +354,11 @@ class _SignIn_PageState extends State<SignIn_Page> {
                       height: 7,
                     ),
                     RaisedButton(
-                      
                       color: blue,
                       onPressed: () {},
                       child: Container(
-                        width: SizeConfig.safeBlockHorizontal* 40,
-                        height: SizeConfig.safeBlockHorizontal*10,
+                        width: SizeConfig.safeBlockHorizontal * 40,
+                        height: SizeConfig.safeBlockHorizontal * 10,
                         child: Center(
                             child: Row(
                           children: <Widget>[
@@ -352,8 +370,7 @@ class _SignIn_PageState extends State<SignIn_Page> {
                               '  Đăng nhập bằng Facebook',
                               style: TextStyle(
                                 color: Colors.white,
-                                fontSize: SizeConfig.safeBlockHorizontal* 2.7,
-                               
+                                fontSize: SizeConfig.safeBlockHorizontal * 2.7,
                               ),
                               textAlign: TextAlign.center,
                             ),
@@ -361,7 +378,8 @@ class _SignIn_PageState extends State<SignIn_Page> {
                         )),
                       ),
                       shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(6.0),),
+                        borderRadius: BorderRadius.circular(6.0),
+                      ),
                     ),
 
                     SizedBox(
@@ -370,25 +388,29 @@ class _SignIn_PageState extends State<SignIn_Page> {
                     RaisedButton(
                       color: red,
                       shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(6.0),),
+                        borderRadius: BorderRadius.circular(6.0),
+                      ),
                       onPressed: () {},
                       child: Container(
-                        width: SizeConfig.safeBlockHorizontal* 40,
-                        height: SizeConfig.safeBlockHorizontal *10,
+                        width: SizeConfig.safeBlockHorizontal * 40,
+                        height: SizeConfig.safeBlockHorizontal * 10,
                         child: Center(
-                          child: Row(children: <Widget>[
-                            Image.asset('assets/google_logo.png',cacheHeight: 18,),
-                             Text(
-                            '  Đăng nhập bằng Google+',
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontSize: SizeConfig.safeBlockHorizontal* 2.7,
-                            
+                            child: Row(
+                          children: <Widget>[
+                            Image.asset(
+                              'assets/google_logo.png',
+                              cacheHeight: 18,
                             ),
-                            textAlign: TextAlign.center,
-                          ),
-                          ],)
-                        ),
+                            Text(
+                              '  Đăng nhập bằng Google+',
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontSize: SizeConfig.safeBlockHorizontal * 2.7,
+                              ),
+                              textAlign: TextAlign.center,
+                            ),
+                          ],
+                        )),
                       ),
                     ),
                     SizedBox(height: 40),
@@ -420,7 +442,7 @@ class _SignIn_PageState extends State<SignIn_Page> {
               contentPadding: EdgeInsets.only(left: 5),
               border: OutlineInputBorder(),
               hintStyle: TextStyle(
-                fontStyle: FontStyle.normal,
+//                fontFamily: 'HI',
                 color: Colors.grey[400],
                 fontSize: 15,
               ),
@@ -430,13 +452,16 @@ class _SignIn_PageState extends State<SignIn_Page> {
                     : Icon(Icons.visibility),
                 onPressed: () {
                   model.change();
+//                  print(model.Count);
+//                model.Count = !model.Count;
+//                print(model.Count);
                 },
               )),
           keyboardType: TextInputType.visiblePassword,
 //                            maxLength: 10,
           validator: validatePass,
           onSaved: (String val) {
-            _pass.text = val;
+            _pass.text = val.trim();
           });
     });
   }

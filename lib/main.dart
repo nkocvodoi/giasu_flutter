@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:test_giasu/ui/Open_App/ForgotPass1.dart';
 import 'package:test_giasu/ui/Open_App/PersonInfor.dart';
+import 'package:test_giasu/ui/Open_App/SignUp_PageTutor.dart';
+import 'package:test_giasu/ui/Open_App/SpecialtyInfor.dart';
 import 'package:test_giasu/ui/Students/Filter_S.dart';
 import 'package:test_giasu/ui/Students/PostRequest.dart';
 import 'package:test_giasu/ui/UI_Main/Anouncement.dart';
@@ -48,7 +50,7 @@ class MyApp extends StatelessWidget {
 //        'signUp': (context) => SignUpPage(),
 //      },
 //        home: Waiting_screen(),
-        home: Waiting_screen(),
+        home: PersonInfor(),
       ),
     );
   }

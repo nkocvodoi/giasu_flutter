@@ -19,10 +19,11 @@ class SmallTextField extends StatelessWidget {
   Widget build(BuildContext context) {
     SizeConfig().init(context);
     return Container(
-      padding: EdgeInsets.only(top: 3.0, bottom: 3.0),
+      
       width: SizeConfig.safeBlockHorizontal * 90,
-      height: 60,
+      height: 80,
       child: TextFormField(
+       
         autofocus: true,
         validator: validate,
         onSaved: (String val) {
@@ -37,7 +38,7 @@ class SmallTextField extends StatelessWidget {
             borderRadius: BorderRadius.circular(10.0),
           ),
           hintStyle: TextStyle(
-            fontSize: 20,
+            fontSize: 18,
             fontFamily: 'UTM',
             color: Colors.grey[400],
           ),

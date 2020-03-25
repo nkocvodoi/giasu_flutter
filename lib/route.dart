@@ -14,7 +14,7 @@ class Router {
   static Route<dynamic> generateRoute(RouteSettings settings) {
     switch (settings.name) {
       case RoutePaths.Home:
-        return MaterialPageRoute(builder: (_) => MyBottomNavigationBar(currentIndex: 0,));
+        return MaterialPageRoute(builder: (_) => MyBottomNavigationBar());
       case RoutePaths.Login:
         return MaterialPageRoute(builder: (_) => SignIn_Page());
       case RoutePaths.SignUp:

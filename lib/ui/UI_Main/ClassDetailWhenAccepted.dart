@@ -88,7 +88,7 @@ class _ClassDetailRequestDemoState extends State<ClassDetailWhenAcceptedDemo> {
                           height: SizeConfig.safeBlockVertical * 5,
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(20.0),
-                            border: Border.all(),
+                            border: Border.all(color: black),
                             color: Colors.white,
                           ),
                           child: Center(
@@ -97,6 +97,7 @@ class _ClassDetailRequestDemoState extends State<ClassDetailWhenAcceptedDemo> {
                               style: TextStyle(
                                 fontStyle: FontStyle.normal,
                                 fontSize: 13,
+                                color: black
                               ),
                               textAlign: TextAlign.center,
                             ),
@@ -130,7 +131,7 @@ class _ClassDetailRequestDemoState extends State<ClassDetailWhenAcceptedDemo> {
                         ),
                         Icon(
                           Icons.portrait,
-                          color: Colors.grey,
+                          color: black,
                           size: 15,
                         ),
                       ),
@@ -138,13 +139,13 @@ class _ClassDetailRequestDemoState extends State<ClassDetailWhenAcceptedDemo> {
                         Text(
                           'Mã lớp: 1222 - Tiếng Anh | Lớp: 5',
                           style: TextStyle(
-                            color: Colors.grey,
+                            color: black,
                             fontSize: 15,
                           ),
                         ),
                         Icon(
                           Icons.home,
-                          color: Colors.grey,
+                          color: black,
                           size: 15,
                         ),
                       ),
@@ -152,13 +153,13 @@ class _ClassDetailRequestDemoState extends State<ClassDetailWhenAcceptedDemo> {
                         Text(
                           'Hình thức học: Gia sư Offline ( tại nhà )',
                           style: TextStyle(
-                            color: Colors.grey,
+                            color: black,
                             fontSize: 15,
                           ),
                         ),
                         Icon(
                           Icons.school,
-                          color: Colors.grey,
+                          color: black,
                           size: 15,
                         ),
                       ),
@@ -166,13 +167,13 @@ class _ClassDetailRequestDemoState extends State<ClassDetailWhenAcceptedDemo> {
                         Text(
                           'Số buổi/tuần:  1 buổi (2h/buổi)',
                           style: TextStyle(
-                            color: Colors.grey,
+                            color: black,
                             fontSize: 15,
                           ),
                         ),
                         Icon(
                           Icons.timelapse,
-                          color: Colors.grey,
+                          color: black,
                           size: 15,
                         ),
                       ),
@@ -180,13 +181,13 @@ class _ClassDetailRequestDemoState extends State<ClassDetailWhenAcceptedDemo> {
                         Text(
                           'Số học viên: 1',
                           style: TextStyle(
-                            color: Colors.grey,
+                            color: black,
                             fontSize: 15,
                           ),
                         ),
                         Icon(
                           Icons.person_outline,
-                          color: Colors.grey,
+                          color: black,
                           size: 15,
                         ),
                       ),
@@ -194,13 +195,13 @@ class _ClassDetailRequestDemoState extends State<ClassDetailWhenAcceptedDemo> {
                         Text(
                           'Địa chỉ: Chung Cư Athena Complex Xuân Phương, Phương Canh, Từ Liêm, Hà Nội, Việt Nam | Hà Nội',
                           style: TextStyle(
-                            color: Colors.grey,
+                            color: black,
                             fontSize: 15,
                           ),
                         ),
                         Icon(
                           Icons.map,
-                          color: Colors.grey,
+                          color: black,
                           size: 15,
                         ),
                       ),
@@ -208,13 +209,13 @@ class _ClassDetailRequestDemoState extends State<ClassDetailWhenAcceptedDemo> {
                         Text(
                           'Cách bạn: 2km',
                           style: TextStyle(
-                            color: Colors.grey,
+                            color: black,
                             fontSize: 15,
                           ),
                         ),
                         Icon(
                           Icons.radio_button_checked,
-                          color: Colors.grey,
+                          color: black,
                           size: 15,
                         ),
                       ),
@@ -228,7 +229,7 @@ class _ClassDetailRequestDemoState extends State<ClassDetailWhenAcceptedDemo> {
                         ),
                         Icon(
                           Icons.monetization_on,
-                          color: Colors.grey,
+                          color: black,
                           size: 15,
                         ),
                       ),
@@ -242,7 +243,7 @@ class _ClassDetailRequestDemoState extends State<ClassDetailWhenAcceptedDemo> {
                         ),
                         Icon(
                           Icons.attach_money,
-                          color: Colors.grey,
+                          color: black,
                           size: 15,
                         ),
                       ),
@@ -278,8 +279,8 @@ class _ClassDetailRequestDemoState extends State<ClassDetailWhenAcceptedDemo> {
               flex: 6,
             ),
             Container(
-              height: SizeConfig.safeBlockVertical * 5,
-              width: SizeConfig.safeBlockVertical *14,
+              height: SizeConfig.safeBlockHorizontal * 10,
+              width: SizeConfig.safeBlockHorizontal *25,
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(20.0),
               ),
@@ -291,7 +292,7 @@ class _ClassDetailRequestDemoState extends State<ClassDetailWhenAcceptedDemo> {
                       MaterialPageRoute(builder: (context) => Payments()));
                 },
                 textColor: Colors.white,
-                child: Text('Thanh toán'),
+                child: Text('Thanh toán',style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 3)),
               ),
             ),
             Expanded(

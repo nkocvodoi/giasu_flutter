@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:test_giasu/ui/Helper/ScreenConfig.dart';
+import 'package:test_giasu/ui/UI_Main/BottomNavigationBar.dart';
+import 'package:test_giasu/ui/UI_Main/General_Infor.dart';
 import 'package:test_giasu/ui/Widgets/ARichTextLine.dart';
 import 'package:test_giasu/ui/Widgets/LargeTextField.dart';
 import 'package:test_giasu/ui/Widgets/SelectedTimeColumn.dart';
 import 'package:test_giasu/ui/Widgets/SmallTextField.dart';
+import 'package:test_giasu/ui/Widgets/previous_widget.dart';
 
 import 'SubjectChoice.dart';
 
@@ -19,6 +22,7 @@ class SpecialtyInfor extends StatefulWidget {
 }
 
 class _SpecialtyInforState extends State<SpecialtyInfor> {
+  
   final TextEditingController _controller = TextEditingController();
   final TextEditingController _controller1 = TextEditingController();
   final TextEditingController _controller2 = TextEditingController();
@@ -37,12 +41,13 @@ class _SpecialtyInforState extends State<SpecialtyInfor> {
     // TODO: implement build
     return Scaffold(
       appBar: AppBar(
+        leading: buildPreviousButton(),
+        centerTitle: true,
         backgroundColor: Color.fromRGBO(47, 101, 174, 1),
-        title: Center(
-          child: Text(
+        title: Text(
             'HỒ SƠ CHUYÊN MÔN',
             textAlign: TextAlign.start,
-          ),
+          
         ),
       ),
       body: Stack(
@@ -76,9 +81,9 @@ class _SpecialtyInforState extends State<SpecialtyInfor> {
                       );
                     },
                     child: Container(
-                      padding: EdgeInsets.only(top: 3.0, bottom: 3.0),
+                      padding: EdgeInsets.all(3.0),
                       width: SizeConfig.safeBlockHorizontal * (90),
-                      height: 60,
+                      height: 40,
                       decoration: BoxDecoration(
                         border: Border.all(color: Colors.grey),
                         borderRadius: BorderRadius.circular(10),
@@ -86,7 +91,7 @@ class _SpecialtyInforState extends State<SpecialtyInfor> {
                       child: Text(
                         'Gia sư môn',
                         style: TextStyle(
-                          fontSize: ScreenUtil.getInstance().setSp(30),
+                          fontSize: 20,
                           fontStyle: FontStyle.normal,
                           color: Colors.grey[400],
                         ),
@@ -115,7 +120,7 @@ class _SpecialtyInforState extends State<SpecialtyInfor> {
                               'Vui lòng cập nhập đầy đủ thông tin phía trên',
                               style: TextStyle(
                                 color: Colors.black38,
-                                fontSize: ScreenUtil.getInstance().setSp(23),
+                                fontSize: 14,
                               ),
                             ),
                           ),
@@ -125,14 +130,17 @@ class _SpecialtyInforState extends State<SpecialtyInfor> {
                         width: ScreenUtil.getInstance().setWidth(150),
                       ),
                       RaisedButton(
-                        color: Colors.blue,
+                        color: colorApp,
                         onPressed: () {
-                          print('tap');
+                          Navigator.push(context, MaterialPageRoute(builder: (context)=> MyBottomNavigationBar(currentIndex: 0)));
                         },
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(10),
+                        ),
                         child: Text(
                           'Lưu lại',
                           style: TextStyle(
-                            fontSize: ScreenUtil.getInstance().setSp(30),
+                            fontSize: 18,
                             color: Colors.white,
                           ),
                         ),

@@ -2,9 +2,17 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 
 import 'package:provider/provider.dart';
+import 'package:test_giasu/core/model/List_ClassData.dart';
 import 'package:test_giasu/core/view_model/signinModel.dart';
 import 'package:test_giasu/ui/Helper/ScreenConfig.dart';
+import 'package:test_giasu/ui/Open_App/SignUp_PageStudent.dart';
+import 'package:test_giasu/ui/Open_App/SignUp_PageTutor.dart';
+import 'package:test_giasu/ui/Students/PostRequest.dart';
+import 'package:test_giasu/ui/UI_Main/Account.dart';
 import 'package:test_giasu/ui/UI_Main/BottomNavigationBar.dart';
+import 'package:test_giasu/ui/UI_Main/BottomNavigationBarStudent.dart';
+import 'package:test_giasu/ui/UI_Main/ClassDetailRequest.dart';
+import 'package:test_giasu/ui/UI_Main/ClassDetailRequestDemo.dart';
 import 'package:test_giasu/ui/UI_Main/General_Infor.dart';
 
 import '../../route.dart';
@@ -25,6 +33,15 @@ class _SignIn_PageState extends State<SignIn_Page> {
   //     _isHidden = !_isHidden;
   //   });
   // }
+
+  Future<CLassData> list_class;
+//  Api _api;
+  @override
+  void initState() {
+    super.initState();
+    list_class = fetchClassData();
+  }
+
   GlobalKey<FormState> _key = new GlobalKey();
   bool _validate = false;
   TextEditingController _phone_number = TextEditingController();
@@ -76,6 +93,7 @@ class _SignIn_PageState extends State<SignIn_Page> {
     }
   }
 
+  TextEditingController _controller = TextEditingController();
   @override
   Widget build(BuildContext context) {
     SizeConfig().init(context);
@@ -95,25 +113,16 @@ class _SignIn_PageState extends State<SignIn_Page> {
                   children: <Widget>[
                     Container(
                       width: double.infinity,
-                      height: SizeConfig.safeBlockVertical * 40,
+                      height: SizeConfig.safeBlockVertical * 35,
                       decoration: BoxDecoration(
-                        color: Colors.blue,
+                        color: colorApp,
                       ),
-                      child: Column(
-                        children: <Widget>[
-                          SizedBox(
-                            height: SizeConfig.safeBlockVertical * 5,
-                          ),
-                          Image.asset(
-                            'assets/Logo2.png',
-                            cacheHeight: 90,
-                            cacheWidth: 130,
-                            height: 130,
-                          ),
-                        ],
+                      child: Image.asset(
+                        'assets/logo3.png',
+                        cacheHeight: 90,
                       ),
                     ),
-                    SizedBox(height: SizeConfig.safeBlockVertical * 5),
+                    SizedBox(height: SizeConfig.safeBlockVertical * 2),
                     Container(
                       padding: EdgeInsets.all(20),
                       decoration: BoxDecoration(
@@ -123,13 +132,17 @@ class _SignIn_PageState extends State<SignIn_Page> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: <Widget>[
                           TextFormField(
+                            
+                              controller: _controller,
+                              
                               decoration: InputDecoration(
                                 hintText: 'Email/ Số điện thoại',
                                 border: OutlineInputBorder(),
+                                contentPadding: EdgeInsets.only(left: 5),
                                 hintStyle: TextStyle(
                                   fontStyle: FontStyle.normal,
                                   color: Colors.grey[400],
-                                  fontSize: 20,
+                                  fontSize: 15,
                                 ),
                                 suffixIcon: IconButton(
                                   icon: Icon(Icons.mail),
@@ -168,14 +181,28 @@ class _SignIn_PageState extends State<SignIn_Page> {
                                     Navigator.push(
                                       context,
                                       MaterialPageRoute(
-                                        builder: (context) => SignUpPage(),
+                                        builder: (context) => SignUpPageTutor(),
                                       ),
                                     );
                                   },
                               ),
                               TextSpan(text: '|'),
+                              // TextSpan(
+                              //   text: ' Đăng ký cho người dùng ',
+                              //   recognizer: TapGestureRecognizer()
+                              //     ..onTap = () {
+                              //       Navigator.push(
+                              //         context,
+                              //         MaterialPageRoute(
+                              //           builder: (context) =>
+                              //               SignUpPageStudent(),
+                              //         ),
+                              //       );
+                              //     },
+                              // ),
+                              // TextSpan(text: '|'),
                               TextSpan(
-                                text: ' Quên mật khẩu ?',
+                                text: ' Quên mật khẩu?  ',
                                 recognizer: TapGestureRecognizer()
                                   ..onTap = () {
                                     Navigator.push(
@@ -189,14 +216,24 @@ class _SignIn_PageState extends State<SignIn_Page> {
                             ],
                           ),
                         ),
+                        SizedBox(width: 20),
                       ],
                     ),
                     SizedBox(
-                      height: SizeConfig.safeBlockVertical * 5,
+                      height: 40,
                     ),
-                    Container(
-                      child: Center(
-                        child: RaisedButton(
+                    RaisedButton(
+                      // onPressed: () {
+                      //   if (_controller.text == '0123456789') {
+                      //     Navigator.push(context,
+                      //         MaterialPageRoute(builder: (context) => MyBottomNavigationBarStudent(0, 'name', 'status', 'id', 'subject', 'grade', 'form_teaching', 'lesson_per_week', 'time_per_lesson', 'student_per_class', 'address', 'tuition_fee', 'class_fee', 'about_course')));
+                      //   } else if (_controller.text == '0123456788') {
+                      //     Navigator.push(
+                      //         context,
+                      //         MaterialPageRoute(
+                      //             builder: (context) =>
+                      //                 ClassDetailRequestDemo()));
+                      //   }
                           onPressed: () async {
                             _sendToServer();
 //                            Navigator.push(
@@ -217,37 +254,36 @@ class _SignIn_PageState extends State<SignIn_Page> {
                               Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                  builder: (context) => MyBottomNavigationBar(
-                                    currentIndex: 0,
-                                  ),
+                                  builder: (context) => ClassDetailRequestDemo()
                                 ),
-                              );
-                            } else {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => SignUpPage()),
-                              );
-                            }
-                          },
-                          color: Colors.orange[300],
-                          child: Container(
-                            width: SizeConfig.safeBlockHorizontal * 35,
-                            height: SizeConfig.safeBlockVertical * 6,
-                            child: Center(child: Text(
-                              'Đăng Nhập',
-                              style: TextStyle(
-                                  fontSize: 20,
-                                  fontWeight: FontWeight.w400,
-                                  color: Colors.white),
-                            ),),
-                          ),
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(6.0),
+                              );}
+                        //  else {
+                        //   Navigator.push(
+                        //     context,
+                        //     MaterialPageRoute(
+                        //         builder: (context) => MyBottomNavigationBarStudent(0, 'name', 'status', 'id', 'subject', 'grade', 'form_teaching', 'lesson_per_week', 'time_per_lesson', 'student_per_class', 'address', 'tuition_fee', 'class_fee', 'about_course')),
+                        //   );
+                        //}
+                      },
+                      color: orange,
+                      child: Container(
+                       width: SizeConfig.safeBlockHorizontal* 40,
+                        height: SizeConfig.safeBlockHorizontal* 10,
+                        child: Center(
+                          child: Text(
+                            'Đăng nhập',
+                            style: TextStyle(
+                                fontSize: SizeConfig.safeBlockVertical* 3,
+                                fontWeight: FontWeight.w400,
+                                color: Colors.white),
                           ),
                         ),
                       ),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(6.0),
+                      ),
                     ),
+
 //                        InkWell(
 //                          child: Center(
 //                            child: Container(
@@ -296,69 +332,66 @@ class _SignIn_PageState extends State<SignIn_Page> {
 //                          ),
 //                        ),
                     SizedBox(
-                      height: 10,
+                      height: 7,
                     ),
-                    InkWell(
-                      child: Center(
-                        child: Container(
-                          width: SizeConfig.safeBlockHorizontal * 40,
-                          height: SizeConfig.safeBlockVertical * 6,
-                          decoration: BoxDecoration(
-                            color: Colors.blue,
-                            borderRadius: BorderRadius.circular(6.0),
-                          ),
-                          child: Material(
-                            color: Colors.transparent,
-                            child: InkWell(
-                              onTap: () {},
-                              child: Center(
-                                child: Text(
-                                  'Đăng nhập bằng Facebook',
-                                  style: TextStyle(
-                                    color: Colors.white,
-                                    fontSize: 13,
-                                    letterSpacing: 1.0,
-                                  ),
-                                  textAlign: TextAlign.center,
-                                ),
-                              ),
+                    RaisedButton(
+                      
+                      color: blue,
+                      onPressed: () {},
+                      child: Container(
+                        width: SizeConfig.safeBlockHorizontal* 40,
+                        height: SizeConfig.safeBlockHorizontal*10,
+                        child: Center(
+                            child: Row(
+                          children: <Widget>[
+                            Image.asset(
+                              'assets/facebook_logo.png',
+                              cacheHeight: 20,
                             ),
-                          ),
-                        ),
+                            Text(
+                              '  Đăng nhập bằng Facebook',
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontSize: SizeConfig.safeBlockHorizontal* 2.7,
+                               
+                              ),
+                              textAlign: TextAlign.center,
+                            ),
+                          ],
+                        )),
                       ),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(6.0),),
                     ),
+
                     SizedBox(
-                      height: 10,
+                      height: 7,
                     ),
-                    InkWell(
-                      child: Center(
-                        child: Container(
-                          width: SizeConfig.safeBlockHorizontal * 40,
-                          height: SizeConfig.safeBlockVertical * 6,
-                          decoration: BoxDecoration(
-                            color: Colors.deepOrange,
-                            borderRadius: BorderRadius.circular(6.0),
-                          ),
-                          child: Material(
-                            color: Colors.transparent,
-                            child: InkWell(
-                              onTap: () {},
-                              child: Center(
-                                child: Text(
-                                  'Đăng nhập bằng Google +',
-                                  style: TextStyle(
-                                    color: Colors.white,
-                                    fontSize: 15,
-                                    letterSpacing: 1.0,
-                                  ),
-                                  textAlign: TextAlign.center,
-                                ),
-                              ),
+                    RaisedButton(
+                      color: red,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(6.0),),
+                      onPressed: () {},
+                      child: Container(
+                        width: SizeConfig.safeBlockHorizontal* 40,
+                        height: SizeConfig.safeBlockHorizontal *10,
+                        child: Center(
+                          child: Row(children: <Widget>[
+                            Image.asset('assets/google_logo.png',cacheHeight: 18,),
+                             Text(
+                            '  Đăng nhập bằng Google+',
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontSize: SizeConfig.safeBlockHorizontal* 2.7,
+                            
                             ),
+                            textAlign: TextAlign.center,
                           ),
+                          ],)
                         ),
                       ),
                     ),
+                    SizedBox(height: 40),
                   ],
                 ),
               ],
@@ -384,11 +417,12 @@ class _SignIn_PageState extends State<SignIn_Page> {
           obscureText: model.count,
           decoration: InputDecoration(
               hintText: 'Mật khẩu',
+              contentPadding: EdgeInsets.only(left: 5),
               border: OutlineInputBorder(),
               hintStyle: TextStyle(
                 fontStyle: FontStyle.normal,
                 color: Colors.grey[400],
-                fontSize: 20,
+                fontSize: 15,
               ),
               suffixIcon: IconButton(
                 icon: model.count

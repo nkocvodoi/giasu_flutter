@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:test_giasu/ui/Helper/ScreenConfig.dart';
+import 'package:test_giasu/ui/UI_Main/General_Infor.dart';
 
 import 'dart:async';
 import 'dart:core';
@@ -30,35 +31,36 @@ class Waiting_screenState extends State<Waiting_screen> {
   @override
   Widget build(BuildContext context) {
     _waitMe();
-    ScreenUtil.instance = ScreenUtil.getInstance()..init(context);
-    ScreenUtil.instance =
-        ScreenUtil(width: 750, height: 1334, allowFontScaling: true);
-    return new Container(
-      decoration: BoxDecoration(color: Colors.blue[500]),
+    return Container(
+      alignment: Alignment.center,
+      color: colorApp,
       child: Stack(
         children: <Widget>[
-          Center(
-            child: Column(
-              children: <Widget>[
-                SizedBox(height: 200),
-                new Image.asset(
-                  'assets/Logo2.png',
-                  height: ScreenUtil.getInstance().setHeight(200),
-                ),
-                SizedBox(height: 40),
-                Text(
-                  'Nền tảng kết nối gia sư, lớp hoc, khóa hoc',
-                
-                  style: TextStyle(
-                      decoration: TextDecoration.none,
-                      color: Colors.white,
-                      fontStyle: FontStyle.normal,
-                      fontSize: 15.0,
-                      fontWeight: FontWeight.bold),
-                ),
-              ],
+          Column(
+        children: <Widget>[
+          Expanded(child: SizedBox(),flex: 2,),
+          Image.asset(
+            'assets/logo3.png',
+            cacheHeight: 100,
+          ),
+          SizedBox(height: 100),
+          Text(
+            'Nền tảng kết nối gia sư, lớp học, khóa học',
+            style: TextStyle(
+                decoration: TextDecoration.none,
+                color: Colors.white,
+                fontFamily: "UTM",
+                fontStyle: FontStyle.normal,
+                fontSize: 15,
             ),
           ),
+          Expanded(child: SizedBox(),flex: 2,),
+        ],
+
+      ),
+        ],
+      )
+
 //          GestureDetector(
 //            onTap: () {
 //              Navigator.push(
@@ -69,8 +71,6 @@ class Waiting_screenState extends State<Waiting_screen> {
 //              );
 //            },
 //          ),
-        ],
-      ),
     );
   }
 }

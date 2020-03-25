@@ -14,18 +14,17 @@ class RectangleImageNameBox extends StatelessWidget {
         width: double.infinity,
         child: Column(
           children: <Widget>[
-            Container(
+            FittedBox(
               child: Image.network(
                 urlString,
-                height: SizeConfig.safeBlockVertical * 10,
-                width: double.infinity,
               ),
+              fit: BoxFit.cover,
             ),
             Text(
               name,
               style: TextStyle(
                 fontSize: SizeConfig.safeBlockHorizontal * 3,
-                fontStyle: FontStyle.normal,
+                 fontFamily: 'UTM',
                 fontWeight: FontWeight.bold,
               ),
             ),

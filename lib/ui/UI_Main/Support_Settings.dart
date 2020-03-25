@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:test_giasu/ui/UI_Main/General_Infor.dart';
+import 'package:test_giasu/ui/Widgets/previous_widget.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class Support_Settings extends StatefulWidget {
@@ -24,13 +26,11 @@ class _Support_SettingsState extends State<Support_Settings> {
     // TODO: implement build
     return Scaffold(
       appBar: AppBar(
+        leading: buildPreviousButton(),
         backgroundColor: _color,
-        title: Center(
-          child: Text(
-            'Trợ giúp & Cài đặt',
-            style: TextStyle(fontSize: 30, fontWeight: FontWeight.w400),
-            textAlign: TextAlign.center,
-          ),
+        centerTitle: true,
+        title: Text(
+          'Trợ giúp & Cài đặt',
         ),
       ),
       body: Padding(
@@ -43,24 +43,29 @@ class _Support_SettingsState extends State<Support_Settings> {
               secondary: Icon(
                 Icons.notifications,
                 color: Colors.blue,
-                size: 40.0,
+                size: 30.0,
               ),
               title: Text(
                 'Thông báo',
                 style: TextStyle(
-                  fontSize: 20.0,
-                  fontStyle: FontStyle.normal,
-                  color: Colors.grey[600],
+                  fontSize: 18.0,
+                  fontFamily: 'UTM',
+                  color: black,
                 ),
               ),
-              subtitle: Text(
+              subtitle: value ? Text(
                 'Nhận thông báo từ hệ thống',
                 style: TextStyle(
-                  fontSize: 15.0,
+                  fontSize: 13.0,
                   fontStyle: FontStyle.italic,
-                  color: Colors.grey[600],
+                  color: black,
                 ),
-              ),
+              ) : Text('Tắt thông báo từ hệ thống',
+                style: TextStyle(
+                  fontSize: 13.0,
+                  fontStyle: FontStyle.italic,
+                  color: black,
+                ),),
             ),
             _buildText('Tham gia cộng đồng HTcon gia sư', 1),
             Divider(
@@ -108,9 +113,9 @@ class _Support_SettingsState extends State<Support_Settings> {
       title: Text(
         _text,
         style: TextStyle(
-          fontSize: 20.0,
-          fontStyle: FontStyle.normal,
-          color: Colors.grey[500],
+          fontSize: 18.0,
+          fontFamily: 'UTM',
+          color: black,
         ),
       ),
       onTap: () {

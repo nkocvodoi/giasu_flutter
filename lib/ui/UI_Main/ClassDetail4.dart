@@ -2,8 +2,11 @@ import 'package:flutter/material.dart';
 
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:test_giasu/ui/Helper/ScreenConfig.dart';
+import 'package:test_giasu/ui/UI_Main/General_Infor.dart';
 import 'package:test_giasu/ui/Widgets/ARichTextLine.dart';
+import 'package:test_giasu/ui/Widgets/LargeTextBox.dart';
 import 'package:test_giasu/ui/Widgets/SelectedTimeColumn.dart';
+import 'package:test_giasu/ui/Widgets/previous_widget.dart';
 
 class ClassDetail4 extends StatefulWidget {
   @override
@@ -40,13 +43,14 @@ class ClassDetail4State extends State<ClassDetail4> {
     // TODO: implement build
     return Scaffold(
       appBar: AppBar(
+        leading: buildPreviousButton(),
+        centerTitle: true,
         backgroundColor: Color.fromRGBO(47, 101, 174, 1),
-        title: Center(
-          child: Text(
+        title: Text(
             'Chi tiết lớp học',
             textAlign: TextAlign.start,
           ),
-        ),
+        
       ),
       body: SingleChildScrollView(
         child: Stack(
@@ -82,7 +86,7 @@ class ClassDetail4State extends State<ClassDetail4> {
                               'Tìm gia sư Tiếng Anh lớp 6 tại Cầu Giấy',
                               style: TextStyle(
                                 fontStyle: FontStyle.normal,
-                                fontSize: SizeConfig.safeBlockHorizontal * 3,
+                                fontSize: 13,
                               ),
                               textAlign: TextAlign.center,
                             ),
@@ -117,7 +121,7 @@ class ClassDetail4State extends State<ClassDetail4> {
                         Icon(
                           Icons.portrait,
                           color: Colors.grey,
-                          size: SizeConfig.safeBlockHorizontal * 3,
+                          size: 15,
                         ),
                       ),
                       _iconTextBox(
@@ -131,7 +135,7 @@ class ClassDetail4State extends State<ClassDetail4> {
                         Icon(
                           Icons.portrait,
                           color: Colors.grey,
-                          size: SizeConfig.safeBlockHorizontal * 3,
+                          size: 15,
                         ),
                       ),
                       _iconTextBox(
@@ -145,7 +149,7 @@ class ClassDetail4State extends State<ClassDetail4> {
                         Icon(
                           Icons.portrait,
                           color: Colors.grey,
-                          size: SizeConfig.safeBlockHorizontal * 3,
+                          size: 15,
                         ),
                       ),
                       _iconTextBox(
@@ -159,7 +163,7 @@ class ClassDetail4State extends State<ClassDetail4> {
                         Icon(
                           Icons.home,
                           color: Colors.grey,
-                          size: SizeConfig.safeBlockHorizontal * 3,
+                          size: 15,
                         ),
                       ),
                       _iconTextBox(
@@ -173,7 +177,7 @@ class ClassDetail4State extends State<ClassDetail4> {
                         Icon(
                           Icons.school,
                           color: Colors.grey,
-                          size: SizeConfig.safeBlockHorizontal * 3,
+                          size: 15,
                         ),
                       ),
                       _iconTextBox(
@@ -187,7 +191,7 @@ class ClassDetail4State extends State<ClassDetail4> {
                         Icon(
                           Icons.timelapse,
                           color: Colors.grey,
-                          size: SizeConfig.safeBlockHorizontal * 3,
+                          size: 15,
                         ),
                       ),
                       _iconTextBox(
@@ -201,7 +205,7 @@ class ClassDetail4State extends State<ClassDetail4> {
                         Icon(
                           Icons.person_outline,
                           color: Colors.grey,
-                          size: SizeConfig.safeBlockHorizontal * 3,
+                          size: 15,
                         ),
                       ),
                       _iconTextBox(
@@ -215,7 +219,7 @@ class ClassDetail4State extends State<ClassDetail4> {
                         Icon(
                           Icons.map,
                           color: Colors.grey,
-                          size: SizeConfig.safeBlockHorizontal * 3,
+                          size: 15,
                         ),
                       ),
                       _iconTextBox(
@@ -229,7 +233,7 @@ class ClassDetail4State extends State<ClassDetail4> {
                         Icon(
                           Icons.radio_button_checked,
                           color: Colors.grey,
-                          size: SizeConfig.safeBlockHorizontal * 3,
+                          size: 15,
                         ),
                       ),
                       _iconTextBox(
@@ -243,7 +247,7 @@ class ClassDetail4State extends State<ClassDetail4> {
                         Icon(
                           Icons.monetization_on,
                           color: Colors.grey,
-                          size: SizeConfig.safeBlockHorizontal * 3,
+                          size: 15,
                         ),
                       ),
                       _iconTextBox(
@@ -257,7 +261,7 @@ class ClassDetail4State extends State<ClassDetail4> {
                         Icon(
                           Icons.attach_money,
                           color: Colors.grey,
-                          size: SizeConfig.safeBlockHorizontal * 3,
+                          size: 15,
                         ),
                       ),
                     ],
@@ -266,22 +270,7 @@ class ClassDetail4State extends State<ClassDetail4> {
                 SizedBox(
                   height: ScreenUtil.getInstance().setHeight(20),
                 ),
-                Container(
-                  width: SizeConfig.safeBlockHorizontal * 95,
-                  height: SizeConfig.safeBlockHorizontal * 25,
-                  decoration: BoxDecoration(
-                    border: Border.all(color: Colors.blue),
-                    borderRadius: BorderRadius.circular(10.0),
-                  ),
-                  child: Text(
-                    'Chi tiết nội dung yêu cầu',
-                    style: TextStyle(
-                      fontSize: SizeConfig.safeBlockHorizontal * 4,
-                      fontStyle: FontStyle.normal,
-                      color: Colors.grey[400],
-                    ),
-                  ),
-                ),
+                LargeTextBox('Chi tiết nội dung yêu cầu'),
                 RichTextLine(),
                 SelectedTimeColumn(),
                 SizedBox(
@@ -298,11 +287,11 @@ class ClassDetail4State extends State<ClassDetail4> {
                       padding: EdgeInsets.all(5),
                       // width: ScreenUtil.getInstance().setWidth(80),
                       // height: ScreenUtil.getInstance().setHeight(50),
-                      color: Colors.blue,
+                      color: colorApp,
                       child: Text(
                         'Lưu ý khi nhận lớp',
                         style: TextStyle(
-                          fontSize: SizeConfig.safeBlockHorizontal * 3,
+                          fontSize: 15,
                           color: Colors.white,
                         ),
                       ),
@@ -326,14 +315,14 @@ class ClassDetail4State extends State<ClassDetail4> {
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(5),
                           ),
-                          color: Colors.blue,
+                          color: colorApp,
                           onPressed: () {
                             print('tap');
                           },
                           child: Text(
                             'Báo phát sinh',
                             style: TextStyle(
-                              fontSize: SizeConfig.safeBlockHorizontal * 3,
+                              fontSize: 15,
                               color: Colors.white,
                             ),
                           ),

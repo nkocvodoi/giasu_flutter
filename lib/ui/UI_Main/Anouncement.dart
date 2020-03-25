@@ -2,6 +2,7 @@
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter/material.dart';
 import 'package:test_giasu/ui/Helper/ScreenConfig.dart';
+import 'package:test_giasu/ui/UI_Main/General_Infor.dart';
 import 'Mails.dart';
 
 class Anouncement extends StatefulWidget {
@@ -25,21 +26,26 @@ class _AnouncementState extends State<Anouncement> {
     // TODO: implement build
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Color.fromRGBO(47, 101, 174, 1),
-        title: Center(
-          child: Text(
-            'Hộp thư',
-            textAlign: TextAlign.center,
-          ),
+        
+        automaticallyImplyLeading: false,
+        centerTitle: true,
+        backgroundColor: colorApp,
+        title: Text(
+          'Hộp thư',
+          textAlign: TextAlign.center,
         ),
+        actions: <Widget>[
+          IconButton(icon: Icon(Icons.done_all,color: Colors.white,), onPressed: null),
+        ],
       ),
+      
       body: SingleChildScrollView(
           child: Stack(
         alignment: Alignment.center,
         children: <Widget>[
           Column(children: <Widget>[
             SizedBox(
-              height: SizeConfig.safeBlockVertical * 5,
+              height: 20,
             ),
             Mails(
                 Icons.bookmark,

@@ -3,6 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
 import 'package:test_giasu/core/view_model/selectedModel.dart';
 import 'package:test_giasu/ui/Helper/ScreenConfig.dart';
+import 'package:test_giasu/ui/UI_Main/General_Infor.dart';
 
 class SelectedTime extends StatefulWidget {
 //  List<bool> isSelected;
@@ -31,8 +32,9 @@ class SelectedTimeState extends State<SelectedTime> {
     // TODO: implement build
     return Consumer<SelectedTimeModel>(builder: (_, model, __) {
       return SafeArea(
-        child: Padding(
-          padding: EdgeInsets.all(10.0),
+        child: Container(
+          width: 350,
+          padding: EdgeInsets.only(top:10, bottom: 10),
           child: Row(
             children: <Widget>[
               Expanded(
@@ -43,9 +45,9 @@ class SelectedTimeState extends State<SelectedTime> {
                 day,
                 textAlign: TextAlign.start,
                 style: TextStyle(
-                  fontSize: SizeConfig.safeBlockHorizontal * 4,
-                  fontStyle: FontStyle.normal,
-                  color: Colors.black38,
+                  fontSize: 15,
+                  fontFamily: 'UTM',
+                  color: black,
                 ),
               ),
               // SizedBox(
@@ -57,54 +59,49 @@ class SelectedTimeState extends State<SelectedTime> {
                 flex: 2,
               ),
               ToggleButtons(
-                disabledColor: Colors.white,
+                disabledColor: black,
                 selectedColor: Colors.white,
                 borderWidth: 0.0,
                 borderRadius: BorderRadius.circular(30.0),
                 borderColor: Colors.blue,
                 selectedBorderColor: Colors.blue,
-                fillColor: Colors.orangeAccent,
-                highlightColor: Colors.white,
+                fillColor: orange,
+                highlightColor: black,
+                textStyle: TextStyle(
+                  fontSize: 12,
+                ),
+                color: black,
                 children: <Widget>[
                   Container(
-                    width: SizeConfig.blockSizeHorizontal * (25),
-                    height: SizeConfig.blockSizeVertical * (3),
+                    width: 80,
+                    height: 30,
                     child: Center(
                       child: Text(
                         'Buổi sáng',
-                        style: TextStyle(
-                          fontSize: SizeConfig.safeBlockHorizontal * 3,
-                        ),
                       ),
                     ),
                   ),
                   Container(
-                    width: SizeConfig.blockSizeHorizontal * (25),
-                    height: SizeConfig.blockSizeVertical * (3),
+                    width: 80,
+                    height: 30,
                     child: Center(
                       child: Text(
                         'Buổi chiều',
-                        style: TextStyle(
-                          fontSize: SizeConfig.safeBlockHorizontal * 3,
-                        ),
                       ),
                     ),
                   ),
                   Container(
-                    width: SizeConfig.blockSizeHorizontal * (23),
-                    height: SizeConfig.blockSizeVertical * (3),
+                    width: 80,
+                    height: 30,
                     child: Center(
                       child: Text(
                         'Buổi tối',
-                        style: TextStyle(
-                          fontSize: SizeConfig.safeBlockHorizontal * 3,
-                        ),
                       ),
                     ),
                   ),
                 ],
                 onPressed: (int index) {
-                model.setCount(!model.cout(n)[index], index, n);
+                  model.setCount(!model.cout(n)[index], index, n);
                 },
                 isSelected: model.cout(n),
               ),

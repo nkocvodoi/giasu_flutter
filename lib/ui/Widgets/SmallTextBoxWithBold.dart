@@ -17,7 +17,7 @@ class SmallTextBoxWithBold extends StatelessWidget {
         infor,
         style: TextStyle(
           fontSize: 15,
-          fontStyle: FontStyle.normal,
+           fontFamily: 'UTM',
           fontWeight: FontWeight.bold,
         ),
       ),

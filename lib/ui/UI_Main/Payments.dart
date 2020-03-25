@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:test_giasu/core/view_model/paymentModel.dart';
+import 'package:test_giasu/ui/UI_Main/BottomNavigationBar.dart';
 import 'package:test_giasu/ui/UI_Main/General_Infor.dart';
+import 'package:test_giasu/ui/Widgets/previous_widget.dart';
 
 class Payments extends StatefulWidget {
   @override
@@ -24,6 +26,7 @@ class _Payments_State extends State<Payments> {
     // TODO: implement build
     return Scaffold(
       appBar: AppBar(
+        leading: buildPreviousButton(),
         backgroundColor: _color,
       ),
       body:Consumer<PaymentModel>(
@@ -40,7 +43,7 @@ class _Payments_State extends State<Payments> {
                       child: Text(
                         'Chọn hình thức thanh toán',
                         style: TextStyle(
-                            height: 0.0, color: Colors.white, fontSize: 25.0),
+                            height: 0.0, color: Colors.white, fontSize: 20.0),
                       ),
                       decoration: BoxDecoration(
                         color: _color,
@@ -49,15 +52,16 @@ class _Payments_State extends State<Payments> {
                     SizedBox(
                       height: 50,
                     ),
-                    Expanded(
-                      child: Container(
+                    Container(
+                        
                         width: 380,
                         child: Text(
                           model.infor,
-                          style: TextStyle(color: colorApp, fontSize: 22.0),
+                          textAlign: TextAlign.center,
+                          style: TextStyle(color: colorApp, fontSize: 18.0),
                         ),
                       ),
-                    ),
+                    Expanded(child: SizedBox()),
                     Divider(
                       thickness: 2,
                     ),
@@ -67,12 +71,12 @@ class _Payments_State extends State<Payments> {
                         padding: EdgeInsets.all(10.0),
                         color: _color,
                         onPressed: () {
-                          print('tap');
+                         Navigator.push(context, MaterialPageRoute(builder: (context)=> MyBottomNavigationBar(currentIndex: 0)));
                         },
                         child: Text(
                           'Thanh toán',
                           style: TextStyle(
-                            fontSize: 25,
+                            
                             fontWeight: FontWeight.w400,
                             color: Colors.white,
                           ),
@@ -88,10 +92,10 @@ class _Payments_State extends State<Payments> {
                   ],
                 ),
                 Positioned(
-                  top: 50,
+                  top: 60,
                   child: Container(
-                    height: 60,
-                    width: 370,
+                    height: 50,
+                    
                     child: Padding(
                       padding: EdgeInsets.only(left: 15.0, right: 15.0, top: 5.0),
                       child: DropdownButton<String>(
@@ -112,7 +116,7 @@ class _Payments_State extends State<Payments> {
                                 Text(
                                   _menu,
                                   style:
-                                  TextStyle(fontSize: 25.0, color: Colors.grey),
+                                  TextStyle(fontSize: 20.0, color: Colors.grey),
                                 ),
                                 SizedBox(
                                   width: 100,

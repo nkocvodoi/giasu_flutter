@@ -56,8 +56,7 @@ class SignInModel extends ChangeNotifier{
         return null;
       }
     }
-    catch (e
-    ) {
+    catch (e) {
       print('login error ' + e.toString());
     }
     notifyListeners();

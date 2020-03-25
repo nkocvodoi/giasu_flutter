@@ -2,6 +2,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:test_giasu/core/model/List_TeacherData.dart' as filter;
 import 'package:test_giasu/core/model/locationservice.dart';
 import 'package:test_giasu/core/model/subjectservice.dart';
+import 'package:test_giasu/core/model/educationsservice.dart';
+import 'package:test_giasu/core/model/formTeachingService.dart';
 
 class FilterModel extends ChangeNotifier {
   FilterModel() {
@@ -22,21 +24,38 @@ class FilterModel extends ChangeNotifier {
     notifyListeners();
   }
 
-  int _form_teaching;
-  int get form_teaching => _form_teaching;
-  void setForm_teaching(int value) {
-    _form_teaching = value;
+   List<Teachings> _form_teaching = [];
+  List<Teachings> get form_teaching => _form_teaching;
+  void setForms(List<Teachings> form_teaching) {
+    _form_teaching = form_teaching;
+  }
+
+  int _idFormTeaching;
+  int get idFormTeaching => _idFormTeaching;
+  void setIdFormTeaching(int value) {
+    print(form_teaching[value].name);
+    _idFormTeaching = value;
     notifyListeners();
   }
-int _education;
-  int get education => _education;
-  void setEducation(int value) {
-    _education = value;
+
+
+  List<Educations> _education = [];
+  List<Educations> get education => _education;
+  void setTypes(List<Educations> education) {
+    _education = education;
+  }
+
+  int _idEducation;
+  int get idEducation => _idEducation;
+  void setIdEducation(int value) {
+    print(education[value].name);
+    _idEducation = value;
     notifyListeners();
   }
+
   List<filter.Location> _city = [];
   List<filter.Location> get city => _city;
-  void setTypes(List<filter.Location> city) {
+  void setCity(List<filter.Location> city) {
     _city = city;
   }
 
@@ -46,7 +65,6 @@ int _education;
     _idCity = value;
     notifyListeners();
   }
-
 
   List<Subjects> _subject = [];
   List<Subjects> get subject => _subject;
@@ -63,9 +81,10 @@ int _education;
 
   void init() async {
     setBusy(true);
-    _city= await LocationService.instance.fetchLocation();
+    _city = await LocationService.instance.fetchLocation();
     _subject = await SubjectService.instance.fetchSubject();
+    _education = await EducationService.instance.fetchEducation();
+    _form_teaching = await FormTeachingService.instance.fetchTeaching();
     setBusy(false);
   }
-
 }

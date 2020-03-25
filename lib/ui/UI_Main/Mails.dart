@@ -27,9 +27,10 @@ class Mails extends StatelessWidget {
             alignment: Alignment.topCenter,
             child: Image.asset(
               'assets/momo.png',
-              width: SizeConfig.safeBlockHorizontal * 8,
+              width:30,
             ),
           ),
+          SizedBox(width: 10),
           Container(
             width: SizeConfig.safeBlockHorizontal * 80,
             child: Column(
@@ -40,8 +41,8 @@ class Mails extends StatelessWidget {
                   textAlign: TextAlign.left,
                   style: TextStyle(
                     fontWeight: FontWeight.bold,
-                    fontStyle: FontStyle.normal,
-                    fontSize: SizeConfig.safeBlockHorizontal * 4,
+                    fontFamily: 'UTM',
+                    fontSize: 18,
                   ),
                 ),
                 SizedBox(
@@ -51,8 +52,8 @@ class Mails extends StatelessWidget {
                   information,
                   textAlign: TextAlign.left,
                   style: TextStyle(
-                    fontSize: SizeConfig.safeBlockHorizontal * 3.5,
-                    fontStyle: FontStyle.normal,
+                    fontSize: 15,
+                    fontFamily: 'UTM',
                   ),
                 ),
                 SizedBox(height: SizeConfig.safeBlockVertical * 1),
@@ -60,13 +61,14 @@ class Mails extends StatelessWidget {
                   time,
                   textAlign: TextAlign.left,
                   style: TextStyle(
-                      fontSize: SizeConfig.safeBlockHorizontal * 2.5,
-                      fontStyle: FontStyle.normal),
+                    color: Colors.blue,
+                      fontSize: 12,
+                       fontFamily: 'UTM',),
                 ),
                 Divider(
                   thickness: 1,
                 ),
-                SizedBox(height: SizeConfig.safeBlockVertical * 3),
+                SizedBox(height:10),
               ],
             ),
           )

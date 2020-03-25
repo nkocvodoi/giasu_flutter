@@ -4,7 +4,7 @@ import 'package:flutter/painting.dart';
 import 'package:provider/provider.dart';
 import 'package:test_giasu/ui/Open_App/ForgotPass2.dart';
 import 'package:test_giasu/ui/UI_Main/General_Infor.dart';
-
+import 'package:test_giasu/ui/Widgets/previous_widget.dart';
 
 class ResetPass extends StatefulWidget {
   @override
@@ -22,15 +22,14 @@ class _ResetPassState extends State<ResetPass> {
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
+    bool _isSelected1 = true;
+    bool _isSelected2 = true;
     return Scaffold(
       appBar: AppBar(
+        leading: buildPreviousButton(),
         backgroundColor: colorApp,
-        title: new Padding(
-          padding: EdgeInsets.only(top: 20.0, bottom: 5.0),
-          child: Text(
-            'Quên mật khẩu',
-            style: TextStyle(fontSize: 35, fontWeight: FontWeight.w400),
-          ),
+        title: Text(
+          'Đổi mật khẩu',
         ),
         centerTitle: true,
       ),
@@ -48,13 +47,13 @@ class _ResetPassState extends State<ResetPass> {
                   ),
                 ),
                 new SizedBox(
-                  height: 70.0,
+                  height: 40.0,
                 ),
-                _buildBox(_newPass, true),
+                _buildBox(_newPass, _isSelected1),
                 new SizedBox(
                   height: 20.0,
                 ),
-                _buildBox(_newPass2, true),
+                _buildBox(_newPass2, _isSelected2),
                 new SizedBox(
                   height: 20.0,
                 ),
@@ -68,11 +67,9 @@ class _ResetPassState extends State<ResetPass> {
                     ),
                   ),
                 ),
-
                 new SizedBox(
                   height: 10.0,
                 ),
-
                 new Padding(
                   padding: EdgeInsets.all(15.0),
                   child: Center(
@@ -88,15 +85,15 @@ class _ResetPassState extends State<ResetPass> {
                       child: new Padding(
                         padding: EdgeInsets.all(10.0),
                         child: Text(
-                          'Khôi phục mật khẩu',
+                          'Đổi mật khẩu',
                           style: TextStyle(
-                              fontSize: 20,
+                              fontSize: 18,
                               fontWeight: FontWeight.w400,
                               color: Colors.white),
                         ),
                       ),
                       shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(20.0),
+                        borderRadius: BorderRadius.circular(10.0),
                       ),
                     ),
                   ),
@@ -108,8 +105,9 @@ class _ResetPassState extends State<ResetPass> {
               child: new Container(
                 child: TextField(
                   autofocus: true,
-                  style: TextStyle(fontSize: 20.0),
+                  style: TextStyle(fontSize: 18.0),
                   decoration: InputDecoration(
+                    contentPadding: EdgeInsets.only(left:5),
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(16.0),
                     ),
@@ -124,7 +122,6 @@ class _ResetPassState extends State<ResetPass> {
                 ),
               ),
             ),
-
           ],
         ),
       ),
@@ -135,31 +132,35 @@ class _ResetPassState extends State<ResetPass> {
     return ChangeNotifierProvider<Counter>(
       create: (_) => Counter(),
       child: Consumer<Counter>(
-        builder: (_, counter, __) => _change_obscure(_a, counter),
+        builder: (_, counter, __) => _change_obscure(_a, counter, _b),
       ),
     );
   }
 
-  Widget _change_obscure(String _a, Counter counter) {
+  Widget _change_obscure(String _a, Counter counter, bool _isSelected) {
     return new Container(
       width: 300,
       child: TextField(
         obscureText: counter.count,
-        style: TextStyle(fontSize: 20.0),
+        style: TextStyle(fontSize: 18.0),
         decoration: InputDecoration(
+            contentPadding: EdgeInsets.only(left: 5),
             border: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(16.0),
+              borderRadius: BorderRadius.circular(10.0),
             ),
             hintText: _a,
             suffixIcon: IconButton(
-                icon: Icon(Icons.remove_red_eye),
+                icon: _isSelected
+                    ? Icon(Icons.visibility_off)
+                    : Icon(Icons.visibility),
                 onPressed: () {
                   counter.change();
+                  _isSelected = !_isSelected;
                 })),
       ),
       decoration: BoxDecoration(
         color: Colors.white,
-        border: Border.all(color: Colors.blueAccent),
+        
         borderRadius: BorderRadius.circular(16.0),
       ),
     );

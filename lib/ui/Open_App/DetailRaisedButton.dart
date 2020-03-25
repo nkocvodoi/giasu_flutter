@@ -17,7 +17,7 @@ class DetailRaisedButton extends StatelessWidget {
       fontStyle: FontStyle.normal,
       color: Colors.white,
       ),
-      
+      textAlign: TextAlign.center,
       ),
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(10),

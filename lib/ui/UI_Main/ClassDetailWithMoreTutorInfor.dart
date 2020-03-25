@@ -4,11 +4,12 @@ import 'package:test_giasu/core/model/List_ClassData.dart';
 import 'package:test_giasu/core/model/List_TeacherData.dart';
 import 'package:test_giasu/ui/Helper/ScreenConfig.dart';
 import 'package:test_giasu/ui/Widgets/ARichTextLine.dart';
+import 'package:test_giasu/ui/Widgets/LargeTextBox.dart';
 import 'package:test_giasu/ui/Widgets/RoundedImageNameBox.dart';
 import 'package:test_giasu/ui/Widgets/SelectedTimeColumn.dart';
+import 'package:test_giasu/ui/Widgets/previous_widget.dart';
 
 import 'TeacherListBox.dart';
-
 
 class ClassDetailWithMoreTutorInfor extends StatefulWidget {
   Data_class classData;
@@ -20,17 +21,17 @@ class ClassDetailWithMoreTutorInfor extends StatefulWidget {
   }
 }
 
-class _ClassDetailWithMoreTutorInforState extends State<ClassDetailWithMoreTutorInfor> {
+class _ClassDetailWithMoreTutorInforState
+    extends State<ClassDetailWithMoreTutorInfor> {
   Data_class classData;
   _ClassDetailWithMoreTutorInforState(this.classData);
   List<Data_teacher> teacher;
   Future<TeacherData> list_teacher;
- 
+
   @override
   void initState() {
     super.initState();
     list_teacher = fetchTeacherData();
-    
   }
 
   Widget _iconTextBox(Text text, Icon icon) {
@@ -65,12 +66,13 @@ class _ClassDetailWithMoreTutorInforState extends State<ClassDetailWithMoreTutor
     // TODO: implement build
     return Scaffold(
       appBar: AppBar(
+        centerTitle: true,
         backgroundColor: Color.fromRGBO(47, 101, 174, 1),
-        title: Center(
-          child: Text(
+        leading: buildPreviousButton(),
+        title:Text(
             'Chi tiết lớp học',
             textAlign: TextAlign.center,
-          ),
+          
         ),
       ),
       body: Center(
@@ -96,13 +98,15 @@ class _ClassDetailWithMoreTutorInforState extends State<ClassDetailWithMoreTutor
                                 alignment: Alignment.center,
                                 color: Color.fromRGBO(47, 101, 174, 1),
                                 child: RoundedImageNameBox(
-                                    'assets/red.jpg', 'Logo2'),
+                                  classData.parent.avatar,
+                                  classData.parent.full_name,
+                                ),
                               ),
                               Align(
                                 alignment: Alignment.bottomCenter,
                                 child: Container(
                                   width: SizeConfig.safeBlockHorizontal * 80,
-                                  height: SizeConfig.safeBlockVertical * 6,
+                                  height: SizeConfig.safeBlockVertical * 5,
                                   decoration: BoxDecoration(
                                     borderRadius: BorderRadius.circular(20.0),
                                     border: Border.all(),
@@ -110,11 +114,11 @@ class _ClassDetailWithMoreTutorInforState extends State<ClassDetailWithMoreTutor
                                   ),
                                   child: Center(
                                     child: Text(
-                                      'Tìm gia sư Tiếng Anh lớp 6 tại Cầu Giấy',
+                                      classData.name,
                                       style: TextStyle(
                                         fontStyle: FontStyle.normal,
                                         fontSize:
-                                            SizeConfig.safeBlockHorizontal * 3,
+                                            13,
                                       ),
                                       textAlign: TextAlign.center,
                                     ),
@@ -144,28 +148,28 @@ class _ClassDetailWithMoreTutorInforState extends State<ClassDetailWithMoreTutor
                                   style: TextStyle(
                                     color: Colors.green,
                                     fontSize:
-                                        SizeConfig.safeBlockHorizontal * 4,
+                                        15,
                                   ),
                                 ),
                                 Icon(
                                   Icons.portrait,
                                   color: Colors.grey,
-                                  size: SizeConfig.safeBlockHorizontal * 4,
+                                  size: 15,
                                 ),
                               ),
                               _iconTextBox(
                                 Text(
-                                  'Mã lớp: ${classData.id} - ${classData.name}',
+                                  'Mã lớp: ${classData.id} - ${classData.subject.name} | Lớp ${classData.grade}',
                                   style: TextStyle(
                                     color: Colors.grey,
                                     fontSize:
-                                        SizeConfig.safeBlockHorizontal * 4,
+                                        15,
                                   ),
                                 ),
                                 Icon(
                                   Icons.home,
                                   color: Colors.grey,
-                                  size: SizeConfig.safeBlockHorizontal * 4,
+                                  size: 15,
                                 ),
                               ),
                               _iconTextBox(
@@ -174,13 +178,13 @@ class _ClassDetailWithMoreTutorInforState extends State<ClassDetailWithMoreTutor
                                   style: TextStyle(
                                     color: Colors.grey,
                                     fontSize:
-                                        SizeConfig.safeBlockHorizontal * 4,
+                                        15,
                                   ),
                                 ),
                                 Icon(
                                   Icons.school,
                                   color: Colors.grey,
-                                  size: SizeConfig.safeBlockHorizontal * 4,
+                                  size: 15,
                                 ),
                               ),
                               _iconTextBox(
@@ -189,13 +193,13 @@ class _ClassDetailWithMoreTutorInforState extends State<ClassDetailWithMoreTutor
                                   style: TextStyle(
                                     color: Colors.grey,
                                     fontSize:
-                                        SizeConfig.safeBlockHorizontal * 4,
+                                        15,
                                   ),
                                 ),
                                 Icon(
                                   Icons.timelapse,
                                   color: Colors.grey,
-                                  size: SizeConfig.safeBlockHorizontal * 4,
+                                  size: 15,
                                 ),
                               ),
                               _iconTextBox(
@@ -204,13 +208,13 @@ class _ClassDetailWithMoreTutorInforState extends State<ClassDetailWithMoreTutor
                                   style: TextStyle(
                                     color: Colors.grey,
                                     fontSize:
-                                        SizeConfig.safeBlockHorizontal * 4,
+                                        15,
                                   ),
                                 ),
                                 Icon(
                                   Icons.person_outline,
                                   color: Colors.grey,
-                                  size: SizeConfig.safeBlockHorizontal * 4,
+                                  size: 15,
                                 ),
                               ),
                               _iconTextBox(
@@ -219,13 +223,13 @@ class _ClassDetailWithMoreTutorInforState extends State<ClassDetailWithMoreTutor
                                   style: TextStyle(
                                     color: Colors.grey,
                                     fontSize:
-                                        SizeConfig.safeBlockHorizontal * 4,
+                                        15,
                                   ),
                                 ),
                                 Icon(
                                   Icons.map,
                                   color: Colors.grey,
-                                  size: SizeConfig.safeBlockHorizontal * 4,
+                                  size: 15,
                                 ),
                               ),
                               _iconTextBox(
@@ -234,13 +238,13 @@ class _ClassDetailWithMoreTutorInforState extends State<ClassDetailWithMoreTutor
                                   style: TextStyle(
                                     color: Colors.grey,
                                     fontSize:
-                                        SizeConfig.safeBlockHorizontal * 4,
+                                        15,
                                   ),
                                 ),
                                 Icon(
                                   Icons.radio_button_checked,
                                   color: Colors.grey,
-                                  size: SizeConfig.safeBlockHorizontal * 4,
+                                  size: 15,
                                 ),
                               ),
                               _iconTextBox(
@@ -249,13 +253,13 @@ class _ClassDetailWithMoreTutorInforState extends State<ClassDetailWithMoreTutor
                                   style: TextStyle(
                                     color: Colors.orange,
                                     fontSize:
-                                        SizeConfig.safeBlockHorizontal * 4,
+                                        15,
                                   ),
                                 ),
                                 Icon(
                                   Icons.monetization_on,
                                   color: Colors.grey,
-                                  size: SizeConfig.safeBlockHorizontal * 4,
+                                  size: 15,
                                 ),
                               ),
                               _iconTextBox(
@@ -264,13 +268,13 @@ class _ClassDetailWithMoreTutorInforState extends State<ClassDetailWithMoreTutor
                                   style: TextStyle(
                                     color: Colors.blue[400],
                                     fontSize:
-                                        SizeConfig.safeBlockHorizontal * 4,
+                                        15,
                                   ),
                                 ),
                                 Icon(
                                   Icons.attach_money,
                                   color: Colors.grey,
-                                  size: SizeConfig.safeBlockHorizontal * 4,
+                                  size: 15,
                                 ),
                               ),
                             ],
@@ -279,22 +283,7 @@ class _ClassDetailWithMoreTutorInforState extends State<ClassDetailWithMoreTutor
                         SizedBox(
                           height: ScreenUtil.getInstance().setHeight(20),
                         ),
-                        Container(
-                          width: SizeConfig.safeBlockHorizontal * 95,
-                          height: SizeConfig.safeBlockHorizontal * 25,
-                          decoration: BoxDecoration(
-                            border: Border.all(color: Colors.blue),
-                            borderRadius: BorderRadius.circular(10.0),
-                          ),
-                          child: Text(
-                            '${classData.about_course}',
-                            style: TextStyle(
-                              fontSize: SizeConfig.safeBlockHorizontal * 4,
-                              fontStyle: FontStyle.normal,
-                              color: Colors.grey[400],
-                            ),
-                          ),
-                        ),
+                       LargeTextBox(classData.about_course),
                         SizedBox(
                           height: ScreenUtil.getInstance().setHeight(10),
                         ),
@@ -308,7 +297,7 @@ class _ClassDetailWithMoreTutorInforState extends State<ClassDetailWithMoreTutor
                           textAlign: TextAlign.start,
                           style: TextStyle(
                             color: Colors.blue,
-                            fontSize: SizeConfig.safeBlockHorizontal * 4,
+                            fontSize: 15,
                           ),
                         ),
                         SizedBox(
@@ -334,7 +323,7 @@ class _ClassDetailWithMoreTutorInforState extends State<ClassDetailWithMoreTutor
                                     hintStyle: TextStyle(
                                         fontStyle: FontStyle.normal,
                                         fontSize:
-                                            SizeConfig.safeBlockHorizontal * 3),
+                                            13),
                                   ),
                                 ),
                               ),
@@ -357,7 +346,7 @@ class _ClassDetailWithMoreTutorInforState extends State<ClassDetailWithMoreTutor
                                     color: Colors.white,
                                     fontStyle: FontStyle.normal,
                                     fontSize:
-                                        SizeConfig.safeBlockHorizontal * 3,
+                                        15,
                                   ),
                                 ),
                               ),
@@ -369,7 +358,7 @@ class _ClassDetailWithMoreTutorInforState extends State<ClassDetailWithMoreTutor
                           ],
                         ),
                         SizedBox(height: SizeConfig.safeBlockVertical * 6),
-                         TeacherListBox(snapshot.data.data),
+                        TeacherListBox(snapshot.data.data),
                       ],
                     ),
                   ],

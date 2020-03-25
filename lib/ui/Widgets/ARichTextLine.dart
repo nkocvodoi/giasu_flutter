@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:test_giasu/ui/Helper/ScreenConfig.dart';
+import 'package:test_giasu/ui/UI_Main/General_Infor.dart';
 class RichTextLine extends StatelessWidget {
   RichTextLine();
   @override
@@ -12,35 +13,35 @@ class RichTextLine extends StatelessWidget {
       text: TextSpan(
         children: <TextSpan>[
           TextSpan(
-            text: 'Thời gian',
+            text: 'Thời gian ',
             style: TextStyle(
-              fontSize:  SizeConfig.safeBlockHorizontal*3,
+              fontSize:  15,
               color: Colors.grey,
-              fontStyle: FontStyle.normal,
+               fontFamily: 'UTM',
             ),
           ),
           TextSpan(
             text: '(màu',
             style: TextStyle(
-              fontStyle: FontStyle.normal,
+               fontFamily: 'UTM',
               color: Colors.grey,
-              fontSize:  SizeConfig.safeBlockHorizontal*3,
+              fontSize:  15,
             ),
           ),
           TextSpan(
             text: ' cam ',
             style: TextStyle(
-              fontStyle: FontStyle.normal,
-              color: Colors.orange,
-              fontSize:  SizeConfig.safeBlockHorizontal*3,
+              fontFamily: 'UTM',
+              color: orange,
+              fontSize:  15,
             ),
           ),
           TextSpan(
-            text: 'hiển thị thời gian có thể dạy)',
+            text: 'hiển thị thời gian có thể học)',
             style: TextStyle(
               color: Colors.grey,
-              fontStyle: FontStyle.normal,
-              fontSize: SizeConfig.safeBlockHorizontal*3,
+              fontFamily: 'UTM',
+              fontSize: 15,
             ),
           ),
         ],

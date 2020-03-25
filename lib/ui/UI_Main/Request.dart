@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:test_giasu/ui/Widgets/SelectedTimeColumn.dart';
+import 'package:test_giasu/ui/Widgets/previous_widget.dart';
 
 class Request extends StatefulWidget {
   @override
@@ -22,6 +23,7 @@ class _RequestState extends State<Request> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: _color,
+        leading: buildPreviousButton(),
         centerTitle: true,
         title: Center(
           child: Text(

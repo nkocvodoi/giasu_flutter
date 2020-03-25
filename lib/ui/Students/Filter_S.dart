@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:test_giasu/ui/Helper/ScreenConfig.dart';
 import 'package:test_giasu/ui/UI_Main/BottomNavigationBar.dart';
+import 'package:test_giasu/ui/Widgets/SmallTextField.dart';
 import 'package:test_giasu/ui/Widgets/previous_widget.dart';
 
 var _locations = ['Hanoi', 'Danang', 'Saigon', 'Other'];
@@ -18,6 +19,11 @@ class Filter_S extends StatefulWidget {
 
 class _Filter_State extends State<Filter_S> {
   final Color _color = Color.fromRGBO(47, 101, 174, 1);
+  TextEditingController _controller = TextEditingController();
+  TextEditingController _controller1 = TextEditingController();
+  TextEditingController _controller2 = TextEditingController();
+  TextEditingController _controller3 = TextEditingController();
+  TextEditingController _controller4 = TextEditingController();
 
   Widget _textField(String text) {
     return Padding(
@@ -82,11 +88,11 @@ class _Filter_State extends State<Filter_S> {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: <Widget>[
-                        _textField('Địa điểm'),
-                        _textField('Môn học'),
-                        _textField('Chủ đề'),
-                        _textField('Hình thức học'),
-                        _textField('Đối tượng dạy'),
+                        SmallTextField('Địa điểm',_controller),
+                        SmallTextField('Môn học',_controller1),
+                        SmallTextField('Chủ đề',_controller2),
+                        SmallTextField('Hình thức học',_controller3),
+                        SmallTextField('Đối tượng dạy',_controller4),
                       ],
                     ),
                   ),

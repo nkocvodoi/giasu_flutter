@@ -3,6 +3,11 @@ import 'dart:ui';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:test_giasu/ui/UI_Main/BottomNavigationBarStudent.dart';
+import 'package:test_giasu/ui/UI_Main/General_Infor.dart';
+import 'package:test_giasu/ui/Widgets/previous_widget.dart';
+
+import 'PostRequest.dart';
 
 class StudentInfor extends StatefulWidget {
   @override
@@ -39,14 +44,15 @@ class _StudentInforState extends State<StudentInfor> {
         ScreenUtil(width: 750, height: 1334, allowFontScaling: true);
     return Scaffold(
       appBar: AppBar(
+        leading: buildPreviousButton(),
         backgroundColor: Color.fromRGBO(47, 101, 174, 1),
-        title: Center(
-          child: Text(
+        centerTitle: true,
+        title: Text(
             'THÔNG TIN CÁ NHÂN',
             textAlign: TextAlign.center,
           ),
         ),
-      ),
+      
       body: Stack(
         fit: StackFit.expand,
         children: <Widget>[
@@ -132,8 +138,10 @@ class _StudentInforState extends State<StudentInfor> {
                           Container(
                             padding: EdgeInsets.all(10),
                             child: RaisedButton(
-                              color: Color.fromRGBO(47, 101, 174, 1),
-                              onPressed: () {},
+                              color: colorApp,
+                              onPressed: () {
+                                Navigator.push(context, MaterialPageRoute(builder: (context)=> PostRequest()));
+                              },
                               child: Text(
                                 'Lưu lại',
                                 style: TextStyle(

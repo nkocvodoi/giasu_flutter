@@ -62,12 +62,17 @@ List<SingleChildCloneableWidget> getProviders() {
     ),
     ChangeNotifierProxyProvider<AuthenticationService, ProfileModel>(
       update: (_, authentication, __) =>
-          ProfileModel(autheticationService: authentication),
+          ProfileModel(authenticationService: authentication),
     ),
     ChangeNotifierProxyProvider<AuthenticationService, NapBitsModel>(
       update: (_, authentication, __) =>
           NapBitsModel(authenticationService: authentication),
     ),
+//    ChangeNotifierProxyProvider<AuthenticationService, WaitingModel>(
+//      update: (_, authentication, __) =>
+//          WaitingModel(authenticationService: authentication),
+//    ),
+
   ];
 
   List<SingleChildCloneableWidget> providers = [

@@ -23,12 +23,11 @@ class _Bits_Manager_State extends State<Bits_Manager> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: colorApp,
-        title: Center(
-          child: Text(
+        centerTitle: true,
+        title: Text(
             'Quản lý Bits',
             style: TextStyle(fontSize: 25, fontWeight: FontWeight.w400),
-            textAlign: TextAlign.center,
-          ),
+//            textAlign: TextAlign.center,
         ),
       ),
 //      bottomNavigationBar: MyBottomNavigationBar(),

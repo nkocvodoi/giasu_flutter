@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:test_giasu/Test.dart';
+import 'package:test_giasu/ui/UI_Main/Account.dart';
 import 'package:test_giasu/ui/UI_Main/ClassDetailRequest.dart';
 import 'package:test_giasu/ui/UI_Main/ClassDetailWithMoreTutorInfor.dart';
 import 'package:test_giasu/ui/UI_Main/Lists_Class.dart';
 import 'package:test_giasu/ui/UI_Main/Nap_Bits.dart';
+import 'package:test_giasu/ui/UI_Main/Profile.dart';
 import 'package:test_giasu/ui/UI_Main/Request.dart';
 import 'package:test_giasu/ui/Widgets/SelectedTime.dart';
 import 'provider_setup.dart' as ProviderSetup;
@@ -39,8 +41,8 @@ class MyApp extends StatelessWidget {
 //        'signIn': (context) => SignIn_Page(),
 //        'signUp': (context) => SignUpPage(),
 //      },
+//        home: Waiting_screen(),
         home: SignIn_Page(),
-//        home: TestSignIn(),
       ),
     );
   }

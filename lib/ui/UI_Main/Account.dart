@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:test_giasu/ui/Open_App/SignIn_Page.dart';
 import 'package:test_giasu/ui/Open_App/Waiting_screen.dart';
+import 'package:test_giasu/ui/UI_Main/Profile.dart';
 
 import 'package:url_launcher/url_launcher.dart';
 
@@ -104,12 +105,12 @@ class _Account_State extends State<Account> {
         switch (_a) {
           case 1: //Trang cá nhân
             {
-              return 1;
-//                Navigator.push(
-//                  context,
-//                  MaterialPageRoute(
-//                    builder: (context) => TutorInfor(),
-//                  ));
+              return
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => Profile(),
+                  ));
             }
             break;
           case 2: //Cập nhật thông tin

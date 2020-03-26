@@ -52,20 +52,21 @@ class SignInModel extends ChangeNotifier {
     var data = {"user": _map};
 
     try {
-      var res = await http.post('https://giasu.htcon.vn/api/sign_in',
+      var res = await http.post('http://192.168.0.106:3300/api/sign_in',
           body: json.encode(data),
           headers: {'Content-Type': 'application/json'});
 
       if (res.statusCode == 200) //return res.body;
       {
         Map<String, dynamic> mapResponse = json.decode(res.body);
-        authenticationService.setToken(mapResponse["token"]);
-        authenticationService.setId(mapResponse["user"]["id"]);
-        authenticationService
-            .setCurrentUser(CurrentUser.fromJson(mapResponse["user"]));
 
-        print(authenticationService.currentUser.id);
-//        print(mapResponse["user"]);
+//        print('log ${authenticationService.currentUser.props}');
+
+//        print(_test.props);
+//        print('log1 ${authenticationService.currentUser.props == _test.props}');
+
+//        print(authenticationService.currentUser.id);
+//        print(mapResponse.toString());
 //        authenticationService.setCurrentUser(CurrentUser.fromJson(mapResponse["user"]));
 //        print(authenticationService.currentUser);
 //        print(authenticationService.isLogined);
@@ -75,9 +76,15 @@ class SignInModel extends ChangeNotifier {
 //        authenticationService.setPrefsData('token', mapResponse['token']);
 //        print(authenticationService.PrefsData.getString('token'));
 //        print(mapResponse);
-        if (mapResponse['code'] == 1)
+        if (mapResponse['code'] == 1) {
+          authenticationService.setToken(mapResponse["token"]);
+          authenticationService.setId(mapResponse["user"]["id"]);
+          authenticationService
+              .setCurrentUser(CurrentUser.fromJson(mapResponse["user"]));
+//          print('log');
+//          print(CurrentUser.fromJson(mapResponse["user"]));
           return true;
-        else {
+        } else {
           _infor = mapResponse['message'];
           return false;
         }

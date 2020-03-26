@@ -156,6 +156,7 @@ class _SignIn_PageState extends State<SignIn_Page> {
                                   icon: Icon(Icons.mail),
                                 ),
                               ),
+                              autofocus: false,
                               keyboardType: TextInputType.phone,
 //                            maxLength: 10,
                               validator: validateMobile,
@@ -237,6 +238,7 @@ class _SignIn_PageState extends State<SignIn_Page> {
 //                            var a = await model.authenticationService.id;
 //                            print(a);
                             if (loginSuccess1) {
+                              print(loginSuccess1);
                               Navigator.push(
                                 context,
                                 MaterialPageRoute(

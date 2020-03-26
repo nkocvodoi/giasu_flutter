@@ -70,6 +70,7 @@ class _FilterState extends State<Filter> {
                             value: null,
                           ),
                           ...List.generate(model.city.length, (index) {
+//                            print(model.city[index].name);
                             return DropdownMenuItem(
                               child: Text('${model.city[index].name}',
                                   style: TextStyle(

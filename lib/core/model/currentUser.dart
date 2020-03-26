@@ -47,7 +47,7 @@ class CurrentUser extends Equatable {
   int booking;
   String approval;
   String active;
-  String notification;
+//  String notification;
 
   CurrentUser({
     this.id,
@@ -63,27 +63,27 @@ class CurrentUser extends Equatable {
     this.booking,
     this.approval,
     this.active,
-    this.notification,
+//    this.notification,
     this.avatar,
   });
 
-  List<Object> get props => [
-        id,
-        avatar,
-        email,
-        role,
-        identification_number,
-        full_info,
-        full_name,
-        phone_number,
-        available_coin,
-        promotion_coin,
-        debt,
-        booking,
-        approval,
-        active,
-        notification
-      ];
+//  List<Object> get props => [
+//        id,
+////        avatar,
+//        email,
+//        role,
+//        identification_number,
+//        full_info,
+//        full_name,
+//        phone_number,
+//        available_coin,
+//        promotion_coin,
+//        debt,
+//        booking,
+//        approval,
+//        active,
+////        notification
+//      ];
 
   factory CurrentUser.fromJson(Map<String, dynamic> json) => CurrentUser(
         id: json['id'],
@@ -100,7 +100,7 @@ class CurrentUser extends Equatable {
         booking: json['booking'],
         approval: json['approval'],
         active: json['active'],
-        notification: json['notification'],
+//        notification: json['notification'],
       );
 
   Map<String, dynamic> toJson() => <String, dynamic>{
@@ -118,6 +118,6 @@ class CurrentUser extends Equatable {
         'booking': booking,
         'approval': approval,
         'active': active,
-        'notification': notification,
+//        'notification': notification,
       };
 }

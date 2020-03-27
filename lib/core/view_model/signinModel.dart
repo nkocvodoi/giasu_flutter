@@ -40,13 +40,6 @@ class SignInModel extends ChangeNotifier {
     setCount(!_count);
   }
 
-//  Future<bool> login(String userPhoneText,String userPassText ) async {
-//    setBusy(true);
-////    var userId = int.tryParse(userIdText);
-//    var success = await login1(userPhoneText, userPassText);
-//    setBusy(false);
-//    return success;
-//  }
 
   Future<bool> login1(Map _map) async {
     var data = {"user": _map};
@@ -60,22 +53,6 @@ class SignInModel extends ChangeNotifier {
       {
         Map<String, dynamic> mapResponse = json.decode(res.body);
 
-//        print('log ${authenticationService.currentUser.props}');
-
-//        print(_test.props);
-//        print('log1 ${authenticationService.currentUser.props == _test.props}');
-
-//        print(authenticationService.currentUser.id);
-//        print(mapResponse.toString());
-//        authenticationService.setCurrentUser(CurrentUser.fromJson(mapResponse["user"]));
-//        print(authenticationService.currentUser);
-//        print(authenticationService.isLogined);
-
-//        print(mapResponse.toString());
-
-//        authenticationService.setPrefsData('token', mapResponse['token']);
-//        print(authenticationService.PrefsData.getString('token'));
-//        print(mapResponse);
         if (mapResponse['code'] == 1) {
           authenticationService.setToken(mapResponse["token"]);
           authenticationService.setId(mapResponse["user"]["id"]);

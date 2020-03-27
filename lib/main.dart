@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 import 'package:test_giasu/ui/Open_App/ForgotPass1.dart';
 import 'package:test_giasu/ui/Open_App/PersonInfor.dart';
 import 'package:test_giasu/ui/Open_App/SignUp_PageTutor.dart';
 import 'package:test_giasu/ui/Open_App/SpecialtyInfor.dart';
+import 'package:test_giasu/ui/Open_App/SubjectChoice.dart';
+import 'package:test_giasu/ui/Open_App/SubjectChoiceDetails.dart';
 import 'package:test_giasu/ui/Students/Filter_S.dart';
 import 'package:test_giasu/ui/Students/PostRequest.dart';
 import 'package:test_giasu/ui/UI_Main/Anouncement.dart';
@@ -19,7 +22,7 @@ import 'TestList_Class.dart';
 import 'provider_setup.dart' as ProviderSetup;
 
 import 'package:test_giasu/ui/UI_Main/Filter.dart';
-import 'package:test_giasu/ui/UI_Main/Payments.dart';
+import 'package:test_giasu/ui/UI_Main/General_Infor.dart';
 
 import 'ui/Open_App/SignIn_Page.dart';
 import 'ui/Open_App/SignUp_Page.dart';
@@ -27,7 +30,10 @@ import 'ui/Open_App/Waiting_screen.dart';
 import 'ui/UI_Main/BottomNavigationBar.dart';
 import 'core/view_model/sendDataExample.dart';
 void main() {
+  // SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp])
+  //   .then((_){
   runApp(MyApp());
+  // });
 }
 class MyApp extends StatelessWidget {
   @override
@@ -40,17 +46,18 @@ class MyApp extends StatelessWidget {
         title: 'HTcon',
         theme: ThemeData(fontFamily: 'UTM'),
         
-//      initialRoute: 'open',
-//      routes: {
-//        '/': (context) => MyBottomNavigationBar(
-//              currentIndex: 0,
-//            ),
-//        'open': (context) => Waiting_screen(),
-//        'signIn': (context) => SignIn_Page(),
-//        'signUp': (context) => SignUpPage(),
-//      },
-//        home: Waiting_screen(),
-        home: PersonInfor(),
+      initialRoute: '/',
+     routes: {
+       '/': (context) => MyBottomNavigationBar(),                       
+       '/open': (context) => Waiting_screen(),
+       '/signIn': (context) => SignIn_Page(),
+       '/signUp': (context) => SignUpPage(),
+       '/specialty': (context) => SpecialtyInfor(),
+       '/subject': (context) => SubjectChoice(),
+       '/home': (context) => MyBottomNavigationBar(),
+     },
+
+        //home: PersonInfor(),
       ),
     );
   }

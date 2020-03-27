@@ -36,7 +36,10 @@ dependencies:
   equatable: ^0.2.0
   date_format: ^1.0.8
   # flutter_cupertino_date_picker: ^0.0.7
-
+  flutter_inappwebview:
+    git:
+      url: https://github.com/pichillilorenzo/flutter_inappwebview.git
+      ref: master
 dev_dependencies:
   flutter_test:
     sdk: flutter

@@ -12,8 +12,6 @@ class ProvinceService {
   Future<List<Province>> fetchProvince() async {
     final response =
     await http.get('https://giasu.htcon.vn/api/v1/guests/provinces');
-
-    print("ketqua" + response.toString());
     if(response.statusCode == 200) {
       Map<String, dynamic> mapResponse = json.decode(response.body);
       if(mapResponse["code"] == 1) {

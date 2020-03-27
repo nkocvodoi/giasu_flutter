@@ -4,6 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:test_giasu/core/service/authentication_service.dart';
+import 'package:test_giasu/ui/UI_Main/General_Infor.dart';
 
 
 class SignUpModel extends ChangeNotifier{
@@ -40,7 +41,7 @@ final AuthenticationService authenticationService;
     var data = {"user":_map};
 //    https://giasu.htcon.vn/api/users/registrations
     try {
-      var res = await http.post('http://192.168.0.106:3300/api/users/registrations',
+      var res = await http.post(APIUrl + 'api/users/registrations',
           body: json.encode(data),
           headers: {
             'Content-Type': 'application/json'

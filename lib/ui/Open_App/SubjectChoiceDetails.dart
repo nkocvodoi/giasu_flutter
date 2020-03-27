@@ -2,6 +2,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
+import 'package:test_giasu/core/model/subjectservice.dart';
+import 'package:test_giasu/core/model/topicService.dart';
+import 'package:test_giasu/core/view_model/personalInforModel.dart';
 import 'package:test_giasu/core/view_model/subjectchoiceModel.dart';
 import 'package:test_giasu/ui/Open_App/SpecialtyInfor.dart';
 import 'package:test_giasu/ui/UI_Main/BottomNavigationBar.dart';
@@ -10,58 +13,82 @@ import 'package:test_giasu/ui/Widgets/previous_widget.dart';
 import 'DetailRaisedButton.dart';
 
 class SubjectChoiceDetails extends StatefulWidget {
-  final List<String> data;
-  Map personalInfor = new Map();
-  SubjectChoiceDetails({Key key, @required this.data,this.personalInfor});
+  List<Subjects> data;
+   List<Topics> firstTopicList;
+  List<Topics> secondTopicList;
+  List<Topics> thirdTopicList;
+  SubjectChoiceDetails(this.data,this.firstTopicList,this.secondTopicList,this.thirdTopicList);
   @override
   State<StatefulWidget> createState() {
     // TODO: implement createState
-    return SubjectChoiceDetailsState(data,personalInfor);
+    return SubjectChoiceDetailsState();
   }
 }
 
 class SubjectChoiceDetailsState extends State<SubjectChoiceDetails> {
-  final List<String> data;
-  Map personalInfor = new Map();
-  SubjectChoiceDetailsState(this.data,this.personalInfor);
-  List<bool> listBools = List.filled(37, true, growable: true);
-  List<String> listSubject = List();
+  GlobalKey<FormState> _key1 = new GlobalKey();
+
+  List<bool> listBools = List.filled(130, true, growable: true);
+  List<Topics> listTopic = List();
+  List<Topics> listSubject = List();
+  List<Map> topics = List();
+  bool _validate = false;
+  _saveToServer() {
+    if (_key1.currentState.validate()) {
+      // No any error in validation
+      _key1.currentState.save();
+    } else {
+      // validation error
+      setState(() {
+        _validate = true;
+      });
+    }
+  }
+
   void onPressed(int n, String m) {
     setState(() => listBools[n] = !listBools[n]);
-    if (listBools[n] == false) listSubject.add(m);
-    if (listBools[n] == true) listSubject.remove(m);
+    var a = Topics(id: (n + 1), name: m);
+    if (listBools[n] == false) {
+      listTopic.add(a);
+      topics.add(a.toMap());
+    }
+    if (listBools[n] == true) {
+      listTopic.removeWhere((item) => item.id == a.id);
+      topics.removeWhere((element) => element["id"] == a.toMap()["id"]);
+    }
   }
+
   // ignore: missing_return
-  Widget _checkData(List data) {
+  Widget _checkData(List<Subjects> data) {
     switch (data.length) {
       case 1:
         return Column(
           children: <Widget>[
-            _subject('${data[0]}', 0),
+            _subject(data[0]),
           ],
         );
         break;
       case 2:
         return Column(
           children: <Widget>[
-            _subject('${data[0]}', 0),
-            _subject('${data[1]}', 6),
+            _subject(data[0]),
+            _subject(data[1]),
           ],
         );
         break;
       case 3:
         return Column(
           children: <Widget>[
-            _subject('${data[0]}', 0),
-            _subject('${data[1]}', 6),
-            _subject('${data[2]}', 12),
+            _subject(data[0]),
+            _subject(data[1]),
+            _subject(data[2]),
           ],
         );
         break;
     }
   }
 
-  Widget _subject(String subject, int n) {
+  Widget _subject(Subjects a) {
     return Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
@@ -70,7 +97,7 @@ class SubjectChoiceDetailsState extends State<SubjectChoiceDetails> {
           ),
           Container(
             child: Text(
-              '     Môn $subject',
+              '     Môn ${a.name}',
               style: TextStyle(
                   fontStyle: FontStyle.normal,
                   fontSize: 20,
@@ -80,11 +107,12 @@ class SubjectChoiceDetailsState extends State<SubjectChoiceDetails> {
           SizedBox(
             height: 20,
           ),
-          _rowOfChoices(n, '$subject cấp 3', 30, '$subject cấp 2', 30),
           _rowOfChoices(
-              2 + n, '$subject cấp 1', 30, '$subject ôn thi Đại học', 23),
-          _rowOfChoices(4 + n, '$subject ôn thi THPT', 25,
-              '$subject luyện thi học sinh giỏi', 17),
+              ((a.id - 1) * 6), '${a.name} cấp 3', 30, '${a.name} cấp 2', 30),
+          _rowOfChoices(2 + ((a.id - 1) * 6), '${a.name} cấp 1', 30,
+              '${a.name} ôn thi Đại học', 23),
+          _rowOfChoices(4 + ((a.id - 1) * 6), '${a.name} ôn thi THPT', 25,
+              '${a.name} luyện thi học sinh giỏi', 17),
         ]);
   }
 
@@ -104,9 +132,8 @@ class SubjectChoiceDetailsState extends State<SubjectChoiceDetails> {
               size: size1,
               selected: listBools[n],
               // model.count,
-              onPressed: () => setState(() => listBools[n] = !listBools[n])
+              onPressed: () => onPressed(n, firstChoice),
               // => model.change()
-              ,
             ),
           ),
           Expanded(
@@ -115,12 +142,10 @@ class SubjectChoiceDetailsState extends State<SubjectChoiceDetails> {
           Expanded(
             flex: 8,
             child: DetailRaisedButton(
-              subject: secondChoice,
-              size: size2,
-              selected: listBools[n + 1],
-              onPressed: () =>
-                  setState(() => listBools[n + 1] = !listBools[n + 1]),
-            ),
+                subject: secondChoice,
+                size: size2,
+                selected: listBools[n + 1],
+                onPressed: () => onPressed((n + 1), secondChoice)),
           ),
           Expanded(
             flex: 1,
@@ -150,15 +175,15 @@ class SubjectChoiceDetailsState extends State<SubjectChoiceDetails> {
           textAlign: TextAlign.start,
         ),
       ),
-      body: SafeArea(
-        child: Stack(
+      body: Consumer<PersonalInforModel>(builder: (_, model, __) {
+        return Stack(
           children: <Widget>[
             SingleChildScrollView(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: <Widget>[
-                  _checkData(data),
+                  _checkData(widget.data),
                   SizedBox(
                     height: ScreenUtil.getInstance().setHeight(80),
                   ),
@@ -180,11 +205,12 @@ class SubjectChoiceDetailsState extends State<SubjectChoiceDetails> {
                         ),
                       ),
                       onPressed: () {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => SpecialtyInfor(personalInfor),
-                            ));
+                        print(topics);
+                        //  _saveToServer();
+                        model.personalInfor["topics"] = topics;
+                        
+                        Navigator.popUntil(
+                            context, ModalRoute.withName('/specialty'));
                       },
                     ),
                   ),
@@ -195,8 +221,8 @@ class SubjectChoiceDetailsState extends State<SubjectChoiceDetails> {
               ),
             ),
           ],
-        ),
-      ),
+        );
+      }),
     );
   }
 }

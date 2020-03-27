@@ -17,18 +17,17 @@ import 'SubjectChoice.dart';
 import 'SubjectChoice.dart';
 
 class SpecialtyInfor extends StatefulWidget {
-  Map personalInfor = new Map();
-  SpecialtyInfor(this.personalInfor);
+  // Map personalInfor = new Map();
+  // SpecialtyInfor(this.personalInfor);
   @override
   State<StatefulWidget> createState() {
     // TODO: implement createState
-    return _SpecialtyInforState(personalInfor);
+    return _SpecialtyInforState();
   }
 }
 
 class _SpecialtyInforState extends State<SpecialtyInfor> {
-  _SpecialtyInforState(this.personalInfor);
-  Map personalInfor = new Map();
+  _SpecialtyInforState();
   GlobalKey<FormState> _key1 = new GlobalKey();
   bool _validate = false;
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
@@ -201,7 +200,7 @@ class _SpecialtyInforState extends State<SpecialtyInfor> {
                                 Navigator.push(
                                   context,
                                   MaterialPageRoute(
-                                    builder: (context) => SubjectChoice(),
+                                    builder: (context) => SubjectChoice( )
                                   ),
                                 );
                               },
@@ -257,7 +256,7 @@ class _SpecialtyInforState extends State<SpecialtyInfor> {
                                 ],
                               ),
                               SizedBox(
-                                width: ScreenUtil.getInstance().setWidth(150),
+                                width: ScreenUtil.getInstance().setWidth(200),
                               ),
                               Consumer<PersonalInforModel>(
                                   builder: (_, model, __) {
@@ -265,24 +264,22 @@ class _SpecialtyInforState extends State<SpecialtyInfor> {
                                   color: colorApp,
                                   onPressed: () async {
                                     _saveToServer();
-                                    personalInfor["tuition_fee"] = (tuition_fee.text == "") ? "null" :
+                                      model.personalInfor["tuition_fee"] = (tuition_fee.text == "") ? "null" :
                                         tuition_fee.text;
-                                    personalInfor["number_class"] = (number_class.text == "") ? "null" :
+                                      model.personalInfor["number_class"] = (number_class.text == "") ? "null" :
                                         number_class.text;
-                                    personalInfor["about_me"] = (about_me.text == "") ? "null" : about_me.text;
-                                    personalInfor["achievement"] = (tuition_fee.text == "") ? "null" :
+                                      model.personalInfor["about_me"] = (about_me.text == "") ? "null" : about_me.text;
+                                      model.personalInfor["achievement"] = (achievement.text == "") ? "null" :
                                         achievement.text;
-                                    personalInfor["form_teaching_id"] = (model.idFormTeaching == null) ? "null" : model.idFormTeaching.toString();
-                                    personalInfor["education_level_id"] = (model.idEducation == null) ? "null" : model.idEducation.toString();
-                                    print(personalInfor.toString());
+                                      model.personalInfor["form_teaching_id"] = (model.idFormTeaching == null) ? "null" : model.idFormTeaching.toString();
+                                      model.personalInfor["education_level_id"] = (model.idEducation == null) ? "null" : model.idEducation.toString();
+                                    print(  model.personalInfor.toString());
                                     var success = await model
-                                        .personalInforCheckup(personalInfor);
+                                        .personalInforCheckup(  model.personalInfor);
+                                        print(success);
                                     if (success) {
-                                      Navigator.push(
-                                          context,
-                                          MaterialPageRoute(
-                                              builder: (context) =>
-                                                  MyBottomNavigationBar()));
+                                      Navigator.pushNamed(context, '/home');
+                                      
                                     } else {
                                       var _message = await model.Infor;
                                       showInSnackBar(_message);

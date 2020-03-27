@@ -101,9 +101,9 @@ class SelectedTimeState extends State<SelectedTime> {
                   ),
                 ],
                 onPressed: (int index) {
-                  model.setCount(!model.cout(n)[index], index, n);
+                  model.setCount(!model.count(n)[index], index, n);
                 },
-                isSelected: model.cout(n),
+                isSelected: model.count(n),
               ),
               Expanded(child: SizedBox(), flex: 1)
             ],

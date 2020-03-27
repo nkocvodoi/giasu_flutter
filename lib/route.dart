@@ -5,9 +5,10 @@ import 'package:test_giasu/ui/Open_App/SignUp_Page.dart';
 import 'package:test_giasu/ui/UI_Main/BottomNavigationBar.dart';
 
 class RoutePaths {
-  static const String Login = 'login';
+  static const String Login = '/login';
   static const String Home = '/';
-  static const String SignUp = 'signup';
+  static const String SignUp = '/signup';
+
 }
 
 class Router {

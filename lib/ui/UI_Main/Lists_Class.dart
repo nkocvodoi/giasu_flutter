@@ -5,6 +5,7 @@ import 'package:http/http.dart' as http;
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:test_giasu/ui/Helper/ScreenConfig.dart';
 import 'package:test_giasu/ui/UI_Main/ClassDetail.dart';
 import 'package:provider/provider.dart';
 import 'package:test_giasu/core/view_model/classModel.dart';
@@ -101,12 +102,12 @@ class _Lists_Class_State extends State<Lists_Class> {
                                   children: <Widget>[
                                     Container(
                                       height: 55,
-                                      width: 150,
+                                      width: SizeConfig.safeBlockHorizontal* 28,
                                       child: Center(
                                         child: Text(
                                           ' ${snapshot.data.total} kết quả',
                                           style: TextStyle(
-                                              fontSize: 18,
+                                              fontSize: SizeConfig.safeBlockHorizontal* 3.5,
                                               color: Colors.white),
                                           textAlign: TextAlign.center,
                                         ),
@@ -122,12 +123,12 @@ class _Lists_Class_State extends State<Lists_Class> {
                                     ),
                                     Container(
                                       height: 55,
-                                      width: 150,
+                                      width: SizeConfig.safeBlockHorizontal * 28,
                                       child: ListTile(
                                         title: Text(
                                           'Bộ lọc',
                                           style: TextStyle(
-                                              fontSize: 18,
+                                              fontSize: SizeConfig.safeBlockHorizontal* 3.5,
                                               color: Colors.white),
                                               textAlign: TextAlign.center,
                                         ),

@@ -25,7 +25,7 @@ class PersonInfor extends StatefulWidget {
 }
 
 class _PersonInforState extends State<PersonInfor> {
-  Map personalInfor = new Map();
+  // Map personalInfor = new Map();
   GlobalKey<FormState> _key1 = new GlobalKey();
   bool _validate = false;
   final TextEditingController full_name = TextEditingController();
@@ -226,7 +226,7 @@ class _PersonInforState extends State<PersonInfor> {
                         ),
                         child: GestureDetector(
                           onTap: chooseImage,
-                          child: showImage(),
+                          child: imageNull() ? Image.asset('assets/user.png',width: 90,) : showImage(),
                         ),
                       ),
                       Column(
@@ -612,36 +612,31 @@ class _PersonInforState extends State<PersonInfor> {
                                           onTap: () async {
                                             startUpload();
                                             _saveToServer();
-                                            personalInfor["full_name"] = (full_name.text == "") ? "null" :
+                                            model.personalInfor["full_name"] = (full_name.text == "") ? "null" :
                                                 full_name.text;
-                                            personalInfor["location_id"] = (model.idCity == null) ? "null" :
+                                            model.personalInfor["location_id"] = (model.idCity == null) ? "null" :
                                                 model.idCity.toString();
-                                            personalInfor["native_country_id"] = (model.idProvince == null) ? "null" :
+                                            model.personalInfor["native_country_id"] = (model.idProvince == null) ? "null" :
                                                 model.idProvince.toString();
-                                            personalInfor["voice_id"] = (model.idVoice == null) ? "null" :
+                                            model.personalInfor["voice_id"] = (model.idVoice == null) ? "null" :
                                                 model.idVoice.toString();
-                                            if(gender != null) personalInfor["gender"] = (gender.text == "") ? "null" :
+                                            if(gender != null)  model.personalInfor["gender"] = (gender.text == "") ? "null" :
                                                 gender.text;
-                                            if(birthdate != null) personalInfor["birthdate"] = (birthdate.text == "") ? "null" :
+                                            if(birthdate != null)  model.personalInfor["birthdate"] = (birthdate.text == "") ? "null" :
                                                 birthdate.text;
-                                            personalInfor["phone_number"] = (phone_number.text == "") ? "null" :
+                                             model.personalInfor["phone_number"] = (phone_number.text == "") ? "null" :
                                                 phone_number.text;
-                                            personalInfor["facebook"] = (facebook.text == "") ? "null" :
+                                             model.personalInfor["facebook"] = (facebook.text == "") ? "null" :
                                                 facebook.text;
-                                            personalInfor["email"] = (email.text == "") ? "null" : email.text;
-                                            personalInfor["address"] = (address.text == "") ? "null" :
+                                             model.personalInfor["email"] = (email.text == "") ? "null" : email.text;
+                                             model.personalInfor["address"] = (address.text == "") ? "null" :
                                                 address.text;
-                                            print(personalInfor.toString());
+                                            print( model.personalInfor.toString());
                                             // var success = await model
                                             //     .personalInforCheckup(
                                             //         personalInfor);
                                             // if (success) {
-                                            Navigator.push(
-                                                context,
-                                                MaterialPageRoute(
-                                                  builder: (context) =>
-                                                      SpecialtyInfor(personalInfor),
-                                                ));
+                                            Navigator.pushNamed(context, '/specialty');
                                             // } else {
                                             //   var _message = await model.Infor;
                                             //   showInSnackBar(_message);

@@ -8,8 +8,10 @@ import 'package:test_giasu/core/model/formTeachingService.dart';
 import 'package:test_giasu/core/model/locationservice.dart';
 import 'package:test_giasu/core/model/provincesService.dart';
 import 'package:test_giasu/core/model/subjectservice.dart';
+import 'package:test_giasu/core/model/topicService.dart';
 import 'package:test_giasu/core/model/voiceService.dart';
 import 'package:test_giasu/core/service/authentication_service.dart';
+import 'package:test_giasu/ui/UI_Main/General_Infor.dart';
 
 class PersonalInforModel extends ChangeNotifier {
   final AuthenticationService authenticationService;
@@ -17,18 +19,11 @@ class PersonalInforModel extends ChangeNotifier {
   PersonalInforModel({this.authenticationService}) {
     init();
   }
-
+  Map personalInfor = new Map();
   bool _busy = false;
   bool get busy => _busy;
   void setBusy(bool value) {
     _busy = value;
-    notifyListeners();
-  }
-
-  int _topic;
-  int get topic => _topic;
-  void setTopic(int value) {
-    _topic = value;
     notifyListeners();
   }
 
@@ -111,6 +106,29 @@ class PersonalInforModel extends ChangeNotifier {
     notifyListeners();
   }
 
+  // List<Topics> _topic = [];
+  // List<Topics> get topic => _topic;
+  // void setTopic(List<Topics> topic) {
+  //   _topic = topic;
+  // }
+
+  // int _idTopic;
+  // int get idTopic => _idTopic;
+  // void serIdTopic(int value) {
+  //   _idTopic = value;
+  //   notifyListeners();
+  // }
+
+  // List<Topics> _topic = [];
+  // List<Topics> get topic => _topic;
+  // Future<void> getListTopic(int i) async {
+  //   _topic = await TopicService.instance.fetchTopic(i);
+  //   notifyListeners();
+  // }
+
+  // List<List<Topics>> _topics = [];
+  // List<List<Topics>> get topics => _topics;
+
   void init() async {
     setBusy(true);
     _province = await ProvinceService.instance.fetchProvince();
@@ -119,6 +137,10 @@ class PersonalInforModel extends ChangeNotifier {
     _education = await EducationService.instance.fetchEducation();
     _form_teaching = await FormTeachingService.instance.fetchTeaching();
     _voice = await VoiceService.instance.fetchVoice();
+    // _topics[0] = await TopicService.instance.fetchTopic(1);
+    // _topics[1] = await TopicService.instance.fetchTopic(2);
+    
+    
     setBusy(false);
   }
 
@@ -151,20 +173,23 @@ class PersonalInforModel extends ChangeNotifier {
 
   Future<bool> personalInforCheckup(Map _map) async {
     var data = {"user": _map};
-    print(data);
+    
 //    https://giasu.htcon.vn/api/users/registrations
-    try {
-      var res = await http.post('http://192.168.0.106:3300/main/thongtin',
+    // try {APIUrl + '
+
+      var res = await http.put(APIUrl + 'api/v1/tutors/2',
+          
           body: json.encode(data),
           headers: {
             'Content-Type': 'application/json',
-            'Authorization': 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjo1NDQsImV4cCI6MTU4NTY0MDkwNCwiaXNzIjoic2Fva2h1ZWUiLCJhdWQiOiJjbGllbnQifQ.F2qklTo-ub90cqNP8Wb1FJXsntJGcNSczY0nzoYhLY4',
+            'Authorization': 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoyLCJleHAiOjE1ODU4NzgxOTEsImlzcyI6InNhb2todWVlIiwiYXVkIjoiY2xpZW50In0.KgzU0-T8r9JSFoEzsakwBBj_nRPiuOumE-lVgRoQIsU',
           });
-          print(res.body.toString());
+          // print('log' + res.body.toString());
+          // print(res.toString());
       if (res.statusCode == 200) //return res.body;
       {
         Map<String, dynamic> mapResponse = json.decode(res.body);
-//        print(mapResponse.toString());
+        print(mapResponse.toString());
 
         if (mapResponse["code"] == 1) {
           return true;
@@ -173,9 +198,9 @@ class PersonalInforModel extends ChangeNotifier {
           return false;
         }
       } 
-    } catch (e) {
-      print(e.toString());
-    }
+    // } catch (e) {
+    //   print(e.toString());
+    // }
     notifyListeners();
   }
 }

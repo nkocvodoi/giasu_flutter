@@ -44,9 +44,6 @@ List<SingleChildCloneableWidget> getProviders() {
       create: (context) => SubjectChoiceModel(),
     ),
     ChangeNotifierProvider(
-      create: (context) => ClassModel(),
-    ),
-    ChangeNotifierProvider(
       create: (context) => Support_SettingModel(),
     ),
   ];
@@ -72,6 +69,10 @@ List<SingleChildCloneableWidget> getProviders() {
 //      update: (_, authentication, __) =>
 //          WaitingModel(authenticationService: authentication),
 //    ),
+    ChangeNotifierProxyProvider<AuthenticationService, ClassModel>(
+      update: (_, authentication, __) =>
+          ClassModel(authenticationService: authentication),
+    ),
 
   ];
 

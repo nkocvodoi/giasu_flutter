@@ -36,7 +36,7 @@ class NapBitsModel extends ChangeNotifier {
   Future<String> postNapBits() async {
     var _data = json.encode({
       "payment": {
-        "total_amount": "200000",
+        "total_amount": _napBits[_group1],
         "payment_method": "ATM_ONLINE",
         "bank_code": "EXB"
       }

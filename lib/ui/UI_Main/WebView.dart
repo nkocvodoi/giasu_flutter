@@ -17,9 +17,6 @@ class MyWebView extends StatefulWidget {
 }
 
 class _WebViewFlutterState extends State<MyWebView> {
-  final Completer<WebViewController> _controller =
-      Completer<WebViewController>();
-//  final _key = UniqueKey();
 
   InAppWebViewController webView;
   String url = "";

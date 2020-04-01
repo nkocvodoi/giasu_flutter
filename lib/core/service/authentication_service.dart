@@ -37,10 +37,12 @@ class AuthenticationService extends ChangeNotifier {
   }
 
   void setCurrentUser(CurrentUser currentUser) {
-//    if (currentUser.props != _currentUser.props) {
-//      print(currentUser.props);
+
+//    if (currentUser.toString() != _currentUser.toString()) {
+
       // @todo: viet lai bieu thuc check
       _currentUser = currentUser;
+      print(_currentUser.toString());
       this._setString("currentUser", _currentUser.toString());
       notifyListeners();
 //    }
@@ -92,12 +94,12 @@ get id {
       jsonDecode(this._getString("currentUser"));
       _currentUser = CurrentUser.fromJson(mapcurrentUser);
     }
-    var _v = this._getString("user");
-    if(_val != null) {
-      Map<String, dynamic> mapUser =
-      jsonDecode(this._getString("user"));
-      _user = Detail_teacher.fromJson(mapUser);
-    }
+//    var _v = this._getString("user");
+//    if(_v != null) {
+//      Map<String, dynamic> mapUser =
+//      jsonDecode(this._getString("user"));
+//      _user = Detail_teacher.fromJson(mapUser);
+//    }
 
     _token = this._getString("token") ?? null;
     _id = this._getInt("id") ?? null;

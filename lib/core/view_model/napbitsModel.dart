@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:test_giasu/core/service/authentication_service.dart';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
+import 'package:test_giasu/ui/UI_Main/General_Infor.dart';
 
 class NapBitsModel extends ChangeNotifier {
   final AuthenticationService authenticationService;
@@ -41,8 +42,9 @@ class NapBitsModel extends ChangeNotifier {
         "bank_code": "EXB"
       }
     });
-    final response = await http.post(
-      'http://192.168.0.106:3300/api/v1/payments',
+    print(_data.toString());
+    final response = await http.post( APIUrl +
+      'api/v1/payments',
       headers: {
     'Content-Type': 'application/json',
         'Authorization': 'Bearer ${authenticationService.token}',
@@ -54,7 +56,7 @@ class NapBitsModel extends ChangeNotifier {
 //    print(response.statusCode);
 //    print('log');
 //    print(mapResponse["data"]);
-//    print(response.body);
+  //  print(response.body);
 
     if (response.statusCode == 200) {
 //    Map<String, dynamic> mapResponse = json.decode(response.body);

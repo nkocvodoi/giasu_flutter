@@ -1,3 +1,4 @@
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:test_giasu/core/model/List_ClassData.dart';
@@ -10,6 +11,7 @@ import 'package:test_giasu/ui/Widgets/LargeTextBox.dart';
 import 'package:test_giasu/ui/Widgets/RoundedImageNameBox.dart';
 import 'package:test_giasu/ui/Widgets/SelectedTimeColumn.dart';
 import 'package:test_giasu/ui/Widgets/previous_widget.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class ClassDetailWhenAcceptedDemo extends StatefulWidget {
   @override
@@ -191,19 +193,55 @@ class _ClassDetailRequestDemoState extends State<ClassDetailWhenAcceptedDemo> {
                           size: 15,
                         ),
                       ),
-                      _iconTextBox(
-                        Text(
-                          'Địa chỉ: Chung Cư Athena Complex Xuân Phương, Phương Canh, Từ Liêm, Hà Nội, Việt Nam | Hà Nội',
-                          style: TextStyle(
-                            color: black,
-                            fontSize: 15,
+                      Row(
+                        children: <Widget>[
+                          Expanded(
+                            child: Icon(
+                              Icons.map,
+                              color: Colors.grey,
+                              size: 15,
+                            ),
                           ),
-                        ),
-                        Icon(
-                          Icons.map,
-                          color: black,
-                          size: 15,
-                        ),
+                          Expanded(
+                            child: SizedBox(
+                              width: ScreenUtil.getInstance().setWidth(20),
+                            ),
+                          ),
+                          Expanded(
+                            flex: 20,
+                            child: Container(
+                              child: RichText(
+                                textAlign: TextAlign.start,
+                                text: TextSpan(
+                                  children: <TextSpan>[
+                                    TextSpan(
+                                      text:
+                                          'Địa chỉ: Chung Cư Athena Complex Xuân Phương, Phương Canh, Từ Liêm, Hà Nội, Việt Nam | Hà Nội',
+                                      style: TextStyle(
+                                        fontSize: 15,
+                                        color: Colors.grey,
+                                        fontFamily: 'UTM',
+                                      ),
+                                    ),
+                                    TextSpan(
+                                      recognizer: TapGestureRecognizer()
+                                        ..onTap = () {
+                                          launch(
+                                              'https://www.google.com/maps/place/38+Tr%E1%BA%A7n+Qu%C3%BD+Ki%C3%AAn,+D%E1%BB%8Bch+V%E1%BB%8Dng,+C%E1%BA%A7u+Gi%E1%BA%A5y,+H%C3%A0+N%E1%BB%99i,+Vi%E1%BB%87t+Nam/@21.0373781,105.7920155,17z/data=!3m1!4b1!4m5!3m4!1s0x3135ab37c1376ff7:0x245ac013cbc4304e!8m2!3d21.0373781!4d105.7920155?hl=vi-VNv');
+                                        },
+                                      text: ' ( Xem bản đồ )',
+                                      style: TextStyle(
+                                        fontFamily: 'UTM',
+                                        color: orange,
+                                        fontSize: 15,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ),
+                          ),
+                        ],
                       ),
                       _iconTextBox(
                         Text(

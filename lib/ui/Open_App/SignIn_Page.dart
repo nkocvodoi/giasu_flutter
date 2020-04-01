@@ -170,6 +170,7 @@ class _SignIn_PageState extends State<SignIn_Page> {
                                   icon: Icon(Icons.mail),
                                 ),
                               ),
+                              autofocus: false,
                               keyboardType: TextInputType.phone,
 //                            maxLength: 10,
                               validator: validateMobile,
@@ -275,9 +276,31 @@ class _SignIn_PageState extends State<SignIn_Page> {
                           Navigator.push(
                             context,
                             MaterialPageRoute(
-                              builder: (context) => ClassDetailRequestDemo(),
-                            ),
-                          );
+                              builder: (context) => ClassDetailRequestDemo()));
+                          //   if (loginSuccess1) {
+                          //     print(loginSuccess1);
+                          //     Navigator.push(
+                          //       context,
+                          //       MaterialPageRoute(
+                          //         builder: (context) => MyBottomNavigationBar(),
+                          //       ),
+                          //     );
+                          //   } else {
+                          //     var _message = await model.Infor;
+                          //     showInSnackBar(_message);
+                          //   }
+                          // },
+                          // color: Colors.orange[300],
+                          // child: new Padding(
+                          //   padding: EdgeInsets.all(10.0),
+                          //   child: Text(
+                          //     'Đăng Nhập',
+                          //     style: TextStyle(
+                          //         fontSize: 20,
+                          //         fontWeight: FontWeight.w400,
+                          //         color: Colors.white),
+                          //   ),
+                          // );
                         } else {
                           var _message = await model.Infor;
                           showInSnackBar(_message);
@@ -302,54 +325,6 @@ class _SignIn_PageState extends State<SignIn_Page> {
                         borderRadius: BorderRadius.circular(6.0),
                       ),
                     ),
-
-//                        InkWell(
-//                          child: Center(
-//                            child: Container(
-//                              width: SizeConfig.safeBlockHorizontal * 40,
-//                              height: SizeConfig.safeBlockVertical * 6,
-//                              decoration: BoxDecoration(
-//                                color: Colors.orange[300],
-//                                borderRadius: BorderRadius.circular(6.0),
-//                              ),
-//                              child: Material(
-//                                color: Colors.transparent,
-//                                child: InkWell(
-//                                  onLongPress: () async {
-//                                    var loginSuccess1 = await model.login(_phone_number.text, _pass.text);
-//
-//                                    if (loginSuccess1) {
-//                                      Navigator.pushNamed(context, RoutePaths.Home);
-//                                    }
-//                                    else {
-//                                      Navigator.pushNamed(context, RoutePaths.SignUp);
-//                                    }
-////                                _sendToServer;
-//
-////                                Navigator.push(
-////                                  context,
-////                                  MaterialPageRoute(
-////                                    builder: (context) => MyBottomNavigationBar(
-////                                      currentIndex: 0,
-////                                    ),
-////                                  ),
-////                                );
-//                                  },
-//                                  child: Center(
-//                                    child: Text(
-//                                      'Đăng nhập',
-//                                      style: TextStyle(
-//                                        color: Colors.white,
-//                                        fontSize: 20,
-//                                        letterSpacing: 1.0,
-//                                      ),
-//                                    ),
-//                                  ),
-//                                ),
-//                              ),
-//                            ),
-//                          ),
-//                        ),
                     SizedBox(
                       height: 7,
                     ),

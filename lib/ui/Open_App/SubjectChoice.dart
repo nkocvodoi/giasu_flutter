@@ -12,48 +12,65 @@ import 'package:test_giasu/ui/Widgets/previous_widget.dart';
 import 'DetailRaisedButton.dart';
 import 'SubjectChoiceDetails.dart';
 
-
 class SubjectChoice extends StatefulWidget {
   // Map personalInfor = new Map();
   // SubjectChoice(this.personalInfor);
- 
+
   @override
   State<StatefulWidget> createState() {
     // TODO: implement createState
-    
     return SubjectChoiceState();
   }
 }
 
 class SubjectChoiceState extends State<SubjectChoice> {
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
-  List<Topics> firstTopicList;
-  List<Topics> secondTopicList;
-  List<Topics> thirdTopicList;
+  List<Topics> topicList = new List<Topics>();
+
+  void fillLists(List<Subjects> subjects, List<Topics> first,
+       List<Topics> data) {
+    for (int j = data.length - 1; j >= 0; j--) {
+      if (data[j].subject_id == subjects[0].id) {
+        first.add(data[j]);
+      }
+      if (data[j].subject_id == subjects[1].id) {
+        first.add(data[j]);
+      }
+      if (data[j].subject_id == subjects[2].id) {
+        first.add(data[j]);
+      }
+    }
+  }
+
   void showInSnackBar(String value) {
     _scaffoldKey.currentState.showSnackBar(
-       SnackBar(
+      SnackBar(
         content: new Text(value, textAlign: TextAlign.start),
         duration: Duration(seconds: 1),
       ),
     );
   }
+
   List<bool> listsBool = List.filled(25, true, growable: true);
-  List<Subjects> listSubject = List();
+  List<Subjects> listSubject = new List<Subjects>();
   List<Map> subjects = List();
   void onPressed(Subjects subject) {
     setState(() => listsBool[subject.id] = !listsBool[subject.id]);
-    if (listsBool[subject.id] == false) {listSubject.add(subject);
-    subjects.add(subject.toMap());
+    if (listsBool[subject.id] == false) {
+      listSubject.add(subject);
+      subjects.add(subject.toMap());
     }
-    if (listsBool[subject.id] == true) {listSubject.removeWhere((item)=> item.id == subject.id);
-    subjects.removeWhere((element) => element["id"] == subject.toMap()["id"]);
+    if (listsBool[subject.id] == true) {
+      listSubject.removeWhere((item) => item.id == subject.id);
+      subjects.removeWhere((element) => element["id"] == subject.toMap()["id"]);
+      // firstTopicList = List();
+      // secondTopicList = List();
+      // thirdTopicList = List();
     }
   }
 
-  Widget _subjectChoice(
-    Subjects firstSubject,size1, Subjects secondSubject,size2, Subjects thirdSubject,size3
-  ) {
+  Widget _subjectChoice(Subjects firstSubject, size1, Subjects secondSubject,
+      size2, Subjects thirdSubject, size3) {
     return Row(
       children: <Widget>[
         Expanded(
@@ -97,7 +114,6 @@ class SubjectChoiceState extends State<SubjectChoice> {
         Expanded(
           child: SizedBox(),
         ),
-        
       ],
     );
   }
@@ -114,14 +130,11 @@ class SubjectChoiceState extends State<SubjectChoice> {
         leading: buildPreviousButton(),
         backgroundColor: Color.fromRGBO(47, 101, 174, 1),
         title: Center(
-          child: Text(
-            'Lựa chọn môn dạy',
-            textAlign: TextAlign.start,
-          ),
-        ),
+            child: Text(
+          'Lựa chọn môn dạy',
+        )),
       ),
-      body: Consumer<PersonalInforModel>(
-        builder: (_, model, __){
+      body: Consumer<PersonalInforModel>(builder: (_, model, __) {
         return Stack(
           fit: StackFit.expand,
           children: <Widget>[
@@ -188,11 +201,12 @@ class SubjectChoiceState extends State<SubjectChoice> {
                       SizedBox(
                         height: 20,
                       ),
-                      _subjectChoice(model.subject[0], 30, model.subject[1], 30, model.subject[2], 30),
+                      _subjectChoice(model.subject[0], 30, model.subject[1], 30,
+                          model.subject[2], 30),
                       _subjectChoice(model.subject[3], 30, model.subject[4], 25,
                           model.subject[5], 18),
-                      _subjectChoice(
-                         model.subject[6], 25, model.subject[7], 27,model.subject[8], 25),
+                      _subjectChoice(model.subject[6], 25, model.subject[7], 27,
+                          model.subject[8], 25),
                       Row(
                         children: <Widget>[
                           Expanded(
@@ -217,8 +231,7 @@ class SubjectChoiceState extends State<SubjectChoice> {
                                 subject: model.subject[10].name,
                                 size: 25,
                                 selected: listsBool[model.subject[10].id],
-                                onPressed: () =>
-                                    onPressed(model.subject[10]),
+                                onPressed: () => onPressed(model.subject[10]),
                               )),
                           Expanded(
                             flex: 1,
@@ -227,10 +240,14 @@ class SubjectChoiceState extends State<SubjectChoice> {
                           Expanded(
                               flex: 8,
                               child: RaisedButton(
-                                child: Text("Môn khác", style: TextStyle(color: Colors.white),),
-                                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+                                child: Text(
+                                  "Môn khác",
+                                  style: TextStyle(color: Colors.white),
+                                ),
+                                shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(10)),
                               )),
-                          Expanded(child: SizedBox(),flex: 1),
+                          Expanded(child: SizedBox(), flex: 1),
                         ],
                       ),
                       SizedBox(
@@ -248,17 +265,22 @@ class SubjectChoiceState extends State<SubjectChoice> {
                       SizedBox(
                         height: 20,
                       ),
-                      _subjectChoice(model.subject[11], 25, model.subject[12], 25,
-                          model.subject[13], 25),
-                      _subjectChoice(model.subject[14], 25, model.subject[15], 25,
-                          model.subject[16], 25),
+                      _subjectChoice(model.subject[11], 25, model.subject[12],
+                          25, model.subject[13], 25),
+                      _subjectChoice(model.subject[14], 25, model.subject[15],
+                          25, model.subject[16], 25),
                       Row(
                         children: <Widget>[
                           Expanded(flex: 1, child: SizedBox()),
                           Expanded(
                               flex: 8,
                               child: RaisedButton(
-                                child: Text("Ngoại ngữ khác",style: TextStyle(color: Colors.white,fontSize: SizeConfig.safeBlockHorizontal*2.5),
+                                child: Text(
+                                  "Ngoại ngữ khác",
+                                  style: TextStyle(
+                                      color: Colors.white,
+                                      fontSize:
+                                          SizeConfig.safeBlockHorizontal * 2.5),
                                 ),
                                 shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(10),
@@ -285,8 +307,8 @@ class SubjectChoiceState extends State<SubjectChoice> {
                       SizedBox(
                         height: 20,
                       ),
-                      _subjectChoice(
-                          model.subject[17], 25, model.subject[18], 26, model.subject[19], 27),
+                      _subjectChoice(model.subject[17], 25, model.subject[18],
+                          26, model.subject[19], 27),
                       Row(
                         children: <Widget>[
                           Expanded(
@@ -308,9 +330,15 @@ class SubjectChoiceState extends State<SubjectChoice> {
                           Expanded(
                               flex: 8,
                               child: RaisedButton(
-                                child: Text("Thể thao khác",style: TextStyle(color: Colors.white,fontSize: SizeConfig.safeBlockHorizontal* 3),
+                                child: Text(
+                                  "Thể thao khác",
+                                  style: TextStyle(
+                                      color: Colors.white,
+                                      fontSize:
+                                          SizeConfig.safeBlockHorizontal * 3),
                                 ),
-                                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+                                shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(10)),
                               )),
                           Expanded(
                             flex: 10,
@@ -340,45 +368,27 @@ class SubjectChoiceState extends State<SubjectChoice> {
                           color: Colors.white,
                         ),
                       ),
-                      onPressed: () {   
-                        if (listSubject.length <= 3 && listSubject.length > 0) {
-                          // for(int i =0;i< listSubject.length;i++){
-                        
-                            // model.topics;
-                            // print(model.topics[0][0].name);
-                            // print(model.subject[0].name);
-                            // if(i == 0) firstTopicList = model.topic;
-                            // if(i == 1) secondTopicList = model.topic ;
-                            // if(i == 2) thirdTopicList = model.topic;
-                          // }
-                          model.personalInfor["subjects"] = subjects;
-                          print(subjects);
+                      onPressed: () {
+                        if (listSubject.length <= 3 && listSubject.length >= 1) {
+                          topicList = new List<Topics>();
+                          fillLists(listSubject, topicList, model.topic);
+                          for (int i = 0; i < topicList.length; i++) {
+                            print(topicList[i].name);
+                          }
+                          
                           Navigator.push(
                               context,
                               MaterialPageRoute(
-                                builder: (context) =>
-                                    SubjectChoiceDetails(listSubject,firstTopicList,secondTopicList,thirdTopicList),
+                                builder: (context) => SubjectChoiceDetails(
+                                    listSubject,
+                                    topicList,
+                                   ),
                               ));
                         } else if (listSubject.length == 0) {
-                            showInSnackBar('Lựa chọn ít nhất 1 môn');
-
-                            // final snackBar = SnackBar(
-                            //   content: Text('Yay! A SnackBar!'),
-                            //   action: SnackBarAction(
-                            //     label: 'Undo',
-                            //     onPressed: () {
-                            //       // Some code to undo the change.
-                            //     },
-                            //   ),
-                            // );
-
-                            // // Find the Scaffold in the widget tree and use
-                            // // it to show a SnackBar.
-                            // Scaffold.of(context).showSnackBar(snackBar);
-                          } 
-                          else {
-                            showInSnackBar('Lựa chọn tối đa 3 môn');
-                          }
+                          showInSnackBar('Lựa chọn ít nhất 1 môn');
+                        } else {
+                          showInSnackBar('Lựa chọn tối đa 3 môn');
+                        }
                       },
                     ),
                   ),
@@ -389,8 +399,8 @@ class SubjectChoiceState extends State<SubjectChoice> {
               ),
             )
           ],
-        );}
-      ),
+        );
+      }),
     );
   }
 }

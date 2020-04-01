@@ -14,6 +14,7 @@ class List_Box extends StatelessWidget {
   Widget build(BuildContext context) {
     // TODO: implement build
     return ListView.builder(
+        padding: EdgeInsets.zero,
         controller: controller,
         shrinkWrap: true,
         itemCount: box.length,
@@ -28,7 +29,11 @@ class List_Box extends StatelessWidget {
 //                  height: 190,
                   child: RaisedButton(
                     onPressed: () {
-                      Navigator.push(context, MaterialPageRoute(builder: (context) => ClassDetailWithMoreTutorInfor(box[index])));
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) =>
+                                  ClassDetailWithMoreTutorInfor(box[index])));
                     },
                     padding: EdgeInsets.all(5.0),
                     child: Row(
@@ -36,14 +41,28 @@ class List_Box extends StatelessWidget {
                         Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: <Widget>[
-                            _iconTextBox(
-                              box[index].name,
-                              colorApp,
-                              Icon(Icons.school),
+                            Container(
+                              child: Row(
+                                children: <Widget>[
+                                  Icon(Icons.school),
+                                  SizedBox(width: 5),
+                                  Container(
+                                    width: 310,
+                                    child: Text(
+                                      "Mã Lớp: ${box[index].id} - ${box[index].subject.name} lớp ${box[index].grade}",
+                                      style: TextStyle(
+                                        fontSize: 16,
+                                        color: blue,
+                                        fontWeight: FontWeight.bold,
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
                             ),
                             _iconTextBox(
                               box[index].parent.full_name,
-                              Colors.deepOrange,
+                              orange,
                               Icon(Icons.account_box),
                             ),
                             _iconTextBox(
@@ -52,7 +71,7 @@ class List_Box extends StatelessWidget {
                               Icon(Icons.map),
                             ),
                             _iconTextBox(
-                              '${(box[index].tuition_fee / 1000).toInt()},000 vnđ/${box[index].time_per_lesson.toInt()}h - ${box[index].lesson_per_week}/tuần',
+                              '${box[index].tuition_fee} vnđ/${box[index].time_per_lesson.toInt()}h - ${box[index].lesson_per_week}/tuần',
                               Colors.grey,
                               Icon(Icons.monetization_on),
                             ),
@@ -62,8 +81,8 @@ class List_Box extends StatelessWidget {
                               Icon(Icons.radio_button_checked),
                             ),
                             _iconTextBox(
-                              'Phí nhận lớp: ${(box[index].class_fee / 1000).toInt()},000 vnđ',
-                              Colors.blue,
+                              'Phí nhận lớp: ${box[index].class_fee} vnđ',
+                              blue,
                               Icon(Icons.attach_money),
                             ),
                           ],
@@ -80,7 +99,6 @@ class List_Box extends StatelessWidget {
                     ),
                     color: Colors.white,
                     shape: RoundedRectangleBorder(
-                      
                       borderRadius: BorderRadius.circular(10.0),
                     ),
                   ),
@@ -109,9 +127,9 @@ class List_Box extends StatelessWidget {
                       Text(
                         '${box[index].recommend_number}/6 đề nghị',
                         style: TextStyle(
-                          height: 1.3,
+                         
                           fontSize: 13,
-                          color: Colors.deepOrange,
+                          color: orange,
                           fontWeight: FontWeight.w400,
                         ),
                       ),
@@ -154,7 +172,7 @@ class List_Box extends StatelessWidget {
           Container(
             width: 310,
             child: Text(
-              _text,
+              '${_text}',
               style: TextStyle(
                 fontSize: 16,
                 color: _c,

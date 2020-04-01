@@ -105,19 +105,51 @@ class PersonalInforModel extends ChangeNotifier {
     _idSubject = value;
     notifyListeners();
   }
+  List<List<Topics>> _topics = [];
+   List<List<Topics>> get topics => _topics;
+  void setTopics(List<List<Topics>> topics) {
+    _topics = topics;
+  }
 
-  // List<Topics> _topic = [];
-  // List<Topics> get topic => _topic;
-  // void setTopic(List<Topics> topic) {
-  //   _topic = topic;
+  // Future<List<Topics>> _topicSubject;
+  //  List<Topics> get topicSubject => _topicSubject;
+  // void setTopicSubject(List<Topics> topicSubject) {
+  //   _topicSubject = topicSubject;
   // }
+  List<Topics> _topic1 = [];
+  List<Topics> _topic2 = [];
+  List<Topics> _topic3 = [];
+  List<Topics> _topic4 = [];
+  List<Topics> _topic5 = [];
+  List<Topics> _topic6 = [];
+  List<Topics> _topic7 = [];
+  List<Topics> _topic8 = [];
+  List<Topics> _topic9 = [];
+  List<Topics> _topic10 = [];
+  List<Topics> _topic11 = [];
+  List<Topics> _topic12 = [];
+  List<Topics> _topic13 = [];
+  List<Topics> _topic14 = [];
+  List<Topics> _topic15 = [];
+  List<Topics> _topic16 = [];
+  List<Topics> _topic17 = [];
+  List<Topics> _topic18 = [];
+  List<Topics> _topic19 = [];
+  List<Topics> _topic20 = [];
+  List<Topics> _topic21 = [];
 
-  // int _idTopic;
-  // int get idTopic => _idTopic;
-  // void serIdTopic(int value) {
-  //   _idTopic = value;
-  //   notifyListeners();
-  // }
+  List<Topics> _topic = [];
+  List<Topics> get topic => _topic;
+  void setTopic(List<Topics> topic) {
+    _topic = topic;
+  }
+
+  int _idTopic;
+  int get idTopic => _idTopic;
+  void serIdTopic(int value) {
+    _idTopic = value;
+    notifyListeners();
+  }
 
   // List<Topics> _topic = [];
   // List<Topics> get topic => _topic;
@@ -137,10 +169,32 @@ class PersonalInforModel extends ChangeNotifier {
     _education = await EducationService.instance.fetchEducation();
     _form_teaching = await FormTeachingService.instance.fetchTeaching();
     _voice = await VoiceService.instance.fetchVoice();
-    // _topics[0] = await TopicService.instance.fetchTopic(1);
-    // _topics[1] = await TopicService.instance.fetchTopic(2);
+    _topic1 = await TopicService.instance.fetchTopic(1);
+    _topic2 = await TopicService.instance.fetchTopic(2);
+    _topic3 = await TopicService.instance.fetchTopic(3);
+    _topic4 = await TopicService.instance.fetchTopic(4);
+    _topic5 = await TopicService.instance.fetchTopic(5);
+    _topic6 = await TopicService.instance.fetchTopic(6);
+    _topic7 = await TopicService.instance.fetchTopic(7);
+    _topic8 = await TopicService.instance.fetchTopic(8);
+    _topic9 = await TopicService.instance.fetchTopic(9);
+    _topic10 = await TopicService.instance.fetchTopic(10);
+    _topic11 = await TopicService.instance.fetchTopic(11);
+    _topic12 = await TopicService.instance.fetchTopic(12);
+    _topic13 = await TopicService.instance.fetchTopic(13);
+    _topic14 = await TopicService.instance.fetchTopic(14);
+    _topic15 = await TopicService.instance.fetchTopic(15);
+    _topic16 = await TopicService.instance.fetchTopic(16);
+    _topic17 = await TopicService.instance.fetchTopic(17);
+    _topic18 = await TopicService.instance.fetchTopic(18);
+    _topic19 = await TopicService.instance.fetchTopic(19);
+    _topic20 = await TopicService.instance.fetchTopic(20);
+    _topic21 = await TopicService.instance.fetchTopic(21);
     
-    
+    // _topic = [_topic1,_topic2,_topic3,_topic4,_topic5,_topic6,_topic7,_topic8,_topic9,_topic10,_topic11,_topic12,_topic13,_topic14,_topic15,_topic16,_topic17,_topic18,_topic19,_topic20,_topic21].expand((element) => element).toList();
+    _topic = _topic1 +_topic2 +_topic3+_topic4+_topic5+_topic6+_topic7+_topic8+_topic9+_topic10+_topic11+_topic12+_topic13+_topic14+_topic15+_topic16+_topic17+_topic18+_topic19+_topic20 + _topic21;
+    print(_topic);
+    print(_subject);
     setBusy(false);
   }
 
@@ -173,16 +227,17 @@ class PersonalInforModel extends ChangeNotifier {
 
   Future<bool> personalInforCheckup(Map _map) async {
     var data = {"user": _map};
-    
+    print("kajshduiashuidhausidash");
+    print(data);
 //    https://giasu.htcon.vn/api/users/registrations
     // try {APIUrl + '
 
-      var res = await http.put(APIUrl + 'api/v1/tutors/2',
+      var res = await http.put(APIUrl + 'api/v1/tutors/521',
           
           body: json.encode(data),
           headers: {
             'Content-Type': 'application/json',
-            'Authorization': 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoyLCJleHAiOjE1ODU4NzgxOTEsImlzcyI6InNhb2todWVlIiwiYXVkIjoiY2xpZW50In0.KgzU0-T8r9JSFoEzsakwBBj_nRPiuOumE-lVgRoQIsU',
+            'Authorization': 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjo1MjEsImV4cCI6MTU4NjMyOTExOSwiaXNzIjoic2Fva2h1ZWUiLCJhdWQiOiJjbGllbnQifQ.zoDa9R5-q_ygJexVYnOxLAZHBcfJiI6EtYgLzO3BZ3c',
           });
           // print('log' + res.body.toString());
           // print(res.toString());

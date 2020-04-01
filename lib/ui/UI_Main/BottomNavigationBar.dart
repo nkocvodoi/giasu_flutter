@@ -36,10 +36,10 @@ class _BottomNavigationBarState extends State<MyBottomNavigationBar> {
 
   Widget build(BuildContext context) {
     // TODO: implement build
-    return Consumer<BottomBarModel>(
-        builder:(_ ,model, __) {
+    return WillPopScope(
+      onWillPop: () async => false,
+        child: Consumer<BottomBarModel>(builder: (_, model, __) {
           return Scaffold(
-            
               body: _children[model.currentIndex],
               bottomNavigationBar: BottomNavigationBar(
                 selectedItemColor: blue,
@@ -57,7 +57,8 @@ class _BottomNavigationBarState extends State<MyBottomNavigationBar> {
                     ),
                     title: Text(
                       'Trang chủ',
-                      style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
+                      style:
+                          TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
                     ),
                   ),
                   BottomNavigationBarItem(
@@ -67,7 +68,8 @@ class _BottomNavigationBarState extends State<MyBottomNavigationBar> {
                     ),
                     title: Text(
                       'Lớp mới',
-                      style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
+                      style:
+                          TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
                     ),
                   ),
                   BottomNavigationBarItem(
@@ -77,7 +79,8 @@ class _BottomNavigationBarState extends State<MyBottomNavigationBar> {
                     ),
                     title: Text(
                       'Thanh toán',
-                      style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
+                      style:
+                          TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
                     ),
                   ),
                   BottomNavigationBarItem(
@@ -87,7 +90,8 @@ class _BottomNavigationBarState extends State<MyBottomNavigationBar> {
                     ),
                     title: Text(
                       'Hộp thư',
-                      style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
+                      style:
+                          TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
                     ),
                   ),
                   BottomNavigationBarItem(
@@ -97,12 +101,13 @@ class _BottomNavigationBarState extends State<MyBottomNavigationBar> {
                     ),
                     title: Text(
                       'Tài khoản',
-                      style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
+                      style:
+                          TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
                     ),
                   ),
                 ],
               ));
-        }
-    );
+        }),
+        );
   }
 }

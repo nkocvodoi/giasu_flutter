@@ -15,6 +15,7 @@ import 'package:test_giasu/ui/UI_Main/ClassDetailRequest.dart';
 import 'package:test_giasu/ui/UI_Main/ClassDetailRequestDemo.dart';
 import 'package:test_giasu/ui/UI_Main/Lists_Class.dart';
 import 'package:test_giasu/ui/UI_Main/Nap_Bits.dart';
+import 'package:test_giasu/ui/UI_Main/Profile.dart';
 import 'package:test_giasu/ui/UI_Main/Request.dart';
 import 'package:test_giasu/ui/UI_Main/Support_Settings.dart';
 import 'package:test_giasu/ui/Widgets/SelectedTime.dart';
@@ -46,9 +47,11 @@ class MyApp extends StatelessWidget {
         title: 'HTcon',
         theme: ThemeData(fontFamily: 'UTM'),
         
-      initialRoute: '/',
+      initialRoute: '/personal',
      routes: {
-       '/': (context) => MyBottomNavigationBar(),                       
+       '/': (context) => Waiting_screen(),   
+       '/subject': (context) => SubjectChoice(), 
+       '/personal': (context) => PersonInfor(),                   
        '/open': (context) => Waiting_screen(),
        '/signIn': (context) => SignIn_Page(),
        '/signUp': (context) => SignUpPage(),

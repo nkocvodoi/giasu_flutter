@@ -6,6 +6,7 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:test_giasu/core/model/currentUser.dart';
 import 'package:test_giasu/core/service/authentication_service.dart';
+import 'package:test_giasu/ui/UI_Main/General_Infor.dart';
 
 class SignInModel extends ChangeNotifier {
   final AuthenticationService authenticationService;
@@ -40,44 +41,28 @@ class SignInModel extends ChangeNotifier {
     setCount(!_count);
   }
 
-//  Future<bool> login(String userPhoneText,String userPassText ) async {
-//    setBusy(true);
-////    var userId = int.tryParse(userIdText);
-//    var success = await login1(userPhoneText, userPassText);
-//    setBusy(false);
-//    return success;
-//  }
 
   Future<bool> login1(Map _map) async {
     var data = {"user": _map};
 
     try {
-      var res = await http.post('https://giasu.htcon.vn/api/sign_in',
+      var res = await http.post(APIUrl + 'api/sign_in',
           body: json.encode(data),
           headers: {'Content-Type': 'application/json'});
 
       if (res.statusCode == 200) //return res.body;
       {
         Map<String, dynamic> mapResponse = json.decode(res.body);
-        authenticationService.setToken(mapResponse["token"]);
-        authenticationService.setId(mapResponse["user"]["id"]);
-        authenticationService
-            .setCurrentUser(CurrentUser.fromJson(mapResponse["user"]));
 
-        print(authenticationService.currentUser.id);
-//        print(mapResponse["user"]);
-//        authenticationService.setCurrentUser(CurrentUser.fromJson(mapResponse["user"]));
-//        print(authenticationService.currentUser);
-//        print(authenticationService.isLogined);
-
-//        print(mapResponse.toString());
-
-//        authenticationService.setPrefsData('token', mapResponse['token']);
-//        print(authenticationService.PrefsData.getString('token'));
-//        print(mapResponse);
-        if (mapResponse['code'] == 1)
+        if (mapResponse['code'] == 1) {
+          authenticationService.setToken(mapResponse["token"]);
+          authenticationService.setId(mapResponse["user"]["id"]);
+          authenticationService
+              .setCurrentUser(CurrentUser.fromJson(mapResponse["user"]));
+//          print('log');
+//          print(CurrentUser.fromJson(mapResponse["user"]));
           return true;
-        else {
+        } else {
           _infor = mapResponse['message'];
           return false;
         }

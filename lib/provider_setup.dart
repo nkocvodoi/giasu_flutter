@@ -44,14 +44,14 @@ List<SingleChildCloneableWidget> getProviders() {
       create: (context) => SubjectChoiceModel(),
     ),
     ChangeNotifierProvider(
-      create: (context) => ClassModel(),
-    ),
-    ChangeNotifierProvider(
       create: (context) => Support_SettingModel(),
     ),
     ChangeNotifierProvider(
       create: (context) => PersonalInforModel(),
-    )
+    ),
+    ChangeNotifierProvider(
+      create: (context) => ClassModel(),
+    ),
   ];
 
   List<SingleChildCloneableWidget> dependentServices = [
@@ -69,7 +69,7 @@ List<SingleChildCloneableWidget> getProviders() {
     ),
     ChangeNotifierProxyProvider<AuthenticationService, ProfileModel>(
       update: (_, authentication, __) =>
-          ProfileModel(autheticationService: authentication),
+          ProfileModel(authenticationService: authentication),
     ),
     ChangeNotifierProxyProvider<AuthenticationService, NapBitsModel>(
       update: (_, authentication, __) =>
@@ -80,6 +80,15 @@ List<SingleChildCloneableWidget> getProviders() {
           SignUpModel(authenticationService: authentication),
     ),
     
+//    ChangeNotifierProxyProvider<AuthenticationService, WaitingModel>(
+//      update: (_, authentication, __) =>
+//          WaitingModel(authenticationService: authentication),
+//    ),
+    // ChangeNotifierProxyProvider<AuthenticationService, ClassModel>(
+    //   update: (_, authentication, __) =>
+    //       ClassModel(authenticationService: authentication),
+    // ),
+
   ];
 
   List<SingleChildCloneableWidget> providers = [

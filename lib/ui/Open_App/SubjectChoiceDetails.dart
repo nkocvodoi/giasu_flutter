@@ -14,12 +14,12 @@ import 'DetailRaisedButton.dart';
 
 class SubjectChoiceDetails extends StatefulWidget {
   List<Subjects> data;
-   List<Topics> firstTopicList;
-  List<Topics> secondTopicList;
-  List<Topics> thirdTopicList;
-  SubjectChoiceDetails(this.data,this.firstTopicList,this.secondTopicList,this.thirdTopicList);
+  List<Topics> topicList;
+  SubjectChoiceDetails(this.data, this.topicList);
+  
   @override
   State<StatefulWidget> createState() {
+    
     // TODO: implement createState
     return SubjectChoiceDetailsState();
   }
@@ -30,7 +30,7 @@ class SubjectChoiceDetailsState extends State<SubjectChoiceDetails> {
 
   List<bool> listBools = List.filled(130, true, growable: true);
   List<Topics> listTopic = List();
-  List<Topics> listSubject = List();
+  List<int> listTopicID = List();
   List<Map> topics = List();
   bool _validate = false;
   _saveToServer() {
@@ -45,50 +45,59 @@ class SubjectChoiceDetailsState extends State<SubjectChoiceDetails> {
     }
   }
 
-  void onPressed(int n, String m) {
-    setState(() => listBools[n] = !listBools[n]);
-    var a = Topics(id: (n + 1), name: m);
-    if (listBools[n] == false) {
-      listTopic.add(a);
-      topics.add(a.toMap());
+  void onPressed(Topics topic) {
+    setState(() => listBools[topic.id] = !listBools[topic.id]);
+
+    if (listBools[topic.id] == false) {
+      listTopic.add(topic);
+      listTopicID.add(topic.id);
+
     }
-    if (listBools[n] == true) {
-      listTopic.removeWhere((item) => item.id == a.id);
-      topics.removeWhere((element) => element["id"] == a.toMap()["id"]);
+    if (listBools[topic.id] == true) {
+      listTopic.removeWhere((item) => item.id == topic.id);
+      listTopicID.remove(topic.id);
     }
   }
 
   // ignore: missing_return
   Widget _checkData(List<Subjects> data) {
-    switch (data.length) {
-      case 1:
-        return Column(
+    return  Column(
           children: <Widget>[
-            _subject(data[0]),
+            (widget.topicList.length != 0) ? _subject(data[0], widget.topicList) : SizedBox(),
+            // (widget.secondTopicList.length != 0) ? _subject(data[0], widget.secondTopicList) : SizedBox(),
+            // (widget.thirdTopicList.length != 0) ? _subject(data[0], widget.thirdTopicList) : SizedBox(),
           ],
-        );
-        break;
-      case 2:
-        return Column(
-          children: <Widget>[
-            _subject(data[0]),
-            _subject(data[1]),
-          ],
-        );
-        break;
-      case 3:
-        return Column(
-          children: <Widget>[
-            _subject(data[0]),
-            _subject(data[1]),
-            _subject(data[2]),
-          ],
-        );
-        break;
-    }
+        ) ;
+    // switch (data.length) {
+    //   case 1:
+    //     return Column(
+    //       children: <Widget>[
+    //         _subject(data[0], widget.firstTopicList),
+    //       ],
+    //     );
+    //     break;
+    //   case 2:
+    //     return Column(
+    //       children: <Widget>[
+    //         _subject(data[0], widget.firstTopicList),
+    //         _subject(data[1], widget.secondTopicList),
+    //       ],
+    //     );
+    //     break;
+    //   case 3:
+    //     return Column(
+    //       children: <Widget>[
+    //         _subject(data[0], widget.firstTopicList),
+    //         _subject(data[1], widget.secondTopicList),
+    //         _subject(data[2], widget.thirdTopicList),
+    //       ],
+    //     );
+    //     break;
+    // }
   }
 
-  Widget _subject(Subjects a) {
+  Widget _subject(Subjects a, List<Topics> topicList) {
+    int n = topicList.length ;
     return Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
@@ -107,18 +116,22 @@ class SubjectChoiceDetailsState extends State<SubjectChoiceDetails> {
           SizedBox(
             height: 20,
           ),
-          _rowOfChoices(
-              ((a.id - 1) * 6), '${a.name} cấp 3', 30, '${a.name} cấp 2', 30),
-          _rowOfChoices(2 + ((a.id - 1) * 6), '${a.name} cấp 1', 30,
-              '${a.name} ôn thi Đại học', 23),
-          _rowOfChoices(4 + ((a.id - 1) * 6), '${a.name} ôn thi THPT', 25,
-              '${a.name} luyện thi học sinh giỏi', 17),
+          _rowOfChoices(topicList,n),
+          _rowOfChoices(topicList,n-2),
+          _rowOfChoices(topicList,n-4),
+          _rowOfChoices(topicList,n-6),
+          _rowOfChoices(topicList,n-8),
+          _rowOfChoices(topicList,n-10),
+          _rowOfChoices(topicList,n -12),
+          _rowOfChoices(topicList, n-14),
+          _rowOfChoices(topicList, n -16),
         ]);
   }
 
-  Widget _rowOfChoices(
-      int n, String firstChoice, int size1, String secondChoice, int size2) {
-    return Consumer<SubjectChoiceModel>(builder: (_, model, __) {
+  Widget _rowOfChoices(List<Topics> topicList,int n) {
+    if ((n - 2) > 0) {
+      var topic1 = topicList[n - 1];
+      var topic2 = topicList[n - 2];
       return Row(
         children: <Widget>[
           Expanded(
@@ -128,11 +141,11 @@ class SubjectChoiceDetailsState extends State<SubjectChoiceDetails> {
           Expanded(
             flex: 8,
             child: DetailRaisedButton(
-              subject: firstChoice,
-              size: size1,
-              selected: listBools[n],
+              subject: topic1.name,
+              size: 23,
+              selected: listBools[topic1.id],
               // model.count,
-              onPressed: () => onPressed(n, firstChoice),
+              onPressed: () => onPressed(topic1),
               // => model.change()
             ),
           ),
@@ -142,10 +155,13 @@ class SubjectChoiceDetailsState extends State<SubjectChoiceDetails> {
           Expanded(
             flex: 8,
             child: DetailRaisedButton(
-                subject: secondChoice,
-                size: size2,
-                selected: listBools[n + 1],
-                onPressed: () => onPressed((n + 1), secondChoice)),
+              subject: topic2.name,
+              size: 23,
+              selected: listBools[topic2.id],
+              // model.count,
+              onPressed: () => onPressed(topic2),
+              // => model.change()
+            ),
           ),
           Expanded(
             flex: 1,
@@ -153,7 +169,32 @@ class SubjectChoiceDetailsState extends State<SubjectChoiceDetails> {
           ),
         ],
       );
-    });
+    }
+    if (n ==1) {
+      var topic1 = topicList[n - 1];
+       
+      return Row(
+        children: <Widget>[
+          Expanded(child: SizedBox(), flex: 1),
+          Expanded(
+            flex: 8,
+            child: DetailRaisedButton(
+              subject: topic1.name,
+              size: 23,
+              selected: listBools[topic1.id],
+              // model.count,
+              onPressed: () => onPressed(topic1),
+              // => model.change()
+            ),
+          ),
+          Expanded(
+            child: SizedBox(),
+            flex: 10,
+          ),
+        ],
+      );
+    } if(n <= 0){
+      return SizedBox(width: double.infinity,);}
   }
 
   @override
@@ -169,10 +210,7 @@ class SubjectChoiceDetailsState extends State<SubjectChoiceDetails> {
         centerTitle: true,
         title: Text(
           'Lựa chọn chủ đề',
-          style: TextStyle(
-            fontStyle: FontStyle.normal,
-          ),
-          textAlign: TextAlign.start,
+          
         ),
       ),
       body: Consumer<PersonalInforModel>(builder: (_, model, __) {
@@ -205,10 +243,10 @@ class SubjectChoiceDetailsState extends State<SubjectChoiceDetails> {
                         ),
                       ),
                       onPressed: () {
-                        print(topics);
+                        print(listTopicID);
                         //  _saveToServer();
-                        model.personalInfor["topics"] = topics;
-                        
+                        model.personalInfor["topic_id"] = listTopicID;
+
                         Navigator.popUntil(
                             context, ModalRoute.withName('/specialty'));
                       },

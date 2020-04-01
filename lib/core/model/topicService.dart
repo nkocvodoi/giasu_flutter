@@ -8,9 +8,9 @@ class TopicService {
   static final TopicService instance = TopicService.internal();
   TopicService.internal();
   factory TopicService() => instance;
-  Future<List<Topics>> fetchTopic(int i) async {
+  Future<List<Topics>> fetchTopic(int subject_id) async {
     final response =
-    await http.get('https://giasu.htcon.vn/api/v1/topics?subject_id=${i}');
+    await http.get('https://giasu.htcon.vn/api/v1/topics?subject_id=${subject_id}');
     if(response.statusCode == 200) {
       Map<String, dynamic> mapResponse = json.decode(response.body);
       

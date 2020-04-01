@@ -197,12 +197,7 @@ class _SpecialtyInforState extends State<SpecialtyInfor> {
                               //     borderRadius: BorderRadius.circular(10.0)),
                               color: Colors.white,
                               onPressed: () {
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                    builder: (context) => SubjectChoice( )
-                                  ),
-                                );
+                                Navigator.pushNamed(context, '/subject');
                               },
                               child: Container(
                                 padding: EdgeInsets.all(3.0),

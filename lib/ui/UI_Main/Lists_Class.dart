@@ -67,6 +67,7 @@ class _Lists_Class_State extends State<Lists_Class> {
                       (BuildContext context, bool innerBoxIsScrolled) {
                     return <Widget>[
                       SliverAppBar(
+                        automaticallyImplyLeading: false,
                         backgroundColor: colorApp,
                         expandedHeight: 40,
 //              floating: false,

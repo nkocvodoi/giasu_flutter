@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 
 class BottomBarModel extends ChangeNotifier {
 
-  int _selectedIndex = 0;
-  int get selectedIndex => _selectedIndex;
-  void setSelectedIndex(int value) {
-    if(value != _selectedIndex) {
-      _selectedIndex = value;
+  int _currentIndex = 0;
+  int get currentIndex => _currentIndex;
+  void setCurrentIndex(int value) {
+    if(value != _currentIndex) {
+      _currentIndex = value;
     }
     notifyListeners();
   }

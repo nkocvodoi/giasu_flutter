@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:test_giasu/ui/Open_App/SignIn_Page.dart';
 import 'package:test_giasu/ui/Open_App/Waiting_screen.dart';
 import 'package:test_giasu/ui/Students/PostRequest.dart';
+import 'package:test_giasu/ui/UI_Main/Profile.dart';
 
 import 'package:url_launcher/url_launcher.dart';
 
@@ -106,65 +107,63 @@ class _Account_State extends State<Account> {
   }
 
   Widget _buildText(String _text, int _a) {
-    return Container(
-        height: 50,
-        child: Center(
-            child: ListTile(
-          title: Row(
-            children: <Widget>[
-              Icon(Icons.account_box),
-              SizedBox(width: 5),
-              Text(
-                _text,
-                style: TextStyle(color: Colors.grey[600], fontSize: 18),
-              ),
-            ],
+    return ListTile(
+      title: Row(
+        children: <Widget>[
+          Icon(Icons.account_box),
+          SizedBox(width: 5),
+          Text(
+            _text,
+            style: TextStyle(color: Colors.grey[600], fontSize: 18),
           ),
-          onTap: () {
-            switch (_a) {
-              case 1: //Trang cá nhân
-                {
-                  return 1;
-                  //  Navigator.push(
-                  //    context,
-                  //    MaterialPageRoute(
-                  //      builder: (context) => TutorInfor(),
-                  //    ));
-                }
-                break;
-              case 2: //Cập nhật thông tin
-                {
-                  return 1;
-                }
-                break;
-              case 3: //Đổi mật khẩu
-                {
-                  return Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => ResetPass(),
-                      ));
-                }
-                break;
-              case 4: //Quản lí lớp
-                {
-                  return 1;
-                }
-                break;
-              case 5: //Câu hỏi thường gặp
-                {
-                  return 1;
-                }
-                break;
-              case 6: //Trợ giúp và cài đặt
-                {
-                  return Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => Support_Settings(),
-                      ));
-                }
-                break;
+        ],
+      ),
+      trailing: Icon(Icons.arrow_forward_ios, size: 20),
+      onTap: () {
+        switch (_a) {
+          case 1: //Trang cá nhân
+            {
+              return
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => Profile(),
+                  ));
+            }
+            break;
+          case 2: //Cập nhật thông tin
+            {
+              return 1;
+            }
+            break;
+          case 3: //Đổi mật khẩu
+            {
+              return Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => ResetPass(),
+                  ));
+            }
+            break;
+          case 4: //Quản lí lớp
+            {
+              return 1;
+            }
+            break;
+          case 5: //Câu hỏi thường gặp
+            {
+              return 1;
+            }
+            break;
+          case 6: //Trợ giúp và cài đặt
+            {
+              return Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => Support_Settings(),
+                  ));
+            }
+            break;
 
               default: //Đăng xuất
                 {
@@ -177,11 +176,8 @@ class _Account_State extends State<Account> {
                 break;
             }
           },
-          trailing: Icon(
-            Icons.arrow_forward_ios,
-            size: 20,
-          ),
-        )));
+          
+        );
   }
 
   Widget _buildExpansionTile(

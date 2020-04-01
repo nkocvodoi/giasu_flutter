@@ -18,21 +18,30 @@ class SignUpPageTutor extends StatefulWidget {
 
 class _SignUpPageTutor extends State<SignUpPageTutor> {
   final Color _c = Colors.blue[800];
-
-  final TextEditingController _email = new TextEditingController();
-  final TextEditingController _name = new TextEditingController();
-  final TextEditingController _phone = new TextEditingController();
-  final TextEditingController _password = new TextEditingController();
-  final TextEditingController _password2 = new TextEditingController();
-
+  Map signupInfor = new Map();
+  TextEditingController _email = new TextEditingController();
+  TextEditingController _name = new TextEditingController();
+  TextEditingController _phone = new TextEditingController();
+  TextEditingController _password = new TextEditingController();
+  TextEditingController _password_confirm = new TextEditingController();
   String _name_hint = 'Họ và Tên *',
       _email_hint = 'Email * ',
       _phone_hint = 'Số điện thoại *',
       _password_hint = 'Mật khẩu *',
       _password2_hint = 'Xác nhận mật khẩu *';
 
-  GlobalKey<FormState> _key = new GlobalKey();
+  GlobalKey<FormState> _key1 = new GlobalKey();
   bool _validate = false;
+  final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
+  void showInSnackBar(String value) {
+    _scaffoldKey.currentState.showSnackBar(
+      SnackBar(
+        content: new Text(value, textAlign: TextAlign.start),
+        duration: Duration(seconds: 1),
+      ),
+    );
+  }
+
   String validatePass(String value) {
     String patttern = r'(^[a-zA-Z ]*$)';
     RegExp regExp = new RegExp(patttern);
@@ -73,13 +82,10 @@ class _SignUpPageTutor extends State<SignUpPageTutor> {
     }
   }
 
-  _sendToServer() {
-    if (_key.currentState.validate()) {
+  _saveToServer() {
+    if (_key1.currentState.validate()) {
       // No any error in validation
-      _key.currentState.save();
-//      print("Name $name");
-//      print("Mobile $mobile");
-//      print("Email $email");
+      _key1.currentState.save();
     } else {
       // validation error
       setState(() {
@@ -104,13 +110,12 @@ class _SignUpPageTutor extends State<SignUpPageTutor> {
       body: new SingleChildScrollView(
         //physics: const NeverScrollableScrollPhysics(),
         child: Form(
-          key: _key,
+          key: _key1,
           autovalidate: _validate,
           child: Container(
             //child: new Padding(padding: EdgeInsets.all(30.0),
             child: new Wrap(
               children: <Widget>[
-                
                 new Container(
                   color: _c,
                   child: new Text(
@@ -121,7 +126,9 @@ class _SignUpPageTutor extends State<SignUpPageTutor> {
                   width: double.infinity,
                   height: 60,
                 ),
-                SizedBox(height: 10,),
+                SizedBox(
+                  height: 10,
+                ),
                 Center(
                   child: Text(
                     'Vui lòng điền đầy đủ thông tin vào những mục (*)',
@@ -135,10 +142,10 @@ class _SignUpPageTutor extends State<SignUpPageTutor> {
                       _TextFieldsName(_name_hint),
                       _TextFieldsPhone(_phone_hint),
                       _TextFieldsEmail(_email_hint),
-                      _TextFieldsPass(_password_hint),
-                      _TextFieldsPass(_password2_hint),
+                      _TextFieldsPass(_password_hint, _password),
+                      _TextFieldsPass(_password2_hint, _password_confirm),
                       new Padding(
-                        padding: EdgeInsets.only(top:5.0,bottom: 5),
+                        padding: EdgeInsets.only(top: 5.0, bottom: 5),
                         child: Text(
                           '*Mật khẩu bắt buộc từ 6 -32 ký tự (bao gồm chữ và số)',
                           style: TextStyle(
@@ -202,32 +209,52 @@ class _SignUpPageTutor extends State<SignUpPageTutor> {
                         ],
                       ),
                       SizedBox(height: 20),
-                     RaisedButton(
-                            onPressed: () {
-                              _sendToServer();
-                              Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                    builder: (context) => PersonInfor(),
-                                  ));
-                            },
-                            color: _c,
-                            child: new Padding(
-                              padding: EdgeInsets.only(top:10.0, bottom: 10,right: 5,left: 5),
-                              child: Text(
-                                'Đăng ký',
-                                style: TextStyle(
-                                    fontSize: 18,
-                                    fontWeight: FontWeight.w400,
-                                    color: Colors.white),
+                      Consumer<SignUpModel>(builder: (_, model, __) {
+                        return Padding(
+                          padding: EdgeInsets.all(15.0),
+                          child: Center(
+                            child: RaisedButton(
+                              onPressed: () async {
+                                _saveToServer();
+                                model.setRole();
+                                signupInfor["role"] = 'tutor';
+                                signupInfor["full_name"] = _name.text;
+                                signupInfor["phone_number"] = _phone.text;
+                                signupInfor["email"] = _email.text;
+                                signupInfor["password"] = _password.text;
+                                signupInfor["password_confirmation"] =
+                                    _password_confirm.text;
+                                var success =
+                                    await model.checksignup(signupInfor);
+                                if (success) {
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (context) => PersonInfor(),
+                                      ));
+                                } else {
+                                  var _message = await model.Infor;
+                                  showInSnackBar(_message);
+                                }
+                              },
+                              color: _c,
+                              child: new Padding(
+                                padding: EdgeInsets.all(7.0),
+                                child: Text(
+                                  'Đăng ký',
+                                  style: TextStyle(
+                                      fontSize: 18,
+                                      fontWeight: FontWeight.w400,
+                                      color: Colors.white),
+                                ),
+                              ),
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(10.0),
                               ),
                             ),
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(10.0),
-                            ),
                           ),
-                        
-                      
+                        );
+                      }),
                       SizedBox(
                         height: 20,
                       )
@@ -241,6 +268,52 @@ class _SignUpPageTutor extends State<SignUpPageTutor> {
         ),
       ),
     );
+  }
+
+  Widget _Chooserole() {
+    return Consumer<SignUpModel>(builder: (_, model, __) {
+      return Container(
+        height: 75,
+        child: Row(
+          children: <Widget>[
+            Expanded(flex: 2, child: SizedBox()),
+            Radio(
+              value: 0,
+              groupValue: model.group,
+              onChanged: (T) {
+//                      setState(() {
+//                        group1 = T;
+//                      });
+//                    print(model.group1);
+//                    print(T);
+                model.setGroup(T);
+              },
+            ),
+            Text(
+              'Học viên',
+              style: TextStyle(fontSize: 18),
+            ),
+            Radio(
+              value: 1,
+              groupValue: model.group,
+              onChanged: (T) {
+//                      setState(() {
+//                        group1 = T;
+//                      });
+//                    print(model.group1);
+//                    print(T);
+                model.setGroup(T);
+              },
+            ),
+            Text(
+              'Gia sư',
+              style: TextStyle(fontSize: 18),
+            ),
+            Expanded(flex: 3, child: SizedBox()),
+          ],
+        ),
+      );
+    });
   }
 
   Widget _TextFieldsName(
@@ -296,9 +369,7 @@ class _SignUpPageTutor extends State<SignUpPageTutor> {
     );
   }
 
-  Widget _TextFieldsPass(
-    String _text,
-  ) {
+  Widget _TextFieldsPass(String _text, TextEditingController _pass) {
     return new Container(
       child: new TextFormField(
           //controller: _emailFilter,
@@ -306,12 +377,13 @@ class _SignUpPageTutor extends State<SignUpPageTutor> {
           obscureText: true,
           style: TextStyle(fontSize: 20.0),
           decoration: new InputDecoration(
-              labelStyle: TextStyle(fontSize: 20.0), labelText: _text),
+              labelStyle: TextStyle(fontSize: 20.0), 
+              labelText: _text),
           keyboardType: TextInputType.visiblePassword,
 //                            maxLength: 10,
           validator: validatePass,
           onSaved: (String val) {
-            _password.text = val;
+            _pass.text = val;
           }),
     );
   }

@@ -14,12 +14,11 @@ class RectangleImageNameBox extends StatelessWidget {
         width: double.infinity,
         child: Column(
           children: <Widget>[
-            FittedBox(
-              child: Image.network(
+            Image.network(
                 urlString,
+                cacheHeight: 90,
               ),
-              fit: BoxFit.cover,
-            ),
+              
             Text(
               name,
               style: TextStyle(

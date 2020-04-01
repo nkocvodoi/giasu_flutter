@@ -2,6 +2,7 @@ import 'package:provider/provider.dart';
 import 'package:flutter/cupertino.dart';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
+import 'package:test_giasu/ui/UI_Main/General_Infor.dart';
 
 class PostRequestModel extends ChangeNotifier {
   int _group = 0;
@@ -35,7 +36,7 @@ class PostRequestModel extends ChangeNotifier {
 //    };
     var data = {"course": _map};
 
-    var res = await http.post('http://192.168.0.106:3300/main/thong-tin',
+    var res = await http.post(APIUrl + 'main/thong-tin',
         body: json.encode(data), headers: {'Content-Type': 'application/json'});
     if (res.statusCode == 200) //return res.body;
     {

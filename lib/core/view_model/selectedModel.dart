@@ -14,7 +14,7 @@ class SelectedTimeModel extends ChangeNotifier {
   List<bool> isSelected5 = List.filled(3, false, growable: true);
   List<bool> isSelected6 = List.filled(3, false, growable: true);
 
-  List<bool> cout(int n) {
+  List<bool> count(int n) {
     switch(n) {
       case 0: return isSelected;
       break;

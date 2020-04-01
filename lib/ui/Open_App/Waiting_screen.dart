@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:test_giasu/core/service/authentication_service.dart';
 import 'package:test_giasu/ui/Helper/ScreenConfig.dart';
+import 'package:test_giasu/ui/Open_App/PersonInfor.dart';
+import 'package:test_giasu/ui/UI_Main/BottomNavigationBar.dart';
 import 'package:test_giasu/ui/UI_Main/General_Infor.dart';
 
 import 'dart:async';
@@ -19,18 +23,43 @@ class Waiting_screenState extends State<Waiting_screen> {
   Timer _timer;
   void _waitMe() {
     _timer = new Timer(Duration(seconds: 2), () {
-      Navigator.push(
-        context,
-        MaterialPageRoute(
-          builder: (context) => SignIn_Page(),
-        ),
-      );
+//      print(Provider.of<AuthenticationService>(context).currentUser);
+      // if(Provider.of<AuthenticationService>(context).isLogined){
+      //   return Navigator.push(
+      //     context,
+      //     MaterialPageRoute(
+      //       builder: (context) => MyBottomNavigationBar(),
+      //     ),
+      //   );
+      // }
+      // else {
+      //   return Navigator.push(
+      //     context,
+      //     MaterialPageRoute(
+      //       builder: (context) => SignIn_Page(),
+      //     ),
+      //   );
+      // }
+      return Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => SignIn_Page(),
+          ),
+        );
     });
   }
 
   @override
   Widget build(BuildContext context) {
-    _waitMe();
+    //_waitMe();
+    Timer(Duration(seconds: 2), () {
+       return Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => SignIn_Page(),
+          ),
+        );
+    });
     return Container(
       alignment: Alignment.center,
       color: colorApp,

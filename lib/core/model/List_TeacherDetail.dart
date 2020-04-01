@@ -10,7 +10,6 @@ Future<TeacherDetail> fetchTeacherDetail(Data_teacher teacher) async {
       .get('https://giasu.htcon.vn/api/v1/parents/tutors/${teacher.id}');
   
   Map<String, dynamic> mapResponse = json.decode(response.body);
- print(mapResponse["data"]["native_country"]);print('svgcsgcsg');
 
   if (response.statusCode == 200) {
 //    Map<String, dynamic> mapResponse = json.decode(response.body);
@@ -71,6 +70,7 @@ class Detail_teacher {
   List<Topic> topic;
   Education education;
   List<FormTeaching> form_teachings;
+
   Detail_teacher(
       {this.id,
       this.role,
@@ -110,8 +110,6 @@ class Detail_teacher {
       this.birthdate,
       this.form_teachings});
   factory Detail_teacher.fromJson(Map<String, dynamic> json) {
-    print(json['native_country'].toString());
-    print(json['voice'].toString());
     return Detail_teacher(
       education: Education.fromJson(json['education']),
       voice: json['voice'],

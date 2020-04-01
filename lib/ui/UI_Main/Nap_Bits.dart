@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:test_giasu/core/model/currentUser.dart';
+import 'package:test_giasu/core/service/authentication_service.dart';
 import 'package:test_giasu/core/view_model/napbitsModel.dart';
 import 'package:test_giasu/ui/UI_Main/General_Infor.dart';
+import 'package:test_giasu/ui/UI_Main/WebView.dart';
 import 'package:test_giasu/ui/Widgets/previous_widget.dart';
 
 class Nap_Bits extends StatefulWidget {
@@ -57,8 +60,15 @@ class _Nap_Bits_State extends State<Nap_Bits> {
               padding: EdgeInsets.only(left: 240),
               child: RaisedButton(
                 color: colorApp,
-                onPressed: () {
-                  print('tap');
+                onPressed: () async {
+                  String _link =
+                      await Provider.of<NapBitsModel>(context).postNapBits();
+                  print(_link);
+                  Navigator.of(context).push(MaterialPageRoute(
+                      builder: (BuildContext context) => MyWebView(
+//                        title: "Alligator.io",
+                            websiteUrl: _link,
+                          )));
                 },
                 child: Text(
                   'Nạp Bits',
@@ -83,6 +93,7 @@ class _Nap_Bits_State extends State<Nap_Bits> {
   }
 
   Widget _Box1() {
+    CurrentUser _user = Provider.of<AuthenticationService>(context).currentUser;
     return Container(
       width: 350,
       child: Padding(
@@ -99,13 +110,13 @@ class _Nap_Bits_State extends State<Nap_Bits> {
               children: <Widget>[
                 _Infor(_a, _b, _c, _d),
                 SizedBox(
-                  width: 40.0,
+                  width: 10.0,
                 ),
                 _Infor(
-                  'INFOR',
-                  'INFOR',
-                  'INFOR',
-                  'INFOR',
+                  _user.full_name,
+                  _user.id.toString(),
+                  _user.email,
+                  _user.identification_number,
                 ),
               ],
             ),
@@ -140,7 +151,6 @@ class _Nap_Bits_State extends State<Nap_Bits> {
     return Text(
       _s,
       style: TextStyle(
-        height: 1.7,
         fontSize: 18,
       ),
     );
@@ -213,16 +223,17 @@ class _Nap_Bits_State extends State<Nap_Bits> {
     return Consumer<NapBitsModel>(builder: (_, model, __) {
       return Container(
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
           children: <Widget>[
             Container(
               width: 150,
               height: 40.0,
-              child: Center(
-                child: Text(
+              child: Text(
                   _s,
+                  textAlign: TextAlign.center,
                   style: TextStyle(fontSize: 13, color: Colors.white),
                 ),
-              ),
+              
               decoration: BoxDecoration(
                 color: colorApp,
                 borderRadius: BorderRadius.circular(10.0),

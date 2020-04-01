@@ -2,20 +2,19 @@ import 'dart:ui';
 import 'dart:io';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
-import 'package:image_picker/image_picker.dart';
+import 'package:date_format/date_format.dart';
 import 'package:flutter/cupertino.dart';
-
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:provider/provider.dart';
+import 'package:test_giasu/core/view_model/filterModel.dart';
+import 'package:test_giasu/ui/Open_App/SpecialtyInfor.dart';
+import 'package:test_giasu/ui/UI_Main/General_Infor.dart';
 import 'package:test_giasu/ui/Widgets/SmallTextField.dart';
 import 'package:test_giasu/ui/Helper/ScreenConfig.dart';
 import 'package:test_giasu/ui/Widgets/previous_widget.dart';
-import 'SpecialtyInfor.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:test_giasu/core/view_model/personalInforModel.dart';
-// import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
-import 'package:path/path.dart' show join;
-// import 'package:path_provider/path_provider.dart';
-import 'SpecialtyInfor.dart';
 
 class PersonInfor extends StatefulWidget {
   @override
@@ -26,116 +25,428 @@ class PersonInfor extends StatefulWidget {
 }
 
 class _PersonInforState extends State<PersonInfor> {
-// My IPv4 : 192.168.43.171
-  final String phpEndPoint = 'http://192.168.43.171/phpAPI/image.php';
-  final String nodeEndPoint = 'http://192.168.43.171:3000/image';
-  File file;
-
-  void _choose() async {
- //   file = await ImagePicker.pickImage(source: ImageSource.camera);
- file = await ImagePicker.pickImage(source: ImageSource.gallery);
+  // Map personalInfor = new Map();
+  GlobalKey<FormState> _key1 = new GlobalKey();
+  bool _validate = false;
+  final TextEditingController full_name = TextEditingController();
+  final TextEditingController gender = TextEditingController();
+  final TextEditingController birthdate = TextEditingController();
+  final TextEditingController facebook = TextEditingController();
+  final TextEditingController phone_number = TextEditingController();
+  final TextEditingController email = TextEditingController();
+  final TextEditingController address = TextEditingController();
+  final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
+  void showInSnackBar(String value) {
+    _scaffoldKey.currentState.showSnackBar(
+      SnackBar(
+        content: new Text(value, textAlign: TextAlign.start),
+        duration: Duration(seconds: 1),
+      ),
+    );
   }
 
-  void _upload() {
-    if (file == null) return;
-    String base64Image = base64Encode(file.readAsBytesSync());
-    String fileName = file.path.split("/").last;
+  String validateString(String value) {
+    String patttern = r'(^[a-zA-Z ]*$)';
+    RegExp regExp = new RegExp(patttern);
+    if (value.length == 0) {
+      return "Trường này không được để trống";
+    }
+    return null;
+  }
 
-    http.post(phpEndPoint, body: {
-      "image": base64Image,
-      "name": fileName,
-    }).then((res) {
-      print(res.statusCode);
-    }).catchError((err) {
-      print(err);
+  static final String uploadEndPoint =
+      'http://192.168.0.106:3300/api/v1/avatar_uploaders/';
+  _saveToServer() {
+    if (_key1.currentState.validate()) {
+      // No any error in validation
+      _key1.currentState.save();
+    } else {
+      // validation error
+      setState(() {
+        _validate = true;
+      });
+    }
+  }
+
+  void chooseImage() {
+    setState(() {
+      file = ImagePicker.pickImage(source: ImageSource.gallery);
+    });
+    setStatus('');
+  }
+
+  setStatus(String message) {
+    setState(() {
+      status = message;
     });
   }
 
-  Future<PersonalInfor> _futurePersonalInfor;
+  startUpload() {
+    setStatus('Uploading Image...');
+    if (null == tmpFile) {
+      setStatus(errMessage);
+      return;
+    }
+    String fileName = tmpFile.path.split('/').last;
+    upload(fileName);
+  }
 
-  final TextEditingController _controller = TextEditingController();
-  final TextEditingController _controller1 = TextEditingController();
-  final TextEditingController _controller2 = TextEditingController();
-  final TextEditingController _controller3 = TextEditingController();
-  final TextEditingController _controller4 = TextEditingController();
-  final TextEditingController _controller5 = TextEditingController();
-  final TextEditingController _controller6 = TextEditingController();
-  final TextEditingController _controller7 = TextEditingController();
-  final TextEditingController _controller8 = TextEditingController();
-  final TextEditingController _controller9 = TextEditingController();
+  upload(String fileName) {
+    http.post(uploadEndPoint, body: {
+      "image": base64Image,
+      "name": fileName,
+    }).then((result) {
+      setStatus(result.statusCode == 200 ? result.body : errMessage);
+    }).catchError((error) {
+      setStatus(error);
+    });
+  }
+
+  Widget showImage() {
+    return FutureBuilder<File>(
+      future: file,
+      builder: (BuildContext context, AsyncSnapshot<File> snapshot) {
+        if (snapshot.connectionState == ConnectionState.done &&
+            null != snapshot.data) {
+          tmpFile = snapshot.data;
+          base64Image = base64Encode(snapshot.data.readAsBytesSync());
+          return Flexible(
+            child: Image.file(
+              snapshot.data,
+              fit: BoxFit.fill,
+            ),
+          );
+        } else if (null != snapshot.error) {
+          return const Text(
+            'Error Picking Image',
+            textAlign: TextAlign.center,
+          );
+        }
+      },
+    );
+  }
+
+//   void startUpload() {
+//   setStatus('Uploading Image...');
+//   if (null == tmpFile) {
+//     setStatus(errMessage);
+//     return;
+//   }
+//   String fileName = tmpFile.path.split('/').last;
+//   upload(fileName);
+// }
+
+// void upload(String fileName) {
+//   http.post(uploadEndPoint, body: {
+//     "image": base64Image,
+//     "name": fileName,
+//   }).then((result) {
+//     setStatus(result.statusCode == 200 ? result.body : errMessage);
+//   }).catchError((error) {
+//     setStatus(error);
+//   });
+// }
+
+  Future<File> file;
+  String status = '';
+  String base64Image;
+  File tmpFile;
+  String errMessage = 'Error Uploading Image';
+
+  DateTime _date = DateTime.now();
+  Future<Null> selectDate(BuildContext context) async {
+    final DateTime picked = await showDatePicker(
+      context: context,
+      initialDate: _date,
+      firstDate: DateTime(1900),
+      lastDate: DateTime.now(),
+    );
+    if (picked != null && picked != _date) {
+      setState(() {
+        _date = picked;
+        birthdate.text = formatDate(_date, [dd, '-', mm, '-', yyyy]);
+      });
+    }
+  }
+
+  bool imageNull() {
+    if (file == null) return true;
+    return false;
+  }
+
+  bool dateTimeNull() {
+    if (_date == null) return true;
+    return false;
+  }
+
   @override
   Widget build(BuildContext context) {
     ScreenUtil.instance = ScreenUtil.getInstance()..init(context);
     ScreenUtil.instance =
         ScreenUtil(width: 900, height: 1334, allowFontScaling: true);
     return Scaffold(
-      appBar: AppBar(
-        leading: buildPreviousButton(),
-        centerTitle: true,
-        backgroundColor: Color.fromRGBO(47, 101, 174, 1),
-        title:Text(
+        key: _scaffoldKey,
+        appBar: AppBar(
+          leading: buildPreviousButton(),
+          centerTitle: true,
+          backgroundColor: colorApp,
+          title: Text(
             'THÔNG TIN CÁ NHÂN',
-            textAlign: TextAlign.center,
-          
+          ),
         ),
-      ),
-      body: Stack(
-        fit: StackFit.expand,
-        children: <Widget>[
-          SingleChildScrollView(
-            child: Padding(
-              padding: EdgeInsets.only(
-                left: ScreenUtil.getInstance().setWidth(28),
-                right: ScreenUtil.getInstance().setWidth(28),
-                top: ScreenUtil.getInstance().setHeight(20),
-              ),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: <Widget>[
-                  Text(
-                    'Ảnh đại diện',
-                    style: TextStyle(
-                      fontSize: 20,
-                    ),
+        body: Consumer<PersonalInforModel>(
+          builder: (_, model, __) {
+            return SingleChildScrollView(
+              child: Form(
+                key: _key1,
+                autovalidate: _validate,
+                child: Padding(
+                  padding: EdgeInsets.only(
+                    left: ScreenUtil.getInstance().setWidth(28),
+                    right: ScreenUtil.getInstance().setWidth(28),
+                    top: ScreenUtil.getInstance().setHeight(20),
                   ),
-                  Container(
-                    margin: EdgeInsets.all(10.0),
-                    // padding: EdgeInsets.all(3.0),
-                    width: 100,
-                    height: 100,
-                    decoration: BoxDecoration(
-                      border: Border.all(color: Colors.blueAccent),
-                      borderRadius: BorderRadius.circular(10.0),
-                    ),
-                    child: GestureDetector(
-                      onTap: _choose,
-                      child: Image.asset('assets/user.png',cacheHeight: 90,),
-
-                    ),
-                  ),
-                  Column(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.center,
                     children: <Widget>[
-                      Container(
-                        margin: EdgeInsets.all(15.0),
-                        decoration: BoxDecoration(
-                          color: Colors.white,
+                      Text(
+                        'Ảnh đại diện',
+                        style: TextStyle(
+                          fontSize: 20,
                         ),
-                        child: (_futurePersonalInfor == null)
-                            ? Column(
+                      ),
+                      Container(
+                        margin: EdgeInsets.all(10.0),
+                        // padding: EdgeInsets.all(3.0),
+                        width: 100,
+                        height: 100,
+                        decoration: BoxDecoration(
+                          border: Border.all(color: Colors.blueAccent),
+                          borderRadius: BorderRadius.circular(10.0),
+                        ),
+                        child: GestureDetector(
+                          onTap: chooseImage,
+                          child: imageNull() ? Image.asset('assets/user.png',width: 90,) : showImage(),
+                        ),
+                      ),
+                      Column(
+                        children: <Widget>[
+                          Container(
+                              margin: EdgeInsets.all(15.0),
+                              decoration: BoxDecoration(
+                                color: Colors.white,
+                              ),
+                              child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: <Widget>[
-                                  SmallTextField('Họ và tên', _controller),
-                                  SmallTextField('Giới tính', _controller1),
-                                  SmallTextField('Quê quán', _controller2),
-                                  SmallTextField('Ngày sinh', _controller3),
-                                  SmallTextField('Giọng nói', _controller4),
+                                  SmallTextField('Họ và tên', full_name),
+                                  SmallTextField('Giới tính', gender),
+                                  Container(
+                                    padding: EdgeInsets.only(
+                                        top: 3.0, bottom: 5.0, left: 10),
+                                    width: 360,
+                                    height: 50,
+                                    child: DropdownButton<int>(
+                                      autofocus: true,
+                                      underline: Container(
+                                        padding: EdgeInsets.only(left: 10),
+                                        color: Colors.transparent,
+                                      ),
+                                      isExpanded: true,
+                                      value: model.idProvince,
+                                      items: [
+                                        DropdownMenuItem(
+                                          child: Text('Quê quán',
+                                              style: TextStyle(
+                                                  fontSize: 18.0,
+                                                  color: Colors.grey)),
+                                          value: null,
+                                        ),
+                                        ...List.generate(model.province.length,
+                                            (index) {
+                                          return DropdownMenuItem(
+                                            child: Text(
+                                                '${model.province[index].name}',
+                                                style: TextStyle(
+                                                    fontSize: 18.0,
+                                                    color: Colors.grey)),
+                                            value: model.province[index].id,
+                                          );
+                                        }),
+                                      ],
+                                      onChanged: (int value) {
+                                        if (value != model.idProvince) {
+                                          model.setIdProvince(value);
+                                        }
+                                      },
+                                    ),
+                                    decoration: BoxDecoration(
+                                      color: Colors.white,
+                                      border:
+                                          Border.all(color: black, width: 1.5),
+                                      borderRadius: BorderRadius.circular(10.0),
+                                    ),
+                                  ),
+                                  SizedBox(height: 20),
+                                  Container(
+                                      padding: EdgeInsets.only(
+                                          top: 3.0, bottom: 3.0),
+                                      width:
+                                          360,
+                                      height: 80,
+                                      child: Row(
+                                        children: <Widget>[
+                                          Expanded(
+                                            flex: 8,
+                                            child: TextFormField(
+                                              controller: birthdate,
+                                              autofocus: true,
+                                              validator: validate,
+                                              onSaved: (String val) {
+                                                if (dateTimeNull()) {
+                                                  birthdate.text = val;
+                                                } else {
+                                                  birthdate.text = formatDate(
+                                                      _date,
+                                                      [dd, '/', mm, '/', yyyy]);
+                                                }
+                                              },
+                                              enableSuggestions: true,
+                                              decoration: InputDecoration(
+                                                contentPadding:
+                                                    EdgeInsets.only(left: 10),
+                                                hintText: 'Ngày sinh',
+                                                border: OutlineInputBorder(
+                                                  borderRadius:
+                                                      BorderRadius.circular(
+                                                          10.0),
+                                                ),
+                                                hintStyle: TextStyle(
+                                                  fontSize: 18,
+                                                  fontFamily: 'UTM',
+                                                  color: Colors.grey[400],
+                                                ),
+                                              ),
+                                            ),
+                                          ),
+                                          SizedBox(
+                                            width: 3,
+                                          ),
+                                          Expanded(
+                                              child: Container(
+                                            decoration: BoxDecoration(
+                                              border: Border.all(color: black),
+                                              borderRadius:
+                                                  BorderRadius.circular(10),
+                                            ),
+                                            child: IconButton(
+                                                icon:
+                                                    Icon(Icons.calendar_today),
+                                                onPressed: () {
+                                                  selectDate(context);
+                                                }),
+                                          )),
+                                        ],
+                                      )),
+                                  Container(
+                                    padding: EdgeInsets.only(
+                                        top: 3.0, bottom: 5.0, left: 10),
+                                    width: 360,
+                                    height: 50,
+                                    child: DropdownButton<int>(
+                                      autofocus: true,
+                                      underline: Container(
+                                        padding: EdgeInsets.only(left: 10),
+                                        color: Colors.transparent,
+                                      ),
+                                      isExpanded: true,
+                                      value: model.idVoice,
+                                      items: [
+                                        DropdownMenuItem(
+                                          child: Text('Giọng nói',
+                                              style: TextStyle(
+                                                  fontSize: 18.0,
+                                                  color: Colors.grey)),
+                                          value: null,
+                                        ),
+                                        ...List.generate(model.voice.length,
+                                            (index) {
+                                          return DropdownMenuItem(
+                                            child: Text(
+                                                '${model.voice[index].name}',
+                                                style: TextStyle(
+                                                    fontSize: 18.0,
+                                                    color: Colors.grey)),
+                                            value: model.voice[index].id,
+                                          );
+                                        }),
+                                      ],
+                                      onChanged: (int value) {
+                                        if (value != model.idVoice) {
+                                          model.setIdVoice(value);
+                                        }
+                                      },
+                                    ),
+                                    decoration: BoxDecoration(
+                                      color: Colors.white,
+                                      border:
+                                          Border.all(color: black, width: 1.5),
+                                      borderRadius: BorderRadius.circular(10.0),
+                                    ),
+                                  ),
+                                  SizedBox(height: 30),
                                   SmallTextField(
-                                      'Link Facebook của bạn', _controller5),
-                                  SmallTextField('Số điện thoại', _controller6),
-                                  SmallTextField('Email', _controller7),
-                                  SmallTextField('Địa chỉ dạy', _controller8),
-                                  SmallTextField(
-                                      'Địa chỉ hiện tại', _controller9),
+                                      'Link Facebook của bạn', facebook),
+                                  SmallTextField('Số điện thoại', phone_number),
+                                  SmallTextField('Email', email),
+                                  Container(
+                                    padding: EdgeInsets.only(
+                                        top: 3.0, bottom: 5.0, left: 10),
+                                    width: 360,
+                                    height: 50,
+                                    child: DropdownButton<int>(
+                                      autofocus: true,
+                                      underline: Container(
+                                        padding: EdgeInsets.only(left: 10),
+                                        color: Colors.transparent,
+                                      ),
+                                      isExpanded: true,
+                                      value: model.idCity,
+                                      items: [
+                                        DropdownMenuItem(
+                                          child: Text('Địa điểm dạy',
+                                              style: TextStyle(
+                                                  fontSize: 18.0,
+                                                  color: Colors.grey)),
+                                          value: null,
+                                        ),
+                                        ...List.generate(model.city.length,
+                                            (index) {
+                                          return DropdownMenuItem(
+                                            child: Text(
+                                                '${model.city[index].name}',
+                                                style: TextStyle(
+                                                    fontSize: 18.0,
+                                                    color: Colors.grey)),
+                                            value: model.city[index].id,
+                                          );
+                                        }),
+                                      ],
+                                      onChanged: (int value) {
+                                        if (value != model.idCity) {
+                                          model.setIdCity(value);
+                                        }
+                                      },
+                                    ),
+                                    decoration: BoxDecoration(
+                                      color: Colors.white,
+                                      border:
+                                          Border.all(color: black, width: 1.5),
+                                      borderRadius: BorderRadius.circular(10.0),
+                                    ),
+                                  ),
+                                  SizedBox(height: 30),
+                                  SmallTextField('Địa chỉ hiện tại', address),
                                   Padding(
                                     padding: EdgeInsets.only(
                                         left: 20.0, top: 10.0, bottom: 10.0),
@@ -160,13 +471,14 @@ class _PersonInforState extends State<PersonInfor> {
                                       borderRadius: BorderRadius.circular(15.0),
                                     ),
                                     child: GestureDetector(
-                                      onTap: _choose,
+                                      onTap: () {},
                                       child: Row(
                                         children: <Widget>[
-                                          Expanded(
-                                            child: SizedBox(),
+                                          SizedBox(width: 5),
+                                          Image.asset(
+                                            'assets/user.png',
+                                            cacheHeight: 100,
                                           ),
-                                          Image.asset('assets/user.png',cacheHeight: 100,),
                                           Column(
                                             crossAxisAlignment:
                                                 CrossAxisAlignment.start,
@@ -183,7 +495,7 @@ class _PersonInforState extends State<PersonInfor> {
                                                   Container(
                                                     width:
                                                         ScreenUtil.getInstance()
-                                                            .setWidth(440),
+                                                            .setWidth(460),
                                                     height:
                                                         ScreenUtil.getInstance()
                                                             .setHeight(145),
@@ -218,13 +530,14 @@ class _PersonInforState extends State<PersonInfor> {
                                       borderRadius: BorderRadius.circular(15.0),
                                     ),
                                     child: GestureDetector(
-                                      onTap: _choose,
+                                      onTap: () {},
                                       child: Row(
                                         children: <Widget>[
-                                          Expanded(
-                                            child: SizedBox(),
+                                          SizedBox(width: 5),
+                                          Image.asset(
+                                            'assets/user.png',
+                                            cacheHeight: 100,
                                           ),
-                                          Image.asset('assets/user.png',cacheHeight: 100,),
                                           Column(
                                             crossAxisAlignment:
                                                 CrossAxisAlignment.start,
@@ -293,62 +606,70 @@ class _PersonInforState extends State<PersonInfor> {
                                       Expanded(
                                         child: SizedBox(),
                                       ),
-                                      GestureDetector(
-                                        onTap: () {
-                                          setState(() {
-                                            _futurePersonalInfor =
-                                                createPersonalInfor(
-                                              _controller.text,
-                                              _controller1.text,
-                                              _controller2.text,
-                                              _controller3.text,
-                                              _controller4.text,
-                                              _controller5.text,
-                                              _controller6.text,
-                                              _controller7.text,
-                                              _controller8.text,
-                                              _controller9.text,
-                                            );
-                                          });
-                                          Navigator.push(
-                                            context,
-                                            MaterialPageRoute(
-                                              builder: (context) =>
-                                                  SpecialtyInfor(),
-                                            ),
-                                          );
-                                        },
-                                        child: Image.asset(
-                                          "assets/next.png",
-                                          width: 100,
-                                        ),
-                                      ),
+                                      Consumer<PersonalInforModel>(
+                                          builder: (_, model, __) {
+                                        return GestureDetector(
+                                          onTap: () async {
+                                            startUpload();
+                                            _saveToServer();
+                                            model.personalInfor["full_name"] = (full_name.text == "") ? "null" :
+                                                full_name.text;
+                                            model.personalInfor["location_id"] = (model.idCity == null) ? "null" :
+                                                model.idCity.toString();
+                                            model.personalInfor["native_country_id"] = (model.idProvince == null) ? "null" :
+                                                model.idProvince.toString();
+                                            model.personalInfor["voice_id"] = (model.idVoice == null) ? "null" :
+                                                model.idVoice.toString();
+                                            if(gender != null)  model.personalInfor["gender"] = (gender.text == "") ? "null" :
+                                                gender.text;
+                                            if(birthdate != null)  model.personalInfor["birthdate"] = (birthdate.text == "") ? "null" :
+                                                birthdate.text;
+                                             model.personalInfor["phone_number"] = (phone_number.text == "") ? "null" :
+                                                phone_number.text;
+                                             model.personalInfor["facebook"] = (facebook.text == "") ? "null" :
+                                                facebook.text;
+                                             model.personalInfor["email"] = (email.text == "") ? "null" : email.text;
+                                             model.personalInfor["address"] = (address.text == "") ? "null" :
+                                                address.text;
+                                            print( model.personalInfor.toString());
+                                            // var success = await model
+                                            //     .personalInforCheckup(
+                                            //         personalInfor);
+                                            // if (success) {
+                                            Navigator.pushNamed(context, '/specialty');
+                                            // } else {
+                                            //   var _message = await model.Infor;
+                                            //   showInSnackBar(_message);
+                                            // }
+                                          },
+                                          child: Image.asset(
+                                            "assets/next.png",
+                                            width: 100,
+                                          ),
+                                        );
+                                      }),
                                       SizedBox(width: 10),
                                     ],
-                                  ),
+                                  )
                                 ],
-                              )
-                            : FutureBuilder<PersonalInfor>(
-                                future: _futurePersonalInfor,
-                                builder: (context, snapshot) {
-                                  if (snapshot.hasData) {
-                                    return Text(snapshot.data.full_name);
-                                  } else if (snapshot.hasError) {
-                                    return Text("${snapshot.error}");
-                                  }
-
-                                  return CircularProgressIndicator();
-                                },
-                              ),
+                              )),
+                        ],
                       ),
                     ],
                   ),
-                ],
+                ),
               ),
-            ),
-          ),
-        ],
-      ),
-    );
+            );
+          },
+        ));
+  }
+
+  String validate(String value) {
+    String patttern = r'(^[a-zA-Z ]*$)';
+    RegExp regExp = new RegExp(patttern);
+    if (value.length == 0) {
+      return "Trường này không được để trống";
+    }
+    return null;
   }
 }

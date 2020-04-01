@@ -43,7 +43,7 @@ class _Payments_State extends State<Payments> {
                       child: Text(
                         'Chọn hình thức thanh toán',
                         style: TextStyle(
-                            height: 0.0, color: Colors.white, fontSize: 20.0),
+                             color: Colors.white, fontSize: 18.0),
                       ),
                       decoration: BoxDecoration(
                         color: _color,
@@ -71,7 +71,7 @@ class _Payments_State extends State<Payments> {
                         padding: EdgeInsets.all(10.0),
                         color: _color,
                         onPressed: () {
-                         Navigator.push(context, MaterialPageRoute(builder: (context)=> MyBottomNavigationBar(currentIndex: 0)));
+                         Navigator.push(context, MaterialPageRoute(builder: (context)=> MyBottomNavigationBar()));
                         },
                         child: Text(
                           'Thanh toán',
@@ -97,7 +97,7 @@ class _Payments_State extends State<Payments> {
                     height: 50,
                     
                     child: Padding(
-                      padding: EdgeInsets.only(left: 15.0, right: 15.0, top: 5.0),
+                      padding: EdgeInsets.only(left: 10.0, right: 10.0),
                       child: DropdownButton<String>(
                         underline: Container(
                           color: Colors.transparent,
@@ -116,7 +116,7 @@ class _Payments_State extends State<Payments> {
                                 Text(
                                   _menu,
                                   style:
-                                  TextStyle(fontSize: 20.0, color: Colors.grey),
+                                  TextStyle(fontSize: 18.0, color: black),
                                 ),
                                 SizedBox(
                                   width: 100,

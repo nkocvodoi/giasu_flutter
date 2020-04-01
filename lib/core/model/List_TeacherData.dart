@@ -57,6 +57,7 @@ class TeacherData {
 }
 
 class Data_teacher {
+  int voice_id;
   int id;
   String role;
   String reset_password_token;
@@ -132,8 +133,8 @@ class Data_teacher {
         this.voice,
         this.topic,
         this.birthdate,
-        this.form_teachings
-
+        this.form_teachings,
+        this.voice_id,
       });
 
   factory Data_teacher.fromJson(Map<String, dynamic> json) => Data_teacher(
@@ -166,6 +167,7 @@ class Data_teacher {
     company: json['company'],
     native_country_id: json['native_country_id'],
     schedule_text: json['schedule_text'],
+    voice_id: json['voice_id'],
     // native_country: NativeCountry.fromJson(json['native_country']),
     birthdate: json['birthdate'],
     topic: (json['topic'] as List)

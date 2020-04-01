@@ -171,12 +171,12 @@ class PostRequestState extends State<PostRequest> {
                             color: Colors.white,
                             padding: EdgeInsets.only(bottom: 6),
                             onPressed: () {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) => SubjectChoice(),
-                                ),
-                              );
+                              // Navigator.push(
+                              //   context,
+                              //   MaterialPageRoute(
+                              //     builder: (context) => SubjectChoice(),
+                              //   ),
+                              // );
                             },
                             child: Container(
                               padding: EdgeInsets.only(

@@ -1,74 +1,261 @@
-import 'dart:async';
+import 'package:provider/provider.dart';
+import 'package:flutter/cupertino.dart';
 import 'dart:convert';
-
-import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import 'package:test_giasu/core/model/List_TeacherData.dart';
+import 'package:test_giasu/core/model/educationsservice.dart';
+import 'package:test_giasu/core/model/formTeachingService.dart';
+import 'package:test_giasu/core/model/locationservice.dart';
+import 'package:test_giasu/core/model/provincesService.dart';
+import 'package:test_giasu/core/model/subjectservice.dart';
+import 'package:test_giasu/core/model/topicService.dart';
+import 'package:test_giasu/core/model/voiceService.dart';
+import 'package:test_giasu/core/service/authentication_service.dart';
+import 'package:test_giasu/ui/UI_Main/General_Infor.dart';
 
-Future<PersonalInfor> createPersonalInfor(
+class PersonalInforModel extends ChangeNotifier {
+  final AuthenticationService authenticationService;
 
-  String full_name,
-  String gender,
-  String native_country,
-  String birthdate,
-  String voice,
-  String facebook,
-  String phone_number,
-  String email,
-  String teaching_address,
-  String address,
-) async {
-  final http.Response response = await http.post(
-    'http://192.168.0.106:3300/api/v1/users/2',
-    headers: <String, String>{
-      'Content-Type': 'application/json; charset=UTF-8',
-    },
-    body: jsonEncode(<String, String>{
-      'full_name': full_name,
-      'gender': gender,
-      'naticve_country': native_country,
-      'birthdate': birthdate,
-      'voice': voice,
-      'facebook': facebook,
-      'phone_number': phone_number,
-      'email': email,
-      'teaching_address': teaching_address,
-      'address': address,
-    }),
-  );
-  if (response.statusCode == 201) {
-    return PersonalInfor.fromJson(json.decode(response.body));
-  } else {
-    throw Exception('Failed to create personal information.');
+  PersonalInforModel({this.authenticationService}) {
+    init();
   }
-}
+  Map personalInfor = new Map();
+  bool _busy = false;
+  bool get busy => _busy;
+  void setBusy(bool value) {
+    _busy = value;
+    notifyListeners();
+  }
 
-class PersonalInfor {
-  int id;
-  String full_name;
-  String gender;
-  String native_country;
-  String birthdate;
-  String voice;
-  String facebook;
-  String phone_number;
-  String email;
-  String teaching_address;
-  String address;
-  PersonalInfor({this.id,this.full_name,this.gender,this.native_country,this.birthdate,this.voice,this.facebook,this.phone_number,this.email,this.teaching_address,this.address});
+  List<Teachings> _form_teaching = [];
+  List<Teachings> get form_teaching => _form_teaching;
+  void setForms(List<Teachings> form_teaching) {
+    _form_teaching = form_teaching;
+  }
 
-  factory PersonalInfor.fromJson(Map<String,dynamic> json){
-    return PersonalInfor(
-      address: json['address'],
-      full_name: json['full_name'],
-      id: json['id'],
-      gender: json['gender'],
-      voice: json['voice'],
-      native_country: json['native_country'],
-      facebook: json['facebook'],
-      phone_number: json['phone_number'],
-      email: json['email'],
-      teaching_address: json['teaching_address'],
-      birthdate: json['birthdate'],
-      );
+  int _idFormTeaching;
+  int get idFormTeaching => _idFormTeaching;
+  void setIdFormTeaching(int value) {
+    print(form_teaching[value].name);
+    _idFormTeaching = value;
+    notifyListeners();
+  }
+
+  List<Educations> _education = [];
+  List<Educations> get education => _education;
+  void setTypes(List<Educations> education) {
+    _education = education;
+  }
+
+  int _idEducation;
+  int get idEducation => _idEducation;
+  void setIdEducation(int value) {
+    _idEducation = value;
+    notifyListeners();
+  }
+
+  List<Voice> _voice = [];
+  List<Voice> get voice => _voice;
+  void setVoice(List<Voice> voice) {
+    _voice = voice;
+  }
+
+  int _idVoice;
+  int get idVoice => _idVoice;
+  void setIdVoice(int value) {
+    _idVoice = value;
+    notifyListeners();
+  }
+
+  List<Location> _city = [];
+  List<Location> get city => _city;
+  void setCity(List<Location> city) {
+    _city = city;
+  }
+
+  int _idCity;
+  int get idCity => _idCity;
+  void setIdCity(int value) {
+    _idCity = value;
+    notifyListeners();
+  }
+
+  List<Province> _province = [];
+  List<Province> get province => _province;
+  void setProvince(List<Province> city) {
+    _province = province;
+  }
+
+  int _idProvince;
+  int get idProvince => _idProvince;
+  void setIdProvince(int value) {
+    _idProvince = value;
+    notifyListeners();
+  }
+
+  List<Subjects> _subject = [];
+  List<Subjects> get subject => _subject;
+  void setSubject(List<Subjects> subject) {
+    _subject = subject;
+  }
+
+  int _idSubject;
+  int get idSubject => _idSubject;
+  void setIdSubject(int value) {
+    _idSubject = value;
+    notifyListeners();
+  }
+  List<List<Topics>> _topics = [];
+   List<List<Topics>> get topics => _topics;
+  void setTopics(List<List<Topics>> topics) {
+    _topics = topics;
+  }
+
+  // Future<List<Topics>> _topicSubject;
+  //  List<Topics> get topicSubject => _topicSubject;
+  // void setTopicSubject(List<Topics> topicSubject) {
+  //   _topicSubject = topicSubject;
+  // }
+  List<Topics> _topic1 = [];
+  List<Topics> _topic2 = [];
+  List<Topics> _topic3 = [];
+  List<Topics> _topic4 = [];
+  List<Topics> _topic5 = [];
+  List<Topics> _topic6 = [];
+  List<Topics> _topic7 = [];
+  List<Topics> _topic8 = [];
+  List<Topics> _topic9 = [];
+  List<Topics> _topic10 = [];
+  List<Topics> _topic11 = [];
+  List<Topics> _topic12 = [];
+  List<Topics> _topic13 = [];
+  List<Topics> _topic14 = [];
+  List<Topics> _topic15 = [];
+  List<Topics> _topic16 = [];
+  List<Topics> _topic17 = [];
+  List<Topics> _topic18 = [];
+  List<Topics> _topic19 = [];
+  List<Topics> _topic20 = [];
+  List<Topics> _topic21 = [];
+
+  List<Topics> _topic = [];
+  List<Topics> get topic => _topic;
+  void setTopic(List<Topics> topic) {
+    _topic = topic;
+  }
+
+  int _idTopic;
+  int get idTopic => _idTopic;
+  void serIdTopic(int value) {
+    _idTopic = value;
+    notifyListeners();
+  }
+
+  // List<Topics> _topic = [];
+  // List<Topics> get topic => _topic;
+  // Future<void> getListTopic(int i) async {
+  //   _topic = await TopicService.instance.fetchTopic(i);
+  //   notifyListeners();
+  // }
+
+  // List<List<Topics>> _topics = [];
+  // List<List<Topics>> get topics => _topics;
+
+  void init() async {
+    setBusy(true);
+    _province = await ProvinceService.instance.fetchProvince();
+    _city = await LocationService.instance.fetchLocation();
+    _subject = await SubjectService.instance.fetchSubject();
+    _education = await EducationService.instance.fetchEducation();
+    _form_teaching = await FormTeachingService.instance.fetchTeaching();
+    _voice = await VoiceService.instance.fetchVoice();
+    _topic1 = await TopicService.instance.fetchTopic(1);
+    _topic2 = await TopicService.instance.fetchTopic(2);
+    _topic3 = await TopicService.instance.fetchTopic(3);
+    _topic4 = await TopicService.instance.fetchTopic(4);
+    _topic5 = await TopicService.instance.fetchTopic(5);
+    _topic6 = await TopicService.instance.fetchTopic(6);
+    _topic7 = await TopicService.instance.fetchTopic(7);
+    _topic8 = await TopicService.instance.fetchTopic(8);
+    _topic9 = await TopicService.instance.fetchTopic(9);
+    _topic10 = await TopicService.instance.fetchTopic(10);
+    _topic11 = await TopicService.instance.fetchTopic(11);
+    _topic12 = await TopicService.instance.fetchTopic(12);
+    _topic13 = await TopicService.instance.fetchTopic(13);
+    _topic14 = await TopicService.instance.fetchTopic(14);
+    _topic15 = await TopicService.instance.fetchTopic(15);
+    _topic16 = await TopicService.instance.fetchTopic(16);
+    _topic17 = await TopicService.instance.fetchTopic(17);
+    _topic18 = await TopicService.instance.fetchTopic(18);
+    _topic19 = await TopicService.instance.fetchTopic(19);
+    _topic20 = await TopicService.instance.fetchTopic(20);
+    _topic21 = await TopicService.instance.fetchTopic(21);
+    
+    // _topic = [_topic1,_topic2,_topic3,_topic4,_topic5,_topic6,_topic7,_topic8,_topic9,_topic10,_topic11,_topic12,_topic13,_topic14,_topic15,_topic16,_topic17,_topic18,_topic19,_topic20,_topic21].expand((element) => element).toList();
+    _topic = _topic1 +_topic2 +_topic3+_topic4+_topic5+_topic6+_topic7+_topic8+_topic9+_topic10+_topic11+_topic12+_topic13+_topic14+_topic15+_topic16+_topic17+_topic18+_topic19+_topic20 + _topic21;
+    print(_topic);
+    print(_subject);
+    setBusy(false);
+  }
+
+  int _group = 0;
+  int get group => _group;
+  void setGroup(int val) {
+    if (val != _group) {
+      _group = val;
+      notifyListeners();
+    }
+  }
+
+  String _infor;
+  String get Infor => _infor;
+
+//  bool _validate = false;
+//  bool get Validate => _validate;
+//  void setValidate() {
+//    _validate = true;
+//  }
+  String _role = 'parentt';
+  String get role => _role;
+  void setRole() {
+    if (_group == 0)
+      _role = 'parentt';
+    else
+      _role = 'tutor';
+    notifyListeners();
+  }
+
+  Future<bool> personalInforCheckup(Map _map) async {
+    var data = {"user": _map};
+    print("kajshduiashuidhausidash");
+    print(data);
+//    https://giasu.htcon.vn/api/users/registrations
+    // try {APIUrl + '
+
+      var res = await http.put(APIUrl + 'api/v1/tutors/521',
+          
+          body: json.encode(data),
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjo1MjEsImV4cCI6MTU4NjMyOTExOSwiaXNzIjoic2Fva2h1ZWUiLCJhdWQiOiJjbGllbnQifQ.zoDa9R5-q_ygJexVYnOxLAZHBcfJiI6EtYgLzO3BZ3c',
+          });
+          // print('log' + res.body.toString());
+          // print(res.toString());
+      if (res.statusCode == 200) //return res.body;
+      {
+        Map<String, dynamic> mapResponse = json.decode(res.body);
+        print(mapResponse.toString());
+
+        if (mapResponse["code"] == 1) {
+          return true;
+        } else {
+          _infor = mapResponse["message"];
+          return false;
+        }
+      } 
+    // } catch (e) {
+    //   print(e.toString());
+    // }
+    notifyListeners();
   }
 }

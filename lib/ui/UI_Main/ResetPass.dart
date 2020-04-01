@@ -75,19 +75,15 @@ class _ResetPassState extends State<ResetPass> {
                   child: Center(
                     child: RaisedButton(
                       onPressed: () {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => ForgotPass2(),
-                            ));
+                        Navigator.pop(context);
                       },
                       color: Colors.blue[800],
                       child: new Padding(
-                        padding: EdgeInsets.all(10.0),
+                        padding: EdgeInsets.only(left: 3, right:3),
                         child: Text(
                           'Đổi mật khẩu',
                           style: TextStyle(
-                              fontSize: 18,
+                              
                               fontWeight: FontWeight.w400,
                               color: Colors.white),
                         ),

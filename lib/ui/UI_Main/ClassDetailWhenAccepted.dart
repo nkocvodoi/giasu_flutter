@@ -1,3 +1,4 @@
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:test_giasu/core/model/List_ClassData.dart';
@@ -10,6 +11,7 @@ import 'package:test_giasu/ui/Widgets/LargeTextBox.dart';
 import 'package:test_giasu/ui/Widgets/RoundedImageNameBox.dart';
 import 'package:test_giasu/ui/Widgets/SelectedTimeColumn.dart';
 import 'package:test_giasu/ui/Widgets/previous_widget.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class ClassDetailWhenAcceptedDemo extends StatefulWidget {
   @override
@@ -88,7 +90,7 @@ class _ClassDetailRequestDemoState extends State<ClassDetailWhenAcceptedDemo> {
                           height: SizeConfig.safeBlockVertical * 5,
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(20.0),
-                            border: Border.all(),
+                            border: Border.all(color: black),
                             color: Colors.white,
                           ),
                           child: Center(
@@ -97,6 +99,7 @@ class _ClassDetailRequestDemoState extends State<ClassDetailWhenAcceptedDemo> {
                               style: TextStyle(
                                 fontStyle: FontStyle.normal,
                                 fontSize: 13,
+                                color: black
                               ),
                               textAlign: TextAlign.center,
                             ),
@@ -130,7 +133,7 @@ class _ClassDetailRequestDemoState extends State<ClassDetailWhenAcceptedDemo> {
                         ),
                         Icon(
                           Icons.portrait,
-                          color: Colors.grey,
+                          color: black,
                           size: 15,
                         ),
                       ),
@@ -138,13 +141,13 @@ class _ClassDetailRequestDemoState extends State<ClassDetailWhenAcceptedDemo> {
                         Text(
                           'Mã lớp: 1222 - Tiếng Anh | Lớp: 5',
                           style: TextStyle(
-                            color: Colors.grey,
+                            color: black,
                             fontSize: 15,
                           ),
                         ),
                         Icon(
                           Icons.home,
-                          color: Colors.grey,
+                          color: black,
                           size: 15,
                         ),
                       ),
@@ -152,13 +155,13 @@ class _ClassDetailRequestDemoState extends State<ClassDetailWhenAcceptedDemo> {
                         Text(
                           'Hình thức học: Gia sư Offline ( tại nhà )',
                           style: TextStyle(
-                            color: Colors.grey,
+                            color: black,
                             fontSize: 15,
                           ),
                         ),
                         Icon(
                           Icons.school,
-                          color: Colors.grey,
+                          color: black,
                           size: 15,
                         ),
                       ),
@@ -166,13 +169,13 @@ class _ClassDetailRequestDemoState extends State<ClassDetailWhenAcceptedDemo> {
                         Text(
                           'Số buổi/tuần:  1 buổi (2h/buổi)',
                           style: TextStyle(
-                            color: Colors.grey,
+                            color: black,
                             fontSize: 15,
                           ),
                         ),
                         Icon(
                           Icons.timelapse,
-                          color: Colors.grey,
+                          color: black,
                           size: 15,
                         ),
                       ),
@@ -180,41 +183,77 @@ class _ClassDetailRequestDemoState extends State<ClassDetailWhenAcceptedDemo> {
                         Text(
                           'Số học viên: 1',
                           style: TextStyle(
-                            color: Colors.grey,
+                            color: black,
                             fontSize: 15,
                           ),
                         ),
                         Icon(
                           Icons.person_outline,
-                          color: Colors.grey,
+                          color: black,
                           size: 15,
                         ),
                       ),
-                      _iconTextBox(
-                        Text(
-                          'Địa chỉ: Chung Cư Athena Complex Xuân Phương, Phương Canh, Từ Liêm, Hà Nội, Việt Nam | Hà Nội',
-                          style: TextStyle(
-                            color: Colors.grey,
-                            fontSize: 15,
+                      Row(
+                        children: <Widget>[
+                          Expanded(
+                            child: Icon(
+                              Icons.map,
+                              color: Colors.grey,
+                              size: 15,
+                            ),
                           ),
-                        ),
-                        Icon(
-                          Icons.map,
-                          color: Colors.grey,
-                          size: 15,
-                        ),
+                          Expanded(
+                            child: SizedBox(
+                              width: ScreenUtil.getInstance().setWidth(20),
+                            ),
+                          ),
+                          Expanded(
+                            flex: 20,
+                            child: Container(
+                              child: RichText(
+                                textAlign: TextAlign.start,
+                                text: TextSpan(
+                                  children: <TextSpan>[
+                                    TextSpan(
+                                      text:
+                                          'Địa chỉ: Chung Cư Athena Complex Xuân Phương, Phương Canh, Từ Liêm, Hà Nội, Việt Nam | Hà Nội',
+                                      style: TextStyle(
+                                        fontSize: 15,
+                                        color: Colors.grey,
+                                        fontFamily: 'UTM',
+                                      ),
+                                    ),
+                                    TextSpan(
+                                      recognizer: TapGestureRecognizer()
+                                        ..onTap = () {
+                                          launch(
+                                              'https://www.google.com/maps/place/38+Tr%E1%BA%A7n+Qu%C3%BD+Ki%C3%AAn,+D%E1%BB%8Bch+V%E1%BB%8Dng,+C%E1%BA%A7u+Gi%E1%BA%A5y,+H%C3%A0+N%E1%BB%99i,+Vi%E1%BB%87t+Nam/@21.0373781,105.7920155,17z/data=!3m1!4b1!4m5!3m4!1s0x3135ab37c1376ff7:0x245ac013cbc4304e!8m2!3d21.0373781!4d105.7920155?hl=vi-VNv');
+                                        },
+                                      text: ' ( Xem bản đồ )',
+                                      style: TextStyle(
+                                        fontFamily: 'UTM',
+                                        color: orange,
+                                        fontSize: 15,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ),
+                          ),
+                        ],
                       ),
                       _iconTextBox(
                         Text(
                           'Cách bạn: 2km',
                           style: TextStyle(
-                            color: Colors.grey,
+                            color: black,
                             fontSize: 15,
                           ),
                         ),
                         Icon(
                           Icons.radio_button_checked,
-                          color: Colors.grey,
+                          color: black,
                           size: 15,
                         ),
                       ),
@@ -228,7 +267,7 @@ class _ClassDetailRequestDemoState extends State<ClassDetailWhenAcceptedDemo> {
                         ),
                         Icon(
                           Icons.monetization_on,
-                          color: Colors.grey,
+                          color: black,
                           size: 15,
                         ),
                       ),
@@ -242,7 +281,7 @@ class _ClassDetailRequestDemoState extends State<ClassDetailWhenAcceptedDemo> {
                         ),
                         Icon(
                           Icons.attach_money,
-                          color: Colors.grey,
+                          color: black,
                           size: 15,
                         ),
                       ),
@@ -278,8 +317,8 @@ class _ClassDetailRequestDemoState extends State<ClassDetailWhenAcceptedDemo> {
               flex: 6,
             ),
             Container(
-              height: SizeConfig.safeBlockVertical * 5,
-              width: SizeConfig.safeBlockVertical *14,
+              height: SizeConfig.safeBlockHorizontal * 10,
+              width: SizeConfig.safeBlockHorizontal *25,
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(20.0),
               ),
@@ -291,7 +330,7 @@ class _ClassDetailRequestDemoState extends State<ClassDetailWhenAcceptedDemo> {
                       MaterialPageRoute(builder: (context) => Payments()));
                 },
                 textColor: Colors.white,
-                child: Text('Thanh toán'),
+                child: Text('Thanh toán',style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 3)),
               ),
             ),
             Expanded(

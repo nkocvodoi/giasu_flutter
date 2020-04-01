@@ -11,6 +11,7 @@ class SubjectService {
   Future<List<Subjects>> fetchSubject() async {
     final response =
     await http.get('https://giasu.htcon.vn/api/v1/subjects');
+    
     if(response.statusCode == 200) {
       Map<String, dynamic> mapResponse = json.decode(response.body);
       if(mapResponse["code"] == 1) {
@@ -28,6 +29,7 @@ class SubjectService {
   }
 }
 
+
 class Subjects {
   final int id;
   final String name;
@@ -41,7 +43,12 @@ class Subjects {
     id: json['id'],
     name: json['name'] as String,
   );
-
+   Map<String, dynamic> toMap() {
+    return {
+      'id': id,
+      'name': name,
+    };
+  }
   Map<String, dynamic> toJson() => <String, dynamic>{
     'id': id,
     'name': name,

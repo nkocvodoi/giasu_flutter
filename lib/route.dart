@@ -5,16 +5,17 @@ import 'package:test_giasu/ui/Open_App/SignUp_Page.dart';
 import 'package:test_giasu/ui/UI_Main/BottomNavigationBar.dart';
 
 class RoutePaths {
-  static const String Login = 'login';
+  static const String Login = '/login';
   static const String Home = '/';
-  static const String SignUp = 'signup';
+  static const String SignUp = '/signup';
+
 }
 
 class Router {
   static Route<dynamic> generateRoute(RouteSettings settings) {
     switch (settings.name) {
       case RoutePaths.Home:
-        return MaterialPageRoute(builder: (_) => MyBottomNavigationBar(currentIndex: 0,));
+        return MaterialPageRoute(builder: (_) => MyBottomNavigationBar());
       case RoutePaths.Login:
         return MaterialPageRoute(builder: (_) => SignIn_Page());
       case RoutePaths.SignUp:

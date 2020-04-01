@@ -76,6 +76,7 @@ class Data_class {
   String parent_number;
   String form_teaching_name;
   Parent parent;
+  bool recommended;
   int recommend_number;
   Subject subject;
   List<ScheduleCourses> schedule_courses;
@@ -102,6 +103,7 @@ class Data_class {
         this.parent_number,
         this.form_teaching_name,
         this.parent,
+        this.recommended,
         this.recommend_number,
         this.subject,
         this.schedule_courses,
@@ -129,6 +131,7 @@ class Data_class {
     parent_number: json['parent_number'],
     form_teaching_name: json['form_teaching_name'],
     parent: Parent.fromJson(json['parent']),
+    recommended: json['recommended'],
     recommend_number: json['recommend_number'],
     subject: Subject.fromJson(json['subject']),
     schedule_courses: (json['data'] as List)

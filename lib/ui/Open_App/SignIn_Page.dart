@@ -221,7 +221,7 @@ class _SignIn_PageState extends State<SignIn_Page> {
                       child: Center(
                         child: RaisedButton(
                           onPressed: () async {
-                            _sendToServer();
+//                            _sendToServer();
 //                            Navigator.push(
 //                              context,
 //                              MaterialPageRoute(
@@ -232,6 +232,7 @@ class _SignIn_PageState extends State<SignIn_Page> {
 //                            );
                             _loginmap["phone_number"] = _phone_number.text;
                             _loginmap["password"] = _pass.text;
+
                             var loginSuccess1 = await model.login1(_loginmap);
 //                            var loginSuccess1 = model.authenticationService.isLogined;
 //                            print(loginSuccess1);

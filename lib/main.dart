@@ -47,20 +47,20 @@ class MyApp extends StatelessWidget {
         title: 'HTcon',
         theme: ThemeData(fontFamily: 'UTM'),
         
-      initialRoute: '/personal',
-     routes: {
-       '/': (context) => Waiting_screen(),   
-       '/subject': (context) => SubjectChoice(), 
-       '/personal': (context) => PersonInfor(),                   
-       '/open': (context) => Waiting_screen(),
-       '/signIn': (context) => SignIn_Page(),
-       '/signUp': (context) => SignUpPage(),
-       '/specialty': (context) => SpecialtyInfor(),
-       '/subject': (context) => SubjectChoice(),
-       '/home': (context) => MyBottomNavigationBar(),
-     },
+//      initialRoute: '/personal',
+//     routes: {
+//       '/': (context) => Waiting_screen(),
+//       '/subject': (context) => SubjectChoice(),
+//       '/personal': (context) => PersonInfor(),
+//       '/open': (context) => Waiting_screen(),
+//       '/signIn': (context) => SignIn_Page(),
+//       '/signUp': (context) => SignUpPage(),
+//       '/specialty': (context) => SpecialtyInfor(),
+//       '/subject': (context) => SubjectChoice(),
+//       '/home': (context) => MyBottomNavigationBar(),
+//     },
 
-        //home: PersonInfor(),
+        home: SignIn_Page(),
       ),
     );
   }

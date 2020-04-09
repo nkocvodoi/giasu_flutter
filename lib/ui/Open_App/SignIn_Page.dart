@@ -2,21 +2,14 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 
 import 'package:provider/provider.dart';
-import 'package:test_giasu/core/model/List_ClassData.dart';
-import 'package:test_giasu/core/view_model/signinModel.dart';
-import 'package:test_giasu/ui/Helper/ScreenConfig.dart';
-import 'package:test_giasu/ui/Open_App/SignUp_Page.dart';
-
-import 'package:test_giasu/ui/Open_App/SignUp_PageTutor.dart';
-
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:test_giasu/core/view_model/signinModel.dart';
 import 'package:test_giasu/ui/Helper/ScreenConfig.dart';
 import 'package:test_giasu/ui/Open_App/ForgotPass1.dart';
-
+import 'package:test_giasu/ui/Open_App/SignUp_Page.dart';
 import 'package:test_giasu/ui/UI_Main/BottomNavigationBar.dart';
-import 'package:test_giasu/ui/UI_Main/ClassDetailRequestDemo.dart';
-
 import 'package:test_giasu/ui/UI_Main/General_Infor.dart';
+import 'package:test_giasu/ui/UI_Main/TutorInfor.dart';
 
 // ignore: camel_case_types
 class SignIn_Page extends StatefulWidget {
@@ -33,24 +26,6 @@ class _SignIn_PageState extends State<SignIn_Page> {
   //   });
   // }
 
-  Future<CLassData> list_class;
-//  Api _api;
-  @override
-  void initState() {
-    super.initState();
-    list_class = fetchClassData();
-  }
-
-//  void initState() {
-//    if (Provider.of<SignInModel>(context).authenticationService.isLogined) {
-//      Navigator.push(
-//        context,
-//        MaterialPageRoute(
-//          builder: (context) => MyBottomNavigationBar(),
-//        ),
-//      );
-//    }
-//  }
 
   Map _loginmap = new Map();
   GlobalKey<FormState> _key = new GlobalKey();
@@ -104,7 +79,6 @@ class _SignIn_PageState extends State<SignIn_Page> {
     }
   }
 
-  TextEditingController _controller = TextEditingController();
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
 
   void showInSnackBar(String value) {
@@ -156,7 +130,6 @@ class _SignIn_PageState extends State<SignIn_Page> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: <Widget>[
                           TextFormField(
-                              controller: _controller,
                               decoration: InputDecoration(
                                 hintText: 'Email/ Số điện thoại',
                                 border: OutlineInputBorder(),
@@ -178,6 +151,7 @@ class _SignIn_PageState extends State<SignIn_Page> {
                                 _phone_number.text = val.trim();
                               }),
                           SizedBox(
+                            width: double.infinity,
                             height: SizeConfig.safeBlockVertical * 2,
                           ),
                           _buildBox('Mật khẩu', true),
@@ -203,7 +177,7 @@ class _SignIn_PageState extends State<SignIn_Page> {
                                     Navigator.push(
                                       context,
                                       MaterialPageRoute(
-                                        builder: (context) => SignUpPageTutor(),
+                                        builder: (context) => SignUpPage(),
                                       ),
                                     );
                                   },
@@ -256,7 +230,7 @@ class _SignIn_PageState extends State<SignIn_Page> {
                       //                 ClassDetailRequestDemo()));
                       //   }
                       onPressed: () async {
-                        _sendToServer();
+//                        _sendToServer();
 //                            Navigator.push(
 //                              context,
 //                              MaterialPageRoute(
@@ -273,34 +247,15 @@ class _SignIn_PageState extends State<SignIn_Page> {
 //                            var a = await model.authenticationService.id;
 //                            print(a);
                         if (loginSuccess1) {
+//                          Navigator.push(
+//                            context,
+//                            MaterialPageRoute(
+//                              builder: (context) => ClassDetailRequestDemo()));
                           Navigator.push(
                             context,
                             MaterialPageRoute(
-                              builder: (context) => ClassDetailRequestDemo()));
-                          //   if (loginSuccess1) {
-                          //     print(loginSuccess1);
-                          //     Navigator.push(
-                          //       context,
-                          //       MaterialPageRoute(
-                          //         builder: (context) => MyBottomNavigationBar(),
-                          //       ),
-                          //     );
-                          //   } else {
-                          //     var _message = await model.Infor;
-                          //     showInSnackBar(_message);
-                          //   }
-                          // },
-                          // color: Colors.orange[300],
-                          // child: new Padding(
-                          //   padding: EdgeInsets.all(10.0),
-                          //   child: Text(
-                          //     'Đăng Nhập',
-                          //     style: TextStyle(
-                          //         fontSize: 20,
-                          //         fontWeight: FontWeight.w400,
-                          //         color: Colors.white),
-                          //   ),
-                          // );
+                              builder: (context) => MyBottomNavigationBar()));
+
                         } else {
                           var _message = await model.Infor;
                           showInSnackBar(_message);
@@ -313,10 +268,10 @@ class _SignIn_PageState extends State<SignIn_Page> {
                         child: Center(
                           child: Text(
                             'Đăng Nhập',
-                           
+
                             style: TextStyle(
                                 fontSize: SizeConfig.safeBlockHorizontal * 5,
-                                
+
                                 color: Colors.white),
                           ),
                         ),

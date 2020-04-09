@@ -11,7 +11,7 @@ import 'package:test_giasu/core/view_model/signinModel.dart';
 import 'package:test_giasu/core/view_model/signupModel.dart';
 import 'package:test_giasu/core/view_model/subjectchoiceModel.dart';
 import 'package:test_giasu/core/view_model/support_settingModel.dart';
-import 'package:test_giasu/ui/Open_App/SignUp_Page.dart';
+import 'package:test_giasu/core/view_model/anouncementModel.dart';
 import 'core/view_model/bottombarModel.dart';
 import 'core/view_model/classModel.dart';
 import 'core/view_model/napbitsModel.dart';
@@ -49,9 +49,6 @@ List<SingleChildCloneableWidget> getProviders() {
     ChangeNotifierProvider(
       create: (context) => PersonalInforModel(),
     ),
-    ChangeNotifierProvider(
-      create: (context) => ClassModel(),
-    ),
   ];
 
   List<SingleChildCloneableWidget> dependentServices = [
@@ -79,15 +76,14 @@ List<SingleChildCloneableWidget> getProviders() {
       update: (_, authentication, __) =>
           SignUpModel(authenticationService: authentication),
     ),
-    
-//    ChangeNotifierProxyProvider<AuthenticationService, WaitingModel>(
-//      update: (_, authentication, __) =>
-//          WaitingModel(authenticationService: authentication),
-//    ),
-    // ChangeNotifierProxyProvider<AuthenticationService, ClassModel>(
-    //   update: (_, authentication, __) =>
-    //       ClassModel(authenticationService: authentication),
-    // ),
+     ChangeNotifierProxyProvider<AuthenticationService, ClassModel>(
+       update: (_, authentication, __) =>
+           ClassModel(authenticationService: authentication),
+     ),
+ChangeNotifierProxyProvider<AuthenticationService, AnouncementModel>(
+       update: (_, authentication, __) =>
+           AnouncementModel(authenticationService: authentication),
+     ),
 
   ];
 

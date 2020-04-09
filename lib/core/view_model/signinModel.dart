@@ -43,7 +43,13 @@ class SignInModel extends ChangeNotifier {
 
 
   Future<bool> login1(Map _map) async {
-    var data = {"user": _map};
+//    var data = {"user": _map};
+    var data = {"user": {
+      "phone_number": "0123456783",
+      "password": "123456789"
+
+    }
+    };
 
     try {
       var res = await http.post(APIUrl + 'api/sign_in',

@@ -42,7 +42,7 @@ class AuthenticationService extends ChangeNotifier {
 
       // @todo: viet lai bieu thuc check
       _currentUser = currentUser;
-      print(_currentUser.toString());
+//      print(_currentUser.toString());
       this._setString("currentUser", _currentUser.toString());
       notifyListeners();
 //    }

@@ -1,3 +1,4 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_vector_icons/flutter_vector_icons.dart';
@@ -89,26 +90,6 @@ class TutorInforState extends State<TutorInfor> {
     );
   }
 
-  Widget _iconTextBoxNoBorder(
-    Text text,
-    Icon icon,
-    Color color,
-    int height,
-  ) {
-    return Container(
-      padding: EdgeInsets.only(right: 5, left: 5),
-      child: Row(
-        children: <Widget>[
-          icon,
-          Container(
-            child: text,
-            width: SizeConfig.safeBlockHorizontal* 38,
-          ),
-        ],
-      ),
-    );
-  }
-
   String getGender(String gender) {
     if (gender == 'female') return 'Nữ';
     if (gender == 'male') return 'Nam';
@@ -129,7 +110,6 @@ class TutorInforState extends State<TutorInfor> {
           backgroundColor: Color.fromRGBO(47, 101, 174, 1),
           leading: buildPreviousButton(),
           centerTitle: true,
-          
         ),
         body: Consumer<PersonalInforModel>(builder: (_, model, __) {
           return Stack(
@@ -295,85 +275,88 @@ class TutorInforState extends State<TutorInfor> {
                     ),
                     Divider(thickness: 1),
                     Container(
-                      width: SizeConfig.safeBlockHorizontal * 95,
                       child: Row(
                         children: <Widget>[
-                          _iconTextBoxNoBorder(
-                              Text(
-                                '${teacherData.subject_text}',
-                                style: TextStyle(
-                                  fontWeight: FontWeight.bold,
-                                  fontFamily: 'UTM',
-                                  fontSize:
-                                      SizeConfig.safeBlockHorizontal * 3.5,
-                                ),
+                          Icon(MaterialCommunityIcons.book),
+                          SizedBox(width: 5),
+                          ConstrainedBox(
+                            constraints: BoxConstraints(
+                              minWidth: SizeConfig.safeBlockHorizontal * 20,
+                              maxWidth: SizeConfig.safeBlockHorizontal * 50,
+                              minHeight: SizeConfig.safeBlockHorizontal * 5,
+                              maxHeight: SizeConfig.safeBlockHorizontal * 10,
+                            ),
+                            child: AutoSizeText(
+                              teacherData.subject_text,
+                              maxFontSize: 16,
+                              maxLines: 2,
+                              style: TextStyle(
+                                fontWeight: FontWeight.bold,
                               ),
-                              Icon(MaterialCommunityIcons.book),
-                              null,
-                              50),
-                          // SizedBox(
-                          //   width: SizeConfig.safeBlockHorizontal * 2,
-                          // ),
-                          _iconTextBoxNoBorder(
-                              Text(
-                                '${teacherData.tuition_fee } vnđ/buổi',
-                                style: TextStyle(
-                                    color: Colors.red,
-                                    fontSize:
-                                        SizeConfig.safeBlockHorizontal * 3.5,
-                                    fontFamily: 'UTM',
-                                    fontWeight: FontWeight.bold),
-                              ),
-                              Icon(MaterialCommunityIcons.tag,
-                                  color: Colors.red),
-                              null,
-                              50),
+                            ),
+                          ),
+                          SizedBox(
+                            width: 20,
+                          ),
+                          Icon(
+                            MaterialCommunityIcons.tag,
+                            color: Colors.red,
+                          ),
+                          SizedBox(
+                            width: 5,
+                          ),
+                          Text(
+                            '${teacherData.tuition_fee} vnđ/buổi',
+                            style: TextStyle(color: Colors.red, fontSize: 16),
+                          ),
                         ],
                       ),
                     ),
-                   
                     Divider(
                       thickness: 1,
                     ),
                     Container(
-                      width: SizeConfig.safeBlockHorizontal * 95,
                       child: Row(
                         children: <Widget>[
-                          _iconTextBoxNoBorder(
-                              Text(
-                                '${teacherData.location.name}',
-                                style: TextStyle(
-                                  color: Colors.blue,
-                                  fontWeight: FontWeight.bold,
-                                  fontFamily: 'UTM',
-                                  fontSize:
-                                      SizeConfig.safeBlockHorizontal * 3.5,
-                                ),
-                              ),
-                              Icon(
-                                Icons.location_on,
-                                color: Colors.blue,
-                              ),
-                              null,
-                              50),
-                          
-                          _iconTextBoxNoBorder(
-                              Text(
-                                'Gia sư Offline (tại nhà)',
-                                style: TextStyle(
-                                    color: Colors.black,
-                                    fontSize:
-                                        SizeConfig.safeBlockHorizontal * 3.5,
-                                    fontFamily: 'UTM',
-                                    fontWeight: FontWeight.bold),
-                              ),
-                              Icon(Icons.business_center, color: Colors.black),
-                              null,
-                              50),
+                          Icon(
+                            Icons.location_on,
+                            color: Colors.blue,
+                          ),
+                          SizedBox(width: SizeConfig.safeBlockHorizontal * 1),
+                          Text(
+                            '${teacherData.location.name}',
+                            style: TextStyle(
+                              color: Colors.blue,
+                              fontWeight: FontWeight.bold,
+                              fontSize: 16,
+                            ),
+                          ),
+                          SizedBox(width: SizeConfig.safeBlockHorizontal * 3),
+                          Icon(Icons.business_center, color: Colors.black),
+                          SizedBox(width: SizeConfig.safeBlockHorizontal * 1),
+                          ConstrainedBox(
+                            constraints: BoxConstraints(
+                              minWidth: SizeConfig.safeBlockHorizontal * 20,
+                              maxWidth: SizeConfig.safeBlockHorizontal * 70,
+                              minHeight: SizeConfig.safeBlockHorizontal * 5,
+                              maxHeight: SizeConfig.safeBlockHorizontal * 5,
+                            ),
+                            child: AutoSizeText(
+                              (teacherData.form_teachings.length == 2)
+                                  ? teacherData.form_teachings[0].name +
+                                      ', ' +
+                                      teacherData.form_teachings[1].name
+                                  : teacherData.form_teachings[0].name,
+                              maxLines: 1,
+                              maxFontSize: 16,
+                              style: TextStyle(
+                                  color: Colors.black,
+                                  fontWeight: FontWeight.bold),
+                            ),
+                          ),
                         ],
                       ),
                     ),
-                   
                     Divider(
                       thickness: 1,
                     ),
@@ -381,7 +364,7 @@ class TutorInforState extends State<TutorInfor> {
                       height: 20,
                     ),
                     Container(
-                      height: SizeConfig.safeBlockHorizontal* 40,
+                      height: SizeConfig.safeBlockHorizontal * 40,
                       child: Row(
                         mainAxisSize: MainAxisSize.max,
                         children: <Widget>[
@@ -395,7 +378,6 @@ class TutorInforState extends State<TutorInfor> {
                         ],
                       ),
                     ),
-                    
                     Container(
                       width: SizeConfig.safeBlockHorizontal * 90,
                       alignment: Alignment.bottomLeft,
@@ -436,9 +418,14 @@ class TutorInforState extends State<TutorInfor> {
                           ),
                           SmallTextBox(
                               'Quê quán: ' + teacherData.location.name),
-                          SmallTextBox('Giọng nói: '+ model.voice[(teacherData.voice_id - 1)].name),
+                          SmallTextBox('Giọng nói: ' +
+                              model.voice[(teacherData.voice_id - 1)].name),
                           //+ model.voice[minus(teacherData.voice_id)].name),
-                          SmallTextBox('Học vấn: '+ model.education[(teacherData.education_level_id - 1)].name),
+                          SmallTextBox('Học vấn: ' +
+                              model
+                                  .education[
+                                      (teacherData.education_level_id - 1)]
+                                  .name),
                           //+ model.education[minus(teacherData.education_level_id)].name),
                           SmallTextBox(
                               'Đại học năm ${teacherData.school_year} - ${teacherData.specialism} - ${teacherData.university}'),

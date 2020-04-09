@@ -154,11 +154,13 @@ class ScheduleCourses {
 }
 
 class Schedule {
+  int id;
   int day;
   int session;
-  Schedule({this.day,this.session});
+  Schedule({this.id,this.day,this.session});
   factory Schedule.fromJson(Map<String,dynamic>json) => Schedule(day: json['day'],session: json['session']);
   Map<String,dynamic> toJson() => <String,dynamic>{
+    'id' : id,
     'day': day,
     'session': session,
   };

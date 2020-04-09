@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
 import 'package:provider/provider.dart';
 import 'package:test_giasu/core/view_model/signupModel.dart';
+import 'package:test_giasu/ui/Widgets/previous_widget.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import 'PersonInfor.dart';
@@ -100,7 +101,7 @@ class _SignUpPageTutor extends State<SignUpPageTutor> {
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
-        //leading: FlatButton.icon( icon: Icon(Icons.arrow_back_ios, textDirection: TextDirection.ltr,)),
+        leading: buildPreviousButton(),
         backgroundColor: _c,
         title: Text(
           'Đăng ký',
@@ -377,8 +378,7 @@ class _SignUpPageTutor extends State<SignUpPageTutor> {
           obscureText: true,
           style: TextStyle(fontSize: 20.0),
           decoration: new InputDecoration(
-              labelStyle: TextStyle(fontSize: 20.0), 
-              labelText: _text),
+              labelStyle: TextStyle(fontSize: 20.0), labelText: _text),
           keyboardType: TextInputType.visiblePassword,
 //                            maxLength: 10,
           validator: validatePass,

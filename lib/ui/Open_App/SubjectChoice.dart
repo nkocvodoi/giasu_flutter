@@ -25,19 +25,17 @@ class SubjectChoice extends StatefulWidget {
 
 class SubjectChoiceState extends State<SubjectChoice> {
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
-  List<Topics> topicList = new List<Topics>();
+  List<Topics> firstTopicList = List<Topics>();
+  List<Topics> secondTopicList = List<Topics>();
+  List<Topics> thirdTopicList = List<Topics>();
 
-  void fillLists(List<Subjects> subjects, List<Topics> first,
-       List<Topics> data) {
-    for (int j = data.length - 1; j >= 0; j--) {
-      if (data[j].subject_id == subjects[0].id) {
-        first.add(data[j]);
-      }
-      if (data[j].subject_id == subjects[1].id) {
-        first.add(data[j]);
-      }
-      if (data[j].subject_id == subjects[2].id) {
-        first.add(data[j]);
+  void fillLists(
+      List<Subjects> subjects, List<Topics> first, List<Topics> data) {
+    for (int i = 0; i < subjects.length; i++) {
+      for (int j = data.length - 1; j >= 0; j++) {
+        if (data[j].subject_id == subjects[i].id) {
+          first.add(data[j]);
+        }
       }
     }
   }
@@ -54,9 +52,15 @@ class SubjectChoiceState extends State<SubjectChoice> {
   List<bool> listsBool = List.filled(25, true, growable: true);
   List<Subjects> listSubject = new List<Subjects>();
   List<Map> subjects = List();
+  bool alreadyExist(int id){
+    for(var i in listSubject){
+      if(i.id == id) return true;
+    }
+    return false;
+  }
   void onPressed(Subjects subject) {
     setState(() => listsBool[subject.id] = !listsBool[subject.id]);
-    if (listsBool[subject.id] == false) {
+    if (listsBool[subject.id] == false && alreadyExist(subject.id)== false) {
       listSubject.add(subject);
       subjects.add(subject.toMap());
     }
@@ -369,21 +373,60 @@ class SubjectChoiceState extends State<SubjectChoice> {
                         ),
                       ),
                       onPressed: () {
-                        if (listSubject.length <= 3 && listSubject.length >= 1) {
-                          topicList = new List<Topics>();
-                          fillLists(listSubject, topicList, model.topic);
-                          for (int i = 0; i < topicList.length; i++) {
-                            print(topicList[i].name);
-                          }
+                        if (listSubject.length <= 3 &&
+                            listSubject.length >= 1) {
                           
+                          listSubject.sort((a,b) => a.id.compareTo(b.id));
+                          for (var i in listSubject) {
+                            print(i.name);
+                          }
+                          int i =0;
+                          int j = 0;
+                          while(i < listSubject.length){
+                            if(listSubject[i].id == model.topic[j].subject_id && i == 0){
+                              firstTopicList.add(model.topic[j]);
+                            }
+                            if(listSubject[i].id == model.topic[j].subject_id && i == 1){
+                              secondTopicList.add(model.topic[j]);
+                            }
+                            if(listSubject[i].id == model.topic[j].subject_id && i == 2){
+                              thirdTopicList.add(model.topic[j]);
+                            }
+                            if(listSubject[i].id < model.topic[j].subject_id){
+                              i++;
+                            }
+                            j++;
+                          }
+                          for(var i in firstTopicList){
+                            print(i.name);
+                          }
+                           for(var i in secondTopicList){
+                            print(i.name);
+                          }
+                           for(var i in thirdTopicList){
+                            print(i.name);
+                          }
+
+
                           Navigator.push(
                               context,
                               MaterialPageRoute(
                                 builder: (context) => SubjectChoiceDetails(
-                                    listSubject,
-                                    topicList,
-                                   ),
+                                  listSubject,
+                                  firstTopicList,
+                                  secondTopicList,
+                                  thirdTopicList
+                                ),
                               ));
+                          // listSubject.clear();
+                          // firstTopicList.clear();
+                          // secondTopicList.clear();
+                          // thirdTopicList.clear();
+                          for(var i in listsBool){
+                            if(i == false){
+                              i = true;
+                            }
+                          }
                         } else if (listSubject.length == 0) {
                           showInSnackBar('Lựa chọn ít nhất 1 môn');
                         } else {

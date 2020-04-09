@@ -14,8 +14,10 @@ import 'DetailRaisedButton.dart';
 
 class SubjectChoiceDetails extends StatefulWidget {
   List<Subjects> data;
-  List<Topics> topicList;
-  SubjectChoiceDetails(this.data, this.topicList);
+  List<Topics> firstTopicList;
+  List<Topics> secondTopicList;
+  List<Topics> thirdTopicList;
+  SubjectChoiceDetails(this.data, this.firstTopicList,this.secondTopicList,this.thirdTopicList);
   
   @override
   State<StatefulWidget> createState() {
@@ -28,7 +30,7 @@ class SubjectChoiceDetails extends StatefulWidget {
 class SubjectChoiceDetailsState extends State<SubjectChoiceDetails> {
   GlobalKey<FormState> _key1 = new GlobalKey();
 
-  List<bool> listBools = List.filled(130, true, growable: true);
+  List<bool> listBools = List.filled(138, true, growable: true);
   List<Topics> listTopic = List();
   List<int> listTopicID = List();
   List<Map> topics = List();
@@ -44,11 +46,16 @@ class SubjectChoiceDetailsState extends State<SubjectChoiceDetails> {
       });
     }
   }
-
+  bool alreadyExist(int id){
+    for(var i in listTopic){
+      if(i.id == id) return true;
+    }
+    return false;
+  }
   void onPressed(Topics topic) {
     setState(() => listBools[topic.id] = !listBools[topic.id]);
 
-    if (listBools[topic.id] == false) {
+    if (listBools[topic.id] == false & alreadyExist(topic.id)) {
       listTopic.add(topic);
       listTopicID.add(topic.id);
 
@@ -61,39 +68,33 @@ class SubjectChoiceDetailsState extends State<SubjectChoiceDetails> {
 
   // ignore: missing_return
   Widget _checkData(List<Subjects> data) {
-    return  Column(
+    
+    switch (data.length) {
+      case 1:
+        return Column(
           children: <Widget>[
-            (widget.topicList.length != 0) ? _subject(data[0], widget.topicList) : SizedBox(),
-            // (widget.secondTopicList.length != 0) ? _subject(data[0], widget.secondTopicList) : SizedBox(),
-            // (widget.thirdTopicList.length != 0) ? _subject(data[0], widget.thirdTopicList) : SizedBox(),
+            _subject(data[0], widget.firstTopicList),
           ],
-        ) ;
-    // switch (data.length) {
-    //   case 1:
-    //     return Column(
-    //       children: <Widget>[
-    //         _subject(data[0], widget.firstTopicList),
-    //       ],
-    //     );
-    //     break;
-    //   case 2:
-    //     return Column(
-    //       children: <Widget>[
-    //         _subject(data[0], widget.firstTopicList),
-    //         _subject(data[1], widget.secondTopicList),
-    //       ],
-    //     );
-    //     break;
-    //   case 3:
-    //     return Column(
-    //       children: <Widget>[
-    //         _subject(data[0], widget.firstTopicList),
-    //         _subject(data[1], widget.secondTopicList),
-    //         _subject(data[2], widget.thirdTopicList),
-    //       ],
-    //     );
-    //     break;
-    // }
+        );
+        break;
+      case 2:
+        return Column(
+          children: <Widget>[
+            _subject(data[0], widget.firstTopicList),
+            _subject(data[1], widget.secondTopicList),
+          ],
+        );
+        break;
+      case 3:
+        return Column(
+          children: <Widget>[
+            _subject(data[0], widget.firstTopicList),
+            _subject(data[1], widget.secondTopicList),
+            _subject(data[2], widget.thirdTopicList),
+          ],
+        );
+        break;
+    }
   }
 
   Widget _subject(Subjects a, List<Topics> topicList) {

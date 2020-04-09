@@ -610,7 +610,7 @@ class _PersonInforState extends State<PersonInfor> {
                                           builder: (_, model, __) {
                                         return GestureDetector(
                                           onTap: () async {
-                                            startUpload();
+                                            // startUpload();
                                             _saveToServer();
                                             model.personalInfor["full_name"] = (full_name.text == "") ? "null" :
                                                 full_name.text;

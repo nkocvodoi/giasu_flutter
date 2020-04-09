@@ -241,7 +241,7 @@ class _SignIn_PageState extends State<SignIn_Page> {
                       ],
                     ),
                     SizedBox(
-                      height: 40,
+                      height: 80,
                     ),
                     RaisedButton(
                       // onPressed: () {
@@ -328,66 +328,66 @@ class _SignIn_PageState extends State<SignIn_Page> {
                     SizedBox(
                       height: 7,
                     ),
-                    RaisedButton(
-                      color: blue,
-                      onPressed: () {},
-                      child: Container(
-                        width: SizeConfig.safeBlockHorizontal * 40,
-                        height: SizeConfig.safeBlockHorizontal * 10,
-                        child: Center(
-                            child: Row(
-                          children: <Widget>[
-                            Image.asset(
-                              'assets/facebook_logo.png',
-                              cacheHeight: 20,
-                            ),
-                            Text(
-                              '  Đăng nhập bằng Facebook',
-                              style: TextStyle(
-                                color: Colors.white,
-                                fontSize: SizeConfig.safeBlockHorizontal * 2.7,
-                              ),
-                              textAlign: TextAlign.center,
-                            ),
-                          ],
-                        )),
-                      ),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(6.0),
-                      ),
-                    ),
+                    // RaisedButton(
+                    //   color: blue,
+                    //   onPressed: () {},
+                    //   child: Container(
+                    //     width: SizeConfig.safeBlockHorizontal * 40,
+                    //     height: SizeConfig.safeBlockHorizontal * 10,
+                    //     child: Center(
+                    //         child: Row(
+                    //       children: <Widget>[
+                    //         Image.asset(
+                    //           'assets/facebook_logo.png',
+                    //           cacheHeight: 20,
+                    //         ),
+                    //         Text(
+                    //           '  Đăng nhập bằng Facebook',
+                    //           style: TextStyle(
+                    //             color: Colors.white,
+                    //             fontSize: SizeConfig.safeBlockHorizontal * 2.7,
+                    //           ),
+                    //           textAlign: TextAlign.center,
+                    //         ),
+                    //       ],
+                    //     )),
+                    //   ),
+                    //   shape: RoundedRectangleBorder(
+                    //     borderRadius: BorderRadius.circular(6.0),
+                    //   ),
+                    // ),
 
-                    SizedBox(
-                      height: 7,
-                    ),
-                    RaisedButton(
-                      color: red,
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(6.0),
-                      ),
-                      onPressed: () {},
-                      child: Container(
-                        width: SizeConfig.safeBlockHorizontal * 40,
-                        height: SizeConfig.safeBlockHorizontal * 10,
-                        child: Center(
-                            child: Row(
-                          children: <Widget>[
-                            Image.asset(
-                              'assets/google_logo.png',
-                              cacheHeight: 18,
-                            ),
-                            Text(
-                              '  Đăng nhập bằng Google+',
-                              style: TextStyle(
-                                color: Colors.white,
-                                fontSize: SizeConfig.safeBlockHorizontal * 2.7,
-                              ),
-                              textAlign: TextAlign.center,
-                            ),
-                          ],
-                        )),
-                      ),
-                    ),
+                    // SizedBox(
+                    //   height: 7,
+                    // ),
+                    // RaisedButton(
+                    //   color: red,
+                    //   shape: RoundedRectangleBorder(
+                    //     borderRadius: BorderRadius.circular(6.0),
+                    //   ),
+                    //   onPressed: () {},
+                    //   child: Container(
+                    //     width: SizeConfig.safeBlockHorizontal * 40,
+                    //     height: SizeConfig.safeBlockHorizontal * 10,
+                    //     child: Center(
+                    //         child: Row(
+                    //       children: <Widget>[
+                    //         Image.asset(
+                    //           'assets/google_logo.png',
+                    //           cacheHeight: 18,
+                    //         ),
+                    //         Text(
+                    //           '  Đăng nhập bằng Google+',
+                    //           style: TextStyle(
+                    //             color: Colors.white,
+                    //             fontSize: SizeConfig.safeBlockHorizontal * 2.7,
+                    //           ),
+                    //           textAlign: TextAlign.center,
+                    //         ),
+                    //       ],
+                    //     )),
+                    //   ),
+                    // ),
                     SizedBox(height: 40),
                   ],
                 ),

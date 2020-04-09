@@ -3,6 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
 import 'package:test_giasu/core/view_model/filterModel.dart';
 import 'package:test_giasu/core/view_model/personalInforModel.dart';
+import 'package:test_giasu/core/view_model/selectedModel.dart';
 import 'package:test_giasu/ui/Helper/ScreenConfig.dart';
 import 'package:test_giasu/ui/UI_Main/BottomNavigationBar.dart';
 import 'package:test_giasu/ui/UI_Main/General_Infor.dart';
@@ -63,6 +64,7 @@ class _SpecialtyInforState extends State<SpecialtyInfor> {
     }
   }
 
+  List<bool> isSelected;
   @override
   Widget build(BuildContext context) {
     ScreenUtil.instance = ScreenUtil.getInstance()..init(context);
@@ -253,28 +255,44 @@ class _SpecialtyInforState extends State<SpecialtyInfor> {
                               SizedBox(
                                 width: ScreenUtil.getInstance().setWidth(200),
                               ),
-                              Consumer<PersonalInforModel>(
-                                  builder: (_, model, __) {
+                              Consumer<SelectedTimeModel>(
+                                  builder: (_, selectedModel, __) {
                                 return RaisedButton(
                                   color: colorApp,
                                   onPressed: () async {
+                                    print(selectedModel.listSelected[0]);
                                     _saveToServer();
-                                      model.personalInfor["tuition_fee"] = (tuition_fee.text == "") ? "null" :
-                                        tuition_fee.text;
-                                      model.personalInfor["number_class"] = (number_class.text == "") ? "null" :
-                                        number_class.text;
-                                      model.personalInfor["about_me"] = (about_me.text == "") ? "null" : about_me.text;
-                                      model.personalInfor["achievement"] = (achievement.text == "") ? "null" :
-                                        achievement.text;
-                                      model.personalInfor["form_teaching_id"] = (model.idFormTeaching == null) ? "null" : model.idFormTeaching.toString();
-                                      model.personalInfor["education_level_id"] = (model.idEducation == null) ? "null" : model.idEducation.toString();
-                                    print(  model.personalInfor.toString());
-                                    var success = await model
-                                        .personalInforCheckup(  model.personalInfor);
-                                        print(success);
+                                    model.personalInfor["tuition_fee"] =
+                                        (tuition_fee.text == "")
+                                            ? "null"
+                                            : tuition_fee.text;
+                                    model.personalInfor["number_class"] =
+                                        (number_class.text == "")
+                                            ? "null"
+                                            : number_class.text;
+                                    model.personalInfor["about_me"] =
+                                        (about_me.text == "")
+                                            ? "null"
+                                            : about_me.text;
+                                    model.personalInfor["achievement"] =
+                                        (achievement.text == "")
+                                            ? "null"
+                                            : achievement.text;
+                                    model.personalInfor["form_teaching_id"] =
+                                        (model.idFormTeaching == null)
+                                            ? "null"
+                                            : model.idFormTeaching.toString();
+                                    model.personalInfor["education_level_id"] =
+                                        (model.idEducation == null)
+                                            ? "null"
+                                            : model.idEducation.toString();
+                                    print(model.personalInfor.toString());
+                                    var success =
+                                        await model.personalInforCheckup(
+                                            model.personalInfor);
+
                                     if (success) {
                                       Navigator.pushNamed(context, '/home');
-                                      
                                     } else {
                                       var _message = await model.Infor;
                                       showInSnackBar(_message);

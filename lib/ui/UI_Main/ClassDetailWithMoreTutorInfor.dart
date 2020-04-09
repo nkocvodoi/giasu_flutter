@@ -1,3 +1,4 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:test_giasu/core/model/List_ClassData.dart';
@@ -9,6 +10,7 @@ import 'package:test_giasu/ui/Widgets/RoundedImageNameBox.dart';
 import 'package:test_giasu/ui/Widgets/SelectedTimeColumn.dart';
 import 'package:test_giasu/ui/Widgets/previous_widget.dart';
 
+import 'General_Infor.dart';
 import 'TeacherListBox.dart';
 
 class ClassDetailWithMoreTutorInfor extends StatefulWidget {
@@ -113,16 +115,24 @@ class _ClassDetailWithMoreTutorInforState
                                     color: Colors.white,
                                   ),
                                   child: Center(
-                                    child: Text(
-                                      classData.name,
-                                      style: TextStyle(
-                                        fontStyle: FontStyle.normal,
-                                        fontSize:
-                                            13,
-                                      ),
-                                      textAlign: TextAlign.center,
-                                    ),
-                                  ),
+                            child: ConstrainedBox(
+                              constraints: BoxConstraints(
+                                minHeight: SizeConfig.safeBlockHorizontal * 8,
+                                maxHeight: SizeConfig.safeBlockHorizontal * 10,
+                                minWidth: SizeConfig.safeBlockHorizontal * 8,
+                                maxWidth: SizeConfig.safeBlockHorizontal * 78,
+                              ),
+                              child: AutoSizeText(
+                                classData.name,
+                                maxLines: 1,
+                                maxFontSize: 20,
+                                style: TextStyle(
+                                  
+                                    fontStyle: FontStyle.normal, color: black),
+                                textAlign: TextAlign.center,
+                              ),
+                            ),
+                          ),
                                 ),
                               )
                             ],
@@ -249,7 +259,7 @@ class _ClassDetailWithMoreTutorInforState
                               ),
                               _iconTextBox(
                                 Text(
-                                  'Học phí/buổi: ${(classData.tuition_fee / 1000).toInt()},000 vnđ/2h',
+                                  'Học phí/buổi: ${classData.tuition_fee} vnđ/2h',
                                   style: TextStyle(
                                     color: Colors.orange,
                                     fontSize:
@@ -264,7 +274,7 @@ class _ClassDetailWithMoreTutorInforState
                               ),
                               _iconTextBox(
                                 Text(
-                                  'Phí nhận lớp: ${(classData.class_fee / 1000).toInt()},000 vnđ',
+                                  'Phí nhận lớp: ${classData.class_fee} vnđ',
                                   style: TextStyle(
                                     color: Colors.blue[400],
                                     fontSize:

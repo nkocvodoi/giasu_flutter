@@ -1,3 +1,4 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -86,6 +87,7 @@ class _ClassDetailRequestDemoState extends State<ClassDetailRequestDemo> {
                       Align(
                         alignment: Alignment.bottomCenter,
                         child: Container(
+                          alignment: Alignment.center,
                           width: SizeConfig.safeBlockHorizontal * 80,
                           height: SizeConfig.safeBlockVertical * 5,
                           decoration: BoxDecoration(
@@ -94,13 +96,22 @@ class _ClassDetailRequestDemoState extends State<ClassDetailRequestDemo> {
                             color: Colors.white,
                           ),
                           child: Center(
-                            child: Text(
-                              'TANH 5 XUÂN PHƯƠNG, TỪ LIÊM',
-                              style: TextStyle(
-                                  fontStyle: FontStyle.normal,
-                                  fontSize: 13,
-                                  color: black),
-                              textAlign: TextAlign.center,
+                            child: ConstrainedBox(
+                              constraints: BoxConstraints(
+                                minHeight: SizeConfig.safeBlockHorizontal * 8,
+                                maxHeight: SizeConfig.safeBlockHorizontal * 10,
+                                minWidth: SizeConfig.safeBlockHorizontal * 8,
+                                maxWidth: SizeConfig.safeBlockHorizontal * 78,
+                              ),
+                              child: AutoSizeText(
+                                'TANH 5 XUÂN PHƯƠNG, TỪ LIÊM',
+                                maxLines: 1,
+                                maxFontSize: 20,
+                                style: TextStyle(
+                                  
+                                    fontStyle: FontStyle.normal, color: black),
+                                textAlign: TextAlign.center,
+                              ),
                             ),
                           ),
                         ),

@@ -69,10 +69,10 @@ class Waiting_screenState extends State<Waiting_screen> {
         children: <Widget>[
           Expanded(child: SizedBox(),flex: 2,),
           Image.asset(
-            'assets/logo3.png',
-            cacheHeight: 100,
+            'assets/Logo.png',
+            cacheHeight: 90,
           ),
-          SizedBox(height: 100),
+          SizedBox(height: 50),
           Text(
             'Nền tảng kết nối gia sư, lớp học, khóa học',
             style: TextStyle(

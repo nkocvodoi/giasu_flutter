@@ -259,3 +259,18 @@ class PersonalInforModel extends ChangeNotifier {
     notifyListeners();
   }
 }
+
+class Schedules {
+  int day;
+  int session;
+  Schedules({this.day,this.session});
+  factory Schedules.fromJson(Map<String,dynamic>json) => Schedules(day: json['day'],session: json['session']);
+  Map<String,dynamic> toJson() => <String,dynamic>{
+    'day': day,
+    'session': session,
+  };
+  Map<String,dynamic> toMap() => <String,dynamic>{
+    'day': day,
+    'session': session,
+  };
+}

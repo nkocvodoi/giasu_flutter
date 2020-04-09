@@ -47,9 +47,9 @@ class MyApp extends StatelessWidget {
         title: 'HTcon',
         theme: ThemeData(fontFamily: 'UTM'),
         
-      initialRoute: '/personal',
+       initialRoute: '/',
      routes: {
-       '/': (context) => Waiting_screen(),   
+       '/': (context) => PersonInfor(),   
        '/subject': (context) => SubjectChoice(), 
        '/personal': (context) => PersonInfor(),                   
        '/open': (context) => Waiting_screen(),

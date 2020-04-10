@@ -11,8 +11,9 @@ import 'package:test_giasu/ui/UI_Main/General_Infor.dart';
 class List_Box extends StatelessWidget {
   List<Data_class> box;
   ScrollController controller;
+  bool stateButton;
 
-  List_Box({Key key, this.box, this.controller}) : super(key: key);
+  List_Box({Key key, this.box, this.controller, this.stateButton}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -102,7 +103,7 @@ class List_Box extends StatelessWidget {
                     ),
                   ),
                   Positioned(
-                    top: 90,
+                    top: 100,
                     right: 10,
                     child: Icon(
                       Icons.arrow_forward_ios,
@@ -110,7 +111,7 @@ class List_Box extends StatelessWidget {
                       size: 30.0,
                     ),
                   ),
-                  Positioned(
+                  (stateButton ? Positioned(
                     top: 153,
                     right: 25,
                     child: SizedBox(
@@ -159,6 +160,9 @@ class List_Box extends StatelessWidget {
                         ),
                       ),
                     ),
+                  )
+                  :
+                      SizedBox()
                   ),
                   Positioned(
                     top: 125,

@@ -26,7 +26,6 @@ class Profile extends StatefulWidget {
   }
 }
 class _ProfileState extends State<Profile> {
-  Future<DataUser> _profile;
 
 //  void initState() {
 //    super.initState();
@@ -122,7 +121,7 @@ class _ProfileState extends State<Profile> {
         backgroundColor: colorApp,
         centerTitle: true,
         title: Text(
-          'Chi tiết ',
+          'Chi tiết',
           textAlign: TextAlign.start,
         ),
       ),
@@ -131,7 +130,9 @@ class _ProfileState extends State<Profile> {
           future: Provider.of<ProfileModel>(context).fetchProfile(),
           builder: (context, snapshot) {
             if(snapshot.hasData) {
+//              print('logggg');
               DataUser _data = snapshot.data;
+//              print('log' + snapshot.data.toString());
               return Stack(
                   fit: StackFit.expand,
                   children: <Widget>[
@@ -159,10 +160,10 @@ class _ProfileState extends State<Profile> {
                                       border: Border.all(width: 3, color: Colors.white),
                                       color: Colors.white,
                                     ),
-                                    child: Expanded(
+//                                    child: Expanded(
                                       child: Image.asset(
                                           'assets/red.jpg' ),
-                                    ),
+//                                    ),
 //                                    child: Expanded(
 //                                      child: Image.network(
 //                                          'https://giasu.htcon.vn' + _data.avatar ),

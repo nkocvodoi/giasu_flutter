@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:provider/provider.dart';
 import 'package:test_giasu/core/service/authentication_service.dart';
 import 'package:test_giasu/core/view_model/bitsmanagerModel.dart';
+import 'package:test_giasu/core/view_model/classManagerModel.dart';
 import 'package:test_giasu/core/view_model/filterModel.dart';
 import 'package:test_giasu/core/view_model/paymentModel.dart';
 import 'package:test_giasu/core/view_model/forgotPassModel.dart';
@@ -28,7 +29,7 @@ List<SingleChildCloneableWidget> getProviders() {
     ChangeNotifierProvider(
       create: (context) => AuthenticationService(),
     ),
-        ChangeNotifierProvider(
+    ChangeNotifierProvider(
       create: (context) => ForgotPassModel(),
     ),
     ChangeNotifierProvider(
@@ -76,15 +77,18 @@ List<SingleChildCloneableWidget> getProviders() {
       update: (_, authentication, __) =>
           SignUpModel(authenticationService: authentication),
     ),
-     ChangeNotifierProxyProvider<AuthenticationService, ClassModel>(
-       update: (_, authentication, __) =>
-           ClassModel(authenticationService: authentication),
-     ),
-ChangeNotifierProxyProvider<AuthenticationService, AnouncementModel>(
-       update: (_, authentication, __) =>
-           AnouncementModel(authenticationService: authentication),
-     ),
-
+    ChangeNotifierProxyProvider<AuthenticationService, ClassModel>(
+      update: (_, authentication, __) =>
+          ClassModel(authenticationService: authentication),
+    ),
+    ChangeNotifierProxyProvider<AuthenticationService, AnouncementModel>(
+      update: (_, authentication, __) =>
+          AnouncementModel(authenticationService: authentication),
+    ),
+    ChangeNotifierProxyProvider<AuthenticationService, ClassManagerModel>(
+      update: (_, authentication, __) =>
+          ClassManagerModel(authenticationService: authentication),
+    ),
   ];
 
   List<SingleChildCloneableWidget> providers = [

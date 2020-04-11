@@ -4,11 +4,11 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:test_giasu/ui/Helper/ScreenConfig.dart';
 
 class Mails extends StatelessWidget {
-  String title;
+//  String title;
   String information;
-  IconData icon;
+//  IconData icon;
   String time;
-  Mails(this.icon, this.title, this.information, this.time);
+  Mails( this.information, this.time);
 
   @override
   Widget build(BuildContext context) {
@@ -18,6 +18,7 @@ class Mails extends StatelessWidget {
     ScreenUtil.instance =
         ScreenUtil(width: 750, height: 1334, allowFontScaling: true);
     return Container(
+      margin: EdgeInsets.only(top: 10.0),
       alignment: Alignment.center,
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -36,18 +37,6 @@ class Mails extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
-                Text(
-                  title,
-                  textAlign: TextAlign.left,
-                  style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    fontFamily: 'UTM',
-                    fontSize: 18,
-                  ),
-                ),
-                SizedBox(
-                  height: SizeConfig.safeBlockVertical * 1,
-                ),
                 Text(
                   information,
                   textAlign: TextAlign.left,

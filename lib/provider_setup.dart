@@ -6,12 +6,13 @@ import 'package:test_giasu/core/view_model/filterModel.dart';
 import 'package:test_giasu/core/view_model/paymentModel.dart';
 import 'package:test_giasu/core/view_model/forgotPassModel.dart';
 import 'package:test_giasu/core/view_model/personalInforModel.dart';
+import 'package:test_giasu/core/view_model/postRequestModel.dart';
 import 'package:test_giasu/core/view_model/profileModel.dart';
 import 'package:test_giasu/core/view_model/signinModel.dart';
 import 'package:test_giasu/core/view_model/signupModel.dart';
 import 'package:test_giasu/core/view_model/subjectchoiceModel.dart';
 import 'package:test_giasu/core/view_model/support_settingModel.dart';
-import 'package:test_giasu/ui/Open_App/SignUp_Page.dart';
+import 'package:test_giasu/core/view_model/anouncementModel.dart';
 import 'core/view_model/bottombarModel.dart';
 import 'core/view_model/classModel.dart';
 import 'core/view_model/napbitsModel.dart';
@@ -28,7 +29,7 @@ List<SingleChildCloneableWidget> getProviders() {
     ChangeNotifierProvider(
       create: (context) => AuthenticationService(),
     ),
-        ChangeNotifierProvider(
+    ChangeNotifierProvider(
       create: (context) => ForgotPassModel(),
     ),
     ChangeNotifierProvider(
@@ -50,7 +51,7 @@ List<SingleChildCloneableWidget> getProviders() {
       create: (context) => PersonalInforModel(),
     ),
     ChangeNotifierProvider(
-      create: (context) => ClassModel(),
+      create: (context) => PostRequestModel(),
     ),
   ];
 
@@ -79,16 +80,18 @@ List<SingleChildCloneableWidget> getProviders() {
       update: (_, authentication, __) =>
           SignUpModel(authenticationService: authentication),
     ),
-    
-//    ChangeNotifierProxyProvider<AuthenticationService, WaitingModel>(
-//      update: (_, authentication, __) =>
-//          WaitingModel(authenticationService: authentication),
-//    ),
-    // ChangeNotifierProxyProvider<AuthenticationService, ClassModel>(
-    //   update: (_, authentication, __) =>
-    //       ClassModel(authenticationService: authentication),
-    // ),
-
+    ChangeNotifierProxyProvider<AuthenticationService, ClassModel>(
+      update: (_, authentication, __) =>
+          ClassModel(authenticationService: authentication),
+    ),
+    ChangeNotifierProxyProvider<AuthenticationService, AnouncementModel>(
+      update: (_, authentication, __) =>
+          AnouncementModel(authenticationService: authentication),
+    ),
+    ChangeNotifierProxyProvider<AuthenticationService, PostRequestModel>(
+      update: (_, authentication, __) =>
+          PostRequestModel(authenticationService: authentication),
+    ),
   ];
 
   List<SingleChildCloneableWidget> providers = [

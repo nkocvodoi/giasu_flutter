@@ -226,7 +226,12 @@ class _PersonInforState extends State<PersonInfor> {
                         ),
                         child: GestureDetector(
                           onTap: chooseImage,
-                          child: imageNull() ? Image.asset('assets/user.png',width: 90,) : showImage(),
+                          child: imageNull()
+                              ? Image.asset(
+                                  'assets/user.png',
+                                  width: 90,
+                                )
+                              : showImage(),
                         ),
                       ),
                       Column(
@@ -291,8 +296,7 @@ class _PersonInforState extends State<PersonInfor> {
                                   Container(
                                       padding: EdgeInsets.only(
                                           top: 3.0, bottom: 3.0),
-                                      width:
-                                          360,
+                                      width: 360,
                                       height: 80,
                                       child: Row(
                                         children: <Widget>[
@@ -462,9 +466,8 @@ class _PersonInforState extends State<PersonInfor> {
                                     margin: EdgeInsets.all(10.0),
                                     // padding: EdgeInsets.all(3.0),
 
-                                    // width: ScreenUtil.getInstance().setWidth(150),
-                                    height:
-                                        ScreenUtil.getInstance().setHeight(200),
+                                    width: SizeConfig.safeBlockHorizontal * 90,
+
                                     decoration: BoxDecoration(
                                       border:
                                           Border.all(color: Colors.blueAccent),
@@ -477,7 +480,9 @@ class _PersonInforState extends State<PersonInfor> {
                                           SizedBox(width: 5),
                                           Image.asset(
                                             'assets/user.png',
-                                            cacheHeight: 100,
+                                            width:
+                                                SizeConfig.safeBlockHorizontal *
+                                                    25,
                                           ),
                                           Column(
                                             crossAxisAlignment:
@@ -490,26 +495,18 @@ class _PersonInforState extends State<PersonInfor> {
                                                   fontSize: 15,
                                                 ),
                                               ),
-                                              Wrap(
-                                                children: <Widget>[
-                                                  Container(
-                                                    width:
-                                                        ScreenUtil.getInstance()
-                                                            .setWidth(460),
-                                                    height:
-                                                        ScreenUtil.getInstance()
-                                                            .setHeight(145),
-                                                    child: Text(
-                                                      'CMT của bạn sẽ được sử dụng để xác thực. Thông tin này sẽ được chúng tôi bảo mật an toàn.',
-                                                      style: TextStyle(
-                                                        fontSize: 15,
-                                                        fontStyle:
-                                                            FontStyle.normal,
-                                                        color: Colors.black38,
-                                                      ),
-                                                    ),
+                                              Container(
+                                                width: SizeConfig
+                                                        .safeBlockHorizontal *
+                                                    50,
+                                                child: Text(
+                                                  'CMT của bạn sẽ được sử dụng để xác thực. Thông tin này sẽ được chúng tôi bảo mật an toàn.',
+                                                  style: TextStyle(
+                                                    fontSize: 15,
+                                                    fontStyle: FontStyle.normal,
+                                                    color: Colors.black38,
                                                   ),
-                                                ],
+                                                ),
                                               ),
                                             ],
                                           ),
@@ -521,9 +518,8 @@ class _PersonInforState extends State<PersonInfor> {
                                     margin: EdgeInsets.all(10.0),
                                     // padding: EdgeInsets.all(3.0),
 
-                                    // width: ScreenUtil.getInstance().setWidth(150),
-                                    height:
-                                        ScreenUtil.getInstance().setHeight(200),
+                                    width: SizeConfig.safeBlockHorizontal * 90,
+
                                     decoration: BoxDecoration(
                                       border:
                                           Border.all(color: Colors.blueAccent),
@@ -536,7 +532,9 @@ class _PersonInforState extends State<PersonInfor> {
                                           SizedBox(width: 5),
                                           Image.asset(
                                             'assets/user.png',
-                                            cacheHeight: 100,
+                                            width:
+                                                SizeConfig.safeBlockHorizontal *
+                                                    25,
                                           ),
                                           Column(
                                             crossAxisAlignment:
@@ -549,27 +547,19 @@ class _PersonInforState extends State<PersonInfor> {
                                                   fontSize: 15,
                                                 ),
                                               ),
-                                              Wrap(
-                                                children: <Widget>[
-                                                  Container(
-                                                    width:
-                                                        ScreenUtil.getInstance()
-                                                            .setWidth(440),
-                                                    height:
-                                                        ScreenUtil.getInstance()
-                                                            .setHeight(145),
-                                                    child: Text(
-                                                      'Thẻ sinh viên/bằng cấp của bạn sẽ được sử dụng để xác thực. Thông tin này sẽ được chúng tôi bảo mật an toàn.',
-                                                      style: TextStyle(
-                                                        fontSize: 15,
-                                                        fontStyle:
-                                                            FontStyle.normal,
-                                                        color: Colors.black38,
-                                                      ),
-                                                    ),
+                                              Container(
+                                                width: ScreenUtil.getInstance()
+                                                    .setWidth(440),
+                                                child: Text(
+                                                  'Thẻ sinh viên/bằng cấp của bạn sẽ được sử dụng để xác thực. Thông tin này sẽ được chúng tôi bảo mật an toàn.',
+                                                  style: TextStyle(
+                                                    fontSize: 15,
+                                                    fontStyle: FontStyle.normal,
+                                                    color: Colors.black38,
                                                   ),
-                                                ],
+                                                ),
                                               ),
+                                              SizedBox(height: 10),
                                             ],
                                           ),
                                         ],
@@ -612,31 +602,59 @@ class _PersonInforState extends State<PersonInfor> {
                                           onTap: () async {
                                             // startUpload();
                                             _saveToServer();
-                                            model.personalInfor["full_name"] = (full_name.text == "") ? "null" :
-                                                full_name.text;
-                                            model.personalInfor["location_id"] = (model.idCity == null) ? "null" :
-                                                model.idCity.toString();
-                                            model.personalInfor["native_country_id"] = (model.idProvince == null) ? "null" :
-                                                model.idProvince.toString();
-                                            model.personalInfor["voice_id"] = (model.idVoice == null) ? "null" :
-                                                model.idVoice.toString();
-                                            if(gender != null)  model.personalInfor["gender"] = (gender.text == "") ? "null" :
-                                                gender.text;
-                                            if(birthdate != null)  model.personalInfor["birthdate"] = (birthdate.text == "") ? "null" :
-                                                birthdate.text;
-                                             model.personalInfor["phone_number"] = (phone_number.text == "") ? "null" :
-                                                phone_number.text;
-                                             model.personalInfor["facebook"] = (facebook.text == "") ? "null" :
-                                                facebook.text;
-                                             model.personalInfor["email"] = (email.text == "") ? "null" : email.text;
-                                             model.personalInfor["address"] = (address.text == "") ? "null" :
-                                                address.text;
-                                            print( model.personalInfor.toString());
+                                            model.personalInfor["full_name"] =
+                                                (full_name.text == "")
+                                                    ? "null"
+                                                    : full_name.text;
+                                            model.personalInfor["location_id"] =
+                                                (model.idCity == null)
+                                                    ? "null"
+                                                    : model.idCity.toString();
+                                            model.personalInfor[
+                                                    "native_country_id"] =
+                                                (model.idProvince == null)
+                                                    ? "null"
+                                                    : model.idProvince
+                                                        .toString();
+                                            model.personalInfor["voice_id"] =
+                                                (model.idVoice == null)
+                                                    ? "null"
+                                                    : model.idVoice.toString();
+                                            if (gender != null)
+                                              model.personalInfor["gender"] =
+                                                  (gender.text == "")
+                                                      ? "null"
+                                                      : gender.text;
+                                            if (birthdate != null)
+                                              model.personalInfor["birthdate"] =
+                                                  (birthdate.text == "")
+                                                      ? "null"
+                                                      : birthdate.text;
+                                            model.personalInfor[
+                                                    "phone_number"] =
+                                                (phone_number.text == "")
+                                                    ? "null"
+                                                    : phone_number.text;
+                                            model.personalInfor["facebook"] =
+                                                (facebook.text == "")
+                                                    ? "null"
+                                                    : facebook.text;
+                                            model.personalInfor["email"] =
+                                                (email.text == "")
+                                                    ? "null"
+                                                    : email.text;
+                                            model.personalInfor["address"] =
+                                                (address.text == "")
+                                                    ? "null"
+                                                    : address.text;
+                                            print(
+                                                model.personalInfor.toString());
                                             // var success = await model
                                             //     .personalInforCheckup(
                                             //         personalInfor);
                                             // if (success) {
-                                            Navigator.pushNamed(context, '/specialty');
+                                            Navigator.pushNamed(
+                                                context, '/specialty');
                                             // } else {
                                             //   var _message = await model.Infor;
                                             //   showInSnackBar(_message);

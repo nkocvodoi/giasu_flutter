@@ -29,7 +29,7 @@ import 'ui/Open_App/SignIn_Page.dart';
 import 'ui/Open_App/SignUp_Page.dart';
 import 'ui/Open_App/Waiting_screen.dart';
 import 'ui/UI_Main/BottomNavigationBar.dart';
-import 'core/view_model/sendDataExample.dart';
+
 void main() {
   // SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp])
   //   .then((_){
@@ -49,7 +49,7 @@ class MyApp extends StatelessWidget {
         
        initialRoute: '/',
      routes: {
-       '/': (context) => PersonInfor(),   
+       '/': (context) => PostRequest(),   
        '/subject': (context) => SubjectChoice(), 
        '/personal': (context) => PersonInfor(),                   
        '/open': (context) => Waiting_screen(),
@@ -58,9 +58,10 @@ class MyApp extends StatelessWidget {
        '/specialty': (context) => SpecialtyInfor(),
        '/subject': (context) => SubjectChoice(),
        '/home': (context) => MyBottomNavigationBar(),
+       '/request': (context) => PostRequest(),
      },
 
-        //home: PersonInfor(),
+        // home: SignIn_Page(),
       ),
     );
   }

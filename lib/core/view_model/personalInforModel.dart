@@ -198,14 +198,7 @@ class PersonalInforModel extends ChangeNotifier {
     setBusy(false);
   }
 
-  int _group = 0;
-  int get group => _group;
-  void setGroup(int val) {
-    if (val != _group) {
-      _group = val;
-      notifyListeners();
-    }
-  }
+ 
 
   String _infor;
   String get Infor => _infor;
@@ -215,22 +208,13 @@ class PersonalInforModel extends ChangeNotifier {
 //  void setValidate() {
 //    _validate = true;
 //  }
-  String _role = 'parentt';
-  String get role => _role;
-  void setRole() {
-    if (_group == 0)
-      _role = 'parentt';
-    else
-      _role = 'tutor';
-    notifyListeners();
-  }
-
+  
   Future<bool> personalInforCheckup(Map _map) async {
     var data = {"user": _map};
     print("kajshduiashuidhausidash");
-    print(data);
+   
 //    https://giasu.htcon.vn/api/users/registrations
-    // try {APIUrl + '
+    try {
 
       var res = await http.put(APIUrl + 'api/v1/tutors/521',
           
@@ -253,9 +237,9 @@ class PersonalInforModel extends ChangeNotifier {
           return false;
         }
       } 
-    // } catch (e) {
-    //   print(e.toString());
-    // }
+    } catch (e) {
+      print(e.toString());
+    }
     notifyListeners();
   }
 }

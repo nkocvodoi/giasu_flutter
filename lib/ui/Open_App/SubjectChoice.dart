@@ -67,9 +67,7 @@ class SubjectChoiceState extends State<SubjectChoice> {
     if (listsBool[subject.id] == true) {
       listSubject.removeWhere((item) => item.id == subject.id);
       subjects.removeWhere((element) => element["id"] == subject.toMap()["id"]);
-      // firstTopicList = List();
-      // secondTopicList = List();
-      // thirdTopicList = List();
+      
     }
   }
 

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
+import 'package:test_giasu/core/model/List_ClassData.dart';
 import 'package:test_giasu/core/view_model/filterModel.dart';
 import 'package:test_giasu/core/view_model/personalInforModel.dart';
 import 'package:test_giasu/core/view_model/selectedModel.dart';
@@ -28,7 +29,7 @@ class SpecialtyInfor extends StatefulWidget {
 }
 
 class _SpecialtyInforState extends State<SpecialtyInfor> {
-  _SpecialtyInforState();
+
   GlobalKey<FormState> _key1 = new GlobalKey();
   bool _validate = false;
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
@@ -75,7 +76,7 @@ class _SpecialtyInforState extends State<SpecialtyInfor> {
         appBar: AppBar(
           leading: buildPreviousButton(),
           centerTitle: true,
-          backgroundColor: Color.fromRGBO(47, 101, 174, 1),
+          backgroundColor: colorApp,
           title: Text(
             'HỒ SƠ CHUYÊN MÔN',
             textAlign: TextAlign.start,
@@ -257,10 +258,27 @@ class _SpecialtyInforState extends State<SpecialtyInfor> {
                               ),
                               Consumer<SelectedTimeModel>(
                                   builder: (_, selectedModel, __) {
+                                List<Schedule> listSchedule = new List<Schedule>();
+                                List<int> schedules = new List<int>();
                                 return RaisedButton(
                                   color: colorApp,
                                   onPressed: () async {
-                                    print(selectedModel.listSelected[0]);
+                                    List<Map> scheduleList = new List<Map>();
+                                    for (int i = 0;
+                                        i < selectedModel.listSelected.length;
+                                        i++) {
+                                      if (selectedModel.listSelected[i] ==
+                                          true) {
+                                        var schedule = Schedule(
+                                            id: (i + 1),
+                                            day: ((i - (i % 3)) ~/ 3),
+                                            session: (i % 3));
+                                        listSchedule.add(schedule);
+                                        schedules.add(schedule.id);
+                                        scheduleList.add(schedule.toMap());
+                                      }
+                                    }
+                                    print(listSchedule.length);
                                     _saveToServer();
                                     model.personalInfor["tuition_fee"] =
                                         (tuition_fee.text == "")
@@ -286,6 +304,7 @@ class _SpecialtyInforState extends State<SpecialtyInfor> {
                                         (model.idEducation == null)
                                             ? "null"
                                             : model.idEducation.toString();
+                                    model.personalInfor["schedules"] = scheduleList;
                                     print(model.personalInfor.toString());
                                     var success =
                                         await model.personalInforCheckup(

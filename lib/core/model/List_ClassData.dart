@@ -164,6 +164,10 @@ class Schedule {
     'day': day,
     'session': session,
   };
+  Map<String,dynamic> toMap() => <String,dynamic>{
+  'day' : day,
+  'session': session,
+  };
 }
 
 class Subject {

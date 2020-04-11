@@ -5,7 +5,6 @@ import 'package:flutter/material.dart';
 import 'package:test_giasu/ui/UI_Main/Bits_Manager.dart';
 import 'package:test_giasu/ui/UI_Main/General_Infor.dart';
 //Webview in flutter
-
 class MyWebView extends StatefulWidget {
   final String websiteUrl;
 

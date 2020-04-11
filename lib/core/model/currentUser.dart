@@ -120,4 +120,8 @@ class CurrentUser extends Equatable {
         'active': active,
 //        'notification': notification,
       };
+
+  @override
+  // TODO: implement props
+  List<Object> get props => throw UnimplementedError();
 }

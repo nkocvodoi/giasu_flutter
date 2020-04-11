@@ -30,10 +30,11 @@ dependencies:
   flutter_vector_icons: ^0.2.1
   shared_preferences: 0.5.6+2
   image_picker: ^0.6.3+4
-  google_maps_flutter: 
+  google_maps_flutter: ^0.5.25+3
+  geolocator: ^5.3.1
   http: ^0.12.0+4
   # flutter_secure_storage: ^3.3.1+1
-  equatable: ^0.2.0
+  equatable: ^1.0.3
   date_format: ^1.0.8
   # flutter_cupertino_date_picker: ^0.0.7
   flutter_inappwebview:
@@ -59,16 +60,16 @@ flutter:
   # the material Icons class.
   uses-material-design: true
   assets:
-#    - assets/Logo.png
-#    - assets/Logo1.png
-#    - assets/Logo2.png
-#    - assets/google_logo.png
-#    - assets/red.jpg
-#    - assets/Copy.png
-#    - assets/fb_share.png
-#    - assets/momo.png
-#    - assets/next.png
-#    - assets/user.png
+    #    - assets/Logo.png
+    #    - assets/Logo1.png
+    #    - assets/Logo2.png
+    #    - assets/google_logo.png
+    #    - assets/red.jpg
+    #    - assets/Copy.png
+    #    - assets/fb_share.png
+    #    - assets/momo.png
+    #    - assets/next.png
+    #    - assets/user.png
     - assets/
 
   # To add assets to your application, add an assets section, like this:
@@ -91,7 +92,7 @@ flutter:
   #   - family: Schyler
   #     fonts:
   #       - asset: fonts/Schyler-Regular.ttf
-#         - asset: fonts/Schyler-Italic.ttf
+  #         - asset: fonts/Schyler-Italic.ttf
   #         style: italic
   fonts:
     - family: UTM

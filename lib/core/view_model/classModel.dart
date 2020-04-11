@@ -28,7 +28,7 @@ class ClassModel extends ChangeNotifier {
   int _idclass;
   bool _recommended;
   Map<int, String> _request = {0: 'Đề nghị dạy', 1: 'Hủy đề nghị dạy'};
-  String _infor = 'hfh';
+  String _infor ;
 
   List<Data_class> get list_class => _list_class;
 

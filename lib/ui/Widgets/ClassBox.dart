@@ -26,7 +26,9 @@ class List_Box extends StatelessWidget {
           itemBuilder: (BuildContext context, int index) {
 //                print('log recommen ${box[index].recommended}');
 //                print(box[index].recommended);
-//            model.setRecomended(box[index].recommended);
+          if(stateButton) {
+            model.setRecomended(box[index].recommended);
+          };
 //              model.setInfor(box[index].recommended);
 //                if(box[index].recommended) {
 //                  model.setInfor('Hủy đề nghị dạy');

@@ -36,10 +36,10 @@ class _Lists_Class_State extends State<Lists_Class> {
       if (_scrollController.position.pixels ==
           (_scrollController.position.maxScrollExtent)) {
         i++;
-        if (i < ((120 / 15) + 1)) {
+//        if (i < ((120/15)+1)){
 //          print(i);
           Provider.of<ClassModel>(context).setPage(i);
-        }
+//        }
       }
     });
   }

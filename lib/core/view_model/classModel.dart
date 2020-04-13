@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:flutter_vector_icons/flutter_vector_icons.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter/cupertino.dart';
 import 'package:test_giasu/core/model/List_ClassData.dart';
@@ -28,7 +29,7 @@ class ClassModel extends ChangeNotifier {
   int _idclass;
   bool _recommended;
   Map<int, String> _request = {0: 'Đề nghị dạy', 1: 'Hủy đề nghị dạy'};
-  String _infor ;
+  String _infor = 'hfh';
 
   List<Data_class> get list_class => _list_class;
 

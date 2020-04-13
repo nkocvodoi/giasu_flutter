@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:test_giasu/ui/Open_App/SignIn_Page.dart';
 import 'package:test_giasu/ui/Open_App/Waiting_screen.dart';
 import 'package:test_giasu/ui/Students/PostRequest.dart';
+import 'package:test_giasu/ui/UI_Main/ClassManager.dart';
 import 'package:test_giasu/ui/UI_Main/Profile.dart';
 
 import 'package:url_launcher/url_launcher.dart';
@@ -147,7 +148,11 @@ class _Account_State extends State<Account> {
             break;
           case 4: //Quản lí lớp
             {
-              return 1;
+              return Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => Class_Manager(),
+                  ));
             }
             break;
           case 5: //Câu hỏi thường gặp

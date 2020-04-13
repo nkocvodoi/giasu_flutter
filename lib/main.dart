@@ -49,7 +49,7 @@ class MyApp extends StatelessWidget {
         
        initialRoute: '/',
      routes: {
-       '/': (context) => PostRequest(),   
+       '/': (context) => SignIn_Page(),   
        '/subject': (context) => SubjectChoice(), 
        '/personal': (context) => PersonInfor(),                   
        '/open': (context) => Waiting_screen(),

@@ -372,8 +372,10 @@ class SubjectChoiceState extends State<SubjectChoice> {
                       ),
                       onPressed: () {
                         if (listSubject.length <= 3 &&
-                            listSubject.length >= 1) {
-                          
+                            listSubject.length >= 1) {    
+                              firstTopicList.clear();
+                              secondTopicList.clear();
+                              thirdTopicList.clear();                     
                           listSubject.sort((a,b) => a.id.compareTo(b.id));
                           for (var i in listSubject) {
                             print(i.name);
@@ -417,12 +419,10 @@ class SubjectChoiceState extends State<SubjectChoice> {
                                 ),
                               ));
                           // listSubject.clear();
-                          // firstTopicList.clear();
-                          // secondTopicList.clear();
-                          // thirdTopicList.clear();
+                          
                           for(var i in listsBool){
                             if(i == false){
-                              i = true;
+                              setState(() => i = true);
                             }
                           }
                         } else if (listSubject.length == 0) {

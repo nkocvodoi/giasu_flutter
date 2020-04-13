@@ -215,15 +215,11 @@ class NativeCountry {
   int id;
   String name;
   NativeCountry({this.id, this.name});
-  factory NativeCountry.fromJson(Map<String, dynamic> json) {
-    print(json.toString());
-
-    return NativeCountry(
+  factory NativeCountry.fromJson(Map<String, dynamic> json) => NativeCountry(
 
       name: json['name'],
       id: json['id'],
     );
-  }
 
   Map<String, dynamic> toJson() => <String, dynamic>{
     'id': id,

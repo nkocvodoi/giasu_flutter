@@ -7,6 +7,7 @@ import 'package:test_giasu/core/view_model/signinModel.dart';
 import 'package:test_giasu/ui/Helper/ScreenConfig.dart';
 import 'package:test_giasu/ui/Open_App/ForgotPass1.dart';
 import 'package:test_giasu/ui/Open_App/SignUp_Page.dart';
+import 'package:test_giasu/ui/Open_App/SignUp_PageTutor.dart';
 import 'package:test_giasu/ui/UI_Main/BottomNavigationBar.dart';
 import 'package:test_giasu/ui/UI_Main/General_Infor.dart';
 import 'package:test_giasu/ui/UI_Main/TutorInfor.dart';
@@ -177,7 +178,7 @@ class _SignIn_PageState extends State<SignIn_Page> {
                                     Navigator.push(
                                       context,
                                       MaterialPageRoute(
-                                        builder: (context) => SignUpPage(),
+                                        builder: (context) => SignUpPageTutor(),
                                       ),
                                     );
                                   },

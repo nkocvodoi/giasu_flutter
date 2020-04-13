@@ -19,7 +19,7 @@ class PostRequestModel extends ChangeNotifier {
   PostRequestModel({this.authenticationService}){
   init();
   }
-   Map postRequestMap = new Map();
+   Map postRequestInfor = new Map();
   bool _busy = false;
   bool get busy => _busy;
   void setBusy(bool value) {

@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
+import 'package:geolocator/geolocator.dart';
 import 'package:http/http.dart' as http;
 Future<CLassData> fetchClassData() async {
   final response =
@@ -71,15 +72,34 @@ class Data_class {
   String about_course;
   String address;
   String tutor_gender;
+  String lng;
+  String lat;
   int debt;
   int class_fee;
   String parent_number;
   String form_teaching_name;
   Parent parent;
+  bool recommended;
   int recommend_number;
   Subject subject;
   List<ScheduleCourses> schedule_courses;
-
+  double distanceInMeters;
+  
+  //  getDistance(double distanceInMeters) async {
+  //   Position _currentPosition;
+  //   final Geolocator geolocator = Geolocator()..forceAndroidLocationManager;
+  //   geolocator
+  //       .getCurrentPosition(desiredAccuracy: LocationAccuracy.best)
+  //       .then((Position position) {
+  //       Position _currentPosition = position;
+  //   }).catchError((e) {
+  //     print(e);
+  //   });
+    
+  //   distanceInMeters =  await Geolocator().distanceBetween(_currentPosition.latitude, _currentPosition.longitude, double.parse(lat), double.parse(lng));
+   
+  // }
+ 
   Data_class(
       {this.id,
         this.name,
@@ -102,9 +122,12 @@ class Data_class {
         this.parent_number,
         this.form_teaching_name,
         this.parent,
+        this.recommended,
         this.recommend_number,
         this.subject,
         this.schedule_courses,
+        this.lng,
+        this.lat,
         });
 
   factory Data_class.fromJson(Map<String, dynamic> json) => Data_class(
@@ -125,10 +148,13 @@ class Data_class {
     address: json['address'],
     tutor_gender: json['tutor_gender'],
     debt: json['debt'],
+    lng: json['lng'],
+    lat: json['lat'],
     class_fee: json['class_fee'],
     parent_number: json['parent_number'],
     form_teaching_name: json['form_teaching_name'],
     parent: Parent.fromJson(json['parent']),
+    recommended: json['recommended'],
     recommend_number: json['recommend_number'],
     subject: Subject.fromJson(json['subject']),
     schedule_courses: (json['data'] as List)

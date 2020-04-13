@@ -26,7 +26,6 @@ class Profile extends StatefulWidget {
   }
 }
 class _ProfileState extends State<Profile> {
-  Future<DataUser> _profile;
 
 //  void initState() {
 //    super.initState();
@@ -122,7 +121,7 @@ class _ProfileState extends State<Profile> {
         backgroundColor: colorApp,
         centerTitle: true,
         title: Text(
-          'Chi tiết ',
+          'Chi tiết',
           textAlign: TextAlign.start,
         ),
       ),
@@ -131,7 +130,9 @@ class _ProfileState extends State<Profile> {
           future: Provider.of<ProfileModel>(context).fetchProfile(),
           builder: (context, snapshot) {
             if(snapshot.hasData) {
+//              print('logggg');
               DataUser _data = snapshot.data;
+//              print('log' + snapshot.data.toString());
               return Stack(
                   fit: StackFit.expand,
                   children: <Widget>[
@@ -159,10 +160,10 @@ class _ProfileState extends State<Profile> {
                                       border: Border.all(width: 3, color: Colors.white),
                                       color: Colors.white,
                                     ),
-                                    child: Expanded(
+//                                    child: Expanded(
                                       child: Image.asset(
                                           'assets/red.jpg' ),
-                                    ),
+//                                    ),
 //                                    child: Expanded(
 //                                      child: Image.network(
 //                                          'https://giasu.htcon.vn' + _data.avatar ),
@@ -417,20 +418,33 @@ class _ProfileState extends State<Profile> {
                               children: <Widget>[
                                 SmallTextBoxWithBold('Thông tin cơ bản'),
                                 SmallTextBox(
-                                  'Năm sinh: ' ,
+                                  'Năm sinh: ${_data.birthdate} ' ,
                                 ),
                                 SmallTextBox(
-                                  'Giới tính: ' ,
+                                  'Giới tính: ${_data.gender} ' ,
                                 ),
-                                SmallTextBox('Quê quán: ' ),
-                                SmallTextBox('Giọng nói: ' ),
-                                SmallTextBox('Học vấn: '),
+//                                SmallTextBox('Quê quán: ${_data.native_country.name}' ),
+//                                SmallTextBox('Giọng nói: ${_data.voice.name}' ),
+//                                SmallTextBox('Học vấn: ${_data.education_level.name}'),
                                 SmallTextBox(
-                                    'Đại học năm: '),
+                                    'Đại học năm: ${_data.school_year}-${_data.specialism}-${_data.university}'),
                                 SmallTextBoxWithBold('Kinh nghiệm gia sư, giảng dạy'),
-                                SmallTextBox(''),
+                                SmallTextBox('${_data.experience}'),
                                 SmallTextBoxWithBold('Thành tích trong học tập và dạy học'),
-                                SmallTextBox(''),
+                                SmallTextBox('${_data.achievement}'),
+                                SmallTextBoxWithBold('Chủ đề dạy'),
+//                                ListView.builder(
+//                                  itemCount: _data.subject.length,
+//                                  itemBuilder: (BuildContext context, int index) {
+//                                    return SmallTextBox('${_data.subject[index].name}');
+//                                  },
+//                                ),
+                                SmallTextBox('${_data.subject}'),
+                                SmallTextBoxWithBold('Gia sư đang là'),
+//                                SmallTextBox('${_data.education.name}'),
+
+
+
                               ],
                             ),
                           ),

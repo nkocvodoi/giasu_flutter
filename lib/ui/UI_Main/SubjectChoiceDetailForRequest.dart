@@ -250,7 +250,7 @@ class SubjectChoiceDetailsForRequestState
                       onPressed: () {
                         print(listTopicID);
                         //  _saveToServer();
-                        model.postRequestMap["topic_id"] = listTopicID;
+                        model.postRequestInfor["topic_id"] = listTopicID;
                         var 
                         count = 0;
                         Navigator.popUntil(context, (route) {

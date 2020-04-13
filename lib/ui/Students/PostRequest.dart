@@ -31,16 +31,16 @@ class PostRequest extends StatefulWidget {
 }
 
 class PostRequestState extends State<PostRequest> {
-  final TextEditingController _controller14 = TextEditingController();
-  final TextEditingController _controller = TextEditingController();
+  final TextEditingController name = TextEditingController();
+
   final TextEditingController _controller1 = TextEditingController();
-  final TextEditingController _controller2 = TextEditingController();
-  final TextEditingController _controller3 = TextEditingController();
-  final TextEditingController _controller4 = TextEditingController();
-  final TextEditingController _controller5 = TextEditingController();
-  final TextEditingController _controller6 = TextEditingController();
-  final TextEditingController _controller7 = TextEditingController();
-  final TextEditingController _controller8 = TextEditingController();
+  final TextEditingController grade = TextEditingController();
+  final TextEditingController lesson_per_week = TextEditingController();
+  final TextEditingController time_per_lesson = TextEditingController();
+  final TextEditingController student_per_class = TextEditingController();
+  final TextEditingController course_education = TextEditingController();
+  final TextEditingController tutor_gender = TextEditingController();
+  final TextEditingController form_teaching_id = TextEditingController();
   final TextEditingController _controller9 = TextEditingController();
   final TextEditingController _controller10 = TextEditingController();
   final TextEditingController _controller11 = TextEditingController();
@@ -126,7 +126,7 @@ class PostRequestState extends State<PostRequest> {
                           ),
                           child: Center(
                             child: TextField(
-                              controller: _controller14,
+                              controller: name,
                               textAlign: TextAlign.center,
                               decoration: InputDecoration(
                                 hintText:
@@ -197,13 +197,13 @@ class PostRequestState extends State<PostRequest> {
                               ),
                             ),
                           ),
-                          SmallTextField('Lớp', _controller2),
-                          SmallTextField('Số buổi học/tuần', _controller3),
-                          SmallTextField('Thời gian học/buổi', _controller4),
-                          SmallTextField('Số học viên/lớp', _controller5),
-                          SmallTextField('Đối tượng dạy', _controller6),
-                          SmallTextField('Giới tính gia sư', _controller7),
-                          SmallTextField('Hình thức dạy', _controller8),
+                          SmallTextField('Lớp', grade),
+                          SmallTextField('Số buổi học/tuần', lesson_per_week),
+                          SmallTextField('Thời gian học/buổi', time_per_lesson),
+                          SmallTextField('Số học viên/lớp', student_per_class),
+                          SmallTextField('Đối tượng dạy', course_education),
+                          SmallTextField('Giới tính gia sư', tutor_gender),
+                          SmallTextField('Hình thức dạy', form_teaching_id),
                           SmallTextField('Học phí/buổi (vnđ)', _controller9),
                           SmallTextField('Điện thoại', _controller10),
                           SmallTextField('Địa điểm', _controller11),
@@ -252,24 +252,32 @@ class PostRequestState extends State<PostRequest> {
                             onPressed: () {
                               _sendToServer();
                               // model.setRole();
-                              postRequestInfor["name"] = _controller14.text;
-                              // postRequestInfor["subject_id"] = _controller.text;
-                              // postRequestInfor["topics"] = _controller1.text;
-                              // postRequestInfor["grade"] = _controller2.text;
-                              // postRequestInfor["lesson_per_week"] = _controller3.text;
-                              // postRequestInfor["time_per_lesson"] = _controller4.text;
-                              // postRequestInfor["student_per_class"] = _controller5.text;
-                              // postRequestInfor["course_education"] = _controller6.text;
-                              // postRequestInfor["tutor_gender"] = _controller7.text;
-                              // postRequestInfor["form_teaching_id"] = _controller8.text;
-                              // postRequestInfor["tuition_fee"] = _controller9.text;
-                              // postRequestInfor["phone_number"] = _controller10.text;
-                              // postRequestInfor["location_id"] = _controller11.text;
-                              // postRequestInfor["address"] = _controller12.text;
-                              // postRequestInfor["about_course"] = _controller13.text;
-                              var sigupsuccess =
+                              postRequestInfor["name"] = name.text;
+                              postRequestInfor["grade"] = grade.text;
+                              postRequestInfor["lesson_per_week"] =
+                                  lesson_per_week.text;
+                              postRequestInfor["time_per_lesson"] =
+                                  time_per_lesson.text;
+                              postRequestInfor["student_per_class"] =
+                                  student_per_class.text;
+                              postRequestInfor["course_education"] =
+                                  course_education.text;
+                              postRequestInfor["tutor_gender"] =
+                                  tutor_gender.text;
+                              postRequestInfor["form_teaching_id"] =
+                                  form_teaching_id.text;
+                              postRequestInfor["tuition_fee"] =
+                                  _controller9.text;
+                              postRequestInfor["phone_number"] =
+                                  _controller10.text;
+                              postRequestInfor["location_id"] =
+                                  _controller11.text;
+                              postRequestInfor["address"] = _controller12.text;
+                              postRequestInfor["about_course"] =
+                                  _controller13.text;
+                              var postData =
                                   model.postRequest(postRequestInfor);
-                              if (sigupsuccess != null) {
+                              if (postData != null) {
                                 Navigator.push(
                                     context,
                                     MaterialPageRoute(

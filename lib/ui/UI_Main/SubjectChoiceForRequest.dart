@@ -9,22 +9,23 @@ import 'package:test_giasu/core/view_model/personalInforModel.dart';
 import 'package:test_giasu/core/view_model/postRequestModel.dart';
 import 'package:test_giasu/ui/Helper/ScreenConfig.dart';
 import 'package:test_giasu/ui/Open_App/DetailRaisedButton.dart';
-import 'package:test_giasu/ui/Open_App/SubjectChoiceDetails.dart';
 import 'package:test_giasu/ui/UI_Main/SubjectChoiceDetailForRequest.dart';
 import 'package:test_giasu/ui/Widgets/previous_widget.dart';
 //import 'package:flutter_vector_icons/flutter_vector_icons.dart';
 
-class SubjectChoiceForRequest extends StatefulWidget {
 
+class SubjectChoiceForRequest extends StatefulWidget {
+  // Map personalInfor = new Map();
+  // SubjectChoice(this.personalInfor);
 
   @override
   State<StatefulWidget> createState() {
     // TODO: implement createState
-    return SubjectChoiceForRequestState();
+    return SubjectChoiceState();
   }
 }
 
-class SubjectChoiceForRequestState extends State<SubjectChoiceForRequest> {
+class SubjectChoiceState extends State<SubjectChoiceForRequest> {
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
   List<Topics> firstTopicList = List<Topics>();
   List<Topics> secondTopicList = List<Topics>();
@@ -373,8 +374,10 @@ class SubjectChoiceForRequestState extends State<SubjectChoiceForRequest> {
                       ),
                       onPressed: () {
                         if (listSubject.length <= 3 &&
-                            listSubject.length >= 1) {
-                          
+                            listSubject.length >= 1) {    
+                              firstTopicList.clear();
+                              secondTopicList.clear();
+                              thirdTopicList.clear();                     
                           listSubject.sort((a,b) => a.id.compareTo(b.id));
                           for (var i in listSubject) {
                             print(i.name);
@@ -418,12 +421,10 @@ class SubjectChoiceForRequestState extends State<SubjectChoiceForRequest> {
                                 ),
                               ));
                           // listSubject.clear();
-                          // firstTopicList.clear();
-                          // secondTopicList.clear();
-                          // thirdTopicList.clear();
+                          
                           for(var i in listsBool){
                             if(i == false){
-                              i = true;
+                              setState(() => i = true);
                             }
                           }
                         } else if (listSubject.length == 0) {

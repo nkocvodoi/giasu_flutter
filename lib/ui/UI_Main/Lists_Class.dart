@@ -169,7 +169,7 @@ class _Lists_Class_State extends State<Lists_Class> {
                   body: List_Box(
                     box: model.list_class,
                     controller: _scrollController,
-                    stateButton: true,
+                   
                   ),
                 ),
               );

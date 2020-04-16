@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:test_giasu/ui/Open_App/PersonInfor.dart';
 import 'package:test_giasu/ui/Open_App/SignIn_Page.dart';
 import 'package:test_giasu/ui/Open_App/Waiting_screen.dart';
 import 'package:test_giasu/ui/Students/PostRequest.dart';
@@ -28,7 +29,6 @@ class _Account_State extends State<Account> {
   Widget build(BuildContext context) {
     // TODO: implement build
     return Scaffold(
-      
       body: ListView(
         children: <Widget>[
           Container(
@@ -124,8 +124,7 @@ class _Account_State extends State<Account> {
         switch (_a) {
           case 1: //Trang cá nhân
             {
-              return
-                Navigator.push(
+              return Navigator.push(
                   context,
                   MaterialPageRoute(
                     builder: (context) => Profile(),
@@ -134,7 +133,11 @@ class _Account_State extends State<Account> {
             break;
           case 2: //Cập nhật thông tin
             {
-              return 1;
+              return Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => PersonInfor(),
+                  ));
             }
             break;
           case 3: //Đổi mật khẩu
@@ -157,7 +160,7 @@ class _Account_State extends State<Account> {
             break;
           case 5: //Câu hỏi thường gặp
             {
-              return 1;
+              launch('https://htcon.vn/cau-hoi-thuong-gap/');
             }
             break;
           case 6: //Trợ giúp và cài đặt
@@ -170,19 +173,18 @@ class _Account_State extends State<Account> {
             }
             break;
 
-              default: //Đăng xuất
-                {
-                  return Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => SignIn_Page(),
-                      ));
-                }
-                break;
+          default: //Đăng xuất
+            {
+              return Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => SignIn_Page(),
+                  ));
             }
-          },
-          
-        );
+            break;
+        }
+      },
+    );
   }
 
   Widget _buildExpansionTile(
@@ -289,8 +291,9 @@ class _Account_State extends State<Account> {
                   MaterialPageRoute(
                     builder: (context) => PostRequest(),
                   ));
-            else
+            else if (_a == 2) {
               return 1;
+            }
           },
         ),
         ListTile(
@@ -306,9 +309,11 @@ class _Account_State extends State<Account> {
           ),
           onTap: () {
             if (_a == 1)
-              return 1;
-            else
-              return 1;
+              launch("https://htcon.vn/chinh-sach-danh-cho-cong-tac-vien/");
+            else if (_a == 2) {
+              return launch(
+                  "https://htcon.vn/chinh-sach-danh-cho-cong-tac-vien/");
+            }
           },
         ),
       ],

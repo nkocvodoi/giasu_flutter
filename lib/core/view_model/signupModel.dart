@@ -52,7 +52,10 @@ final AuthenticationService authenticationService;
 //        print(mapResponse.toString());
 
         if(mapResponse["code"] == 1) {
-          authenticationService.setToken(mapResponse["token"]);
+        authenticationService.setToken(mapResponse["token"]);
+        // authenticationService.setId(mapResponse["user"]["id"]);
+        // authenticationService.setEmail(mapResponse["user"]["email"]);
+        // authenticationService.setIdentification_number(mapResponse["user"]["identification_number"]);
           return true;
         }
         else {

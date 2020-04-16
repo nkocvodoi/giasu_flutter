@@ -11,6 +11,8 @@ class AuthenticationService extends ChangeNotifier {
   Detail_teacher _user;
   int _id;
   String _token;
+  String _email;
+  String _identification_number;
   AuthenticationService() {
     reload();
   }
@@ -80,6 +82,28 @@ get id {
     if (id != _id) {
       _id = id;
       this._setInt("id", _id);
+      notifyListeners();
+    }
+  }
+  get email {
+    return _email;
+  }
+
+  void setEmail(String email) {
+    if (email != _email) {
+      _email = email;
+      this._setString("email", _email);
+      notifyListeners();
+    }
+  }
+  get identification_number {
+    return _identification_number;
+  }
+
+  void setIdentification_number(String identification_number) {
+    if (identification_number != _identification_number) {
+      _identification_number = identification_number;
+      this._setString("identification_number", _identification_number);
       notifyListeners();
     }
   }

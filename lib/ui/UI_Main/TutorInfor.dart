@@ -50,7 +50,7 @@ class TutorInforState extends State<TutorInfor> {
             '$number',
             style: TextStyle(
               fontSize: SizeConfig.safeBlockHorizontal * 5,
-              fontFamily: 'UTM',
+               
               fontWeight: FontWeight.bold,
               color: Colors.black87,
             ),
@@ -60,7 +60,7 @@ class TutorInforState extends State<TutorInfor> {
             detail,
             style: TextStyle(
               fontSize: 15,
-              fontFamily: 'UTM',
+               
             ),
           )
         ],
@@ -179,13 +179,13 @@ class TutorInforState extends State<TutorInfor> {
                                     fontSize:
                                         SizeConfig.safeBlockHorizontal * 5,
                                     color: Colors.grey,
-                                    fontFamily: 'UTM',
+                                    
                                   ),
                                 ),
                                 TextSpan(
                                   text: ' ${teacherData.id}',
                                   style: TextStyle(
-                                    fontFamily: 'UTM',
+                                   
                                     color: Colors.black,
                                     fontSize:
                                         SizeConfig.safeBlockHorizontal * 5,
@@ -213,7 +213,7 @@ class TutorInforState extends State<TutorInfor> {
                               '${teacherData.full_name}',
                               style: TextStyle(
                                 color: Colors.blue[400],
-                                fontFamily: 'UTM',
+                             
                                 fontWeight: FontWeight.bold,
                                 fontSize: SizeConfig.safeBlockHorizontal * 3.5,
                               ),
@@ -228,7 +228,7 @@ class TutorInforState extends State<TutorInfor> {
                                   style: TextStyle(
                                       fontSize:
                                           SizeConfig.safeBlockHorizontal * 3,
-                                      fontFamily: 'UTM'),
+                                     ),
                                 ),
                                 Icon(MaterialCommunityIcons.heart,
                                     size: SizeConfig.safeBlockHorizontal * 3),
@@ -243,7 +243,7 @@ class TutorInforState extends State<TutorInfor> {
                                   style: TextStyle(
                                       fontSize:
                                           SizeConfig.safeBlockHorizontal * 3,
-                                      fontFamily: 'UTM',
+                                    
                                       color: Colors.white),
                                 ),
                                 Icon(MaterialCommunityIcons.thumb_up,
@@ -257,7 +257,7 @@ class TutorInforState extends State<TutorInfor> {
                                   style: TextStyle(
                                       fontSize:
                                           SizeConfig.safeBlockHorizontal * 3,
-                                      fontFamily: 'UTM',
+                                       
                                       color: Colors.white),
                                 ),
                                 Icon(
@@ -385,7 +385,7 @@ class TutorInforState extends State<TutorInfor> {
                         'THÔNG TIN GIA SƯ',
                         style: TextStyle(
                           fontSize: 20,
-                          fontFamily: 'UTM',
+                           
                           color: Color.fromRGBO(47, 101, 174, 1),
                         ),
                       ),
@@ -444,7 +444,7 @@ class TutorInforState extends State<TutorInfor> {
                         'LỚP ĐÃ DẠY',
                         style: TextStyle(
                           fontSize: 20,
-                          fontFamily: 'UTM',
+                           
                           color: colorApp,
                         ),
                       ),
@@ -464,7 +464,7 @@ class TutorInforState extends State<TutorInfor> {
                         'LỊCH DẠY GIA SƯ',
                         style: TextStyle(
                           fontSize: 20,
-                          fontFamily: 'UTM',
+                           
                           color: colorApp,
                         ),
                       ),
@@ -491,7 +491,7 @@ class TutorInforState extends State<TutorInfor> {
                               'VỊ TRÍ GIA SƯ',
                               style: TextStyle(
                                 fontSize: 18,
-                                fontFamily: 'UTM',
+                                 
                                 color: colorApp,
                               ),
                             ),
@@ -512,7 +512,7 @@ class TutorInforState extends State<TutorInfor> {
                                     style: TextStyle(
                                       fontSize: 15,
                                       color: Colors.grey,
-                                      fontFamily: 'UTM',
+                                       
                                     ),
                                   ),
                                   TextSpan(
@@ -523,7 +523,7 @@ class TutorInforState extends State<TutorInfor> {
                                       },
                                     text: '( Xem bản đồ )',
                                     style: TextStyle(
-                                      fontFamily: 'UTM',
+                                       
                                       color: orange,
                                       fontSize: 15,
                                     ),
@@ -550,7 +550,7 @@ class TutorInforState extends State<TutorInfor> {
                         'ĐÁNH GIÁ GIA SƯ',
                         style: TextStyle(
                           fontSize: 20,
-                          fontFamily: 'UTM',
+                           
                           color: Color.fromRGBO(47, 101, 174, 1),
                         ),
                       ),
@@ -580,7 +580,7 @@ class TutorInforState extends State<TutorInfor> {
                             'Mời dạy',
                             style: TextStyle(
                                 fontSize: 15,
-                                fontFamily: 'UTM',
+                                 
                                 color: Colors.white),
                           ),
                         ),

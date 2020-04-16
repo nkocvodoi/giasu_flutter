@@ -1,6 +1,9 @@
+import 'package:date_format/date_format.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:test_giasu/core/model/List_ClassData.dart';
 import 'package:test_giasu/core/view_model/postRequestModel.dart';
+import 'package:test_giasu/core/view_model/selectedModel.dart';
 import 'package:test_giasu/ui/Helper/ScreenConfig.dart';
 import 'package:test_giasu/ui/Open_App/PersonInfor.dart';
 import 'package:test_giasu/ui/Open_App/SubjectChoice.dart';
@@ -33,7 +36,7 @@ class PostRequest extends StatefulWidget {
 class PostRequestState extends State<PostRequest> {
   final TextEditingController name = TextEditingController();
 
-  final TextEditingController _controller1 = TextEditingController();
+  final TextEditingController tuition_fee = TextEditingController();
   final TextEditingController grade = TextEditingController();
   final TextEditingController lesson_per_week = TextEditingController();
   final TextEditingController time_per_lesson = TextEditingController();
@@ -41,15 +44,82 @@ class PostRequestState extends State<PostRequest> {
   final TextEditingController course_education = TextEditingController();
   final TextEditingController tutor_gender = TextEditingController();
   final TextEditingController form_teaching_id = TextEditingController();
-  final TextEditingController _controller9 = TextEditingController();
-  final TextEditingController _controller10 = TextEditingController();
+  final TextEditingController from_date = TextEditingController();
+  final TextEditingController phone_number = TextEditingController();
   final TextEditingController _controller11 = TextEditingController();
-  final TextEditingController _controller12 = TextEditingController();
-  final TextEditingController _controller13 = TextEditingController();
+  final TextEditingController address = TextEditingController();
+  final TextEditingController about_course = TextEditingController();
 
   Map postRequestInfor = Map();
   GlobalKey<FormState> _key = GlobalKey();
+  List<String> className = [
+    "5 tuổi",
+    "1",
+    "2",
+    "3",
+    "4",
+    "5",
+    "6",
+    "7",
+    "8",
+    "9",
+    "10",
+    "11",
+    "12",
+    "Khác"
+  ];
+  List<String> lesson_per_week_list = [
+    "1 buổi",
+    "2 buổi",
+    "3 buổi",
+    "4 buổi",
+    "5 buổi",
+    "6 buổi",
+    "7 buổi",
+  ];
+  List<String> time_per_lesson_list = [
+    "1h",
+    "1.5h",
+    "2h",
+    "2.5h",
+  ];
+  List<int> student_per_class_list = [
+    1,
+    2,
+  ];
+  List<String> form_teaching_list = [
+    "Gia sư Offline (tại nhà)",
+    "Gia sư Online (trực tuyến)",
+  ];
+  DateTime _date = DateTime.now();
+  Future<Null> selectDate(BuildContext context) async {
+    final DateTime picked = await showDatePicker(
+      context: context,
+      initialDate: _date,
+      firstDate: DateTime.now(),
+      lastDate: DateTime(2100),
+    );
+    if (picked != null && picked != _date) {
+      setState(() {
+        _date = picked;
+        from_date.text = formatDate(_date, [dd, '/', mm, '/', yyyy]);
+      });
+    }
+  }
+
+  bool dateTimeNull() {
+    if (_date == null) return true;
+    return false;
+  }
+
+  List<String> genderList = ["Nam", "Nữ", "Không yêu cầu"];
+  int genderID;
   bool _validate = false;
+  int classID;
+  int lessonID;
+  int timeID;
+  int student_numberID;
+  int teaching_formID;
   String validate(String value) {
     String patttern = r'(^[a-zA-Z ]*$)';
     RegExp regExp = new RegExp(patttern);
@@ -134,7 +204,7 @@ class PostRequestState extends State<PostRequest> {
                                 border: InputBorder.none,
                                 hintStyle: TextStyle(
                                     color: Colors.grey,
-                                    fontSize: 18,
+                                    fontSize: 16,
                                     fontStyle: FontStyle.normal),
                               ),
                             ),
@@ -197,20 +267,420 @@ class PostRequestState extends State<PostRequest> {
                               ),
                             ),
                           ),
-                          SmallTextField('Lớp', grade),
-                          SmallTextField('Số buổi học/tuần', lesson_per_week),
-                          SmallTextField('Thời gian học/buổi', time_per_lesson),
-                          SmallTextField('Số học viên/lớp', student_per_class),
-                          SmallTextField('Đối tượng dạy', course_education),
-                          SmallTextField('Giới tính gia sư', tutor_gender),
-                          SmallTextField('Hình thức dạy', form_teaching_id),
-                          SmallTextField('Học phí/buổi (vnđ)', _controller9),
-                          SmallTextField('Điện thoại', _controller10),
-                          SmallTextField('Địa điểm', _controller11),
-                          SmallTextField('Địa chỉ học', _controller12),
+                          SizedBox(height: 30),
+                          Container(
+                            padding: EdgeInsets.only(
+                                top: 3.0, bottom: 5.0, left: 10),
+                            width: SizeConfig.safeBlockHorizontal * 90,
+                            height: 50,
+                            child: DropdownButton<int>(
+                              autofocus: true,
+                              underline: Container(
+                                padding: EdgeInsets.only(left: 10),
+                                color: Colors.transparent,
+                              ),
+                              isExpanded: true,
+                              value: classID,
+                              items: [
+                                DropdownMenuItem(
+                                  child: Text('Lớp',
+                                      style: TextStyle(
+                                          fontSize: 18.0, color: Colors.grey)),
+                                  value: null,
+                                ),
+                                ...List.generate(14, (index) {
+                                  return DropdownMenuItem(
+                                    child: Text('${className[index]}',
+                                        style: TextStyle(
+                                            fontSize: 18.0,
+                                            color: Colors.grey)),
+                                    value: index,
+                                  );
+                                }),
+                              ],
+                              onChanged: (int value) {
+                                if (value != classID) {
+                                  setState(() {
+                                    classID = value;
+                                  });
+                                }
+                              },
+                            ),
+                            decoration: BoxDecoration(
+                              border: Border.all(color: black, width: 1.5),
+                              borderRadius: BorderRadius.circular(10.0),
+                            ),
+                          ),
+                          SizedBox(height: 30),
+                          Container(
+                            padding: EdgeInsets.only(
+                                top: 3.0, bottom: 5.0, left: 10),
+                            width: SizeConfig.safeBlockHorizontal * 90,
+                            height: 50,
+                            child: DropdownButton<int>(
+                              autofocus: true,
+                              underline: Container(
+                                padding: EdgeInsets.only(left: 10),
+                                color: Colors.transparent,
+                              ),
+                              isExpanded: true,
+                              value: lessonID,
+                              items: [
+                                DropdownMenuItem(
+                                  child: Text('Số buổi học/tuần',
+                                      style: TextStyle(
+                                          fontSize: 18.0, color: Colors.grey)),
+                                  value: null,
+                                ),
+                                ...List.generate(7, (index) {
+                                  return DropdownMenuItem(
+                                    child: Text(
+                                        '${lesson_per_week_list[index]}',
+                                        style: TextStyle(
+                                            fontSize: 18.0,
+                                            color: Colors.grey)),
+                                    value: index,
+                                  );
+                                }),
+                              ],
+                              onChanged: (int value) {
+                                if (value != lessonID) {
+                                  setState(() {
+                                    lessonID = value;
+                                  });
+                                }
+                              },
+                            ),
+                            decoration: BoxDecoration(
+                              border: Border.all(color: black, width: 1.5),
+                              borderRadius: BorderRadius.circular(10.0),
+                            ),
+                          ),
+                          SizedBox(height: 30),
+                          Container(
+                            padding: EdgeInsets.only(
+                                top: 3.0, bottom: 5.0, left: 10),
+                            width: SizeConfig.safeBlockHorizontal * 90,
+                            height: 50,
+                            child: DropdownButton<int>(
+                              autofocus: true,
+                              underline: Container(
+                                padding: EdgeInsets.only(left: 10),
+                                color: Colors.transparent,
+                              ),
+                              isExpanded: true,
+                              value: timeID,
+                              items: [
+                                DropdownMenuItem(
+                                  child: Text('Thời gian học/buổi',
+                                      style: TextStyle(
+                                          fontSize: 18.0, color: Colors.grey)),
+                                  value: null,
+                                ),
+                                ...List.generate(4, (index) {
+                                  return DropdownMenuItem(
+                                    child: Text(
+                                        '${time_per_lesson_list[index]}',
+                                        style: TextStyle(
+                                            fontSize: 18.0,
+                                            color: Colors.grey)),
+                                    value: index,
+                                  );
+                                }),
+                              ],
+                              onChanged: (int value) {
+                                if (value != timeID) {
+                                  setState(() {
+                                    timeID = value;
+                                  });
+                                }
+                              },
+                            ),
+                            decoration: BoxDecoration(
+                              border: Border.all(color: black, width: 1.5),
+                              borderRadius: BorderRadius.circular(10.0),
+                            ),
+                          ),
+                          SizedBox(height: 30),
+                          Container(
+                            padding: EdgeInsets.only(
+                                top: 3.0, bottom: 5.0, left: 10),
+                            width: SizeConfig.safeBlockHorizontal * 90,
+                            height: 50,
+                            child: DropdownButton<int>(
+                              autofocus: true,
+                              underline: Container(
+                                padding: EdgeInsets.only(left: 10),
+                                color: Colors.transparent,
+                              ),
+                              isExpanded: true,
+                              value: student_numberID,
+                              items: [
+                                DropdownMenuItem(
+                                  child: Text('Số học viên/lớp',
+                                      style: TextStyle(
+                                          fontSize: 18.0, color: Colors.grey)),
+                                  value: null,
+                                ),
+                                ...List.generate(2, (index) {
+                                  return DropdownMenuItem(
+                                    child: Text(
+                                        '${student_per_class_list[index]}',
+                                        style: TextStyle(
+                                            fontSize: 18.0,
+                                            color: Colors.grey)),
+                                    value: index,
+                                  );
+                                }),
+                              ],
+                              onChanged: (int value) {
+                                if (value != student_numberID) {
+                                  setState(() {
+                                    student_numberID = value;
+                                  });
+                                }
+                              },
+                            ),
+                            decoration: BoxDecoration(
+                              border: Border.all(color: black, width: 1.5),
+                              borderRadius: BorderRadius.circular(10.0),
+                            ),
+                          ),
+                          SizedBox(height: 30),
+                          Container(
+                            padding: EdgeInsets.only(
+                                top: 3.0, bottom: 5.0, left: 10),
+                            width: SizeConfig.safeBlockHorizontal * 90,
+                            height: 50,
+                            child: DropdownButton<int>(
+                              autofocus: true,
+                              underline: Container(
+                                padding: EdgeInsets.only(left: 10),
+                                color: Colors.transparent,
+                              ),
+                              isExpanded: true,
+                              value: model.idEducation,
+                              items: [
+                                DropdownMenuItem(
+                                  child: Text('Đối tượng dạy',
+                                      style: TextStyle(
+                                          fontSize: 18.0, color: Colors.grey)),
+                                  value: null,
+                                ),
+                                ...List.generate(model.education.length,
+                                    (index) {
+                                  return DropdownMenuItem(
+                                    child: Text(
+                                        '${model.education[index].name}',
+                                        style: TextStyle(
+                                            fontSize: 18.0,
+                                            color: Colors.grey)),
+                                    value: model.education[index].id,
+                                  );
+                                }),
+                              ],
+                              onChanged: (int value) {
+                                if (value != model.idEducation) {
+                                  model.setIdEducation(value);
+                                }
+                              },
+                            ),
+                            decoration: BoxDecoration(
+                              border: Border.all(color: black, width: 1.5),
+                              borderRadius: BorderRadius.circular(10.0),
+                            ),
+                          ),
+                          SizedBox(height: 30),
+                          Container(
+                            padding: EdgeInsets.only(
+                                top: 3.0, bottom: 5.0, left: 10),
+                            width: SizeConfig.safeBlockHorizontal * 90,
+                            height: 50,
+                            child: DropdownButton<int>(
+                              autofocus: true,
+                              underline: Container(
+                                padding: EdgeInsets.only(left: 10),
+                                color: Colors.transparent,
+                              ),
+                              isExpanded: true,
+                              value: genderID,
+                              items: [
+                                DropdownMenuItem(
+                                  child: Text('Giới tính gia sư',
+                                      style: TextStyle(
+                                          fontSize: 18.0, color: Colors.grey)),
+                                  value: null,
+                                ),
+                                ...List.generate(3, (index) {
+                                  return DropdownMenuItem(
+                                    child: Text('${genderList[index]}',
+                                        style: TextStyle(
+                                            fontSize: 18.0,
+                                            color: Colors.grey)),
+                                    value: index,
+                                  );
+                                }),
+                              ],
+                              onChanged: (int value) {
+                                if (value != genderID) {
+                                  setState(() {
+                                    genderID = value;
+                                  });
+                                }
+                              },
+                            ),
+                            decoration: BoxDecoration(
+                              border: Border.all(color: black, width: 1.5),
+                              borderRadius: BorderRadius.circular(10.0),
+                            ),
+                          ),
+                          SizedBox(height: 30),
+                          Container(
+                            padding: EdgeInsets.only(
+                                top: 3.0, bottom: 5.0, left: 10),
+                            width: SizeConfig.safeBlockHorizontal * 90,
+                            height: 50,
+                            child: DropdownButton<int>(
+                              autofocus: true,
+                              underline: Container(
+                                padding: EdgeInsets.only(left: 10),
+                                color: Colors.transparent,
+                              ),
+                              isExpanded: true,
+                              value: teaching_formID,
+                              items: [
+                                DropdownMenuItem(
+                                  child: Text('Hình thức dạy',
+                                      style: TextStyle(
+                                          fontSize: 18.0, color: Colors.grey)),
+                                  value: null,
+                                ),
+                                ...List.generate(form_teaching_list.length,
+                                    (index) {
+                                  return DropdownMenuItem(
+                                    child: Text('${form_teaching_list[index]}',
+                                        style: TextStyle(
+                                            fontSize: 18.0,
+                                            color: Colors.grey)),
+                                    value: index,
+                                  );
+                                }),
+                              ],
+                              onChanged: (int value) {
+                                if (value != teaching_formID) {
+                                  setState(() {
+                                    teaching_formID = value;
+                                  });
+                                }
+                              },
+                            ),
+                            decoration: BoxDecoration(
+                              border: Border.all(color: black, width: 1.5),
+                              borderRadius: BorderRadius.circular(10.0),
+                            ),
+                          ),
+                          SizedBox(height: 30),
+                          SmallTextField('Học phí/buổi (vnđ)', tuition_fee),
+                          SmallTextField('Điện thoại', phone_number),
+                          Container(
+                            padding: EdgeInsets.only(
+                                top: 3.0, bottom: 5.0, left: 10),
+                            width: SizeConfig.safeBlockHorizontal * 90,
+                            height: 50,
+                            child: DropdownButton<int>(
+                              autofocus: true,
+                              underline: Container(
+                                padding: EdgeInsets.only(left: 10),
+                                color: Colors.transparent,
+                              ),
+                              isExpanded: true,
+                              value: model.idCity,
+                              items: [
+                                DropdownMenuItem(
+                                  child: Text('Địa điểm dạy',
+                                      style: TextStyle(
+                                          fontSize: 18.0, color: Colors.grey)),
+                                  value: null,
+                                ),
+                                ...List.generate(model.city.length, (index) {
+                                  return DropdownMenuItem(
+                                    child: Text('${model.city[index].name}',
+                                        style: TextStyle(
+                                            fontSize: 18.0,
+                                            color: Colors.grey)),
+                                    value: model.city[index].id,
+                                  );
+                                }),
+                              ],
+                              onChanged: (int value) {
+                                if (value != model.idCity) {
+                                  model.setIdCity(value);
+                                }
+                              },
+                            ),
+                            decoration: BoxDecoration(
+                              border: Border.all(color: black, width: 1.5),
+                              borderRadius: BorderRadius.circular(10.0),
+                            ),
+                          ),
+                          SizedBox(height: 30),
+                          SmallTextField('Địa chỉ học', address),
+                          Container(
+                              padding: EdgeInsets.only(top: 3.0, bottom: 3.0),
+                              width: SizeConfig.safeBlockHorizontal * 90,
+                              height: 80,
+                              child: Row(
+                                children: <Widget>[
+                                  Expanded(
+                                    flex: 8,
+                                    child: TextFormField(
+                                      controller: from_date,
+                                      autofocus: true,
+                                      validator: validate,
+                                      onSaved: (String val) {
+                                        if (dateTimeNull()) {
+                                          from_date.text = val;
+                                        } else {
+                                          from_date.text = formatDate(
+                                              _date, [dd, '/', mm, '/', yyyy]);
+                                        }
+                                      },
+                                      enableSuggestions: true,
+                                      decoration: InputDecoration(
+                                        contentPadding:
+                                            EdgeInsets.only(left: 10),
+                                        hintText: 'Ngày dự kiến học',
+                                        border: OutlineInputBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(10.0),
+                                        ),
+                                        hintStyle: TextStyle(
+                                          fontSize: 18,
+                                          color: Colors.grey[400],
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                  SizedBox(
+                                    width: 3,
+                                  ),
+                                  Expanded(
+                                      child: Container(
+                                    decoration: BoxDecoration(
+                                      border: Border.all(color: black),
+                                      borderRadius: BorderRadius.circular(10),
+                                    ),
+                                    child: IconButton(
+                                        icon: Icon(Icons.calendar_today),
+                                        onPressed: () {
+                                          selectDate(context);
+                                        }),
+                                  )),
+                                ],
+                              )),
                           LargeTextField(
                               'Nhập mô tả chi tiết nội dung muốn học',
-                              _controller13),
+                              about_course),
                         ],
                       ),
                     ),
@@ -243,58 +713,89 @@ class PostRequestState extends State<PostRequest> {
                           child: SizedBox(),
                         ),
                         Container(
-                          padding: EdgeInsets.only(right: 15),
-                          child: RaisedButton(
-//              padding: EdgeInsets.only(),
-                            color: Colors.blue[800],
-                            shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(10)),
-                            onPressed: () {
-                              _sendToServer();
-                              // model.setRole();
-                              postRequestInfor["name"] = name.text;
-                              postRequestInfor["grade"] = grade.text;
-                              postRequestInfor["lesson_per_week"] =
-                                  lesson_per_week.text;
-                              postRequestInfor["time_per_lesson"] =
-                                  time_per_lesson.text;
-                              postRequestInfor["student_per_class"] =
-                                  student_per_class.text;
-                              postRequestInfor["course_education"] =
-                                  course_education.text;
-                              postRequestInfor["tutor_gender"] =
-                                  tutor_gender.text;
-                              postRequestInfor["form_teaching_id"] =
-                                  form_teaching_id.text;
-                              postRequestInfor["tuition_fee"] =
-                                  _controller9.text;
-                              postRequestInfor["phone_number"] =
-                                  _controller10.text;
-                              postRequestInfor["location_id"] =
-                                  _controller11.text;
-                              postRequestInfor["address"] = _controller12.text;
-                              postRequestInfor["about_course"] =
-                                  _controller13.text;
-                              var postData =
-                                  model.postRequest(postRequestInfor);
-                              if (postData != null) {
-                                Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                      builder: (context) =>
-                                          MyBottomNavigationBar(),
-                                    ));
-                              }
-                            },
-                            child: Text(
-                              'Đăng yêu cầu',
-                              style: TextStyle(
-                                fontSize: 18,
-                                color: Colors.white,
-                              ),
-                            ),
-                          ),
-                        )
+                            padding: EdgeInsets.only(right: 15),
+                            child: Consumer<SelectedTimeModel>(
+                                builder: (_, selectedModel, __) {
+                              List<Schedule> listSchedule =
+                                  new List<Schedule>();
+                              List<int> schedules = new List<int>();
+                              List<int> form_teaching_listof = new List<int>();
+                              form_teaching_listof.add(teaching_formID);
+                              return RaisedButton(
+                                color: colorApp,
+                                onPressed: () async {
+                                  List<Map> scheduleList = new List<Map>();
+                                  for (int i = 0;
+                                      i < selectedModel.listSelected.length;
+                                      i++) {
+                                    if (selectedModel.listSelected[i] == true) {
+                                      var schedule = Schedule(
+                                          day: ((i - (i % 3)) ~/ 3),
+                                          session: (i % 3));
+                                      listSchedule.add(schedule);
+                                      schedules.add(schedule.id);
+                                      scheduleList.add(schedule.toMap());
+                                    }
+                                  }
+                                  _sendToServer();
+                                  // model.setRole();
+                                  postRequestInfor["name"] = "Kiên đi học";
+                                  //name.text;
+                                  postRequestInfor["grade"] = "12";
+                                  //className[classID];
+                                  postRequestInfor["lesson_per_week"] =
+                                      "4 buổi";
+                                  //lesson_per_week_list[lessonID];
+                                  postRequestInfor["time_per_lesson"] = 1.5;
+                                  // time_per_lesson_list[timeID];
+                                  postRequestInfor["student_per_class"] = 2;
+                                  //student_per_class_list[student_numberID];
+                                  postRequestInfor["course_education"] = [
+                                    {"id": 4, "name": "Người đi làm"}
+                                  ];
+                                  // [
+                                  //   (model.education[model.idEducation - 1].name)
+                                  // ];
+                                  postRequestInfor["tutor_gender"] = 1;
+                                  //(genderID + 1).toString();
+                                  postRequestInfor["form_teaching_id"] = 1;
+                                  //  (teaching_formID + 1);
+                                  postRequestInfor["tuition_fee"] = "150000";
+                                  // tuition_fee.text;
+                                  postRequestInfor["phone_number"] =
+                                      "0398567928";
+                                  // phone_number.text;
+                                  postRequestInfor["location_id"] = 13;
+                                  //model.idCity;
+                                  postRequestInfor["address"] = address.text;
+                                  postRequestInfor["from_date"] =
+                                      from_date.text;
+                                  postRequestInfor["about_course"] =
+                                      about_course.text;
+                                  postRequestInfor["schedules"] = scheduleList;
+                                  postRequestInfor["topics"] = [15];
+                                  postRequestInfor["topic_id"] = [15];
+                                  print(postRequestInfor);
+                                  var postData =
+                                      await model.postRequest(postRequestInfor);
+                                  if (postData) {
+                                    Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                          builder: (context) =>
+                                              MyBottomNavigationBar(),
+                                        ));
+                                  }
+                                },
+                                child: Text(
+                                  'Đăng yêu cầu',
+                                  style: TextStyle(
+                                    fontSize: 18,
+                                    color: Colors.white,
+                                  ),
+                                ),
+                              );
+                            }))
                       ],
                     ),
                   ],

@@ -11,24 +11,24 @@ import 'package:test_giasu/ui/Open_App/DetailRaisedButton.dart';
 import 'package:test_giasu/ui/Open_App/SpecialtyInfor.dart';
 import 'package:test_giasu/ui/UI_Main/BottomNavigationBar.dart';
 import 'package:test_giasu/ui/Widgets/previous_widget.dart';
+import 'package:test_giasu/main.dart';
 
 class SubjectChoiceDetailsForRequest extends StatefulWidget {
   List<Subjects> data;
   List<Topics> firstTopicList;
   List<Topics> secondTopicList;
   List<Topics> thirdTopicList;
-  SubjectChoiceDetailsForRequest(this.data, this.firstTopicList,
-      this.secondTopicList, this.thirdTopicList);
+  SubjectChoiceDetailsForRequest(this.data, this.firstTopicList, this.secondTopicList,
+      this.thirdTopicList);
 
   @override
   State<StatefulWidget> createState() {
     // TODO: implement createState
-    return SubjectChoiceDetailsForRequestState();
+    return SubjectChoiceDetailsState();
   }
 }
 
-class SubjectChoiceDetailsForRequestState
-    extends State<SubjectChoiceDetailsForRequest> {
+class SubjectChoiceDetailsState extends State<SubjectChoiceDetailsForRequest> {
   GlobalKey<FormState> _key1 = new GlobalKey();
 
   List<bool> listBools = List.filled(138, true, growable: true);
@@ -70,28 +70,44 @@ class SubjectChoiceDetailsForRequestState
 
   // ignore: missing_return
   Widget _checkData(List<Subjects> data) {
+    print(data.length);
     switch (data.length) {
       case 1:
+        print(data.length);
         return Column(
           children: <Widget>[
-            _subject(data[0], widget.firstTopicList),
+            (data.length > 0)
+                ? _subject(data[0], widget.firstTopicList)
+                : SizedBox(),
           ],
         );
         break;
       case 2:
+        print(data.length);
         return Column(
           children: <Widget>[
-            _subject(data[0], widget.firstTopicList),
-            _subject(data[1], widget.secondTopicList),
+            (data.length > 0)
+                ? _subject(data[0], widget.firstTopicList)
+                : SizedBox(),
+            (data.length > 1)
+                ? _subject(data[1], widget.secondTopicList)
+                : SizedBox(),
           ],
         );
         break;
       case 3:
+        print(data.length);
         return Column(
           children: <Widget>[
-            _subject(data[0], widget.firstTopicList),
-            _subject(data[1], widget.secondTopicList),
-            _subject(data[2], widget.thirdTopicList),
+            (data.length > 0)
+                ? _subject(data[0], widget.firstTopicList)
+                : SizedBox(),
+            (data.length > 1)
+                ? _subject(data[1], widget.secondTopicList)
+                : SizedBox(),
+            (data.length > 2)
+                ? _subject(data[2], widget.thirdTopicList)
+                : SizedBox(),
           ],
         );
         break;
@@ -100,6 +116,7 @@ class SubjectChoiceDetailsForRequestState
 
   Widget _subject(Subjects a, List<Topics> topicList) {
     int n = topicList.length;
+    print(n);
     return Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
@@ -118,20 +135,23 @@ class SubjectChoiceDetailsForRequestState
           SizedBox(
             height: 20,
           ),
-          _rowOfChoices(topicList, n),
-          _rowOfChoices(topicList, n - 2),
-          _rowOfChoices(topicList, n - 4),
-          _rowOfChoices(topicList, n - 6),
-          _rowOfChoices(topicList, n - 8),
-          _rowOfChoices(topicList, n - 10),
-          _rowOfChoices(topicList, n - 12),
-          _rowOfChoices(topicList, n - 14),
-          _rowOfChoices(topicList, n - 16),
+          
+          (n > 0) ? _rowOfChoices(topicList, n) : SizedBox(),
+           (n > 2) ? _rowOfChoices(topicList, n - 2) : SizedBox(),
+           (n > 4) ? _rowOfChoices(topicList, n - 4) : SizedBox(),
+          (n > 6) ? _rowOfChoices(topicList, n - 6) : SizedBox(),
+           (n > 8) ? _rowOfChoices(topicList, n - 8) : SizedBox(),
+           (n > 10) ? _rowOfChoices(topicList, n - 10) : SizedBox(),
+          (n > 12) ? _rowOfChoices(topicList, n - 12) : SizedBox(),
+          (n > 14) ? _rowOfChoices(topicList, n - 14) : SizedBox(),
+          (n > 16) ? _rowOfChoices(topicList, n - 16) : SizedBox(),
+         
         ]);
   }
 
   Widget _rowOfChoices(List<Topics> topicList, int n) {
-    if ((n - 2) > 0) {
+    print(n);
+    if ((n - 2) >= 0) {
       var topic1 = topicList[n - 1];
       var topic2 = topicList[n - 2];
       return Row(
@@ -171,10 +191,8 @@ class SubjectChoiceDetailsForRequestState
           ),
         ],
       );
-    }
-    if (n == 1) {
+    } else if (n == 1) {
       var topic1 = topicList[n - 1];
-
       return Row(
         children: <Widget>[
           Expanded(child: SizedBox(), flex: 1),
@@ -195,12 +213,11 @@ class SubjectChoiceDetailsForRequestState
           ),
         ],
       );
-    }
-    if (n <= 0) {
+    }else
       return SizedBox(
         width: double.infinity,
       );
-    }
+    
   }
 
   @override
@@ -212,62 +229,61 @@ class SubjectChoiceDetailsForRequestState
     return Scaffold(
       appBar: AppBar(
         leading: buildPreviousButton(),
+        
         backgroundColor: Color.fromRGBO(47, 101, 174, 1),
         centerTitle: true,
         title: Text(
           'Lựa chọn chủ đề',
         ),
       ),
-      body: Consumer<PostRequestModel>(builder: (_, model, __) {
-        return Stack(
-          children: <Widget>[
-            SingleChildScrollView(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: <Widget>[
-                  _checkData(widget.data),
-                  SizedBox(
-                    height: ScreenUtil.getInstance().setHeight(80),
-                  ),
-                  Divider(thickness: 1),
-                  Container(
+      body: Stack(
+        children: <Widget>[
+          SingleChildScrollView(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: <Widget>[
+                _checkData(widget.data),
+                SizedBox(
+                  height: ScreenUtil.getInstance().setHeight(80),
+                ),
+                Divider(thickness: 1),
+                Container(
                     height: ScreenUtil.getInstance().setHeight(100),
                     width: ScreenUtil.getInstance().setWidth(700),
                     alignment: Alignment.bottomRight,
-                    child: RaisedButton(
-                      color: Color.fromRGBO(47, 101, 174, 1),
-                      shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(10)),
-                      child: Text(
-                        'Lựa chọn',
-                        style: TextStyle(
-                          fontStyle: FontStyle.normal,
-                          fontSize: ScreenUtil.getInstance().setSp(25),
-                          color: Colors.white,
+                    child:
+                        Consumer<PostRequestModel>(builder: (_, model, __) {
+                      return RaisedButton(
+                        color: Color.fromRGBO(47, 101, 174, 1),
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(10)),
+                        child: Text(
+                          'Lựa chọn',
+                          style: TextStyle(
+                            fontStyle: FontStyle.normal,
+                            fontSize: ScreenUtil.getInstance().setSp(25),
+                            color: Colors.white,
+                          ),
                         ),
-                      ),
-                      onPressed: () {
-                        print(listTopicID);
-                        //  _saveToServer();
-                        model.postRequestInfor["topic_id"] = listTopicID;
-                        var 
-                        count = 0;
-                        Navigator.popUntil(context, (route) {
-                          return count++ == 2;
-                        });
-                      },
-                    ),
-                  ),
-                  SizedBox(
-                    height: 20,
-                  ),
-                ],
-              ),
+                        onPressed: () {
+                          print(listTopicID);
+                          //  _saveToServer();
+                          model.postRequestInfor["topic_id"] = listTopicID;
+
+                          Navigator.popUntil(
+                              context, ModalRoute.withName('/request'));
+                        },
+                      );
+                    })),
+                SizedBox(
+                  height: 20,
+                ),
+              ],
             ),
-          ],
-        );
-      }),
+          ),
+        ],
+      ),
     );
   }
 }

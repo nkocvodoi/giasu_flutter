@@ -29,20 +29,26 @@ class SpecialtyInfor extends StatefulWidget {
 }
 
 class _SpecialtyInforState extends State<SpecialtyInfor> {
-
   GlobalKey<FormState> _key1 = new GlobalKey();
   bool _validate = false;
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
-  final TextEditingController _controller = TextEditingController();
-  final TextEditingController _controller1 = TextEditingController();
+  final TextEditingController university = TextEditingController();
+  final TextEditingController school_year = TextEditingController();
   final TextEditingController tuition_fee = TextEditingController();
   final TextEditingController number_class = TextEditingController();
-  final TextEditingController _controller4 = TextEditingController();
+  final TextEditingController specialism = TextEditingController();
   final TextEditingController _controller5 = TextEditingController();
   final TextEditingController _controller6 = TextEditingController();
   final TextEditingController about_me = TextEditingController();
   final TextEditingController achievement = TextEditingController();
   final TextEditingController _controller9 = TextEditingController();
+  
+  List<String> form_teaching_list = [
+    "Gia sư Offline (tại nhà)",
+    "Gia sư Online (trực tuyến)",
+    "Cả hai hình thức",
+  ];
+  int teaching_formID;
 
   void showInSnackBar(String value) {
     _scaffoldKey.currentState.showSnackBar(
@@ -141,12 +147,43 @@ class _SpecialtyInforState extends State<SpecialtyInfor> {
                               },
                             ),
                             decoration: BoxDecoration(
-                              color: Colors.white,
                               border: Border.all(color: black, width: 1.5),
                               borderRadius: BorderRadius.circular(10.0),
                             ),
                           ),
                           SizedBox(height: 30),
+                          SmallTextField("Tốt nghiệp trường", university),
+                          // Container(
+                          //   width: SizeConfig.safeBlockHorizontal * 90,
+                          //   height: 80,
+                          //   child: TextFormField(
+                          //     autofocus: true,
+                          //     validator: validate,
+                          //     onSaved: (String val) {
+                          //       school_year.text = val;
+                          //       // if (val !=
+                          //       //     model.authenticationService.identification_number) {
+                          //       //   phone_number.text = val;
+                          //       // }
+                          //     },
+                          //     keyboardType: TextInputType.phone,
+                          //     controller: school_year,
+                          //     enableSuggestions: true,
+                          //     decoration: InputDecoration(
+                          //       contentPadding: EdgeInsets.only(left: 10),
+                          //       hintText: "Năm tốt nghiệp",
+                          //       border: OutlineInputBorder(
+                          //         borderRadius: BorderRadius.circular(10.0),
+                          //       ),
+                          //       hintStyle: TextStyle(
+                          //         fontSize: 18,
+                          //         fontFamily: 'UTM',
+                          //         color: Colors.grey,
+                          //       ),
+                          //     ),
+                          //   ),
+                          // ),
+                          // SmallTextField("Chuyên ngành", specialism),
                           Container(
                             padding: EdgeInsets.only(
                                 top: 3.0, bottom: 5.0, left: 10),
@@ -159,7 +196,7 @@ class _SpecialtyInforState extends State<SpecialtyInfor> {
                                 color: Colors.transparent,
                               ),
                               isExpanded: true,
-                              value: model.idFormTeaching,
+                              value: teaching_formID,
                               items: [
                                 DropdownMenuItem(
                                   child: Text('Hình thức dạy',
@@ -167,24 +204,26 @@ class _SpecialtyInforState extends State<SpecialtyInfor> {
                                           fontSize: 18.0, color: Colors.grey)),
                                   value: null,
                                 ),
-                                ...List.generate(model.form_teaching.length,
+                                ...List.generate(form_teaching_list.length,
                                     (index) {
                                   return DropdownMenuItem(
-                                    child: Text(
-                                        '${model.form_teaching[index].name}',
+                                    child: Text('${form_teaching_list[index]}',
                                         style: TextStyle(
                                             fontSize: 18.0,
                                             color: Colors.grey)),
-                                    value: model.education[index].id,
+                                    value: index,
                                   );
                                 }),
                               ],
                               onChanged: (int value) {
-                                model.setIdFormTeaching(value);
+                                if (value != teaching_formID) {
+                                  setState(() {
+                                    teaching_formID = value;
+                                  });
+                                }
                               },
                             ),
                             decoration: BoxDecoration(
-                              color: Colors.white,
                               border: Border.all(color: black, width: 1.5),
                               borderRadius: BorderRadius.circular(10.0),
                             ),
@@ -198,7 +237,7 @@ class _SpecialtyInforState extends State<SpecialtyInfor> {
                             child: FlatButton(
                               // shape: RoundedRectangleBorder(
                               //     borderRadius: BorderRadius.circular(10.0)),
-                              color: Colors.white,
+
                               onPressed: () {
                                 Navigator.pushNamed(context, '/subject');
                               },
@@ -258,8 +297,11 @@ class _SpecialtyInforState extends State<SpecialtyInfor> {
                               ),
                               Consumer<SelectedTimeModel>(
                                   builder: (_, selectedModel, __) {
-                                List<Schedule> listSchedule = new List<Schedule>();
+                                List<Schedule> listSchedule =
+                                    new List<Schedule>();
                                 List<int> schedules = new List<int>();
+                                List<int> form_teaching_listof = new List<int>();
+                                form_teaching_listof.add(teaching_formID);
                                 return RaisedButton(
                                   color: colorApp,
                                   onPressed: () async {
@@ -270,7 +312,6 @@ class _SpecialtyInforState extends State<SpecialtyInfor> {
                                       if (selectedModel.listSelected[i] ==
                                           true) {
                                         var schedule = Schedule(
-                                            id: (i + 1),
                                             day: ((i - (i % 3)) ~/ 3),
                                             session: (i % 3));
                                         listSchedule.add(schedule);
@@ -296,15 +337,24 @@ class _SpecialtyInforState extends State<SpecialtyInfor> {
                                         (achievement.text == "")
                                             ? "null"
                                             : achievement.text;
-                                    model.personalInfor["form_teaching_id"] =
-                                        (model.idFormTeaching == null)
-                                            ? "null"
-                                            : model.idFormTeaching.toString();
+                                    model.personalInfor["form_teaching_id"] = [1];
+                                        // (teaching_formID == 2) ? [1,2] : [(teaching_formID +1)];
                                     model.personalInfor["education_level_id"] =
-                                        (model.idEducation == null)
-                                            ? "null"
-                                            : model.idEducation.toString();
-                                    model.personalInfor["schedules"] = scheduleList;
+                                       model.idEducation.toString();
+                                    model.personalInfor["lng"] = "3.0";
+                                    model.personalInfor["lat"] = "2.0";
+                                    model.personalInfor["schedules"] =
+                                        scheduleList;
+                                    //  model.personalInfor["role"] = "tutor";
+                                    //  model.personalInfor["id"] = 521;
+                                    //  model.personalInfor["username"] = "Kien";
+                                    //  model.personalInfor["identification_number"] = "0398567928";
+                                    model.personalInfor["university"] = "Ironbarrow Technical College";
+                                       // university.text;
+                                    model.personalInfor["school_year"] = 2019;
+                                    model.personalInfor["company"] = "Ironbarrow Technical College";
+                                    model.personalInfor["specialism"] = "Sư phạm Anh";
+                                        //specialism.text;
                                     print(model.personalInfor.toString());
                                     var success =
                                         await model.personalInforCheckup(
@@ -340,5 +390,14 @@ class _SpecialtyInforState extends State<SpecialtyInfor> {
             );
           },
         ));
+  }
+
+  String validate(String value) {
+    String patttern = r'(^[a-zA-Z ]*$)';
+    RegExp regExp = new RegExp(patttern);
+    if (value.length == 0) {
+      return "Trường này không được để trống";
+    }
+    return null;
   }
 }

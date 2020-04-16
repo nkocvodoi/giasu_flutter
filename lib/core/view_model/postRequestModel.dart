@@ -186,33 +186,33 @@ class PostRequestModel extends ChangeNotifier {
     print(_subject);
     setBusy(false);
   }
+  
+  String _infor;
+  String get Infor => _infor;
 
   Future<bool> postRequest(Map _map) async {
     var data = {"course": _map};
-    var res = await http.post(APIUrl + 'main/thong-tin',
-        body: json.encode(data), headers: {'Content-Type': 'application/json'});
+    var res = await http.post(APIUrl + 'api/v1/parents/courses',
+        body: json.encode(data), 
+        headers: {'Content-Type': 'application/json',
+        'Authorization': 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjo1MjEsImV4cCI6MTU4NjMyOTExOSwiaXNzIjoic2Fva2h1ZWUiLCJhdWQiOiJjbGllbnQifQ.zoDa9R5-q_ygJexVYnOxLAZHBcfJiI6EtYgLzO3BZ3c',});
     if (res.statusCode == 200) //return res.body;
     {
-//      Map<String, dynamic> mapResponse =  json.decode(res.body);
+        Map<String, dynamic> mapResponse = json.decode(res.body);
+        print(mapResponse.toString());
 
-      return true;
-    } else {
-      return null;
-    }
+        if (mapResponse["code"] == 1) {
+          return true;
+        } else {
+          _infor = mapResponse["message"];
+          return false;
+        }
+      
+    }  
+    notifyListeners();
   }
-
-  // Future<Post> createPost(String url, {Map body}) async {
-  // return http.post(url, body: body).then((http.Response response) {
-  //   final int statusCode = response.statusCode;
-
-  //   if (statusCode < 200 || statusCode > 400 || json == null) {
-  //     throw new Exception("Error while fetching data");
-  //   }
-  //   return Post.fromJson(json.decode(response.body));
-  // });
-//}
-
 }
+
 class Schedules {
   int day;
   int session;

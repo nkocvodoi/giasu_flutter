@@ -33,24 +33,28 @@ class SubjectService {
 class Subjects {
   final int id;
   final String name;
-
+  final String group;
   Subjects({
     this.id,
     this.name,
+    this.group
   });
 
   factory Subjects.fromJson(Map<dynamic, dynamic> json) => Subjects(
     id: json['id'],
     name: json['name'] as String,
+    group: json['group'] as String,
   );
    Map<String, dynamic> toMap() {
     return {
       'id': id,
       'name': name,
+      'group': group,
     };
   }
   Map<String, dynamic> toJson() => <String, dynamic>{
     'id': id,
     'name': name,
+    'group': group,
   };
 }

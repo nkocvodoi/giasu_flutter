@@ -42,15 +42,14 @@ class SignInModel extends ChangeNotifier {
   }
 
 
-  Future<bool> login1(Map _map) async {
-//    var data = {"user": _map};
-
-    var data = {"user": {
-      "phone_number": "0123456781",
-      "password": "123456789"
-
-    }
-    };
+  Future<bool> login1(Map map) async {
+    print(map);
+    var data = {"user": map};
+    // var data = {"user": {
+    //   "phone_number": "0398567928",
+    //   "password": "kien1234"
+    // }
+    // };
 
     try {
       var res = await http.post(APIUrl + 'api/sign_in',
@@ -64,8 +63,8 @@ class SignInModel extends ChangeNotifier {
         if (mapResponse['code'] == 1) {
           authenticationService.setToken(mapResponse["token"]);
           authenticationService.setId(mapResponse["user"]["id"]);
-//          authenticationService
-//              .setCurrentUser(CurrentUser.fromJson(mapResponse["user"]));
+          authenticationService
+              .setCurrentUser(CurrentUser.fromJson(mapResponse["user"]));
 //          print('log');
 //          print(CurrentUser.fromJson(mapResponse["user"]));
           return true;

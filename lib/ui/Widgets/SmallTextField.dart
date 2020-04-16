@@ -31,16 +31,19 @@ class SmallTextField extends StatelessWidget {
         },
         controller: _controller,
         enableSuggestions: true,
+        
         decoration: InputDecoration(
+          
           contentPadding: EdgeInsets.only(left: 10),
           hintText: infor,
           border: OutlineInputBorder(
+            
             borderRadius: BorderRadius.circular(10.0),
           ),
           hintStyle: TextStyle(
             fontSize: 18,
             fontFamily: 'UTM',
-            color: Colors.grey[400],
+            color: Colors.grey,
           ),
         ),
       ),

@@ -28,7 +28,7 @@ class _SignIn_PageState extends State<SignIn_Page> {
   // }
 
 
-  Map _loginmap = new Map();
+  Map loginmap = new Map<String,dynamic>();
   GlobalKey<FormState> _key = new GlobalKey();
   bool _validate = false;
   TextEditingController _phone_number = TextEditingController();
@@ -131,6 +131,7 @@ class _SignIn_PageState extends State<SignIn_Page> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: <Widget>[
                           TextFormField(
+                            controller: _phone_number,
                               decoration: InputDecoration(
                                 hintText: 'Email/ Số điện thoại',
                                 border: OutlineInputBorder(),
@@ -149,7 +150,9 @@ class _SignIn_PageState extends State<SignIn_Page> {
 //                            maxLength: 10,
                               validator: validateMobile,
                               onSaved: (String val) {
-                                _phone_number.text = val.trim();
+                               setState(() {
+                                  _phone_number.text = val.trim();
+                               });
                               }),
                           SizedBox(
                             width: double.infinity,
@@ -240,9 +243,11 @@ class _SignIn_PageState extends State<SignIn_Page> {
 //                                ),
 //                              ),
 //                            );
-                        _loginmap["phone_number"] = _phone_number.text;
-                        _loginmap["password"] = _pass.text;
-                        var loginSuccess1 = await model.login1(_loginmap);
+
+                        loginmap["phone_number"] = _phone_number.text;
+                        loginmap["password"] = _pass.text;
+                        print(loginmap);
+                        var loginSuccess1 = await model.login1(loginmap);
 //                            var loginSuccess1 = model.authenticationService.isLogined;
 //                            print(loginSuccess1);
 //                            var a = await model.authenticationService.id;
@@ -367,6 +372,7 @@ class _SignIn_PageState extends State<SignIn_Page> {
   Widget _buildBox(String _a, bool _b) {
     return Consumer<SignInModel>(builder: (_, model, __) {
       return TextFormField(
+        controller: _pass,
           obscureText: model.count,
           decoration: InputDecoration(
               hintText: 'Mật khẩu',
@@ -392,7 +398,9 @@ class _SignIn_PageState extends State<SignIn_Page> {
 //                            maxLength: 10,
           validator: validatePass,
           onSaved: (String val) {
-            _pass.text = val.trim();
+           setState(() {
+             _pass.text = val.trim();
+           }); 
           });
     });
   }

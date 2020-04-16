@@ -52,7 +52,7 @@ class _Class_Manager_State extends State<Class_Manager> {
                     return List_Box(
                       box: snapshot.data.data,
                       controller: _scrollController,
-                      stateButton: false,
+                     
                     );
                   }
                   else {

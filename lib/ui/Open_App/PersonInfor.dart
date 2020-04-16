@@ -1,6 +1,8 @@
 import 'dart:ui';
 import 'dart:io';
 import 'dart:convert';
+import 'package:flutter_google_places/flutter_google_places.dart';
+import 'package:google_maps_webservice/places.dart';
 import 'package:http/http.dart' as http;
 import 'package:date_format/date_format.dart';
 import 'package:flutter/cupertino.dart';
@@ -28,6 +30,8 @@ class _PersonInforState extends State<PersonInfor> {
   // Map personalInfor = new Map();
   GlobalKey<FormState> _key1 = new GlobalKey();
   bool _validate = false;
+  List<String> genderList = ["Nam", "Nữ"];
+  int genderID;
   final TextEditingController full_name = TextEditingController();
   final TextEditingController gender = TextEditingController();
   final TextEditingController birthdate = TextEditingController();
@@ -164,7 +168,7 @@ class _PersonInforState extends State<PersonInfor> {
     if (picked != null && picked != _date) {
       setState(() {
         _date = picked;
-        birthdate.text = formatDate(_date, [dd, '-', mm, '-', yyyy]);
+        birthdate.text = formatDate(_date, [dd, '/', mm, '/', yyyy]);
       });
     }
   }
@@ -238,14 +242,60 @@ class _PersonInforState extends State<PersonInfor> {
                         children: <Widget>[
                           Container(
                               margin: EdgeInsets.all(15.0),
-                              decoration: BoxDecoration(
-                                color: Colors.white,
-                              ),
+                              decoration: BoxDecoration(),
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: <Widget>[
                                   SmallTextField('Họ và tên', full_name),
-                                  SmallTextField('Giới tính', gender),
+                                  Container(
+                                    padding: EdgeInsets.only(
+                                        top: 3.0, bottom: 5.0, left: 10),
+                                    width: SizeConfig.safeBlockHorizontal * 90,
+                                    height: 50,
+                                    child: DropdownButton<int>(
+                                      autofocus: true,
+                                      underline: Container(
+                                        padding: EdgeInsets.only(left: 10),
+                                        color: Colors.transparent,
+                                      ),
+                                      isExpanded: true,
+                                      value: genderID,
+                                      items: [
+                                        DropdownMenuItem(
+                                          child: Text('Giới tính',
+                                              style: TextStyle(
+                                                  fontSize: 18.0,
+                                                  color: Colors.grey)),
+                                          value: null,
+                                        ),
+                                        ...List.generate(genderList.length,
+                                            (index) {
+                                          return DropdownMenuItem(
+                                            child: Text('${genderList[index]}',
+                                                style: TextStyle(
+                                                    fontSize: 18.0,
+                                                    color: Colors.grey)),
+                                            value: index,
+                                          );
+                                        }),
+                                      ],
+                                      onChanged: (int value) {
+                                        if (value != genderID) {
+                                          setState(() {
+                                            genderID = value;
+                                          });
+                                        }
+                                      },
+                                    ),
+                                    decoration: BoxDecoration(
+                                      border:
+                                          Border.all(color: black, width: 1.5),
+                                      borderRadius: BorderRadius.circular(10.0),
+                                    ),
+                                  ),
+                                  SizedBox(
+                                    height: 30,
+                                  ),
                                   Container(
                                     padding: EdgeInsets.only(
                                         top: 3.0, bottom: 5.0, left: 10),
@@ -286,7 +336,6 @@ class _PersonInforState extends State<PersonInfor> {
                                       },
                                     ),
                                     decoration: BoxDecoration(
-                                      color: Colors.white,
                                       border:
                                           Border.all(color: black, width: 1.5),
                                       borderRadius: BorderRadius.circular(10.0),
@@ -352,6 +401,7 @@ class _PersonInforState extends State<PersonInfor> {
                                           )),
                                         ],
                                       )),
+                                  SizedBox(height: 20),
                                   Container(
                                     padding: EdgeInsets.only(
                                         top: 3.0, bottom: 5.0, left: 10),
@@ -392,7 +442,6 @@ class _PersonInforState extends State<PersonInfor> {
                                       },
                                     ),
                                     decoration: BoxDecoration(
-                                      color: Colors.white,
                                       border:
                                           Border.all(color: black, width: 1.5),
                                       borderRadius: BorderRadius.circular(10.0),
@@ -401,8 +450,65 @@ class _PersonInforState extends State<PersonInfor> {
                                   SizedBox(height: 30),
                                   SmallTextField(
                                       'Link Facebook của bạn', facebook),
-                                  SmallTextField('Số điện thoại', phone_number),
-                                  SmallTextField('Email', email),
+                                  Container(
+                                    width: SizeConfig.safeBlockHorizontal * 90,
+                                    height: 80,
+                                    child: TextFormField(
+                                      autofocus: true,
+                                      validator: validate,
+                                      onSaved: (String val) {
+                                        phone_number.text = val;
+                                        // if (val !=
+                                        //     model.authenticationService.identification_number) {
+                                        //   phone_number.text = val;
+                                        // }
+                                      },
+                                      keyboardType: TextInputType.phone,
+                                      controller: phone_number,
+                                      enableSuggestions: true,
+                                      decoration: InputDecoration(
+                                        contentPadding:
+                                            EdgeInsets.only(left: 10),
+                                        hintText: "Số điện thoại",
+                                        border: OutlineInputBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(10.0),
+                                        ),
+                                        hintStyle: TextStyle(
+                                          fontSize: 18,
+                                          fontFamily: 'UTM',
+                                          color: Colors.grey,
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                  Container(
+                                    width: SizeConfig.safeBlockHorizontal * 90,
+                                    height: 80,
+                                    child: TextFormField(
+                                      autofocus: true,
+                                      validator: validate1,
+                                      onSaved: (String val) {
+                                        email.text = val;
+                                      },
+                                      keyboardType: TextInputType.emailAddress,
+                                      controller: email,
+                                      enableSuggestions: true,
+                                      decoration: InputDecoration(
+                                        contentPadding:
+                                            EdgeInsets.only(left: 10),
+                                        hintText: "Email",
+                                        border: OutlineInputBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(10.0),
+                                        ),
+                                        hintStyle: TextStyle(
+                                          fontSize: 18,
+                                          color: Colors.grey,
+                                        ),
+                                      ),
+                                    ),
+                                  ),
                                   Container(
                                     padding: EdgeInsets.only(
                                         top: 3.0, bottom: 5.0, left: 10),
@@ -443,14 +549,13 @@ class _PersonInforState extends State<PersonInfor> {
                                       },
                                     ),
                                     decoration: BoxDecoration(
-                                      color: Colors.white,
                                       border:
                                           Border.all(color: black, width: 1.5),
                                       borderRadius: BorderRadius.circular(10.0),
                                     ),
                                   ),
                                   SizedBox(height: 30),
-                                  SmallTextField('Địa chỉ hiện tại', address),
+                                  SmallTextField("Địa chỉ hiện tại", address),
                                   Padding(
                                     padding: EdgeInsets.only(
                                         left: 20.0, top: 10.0, bottom: 10.0),
@@ -620,21 +725,19 @@ class _PersonInforState extends State<PersonInfor> {
                                                 (model.idVoice == null)
                                                     ? "null"
                                                     : model.idVoice.toString();
-                                            if (gender != null)
-                                              model.personalInfor["gender"] =
-                                                  (gender.text == "")
-                                                      ? "null"
-                                                      : gender.text;
-                                            if (birthdate != null)
+
+                                            model.personalInfor["gender"] = 1;
+                                            // (genderID + 1);
+                                            
                                               model.personalInfor["birthdate"] =
                                                   (birthdate.text == "")
                                                       ? "null"
-                                                      : birthdate.text;
+                                                      : "22/09/2000";
                                             model.personalInfor[
                                                     "phone_number"] =
                                                 (phone_number.text == "")
                                                     ? "null"
-                                                    : phone_number.text;
+                                                    : "03948238947";
                                             model.personalInfor["facebook"] =
                                                 (facebook.text == "")
                                                     ? "null"
@@ -649,16 +752,9 @@ class _PersonInforState extends State<PersonInfor> {
                                                     : address.text;
                                             print(
                                                 model.personalInfor.toString());
-                                            // var success = await model
-                                            //     .personalInforCheckup(
-                                            //         personalInfor);
-                                            // if (success) {
+
                                             Navigator.pushNamed(
                                                 context, '/specialty');
-                                            // } else {
-                                            //   var _message = await model.Infor;
-                                            //   showInSnackBar(_message);
-                                            // }
                                           },
                                           child: Image.asset(
                                             "assets/next.png",
@@ -683,6 +779,15 @@ class _PersonInforState extends State<PersonInfor> {
   }
 
   String validate(String value) {
+    String patttern = r'(^[a-zA-Z ]*$)';
+    RegExp regExp = new RegExp(patttern);
+    if (value.length == 0) {
+      return "Trường này không được để trống";
+    }
+    return null;
+  }
+
+  String validate1(String value) {
     String patttern = r'(^[a-zA-Z ]*$)';
     RegExp regExp = new RegExp(patttern);
     if (value.length == 0) {

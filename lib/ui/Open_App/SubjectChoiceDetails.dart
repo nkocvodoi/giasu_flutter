@@ -221,10 +221,13 @@ class SubjectChoiceDetailsState extends State<SubjectChoiceDetails> {
 
   @override
   Widget build(BuildContext context) {
+    List<Map> subjectListToMap = List<Map>();
     ScreenUtil.instance = ScreenUtil.getInstance()..init(context);
     ScreenUtil.instance =
         ScreenUtil(width: 750, height: 1334, allowFontScaling: true);
-
+    for(var i in widget.data){
+      subjectListToMap.add(i.toMap());
+    }
     return Scaffold(
       appBar: AppBar(
         leading: buildPreviousButton(),
@@ -269,7 +272,7 @@ class SubjectChoiceDetailsState extends State<SubjectChoiceDetails> {
                           print(listTopicID);
                           //  _saveToServer();
                           model.personalInfor["topic_id"] = listTopicID;
-
+                          model.personalInfor["subjects"] = subjectListToMap;
                           Navigator.popUntil(
                               context, ModalRoute.withName('/specialty'));
                         },

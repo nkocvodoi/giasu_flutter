@@ -212,21 +212,14 @@ class PersonalInforModel extends ChangeNotifier {
   Future<bool> personalInforCheckup(Map _map) async {
     var data = {"user": _map};
     print("kajshduiashuidhausidash");
-   
-//    https://giasu.htcon.vn/api/users/registrations
     try {
-
       var res = await http.put(APIUrl + 'api/v1/tutors/521',
-          
           body: json.encode(data),
           headers: {
             'Content-Type': 'application/json',
             'Authorization': 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjo1MjEsImV4cCI6MTU4NjMyOTExOSwiaXNzIjoic2Fva2h1ZWUiLCJhdWQiOiJjbGllbnQifQ.zoDa9R5-q_ygJexVYnOxLAZHBcfJiI6EtYgLzO3BZ3c',
           });
-          // print('log' + res.body.toString());
-          // print(res.toString());
-      if (res.statusCode == 200) //return res.body;
-      {
+      if (res.statusCode == 200){
         Map<String, dynamic> mapResponse = json.decode(res.body);
         print(mapResponse.toString());
 

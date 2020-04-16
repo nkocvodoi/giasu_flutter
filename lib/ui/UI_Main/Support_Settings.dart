@@ -31,7 +31,7 @@ class _Support_SettingsState extends State<Support_Settings> {
         ),
       ),
       body: Padding(
-        padding: EdgeInsets.all(15.0),
+        padding: EdgeInsets.only(top:15.0, left: 15.0),
         child: Consumer<Support_SettingModel>(
             builder: (_ ,model, __) {
               return Column(
@@ -113,8 +113,7 @@ class _Support_SettingsState extends State<Support_Settings> {
       title: Text(
         _text,
         style: TextStyle(
-          fontSize: 18.0,
-          fontFamily: 'UTM',
+          fontSize: 18.0,      
           color: black,
         ),
       ),
@@ -122,28 +121,28 @@ class _Support_SettingsState extends State<Support_Settings> {
         switch (_a) {
           case 1:
             {
-              return launch('https://www.facebook.com/Giasubinhminh.club/');
+               launch('https://www.facebook.com/groups/HTcongiasu/');
             }
             break;
           case 2:
             {
-              return 1;
+              launch("https://htcon.vn/huong-dan-xu-ly-phat-sinh-htcon-gia-su/");
             }
             break;
           case 3:
             {
-              return 1;
+              launch('https://htcon.vn/huong-dan-xu-ly-khieu-nai-tranh-chap/');
             }
             break;
           case 4:
             {
-              return 1;
+              launch('https://htcon.vn/nhung-luu-y-quan-trong/');
             }
             break;
 
           default:
             {
-              return 1;
+              launch('https://htcon.vn/lien-he/');
             }
             break;
         }

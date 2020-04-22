@@ -4,6 +4,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:test_giasu/core/model/List_ClassData.dart';
 import 'package:test_giasu/ui/Helper/ScreenConfig.dart';
+import 'package:test_giasu/ui/UI_Main/BottomNavigationBar.dart';
+import 'package:test_giasu/ui/UI_Main/ClassDetailWhenAccepted.dart';
+import 'package:test_giasu/ui/UI_Main/General_Infor.dart';
+import 'package:test_giasu/ui/UI_Main/Payments.dart';
 import 'package:test_giasu/ui/Widgets/ARichTextLine.dart';
 import 'package:test_giasu/ui/Widgets/LargeTextBox.dart';
 import 'package:test_giasu/ui/Widgets/RoundedImageNameBox.dart';
@@ -12,21 +16,19 @@ import 'package:test_giasu/ui/Widgets/SelectedTimeColumn.dart';
 import 'package:test_giasu/ui/Widgets/previous_widget.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-import 'General_Infor.dart';
-
-class ClassDetail extends StatefulWidget {
+class ClassDetailWhenAccepted extends StatefulWidget {
   Data_class classData;
-  ClassDetail(this.classData);
+  ClassDetailWhenAccepted(this.classData);
   @override
   State<StatefulWidget> createState() {
     // TODO: implement createState
-    return ClassDetailState(classData);
+    return _ClassDetailRequestState(classData);
   }
 }
 
-class ClassDetailState extends State<ClassDetail> {
+class _ClassDetailRequestState extends State<ClassDetailWhenAccepted> {
   Data_class classData;
-  ClassDetailState(this.classData);
+  _ClassDetailRequestState(this.classData);
   Widget _iconTextBox(Text text, Icon icon) {
     return Row(
       children: <Widget>[
@@ -75,21 +77,18 @@ class ClassDetailState extends State<ClassDetail> {
               children: <Widget>[
                 Container(
                   width: double.infinity,
-                  height: SizeConfig.safeBlockVertical * 22,
+                  height: SizeConfig.safeBlockVertical * 20,
                   child: Stack(
                     children: <Widget>[
                       Container(
                         width: double.infinity,
-                        height: SizeConfig.safeBlockVertical * 19.5,
+                        height: SizeConfig.safeBlockVertical * 17.5,
                         alignment: Alignment.center,
                         color: colorApp,
                         child: RoundedImageNameBoxForDemo(
                           classData.parent.avatar,
                           classData.parent.full_name,
                         ),
-                      ),
-                      Expanded(
-                        child: SizedBox(),
                       ),
                       Align(
                         alignment: Alignment.bottomCenter,
@@ -294,7 +293,7 @@ class ClassDetailState extends State<ClassDetail> {
                       ),
                       _iconTextBox(
                         Text(
-                          'Học phí/buổi: ${classData.tuition_fee} vnđ/2h',
+                          'Học phí/buổi: ${(classData.tuition_fee / 1000).toInt()},000 vnđ/2h',
                           style: TextStyle(
                             color: Colors.orange,
                             fontSize: 15,
@@ -311,7 +310,7 @@ class ClassDetailState extends State<ClassDetail> {
                       ),
                       _iconTextBox(
                         Text(
-                          'Phí nhận lớp: ${(classData.class_fee)} vnđ',
+                          'Phí nhận lớp: ${(classData.class_fee / 1000).toInt()},000 vnđ',
                           style: TextStyle(
                             color: Colors.blue[400],
                             fontSize: 15,
@@ -338,54 +337,42 @@ class ClassDetailState extends State<ClassDetail> {
                 SizedBox(
                   height: ScreenUtil.getInstance().setHeight(50),
                 ),
-                Divider(
-                  color: grey,
-                  thickness: 1,
-                ),
-                Container(
-                  width: SizeConfig.safeBlockHorizontal * 90,
-                  height: SizeConfig.safeBlockVertical * 10,
-                  alignment: Alignment.topCenter,
-                  child: Row(
-                    children: <Widget>[
-                      Wrap(
-                        children: <Widget>[
-                          Container(
-                            width: ScreenUtil.getInstance().setWidth(145),
-                            margin: EdgeInsets.all(5.0),
-                            child: Text(
-                              'Đã có ${classData.recommend_number}/6 đề nghị dạy',
-                              textAlign: TextAlign.center,
-                              style: TextStyle(
-                                color: Colors.black38,
-                                fontSize: 13,
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
-                      SizedBox(
-                        width: SizeConfig.safeBlockHorizontal * 40,
-                      ),
-                      RaisedButton(
-                        shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(10)),
-                        color: colorApp,
-                        onPressed: () {
-                          print('tap');
-                        },
-                        child: Text(
-                          'Đề nghị dạy',
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontStyle: FontStyle.normal,
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-              ],
+                ],
+            ),
+          ],
+        ),
+      ),
+      bottomNavigationBar: Container(
+        alignment: Alignment.center,
+        width: ScreenUtil.getInstance().setWidth(700),
+        height: ScreenUtil.getInstance().setHeight(100),
+        child: Row(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: <Widget>[
+            Expanded(
+              child: SizedBox(),
+              flex: 6,
+            ),
+            Container(
+              height: SizeConfig.safeBlockHorizontal * 10,
+              width: SizeConfig.safeBlockHorizontal *25,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(20.0),
+              ),
+              child: RaisedButton(
+                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+                color: colorApp,
+                onPressed: () {
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => Payments()));
+                },
+                textColor: Colors.white,
+                child: Text('Thanh toán',style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 3)),
+              ),
+            ),
+            Expanded(
+              child: SizedBox(),
+              flex: 1,
             ),
           ],
         ),

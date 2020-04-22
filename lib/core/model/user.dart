@@ -196,7 +196,7 @@ class DataUser {
       subject_text: json['subject_text'],
       course_count: json['course_count'],
       like_count: json['like_count'],
-//      location: Location.fromJson(json['location']),
+      location: Location.fromJson(json['location']),
     );
   }
 }

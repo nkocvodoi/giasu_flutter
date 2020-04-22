@@ -3,11 +3,17 @@ import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
 import 'package:provider/provider.dart';
 import 'package:test_giasu/core/view_model/signupModel.dart';
+import 'package:test_giasu/ui/UI_Main/General_Infor.dart';
+import 'package:test_giasu/ui/Widgets/TextFieldEmail.dart';
+import 'package:test_giasu/ui/Widgets/TextFieldName.dart';
+import 'package:test_giasu/ui/Widgets/TextFieldPass.dart';
+import 'package:test_giasu/ui/Widgets/TextFieldPhone.dart';
 import 'package:test_giasu/ui/Widgets/previous_widget.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import 'PersonInfor.dart';
 import 'SignIn_Page.dart';
+
 
 class SignUpPageTutor extends StatefulWidget {
   @override
@@ -20,11 +26,11 @@ class SignUpPageTutor extends StatefulWidget {
 class _SignUpPageTutor extends State<SignUpPageTutor> {
   final Color _c = Colors.blue[800];
   Map signupInfor = new Map();
-  TextEditingController _email = new TextEditingController();
-  TextEditingController _name = new TextEditingController();
-  TextEditingController _phone = new TextEditingController();
-  TextEditingController _password = new TextEditingController();
-  TextEditingController _password_confirm = new TextEditingController();
+  TextEditingController email = new TextEditingController();
+  TextEditingController name = new TextEditingController();
+  TextEditingController phone = new TextEditingController();
+  TextEditingController password = new TextEditingController();
+  TextEditingController password_confirm = new TextEditingController();
   String _name_hint = 'Họ và Tên *',
       _email_hint = 'Email * ',
       _phone_hint = 'Số điện thoại *',
@@ -81,6 +87,17 @@ class _SignUpPageTutor extends State<SignUpPageTutor> {
     } else {
       return null;
     }
+  }
+
+   String validateConfirmPass(String value) {
+    String patttern = r'(^[a-zA-Z ]*$)';
+    RegExp regExp = new RegExp(patttern);
+    if (value.length == 0) {
+      return "Trường này không được để trống";
+    }else if(value != password.text){
+      return "Xác nhận mật khẩu khác với mật khẩu";
+    }
+    return null;
   }
 
   _saveToServer() {
@@ -140,11 +157,11 @@ class _SignUpPageTutor extends State<SignUpPageTutor> {
                   padding: EdgeInsets.only(left: 20.0, right: 20.0),
                   child: Column(
                     children: <Widget>[
-                      _TextFieldsName(_name_hint),
-                      _TextFieldsPhone(_phone_hint),
-                      _TextFieldsEmail(_email_hint),
-                      _TextFieldsPass(_password_hint, _password),
-                      _TextFieldsPass(_password2_hint, _password_confirm),
+                      TextFieldName(_name_hint,name),
+                      TextFieldPhone(_phone_hint,phone),
+                      TextFieldEmail(_email_hint,email),
+                      TextFieldPass(_password_hint, password),
+                      TextFieldPass(_password2_hint, password_confirm),
                       new Padding(
                         padding: EdgeInsets.only(top: 5.0, bottom: 5),
                         child: Text(
@@ -170,7 +187,7 @@ class _SignUpPageTutor extends State<SignUpPageTutor> {
                                 text: ' Đồng ý với ',
                                 style: TextStyle(
                                     fontStyle: FontStyle.italic,
-                                    color: Colors.indigo,
+                                    color: blue,
                                     fontSize: 16.0),
                                 children: <TextSpan>[
                                   TextSpan(
@@ -192,9 +209,8 @@ class _SignUpPageTutor extends State<SignUpPageTutor> {
                                     text: 'chính sách',
                                     recognizer: new TapGestureRecognizer()
                                       ..onTap = () {
-                                        print('Log');
                                         launch(
-                                            'https://htcon.vn/chinh-sach-bao-mat-thong-tin/');
+                                            'https://htcon.vn/chinh-sach-bao-mat/');
                                       },
                                     style: TextStyle(
                                       fontStyle: FontStyle.italic,
@@ -216,15 +232,18 @@ class _SignUpPageTutor extends State<SignUpPageTutor> {
                           child: Center(
                             child: RaisedButton(
                               onPressed: () async {
+                                print(phone.text);
+                                print(name.text);
                                 _saveToServer();
                                 model.setRole();
                                 signupInfor["role"] = 'tutor';
-                                signupInfor["full_name"] = _name.text;
-                                signupInfor["phone_number"] = _phone.text;
-                                signupInfor["email"] = _email.text;
-                                signupInfor["password"] = _password.text;
+                                signupInfor["full_name"] = name.text;
+                                signupInfor["phone_number"] = phone.text;
+                                signupInfor["email"] = email.text;
+                                signupInfor["password"] = password.text;
                                 signupInfor["password_confirmation"] =
-                                    _password_confirm.text;
+                                    password_confirm.text;
+                                print(signupInfor);
                                 var success =
                                     await model.checksignup(signupInfor);
                                 if (success) {
@@ -324,14 +343,14 @@ class _SignUpPageTutor extends State<SignUpPageTutor> {
       child: new TextFormField(
           //controller: _emailFilter,
           autofocus: true,
-          style: TextStyle(fontSize: 20.0),
+          style: TextStyle(fontSize: 18.0),
           decoration: new InputDecoration(
-              labelStyle: TextStyle(fontSize: 20.0), labelText: _text),
+              labelStyle: TextStyle(fontSize: 18.0), labelText: _text),
           keyboardType: TextInputType.text,
 //                            maxLength: 10,
           validator: validateName,
           onSaved: (String val) {
-            _name.text = val;
+            name.text = val;
           }),
     );
   }
@@ -341,14 +360,14 @@ class _SignUpPageTutor extends State<SignUpPageTutor> {
       child: new TextFormField(
           //controller: _emailFilter,
           autofocus: true,
-          style: TextStyle(fontSize: 20.0),
+          style: TextStyle(fontSize: 18.0),
           decoration: new InputDecoration(
-              labelStyle: TextStyle(fontSize: 20.0), labelText: _text),
+              labelStyle: TextStyle(fontSize: 18.0), labelText: _text),
           keyboardType: TextInputType.emailAddress,
 //                            maxLength: 10,
           validator: validateEmail,
           onSaved: (String val) {
-            _email.text = val;
+            email.text = val;
           }),
     );
   }
@@ -357,15 +376,20 @@ class _SignUpPageTutor extends State<SignUpPageTutor> {
     return new Container(
       child: new TextFormField(
           //controller: _emailFilter,
+          cursorColor: blue,
           autofocus: true,
-          style: TextStyle(fontSize: 20.0),
+          style: TextStyle(fontSize: 18.0),
           decoration: new InputDecoration(
-              labelStyle: TextStyle(fontSize: 20.0), labelText: _text),
+            fillColor: blue,
+              focusColor: blue,
+              hoverColor: blue,
+              labelStyle: TextStyle(fontSize: 18.0),
+              labelText: _text),
           keyboardType: TextInputType.phone,
 //                            maxLength: 10,
           validator: validateMobile,
           onSaved: (String val) {
-            _phone.text = val;
+            phone.text = val;
           }),
     );
   }
@@ -376,12 +400,30 @@ class _SignUpPageTutor extends State<SignUpPageTutor> {
           //controller: _emailFilter,
           autofocus: true,
           obscureText: true,
-          style: TextStyle(fontSize: 20.0),
+          style: TextStyle(fontSize: 18.0),
           decoration: new InputDecoration(
-              labelStyle: TextStyle(fontSize: 20.0), labelText: _text),
+              labelStyle: TextStyle(fontSize: 18.0), labelText: _text),
           keyboardType: TextInputType.visiblePassword,
 //                            maxLength: 10,
           validator: validatePass,
+          onSaved: (String val) {
+            _pass.text = val;
+          }),
+    );
+  }
+
+  Widget _TextFieldsConfirmPass(String _text, TextEditingController _pass) {
+    return new Container(
+      child: new TextFormField(
+          //controller: _emailFilter,
+          autofocus: true,
+          obscureText: true,
+          style: TextStyle(fontSize: 18.0),
+          decoration: new InputDecoration(
+              labelStyle: TextStyle(fontSize: 18.0), labelText: _text),
+          keyboardType: TextInputType.visiblePassword,
+//                            maxLength: 10,
+          validator: validateConfirmPass,
           onSaved: (String val) {
             _pass.text = val;
           }),

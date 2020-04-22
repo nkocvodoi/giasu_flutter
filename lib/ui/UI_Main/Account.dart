@@ -219,7 +219,7 @@ class _Account_State extends State<Account> {
           ),
           onTap: () {
             launch(
-                'https://htcon.vn/chinh-sach-bao-mat-thong-tin/'); //Chính sách
+                ' https://htcon.vn/chinh-sach-bao-mat/'); //Chính sách
           },
         ),
         ListTile(

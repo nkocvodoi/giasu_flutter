@@ -50,17 +50,15 @@ class TutorInforState extends State<TutorInfor> {
             '$number',
             style: TextStyle(
               fontSize: SizeConfig.safeBlockHorizontal * 5,
-               
               fontWeight: FontWeight.bold,
               color: Colors.black87,
             ),
           ),
-          Divider(thickness: 2, color: Colors.blue),
+          Divider(thickness: 2, color: blue),
           Text(
             detail,
             style: TextStyle(
               fontSize: 15,
-               
             ),
           )
         ],
@@ -78,12 +76,13 @@ class TutorInforState extends State<TutorInfor> {
       padding: EdgeInsets.only(right: 5, left: 5),
       height: 35,
       decoration: BoxDecoration(
-        color: color,
+        color: blue,
         border: Border.all(color: Colors.grey),
       ),
       child: Row(
         children: <Widget>[
           icon,
+          SizedBox(width: 5),
           text,
         ],
       ),
@@ -107,7 +106,7 @@ class TutorInforState extends State<TutorInfor> {
     // TODO: implement build
     return Scaffold(
         appBar: AppBar(
-          backgroundColor: Color.fromRGBO(47, 101, 174, 1),
+          backgroundColor: colorApp,
           leading: buildPreviousButton(),
           centerTitle: true,
         ),
@@ -155,12 +154,8 @@ class TutorInforState extends State<TutorInfor> {
                         ],
                       ),
                     ),
-                    SizedBox(
-                      height: 6,
-                    ),
                     Container(
-                      alignment: Alignment.centerRight,
-                      height: SizeConfig.safeBlockVertical * 10,
+                      alignment: Alignment.topCenter,
                       width: double.infinity,
                       child: Row(
                         children: <Widget>[
@@ -179,13 +174,11 @@ class TutorInforState extends State<TutorInfor> {
                                     fontSize:
                                         SizeConfig.safeBlockHorizontal * 5,
                                     color: Colors.grey,
-                                    
                                   ),
                                 ),
                                 TextSpan(
                                   text: ' ${teacherData.id}',
                                   style: TextStyle(
-                                   
                                     color: Colors.black,
                                     fontSize:
                                         SizeConfig.safeBlockHorizontal * 5,
@@ -206,34 +199,17 @@ class TutorInforState extends State<TutorInfor> {
                       child: Center(
                         child: Row(
                           children: <Widget>[
-                            Expanded(
-                              child: SizedBox(),
+                            SizedBox(
+                              width: 20,
                             ),
                             Text(
                               '${teacherData.full_name}',
                               style: TextStyle(
-                                color: Colors.blue[400],
-                             
+                                color: blue,
                                 fontWeight: FontWeight.bold,
                                 fontSize: SizeConfig.safeBlockHorizontal * 3.5,
                               ),
                             ),
-                            Expanded(
-                              child: SizedBox(),
-                              flex: 8,
-                            ),
-                            _iconTextBox(
-                                Text(
-                                  'Lưu',
-                                  style: TextStyle(
-                                      fontSize:
-                                          SizeConfig.safeBlockHorizontal * 3,
-                                     ),
-                                ),
-                                Icon(MaterialCommunityIcons.heart,
-                                    size: SizeConfig.safeBlockHorizontal * 3),
-                                null,
-                                50),
                             Expanded(
                               child: SizedBox(),
                             ),
@@ -243,31 +219,33 @@ class TutorInforState extends State<TutorInfor> {
                                   style: TextStyle(
                                       fontSize:
                                           SizeConfig.safeBlockHorizontal * 3,
-                                    
                                       color: Colors.white),
                                 ),
-                                Icon(MaterialCommunityIcons.thumb_up,
-                                    size: SizeConfig.safeBlockHorizontal * 3),
+                                Icon(
+                                  MaterialCommunityIcons.thumb_up,
+                                  size: SizeConfig.safeBlockHorizontal * 3,
+                                  color: Colors.white,
+                                ),
                                 colorApp,
                                 50),
-                            Expanded(child: SizedBox()),
+                            SizedBox(width: 10),
                             _iconTextBox(
                                 Text(
                                   'Đánh giá',
                                   style: TextStyle(
                                       fontSize:
                                           SizeConfig.safeBlockHorizontal * 3,
-                                       
                                       color: Colors.white),
                                 ),
                                 Icon(
                                   MaterialCommunityIcons.star,
                                   size: SizeConfig.safeBlockHorizontal * 3,
+                                  color: Colors.white,
                                 ),
                                 colorApp,
                                 50),
-                            Expanded(
-                              child: SizedBox(),
+                            SizedBox(
+                              width: 20,
                             ),
                           ],
                         ),
@@ -277,6 +255,7 @@ class TutorInforState extends State<TutorInfor> {
                     Container(
                       child: Row(
                         children: <Widget>[
+                          SizedBox(width: SizeConfig.safeBlockHorizontal*1),
                           Icon(MaterialCommunityIcons.book),
                           SizedBox(width: 5),
                           ConstrainedBox(
@@ -318,15 +297,16 @@ class TutorInforState extends State<TutorInfor> {
                     Container(
                       child: Row(
                         children: <Widget>[
+                          SizedBox(width: SizeConfig.safeBlockHorizontal*1),
                           Icon(
                             Icons.location_on,
-                            color: Colors.blue,
+                            color: blue,
                           ),
                           SizedBox(width: SizeConfig.safeBlockHorizontal * 1),
                           Text(
                             '${teacherData.location.name}',
                             style: TextStyle(
-                              color: Colors.blue,
+                              color: blue,
                               fontWeight: FontWeight.bold,
                               fontSize: 16,
                             ),
@@ -338,7 +318,7 @@ class TutorInforState extends State<TutorInfor> {
                             constraints: BoxConstraints(
                               minWidth: SizeConfig.safeBlockHorizontal * 20,
                               maxWidth: SizeConfig.safeBlockHorizontal * 70,
-                              minHeight: SizeConfig.safeBlockHorizontal * 5,
+                              minHeight: SizeConfig.safeBlockHorizontal * 3,
                               maxHeight: SizeConfig.safeBlockHorizontal * 5,
                             ),
                             child: AutoSizeText(
@@ -361,10 +341,10 @@ class TutorInforState extends State<TutorInfor> {
                       thickness: 1,
                     ),
                     SizedBox(
-                      height: 20,
+                      height: 40,
                     ),
                     Container(
-                      height: SizeConfig.safeBlockHorizontal * 40,
+                      height: SizeConfig.safeBlockHorizontal * 30,
                       child: Row(
                         mainAxisSize: MainAxisSize.max,
                         children: <Widget>[
@@ -385,8 +365,7 @@ class TutorInforState extends State<TutorInfor> {
                         'THÔNG TIN GIA SƯ',
                         style: TextStyle(
                           fontSize: 20,
-                           
-                          color: Color.fromRGBO(47, 101, 174, 1),
+                          color: blue,
                         ),
                       ),
                     ),
@@ -444,7 +423,6 @@ class TutorInforState extends State<TutorInfor> {
                         'LỚP ĐÃ DẠY',
                         style: TextStyle(
                           fontSize: 20,
-                           
                           color: colorApp,
                         ),
                       ),
@@ -464,7 +442,6 @@ class TutorInforState extends State<TutorInfor> {
                         'LỊCH DẠY GIA SƯ',
                         style: TextStyle(
                           fontSize: 20,
-                           
                           color: colorApp,
                         ),
                       ),
@@ -491,7 +468,6 @@ class TutorInforState extends State<TutorInfor> {
                               'VỊ TRÍ GIA SƯ',
                               style: TextStyle(
                                 fontSize: 18,
-                                 
                                 color: colorApp,
                               ),
                             ),
@@ -512,7 +488,6 @@ class TutorInforState extends State<TutorInfor> {
                                     style: TextStyle(
                                       fontSize: 15,
                                       color: Colors.grey,
-                                       
                                     ),
                                   ),
                                   TextSpan(
@@ -523,7 +498,6 @@ class TutorInforState extends State<TutorInfor> {
                                       },
                                     text: '( Xem bản đồ )',
                                     style: TextStyle(
-                                       
                                       color: orange,
                                       fontSize: 15,
                                     ),
@@ -550,8 +524,7 @@ class TutorInforState extends State<TutorInfor> {
                         'ĐÁNH GIÁ GIA SƯ',
                         style: TextStyle(
                           fontSize: 20,
-                           
-                          color: Color.fromRGBO(47, 101, 174, 1),
+                          color: blue,
                         ),
                       ),
                     ),
@@ -571,17 +544,14 @@ class TutorInforState extends State<TutorInfor> {
                         width: SizeConfig.safeBlockHorizontal * 25,
                         height: SizeConfig.safeBlockVertical * 5,
                         child: RaisedButton(
-                          color: Color.fromRGBO(47, 101, 174, 1),
+                          color: blue,
                           onPressed: () {},
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(10),
                           ),
                           child: Text(
                             'Mời dạy',
-                            style: TextStyle(
-                                fontSize: 15,
-                                 
-                                color: Colors.white),
+                            style: TextStyle(fontSize: 15, color: Colors.white),
                           ),
                         ),
                       ),

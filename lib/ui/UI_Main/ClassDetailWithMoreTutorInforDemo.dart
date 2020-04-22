@@ -9,6 +9,7 @@ import 'package:test_giasu/ui/UI_Main/General_Infor.dart';
 import 'package:test_giasu/ui/Widgets/ARichTextLine.dart';
 import 'package:test_giasu/ui/Widgets/LargeTextBox.dart';
 import 'package:test_giasu/ui/Widgets/RoundedImageNameBox.dart';
+import 'package:test_giasu/ui/Widgets/RoundedImageNameBoxForDemo.dart';
 import 'package:test_giasu/ui/Widgets/SelectedTimeColumn.dart';
 import 'package:test_giasu/ui/Widgets/previous_widget.dart';
 
@@ -97,7 +98,7 @@ class _ClassDetailWithMoreTutorInforState
                                 height: SizeConfig.safeBlockVertical * 21,
                                 alignment: Alignment.center,
                                 color: Color.fromRGBO(47, 101, 174, 1),
-                                child: RoundedImageNameBox(
+                                child: RoundedImageNameBoxForDemo(
                                   "/avatar/1466/14963324_211293059282131_333912323949534667_n_56fea2079cd3f8a1f771.jpg",
                                   "Gia sư Bách Khoa",
                                 ),

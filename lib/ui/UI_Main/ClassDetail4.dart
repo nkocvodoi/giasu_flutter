@@ -1,22 +1,32 @@
+import 'package:auto_size_text/auto_size_text.dart';
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:test_giasu/core/model/List_ClassData.dart';
 import 'package:test_giasu/ui/Helper/ScreenConfig.dart';
 import 'package:test_giasu/ui/UI_Main/General_Infor.dart';
 import 'package:test_giasu/ui/Widgets/ARichTextLine.dart';
 import 'package:test_giasu/ui/Widgets/LargeTextBox.dart';
+import 'package:test_giasu/ui/Widgets/RoundedImageNameBox.dart';
+import 'package:test_giasu/ui/Widgets/RoundedImageNameBoxForDemo.dart';
 import 'package:test_giasu/ui/Widgets/SelectedTimeColumn.dart';
 import 'package:test_giasu/ui/Widgets/previous_widget.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class ClassDetail4 extends StatefulWidget {
+  Data_class classData;
+  ClassDetail4(this.classData);
   @override
   State<StatefulWidget> createState() {
     // TODO: implement createState
-    return ClassDetail4State();
+    return ClassDetail4State(classData);
   }
 }
 
 class ClassDetail4State extends State<ClassDetail4> {
+  Data_class classData;
+  ClassDetail4State(this.classData);
   Widget _iconTextBox(Text text, Icon icon) {
     return Container(
       decoration: BoxDecoration(
@@ -47,10 +57,9 @@ class ClassDetail4State extends State<ClassDetail4> {
         centerTitle: true,
         backgroundColor: Color.fromRGBO(47, 101, 174, 1),
         title: Text(
-            'Chi tiết lớp học',
-            textAlign: TextAlign.start,
-          ),
-        
+          'Chi tiết lớp học',
+          textAlign: TextAlign.start,
+        ),
       ),
       body: SingleChildScrollView(
         child: Stack(
@@ -68,8 +77,11 @@ class ClassDetail4State extends State<ClassDetail4> {
                         width: double.infinity,
                         height: SizeConfig.safeBlockVertical * 17.5,
                         alignment: Alignment.center,
-                        color: Color.fromRGBO(47, 101, 174, 1),
-                        child: Icon(Icons.portrait),
+                        color: colorApp,
+                        child: RoundedImageNameBoxForDemo(
+                          classData.parent.avatar,
+                          classData.parent.full_name,
+                        ),
                       ),
                       Align(
                         alignment: Alignment.bottomCenter,
@@ -78,21 +90,29 @@ class ClassDetail4State extends State<ClassDetail4> {
                           height: SizeConfig.safeBlockVertical * 5,
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(20.0),
-                            border: Border.all(),
+                            border: Border.all(color: grey, width: 1),
                             color: Colors.white,
                           ),
                           child: Center(
-                            child: Text(
-                              'Tìm gia sư Tiếng Anh lớp 6 tại Cầu Giấy',
-                              style: TextStyle(
-                                fontStyle: FontStyle.normal,
-                                fontSize: 13,
+                            child: ConstrainedBox(
+                              constraints: BoxConstraints(
+                                minHeight: SizeConfig.safeBlockHorizontal * 8,
+                                maxHeight: SizeConfig.safeBlockHorizontal * 10,
+                                minWidth: SizeConfig.safeBlockHorizontal * 8,
+                                maxWidth: SizeConfig.safeBlockHorizontal * 78,
                               ),
-                              textAlign: TextAlign.center,
+                              child: AutoSizeText(
+                                classData.name,
+                                maxLines: 1,
+                                maxFontSize: 20,
+                                style: TextStyle(
+                                    fontStyle: FontStyle.normal, color: black),
+                                textAlign: TextAlign.center,
+                              ),
                             ),
                           ),
                         ),
-                      ),
+                      )
                     ],
                   ),
                 ),
@@ -124,6 +144,9 @@ class ClassDetail4State extends State<ClassDetail4> {
                           size: 15,
                         ),
                       ),
+                      Divider(
+                        color: grey,
+                      ),
                       _iconTextBox(
                         Text(
                           'SĐT Phụ huynh/ HV: 0862856500',
@@ -138,129 +161,191 @@ class ClassDetail4State extends State<ClassDetail4> {
                           size: 15,
                         ),
                       ),
+                      Divider(
+                        color: grey,
+                      ),
                       _iconTextBox(
                         Text(
-                          'Trạng thái: Đang tìm gia sư',
+                          'Trạng thái: ${classData.status}',
                           style: TextStyle(
                             color: Colors.green,
-                            fontSize: SizeConfig.safeBlockHorizontal * 4,
+                            fontSize: 15,
                           ),
                         ),
                         Icon(
                           Icons.portrait,
-                          color: Colors.grey,
+                          color: black,
                           size: 15,
                         ),
                       ),
+                      Divider(
+                        color: grey,
+                      ),
                       _iconTextBox(
                         Text(
-                          'Mã lớp: 522 - Tiếng Anh |Lớp 6',
+                          'Mã lớp: ${classData.id} - ${classData.subject.name} | Lớp ${classData.grade}',
                           style: TextStyle(
-                            color: Colors.grey,
-                            fontSize: SizeConfig.safeBlockHorizontal * 4,
+                            color: black,
+                            fontSize: 15,
                           ),
                         ),
                         Icon(
                           Icons.home,
-                          color: Colors.grey,
+                          color: black,
                           size: 15,
                         ),
                       ),
+                      Divider(
+                        color: grey,
+                      ),
                       _iconTextBox(
                         Text(
-                          'Hình thức học: Offline',
+                          'Hình thức học: ${classData.form_teaching_name}',
                           style: TextStyle(
-                            color: Colors.grey,
-                            fontSize: SizeConfig.safeBlockHorizontal * 4,
+                            color: black,
+                            fontSize: 15,
                           ),
                         ),
                         Icon(
                           Icons.school,
-                          color: Colors.grey,
+                          color: black,
                           size: 15,
                         ),
                       ),
+                      Divider(
+                        color: grey,
+                      ),
                       _iconTextBox(
                         Text(
-                          'Số buổi/tuần: 2 (2h/buổi)',
+                          'Số buổi/tuần: ${classData.lesson_per_week} (${(classData.time_per_lesson).toInt()}h/buổi)',
                           style: TextStyle(
-                            color: Colors.grey,
-                            fontSize: SizeConfig.safeBlockHorizontal * 4,
+                            color: black,
+                            fontSize: 15,
                           ),
                         ),
                         Icon(
                           Icons.timelapse,
-                          color: Colors.grey,
+                          color: black,
                           size: 15,
                         ),
                       ),
+                      Divider(
+                        color: grey,
+                      ),
                       _iconTextBox(
                         Text(
-                          'Số học viên: 1',
+                          'Số học viên: ${classData.student_per_class}',
                           style: TextStyle(
-                            color: Colors.grey,
-                            fontSize: SizeConfig.safeBlockHorizontal * 4,
+                            color: black,
+                            fontSize: 15,
                           ),
                         ),
                         Icon(
                           Icons.person_outline,
-                          color: Colors.grey,
+                          color: black,
                           size: 15,
                         ),
                       ),
-                      _iconTextBox(
-                        Text(
-                          'Địa chỉ: 155 Cầu Giấy, Hà Nội',
-                          style: TextStyle(
-                            color: Colors.grey,
-                            fontSize: SizeConfig.safeBlockHorizontal * 4,
+                      Divider(
+                        color: grey,
+                      ),
+                      Row(
+                        children: <Widget>[
+                          Expanded(
+                            child: Icon(
+                              Icons.map,
+                              color: Colors.grey,
+                              size: 15,
+                            ),
                           ),
-                        ),
-                        Icon(
-                          Icons.map,
-                          color: Colors.grey,
-                          size: 15,
-                        ),
+                          Expanded(
+                            child: SizedBox(
+                              width: ScreenUtil.getInstance().setWidth(20),
+                            ),
+                          ),
+                          Expanded(
+                            flex: 20,
+                            child: Container(
+                              child: RichText(
+                                textAlign: TextAlign.start,
+                                text: TextSpan(
+                                  children: <TextSpan>[
+                                    TextSpan(
+                                      text: classData.address,
+                                      style: TextStyle(
+                                        fontSize: 15,
+                                        color: Colors.grey,
+                                        fontFamily: 'UTM',
+                                      ),
+                                    ),
+                                    TextSpan(
+                                      recognizer: TapGestureRecognizer()
+                                        ..onTap = () {
+                                          launch(
+                                              'https://www.google.com/maps/place/38+Tr%E1%BA%A7n+Qu%C3%BD+Ki%C3%AAn,+D%E1%BB%8Bch+V%E1%BB%8Dng,+C%E1%BA%A7u+Gi%E1%BA%A5y,+H%C3%A0+N%E1%BB%99i,+Vi%E1%BB%87t+Nam/@21.0373781,105.7920155,17z/data=!3m1!4b1!4m5!3m4!1s0x3135ab37c1376ff7:0x245ac013cbc4304e!8m2!3d21.0373781!4d105.7920155?hl=vi-VNv');
+                                        },
+                                      text: ' ( Xem bản đồ )',
+                                      style: TextStyle(
+                                        fontFamily: 'UTM',
+                                        color: orange,
+                                        fontSize: 15,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                      Divider(
+                        color: grey,
                       ),
                       _iconTextBox(
                         Text(
                           'Cách bạn: 2km',
                           style: TextStyle(
-                            color: Colors.grey,
-                            fontSize: SizeConfig.safeBlockHorizontal * 4,
+                            color: black,
+                            fontSize: 15,
                           ),
                         ),
                         Icon(
                           Icons.radio_button_checked,
-                          color: Colors.grey,
+                          color: black,
                           size: 15,
                         ),
                       ),
+                      Divider(
+                        color: grey,
+                      ),
                       _iconTextBox(
                         Text(
-                          'Học phí/buổi: 150.000 vnđ/2h',
+                          'Học phí/buổi: ${(classData.tuition_fee / 1000).toInt()},000 vnđ/2h',
                           style: TextStyle(
                             color: Colors.orange,
-                            fontSize: SizeConfig.safeBlockHorizontal * 4,
+                            fontSize: 15,
                           ),
                         ),
                         Icon(
                           Icons.monetization_on,
-                          color: Colors.grey,
+                          color: black,
                           size: 15,
                         ),
                       ),
+                      Divider(
+                        color: grey,
+                      ),
                       _iconTextBox(
                         Text(
-                          'Phí nhận lớp: 490.000 vnđ',
+                          'Phí nhận lớp: ${(classData.class_fee / 1000).toInt()},000 vnđ',
                           style: TextStyle(
                             color: Colors.blue[400],
-                            fontSize: SizeConfig.safeBlockHorizontal * 4,
+                            fontSize: 15,
                           ),
                         ),
                         Icon(
                           Icons.attach_money,
-                          color: Colors.grey,
+                          color: black,
                           size: 15,
                         ),
                       ),
@@ -268,7 +353,7 @@ class ClassDetail4State extends State<ClassDetail4> {
                   ),
                 ),
                 SizedBox(
-                  height: ScreenUtil.getInstance().setHeight(20),
+                  height: 10,
                 ),
                 LargeTextBox('Chi tiết nội dung yêu cầu'),
                 RichTextLine(),
@@ -280,51 +365,40 @@ class ClassDetail4State extends State<ClassDetail4> {
                   alignment: Alignment.topLeft,
                   child: Container(
                     padding: EdgeInsets.all(5),
-                    // width: ScreenUtil.getInstance().setWidth(600),
-                    //height: ScreenUtil.getInstance().setHeight(60),
 
-                    child: Container(
-                      padding: EdgeInsets.all(5),
-                      // width: ScreenUtil.getInstance().setWidth(80),
-                      // height: ScreenUtil.getInstance().setHeight(50),
-                      color: colorApp,
-                      child: Text(
-                        'Lưu ý khi nhận lớp',
-                        style: TextStyle(
-                          fontSize: 15,
-                          color: Colors.white,
-                        ),
+                    // width: ScreenUtil.getInstance().setWidth(80),
+                    // height: ScreenUtil.getInstance().setHeight(50),
+                    color: colorApp,
+                    child: Text(
+                      'Lưu ý khi nhận lớp',
+                      style: TextStyle(
+                        fontSize: 15,
+                        color: Colors.white,
                       ),
                     ),
                   ),
                 ),
                 Container(
-                  width: SizeConfig.safeBlockHorizontal * 90,
+                  width: SizeConfig.safeBlockHorizontal * 70,
                   height: SizeConfig.safeBlockVertical * 8,
                   decoration: BoxDecoration(
                     border: Border.all(color: Colors.grey),
                   ),
                   child: Row(
                     children: <Widget>[
-                      SizedBox(
-                        width: SizeConfig.safeBlockHorizontal * 60,
+                      Expanded(
+                        child: SizedBox(),
                       ),
-                      Container(
-                        height: SizeConfig.safeBlockVertical * 5,
-                        child: RaisedButton(
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(5),
-                          ),
-                          color: colorApp,
-                          onPressed: () {
-                            print('tap');
-                          },
-                          child: Text(
-                            'Báo phát sinh',
-                            style: TextStyle(
-                              fontSize: 15,
-                              color: Colors.white,
-                            ),
+                      RaisedButton(
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(5),
+                        ),
+                        color: colorApp,
+                        onPressed: () {},
+                        child: Text(
+                          'Báo phát sinh',
+                          style: TextStyle(
+                            color: Colors.white,
                           ),
                         ),
                       ),

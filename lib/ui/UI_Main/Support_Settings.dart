@@ -16,12 +16,14 @@ class Support_Settings extends StatefulWidget {
 }
 
 class _Support_SettingsState extends State<Support_Settings> {
-
-
+  bool status = true;
+  final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
   @override
   Widget build(BuildContext context) {
+    
     // TODO: implement build
     return Scaffold(
+      key: _scaffoldKey,
       appBar: AppBar(
         leading: buildPreviousButton(),
         backgroundColor: colorApp,
@@ -31,79 +33,85 @@ class _Support_SettingsState extends State<Support_Settings> {
         ),
       ),
       body: Padding(
-        padding: EdgeInsets.only(top:15.0, left: 15.0),
-        child: Consumer<Support_SettingModel>(
-            builder: (_ ,model, __) {
-              return Column(
-                children: <Widget>[
-                  SwitchListTile(
-                    value: model.count,
-                    onChanged:(bool _val) {
-                      model.setCount(_val);
-                      model.setNotifi();
-
-                    },
-                    secondary: Icon(
-                      Icons.notifications,
-                      color: Colors.blue,
-                      size: 40.0,
-                    ),
-                    title: Text(
-                      'Thông báo',
-                      style: TextStyle(
-                        fontSize: 20.0,
-                        fontStyle: FontStyle.normal,
-                        color: Colors.grey[600],
-                      ),
-                    ),
-                    subtitle: Text(
-                      '${model.notifi} thông báo từ hệ thống',
-                      style: TextStyle(
-                        fontSize: 15.0,
-                        fontStyle: FontStyle.italic,
-                        color: Colors.grey[600],
-                      ),
-                    ),
+        padding: EdgeInsets.only(top: 15.0, left: 15.0),
+        child:Column(
+            children: <Widget>[
+              SwitchListTile(
+                value: status,
+                onChanged: (bool _val) {
+                  if(_val != status){
+                    setState(() {
+                      status = _val;
+                    });
+                  }
+                  SnackBar snackBar = SnackBar(
+                    duration: Duration(seconds: 1),
+                    content: Text((status)
+                        ? 'Bật thông báo từ hệ thống'
+                        : 'Tắt thông báo từ hệ thống'),
+                  );
+                  _scaffoldKey.currentState.showSnackBar(snackBar);
+                },
+                secondary: Icon(
+                  Icons.notifications,
+                  color: Colors.blue,
+                  size: 40.0,
+                ),
+                title: Text(
+                  'Thông báo',
+                  style: TextStyle(
+                    fontSize: 20.0,
+                    fontStyle: FontStyle.normal,
+                    color: Colors.grey[600],
                   ),
-                  _buildText('Tham gia cộng đồng HTcon gia sư', 1),
-                  Divider(
-                    height: 0.0,
-                    thickness: 2,
-                    indent: 14.0,
-                    endIndent: 18.0,
+                ),
+                subtitle: Text(
+                  (status) ? 'Bật thông báo từ hệ thống' : 'Tắt thông báo từ hệ thống',
+                  style: TextStyle(
+                    fontSize: 15.0,
+                    fontStyle: FontStyle.italic,
+                    color: Colors.grey[600],
                   ),
-                  _buildText('Hướng dẫn xử lí lớp phát sinh', 2),
-                  Divider(
-                    height: 0.0,
-                    thickness: 2,
-                    indent: 14.0,
-                    endIndent: 18.0,
-                  ),
-                  _buildText('Hướng dẫn khiếu nại', 3),
-                  Divider(
-                    height: 0.0,
-                    thickness: 2,
-                    indent: 14.0,
-                    endIndent: 18.0,
-                  ),
-                  _buildText('Những lưu ý quan trọng', 4),
-                  Divider(
-                    height: 0.0,
-                    thickness: 2,
-                    indent: 14.0,
-                    endIndent: 18.0,
-                  ),
-                  _buildText('Liên hệ', 5),
-                  Divider(
-                    height: 0.0,
-                    thickness: 2,
-                    indent: 14.0,
-                    endIndent: 18.0,
-                  ),
-                ],
-              );
-            }
-        ),
+                ),
+              ),
+              _buildText('Tham gia cộng đồng HTcon gia sư', 1),
+              Divider(
+                height: 0.0,
+                thickness: 2,
+                indent: 14.0,
+                endIndent: 18.0,
+              ),
+              _buildText('Hướng dẫn xử lí lớp phát sinh', 2),
+              Divider(
+                height: 0.0,
+                thickness: 2,
+                indent: 14.0,
+                endIndent: 18.0,
+              ),
+              _buildText('Hướng dẫn khiếu nại', 3),
+              Divider(
+                height: 0.0,
+                thickness: 2,
+                indent: 14.0,
+                endIndent: 18.0,
+              ),
+              _buildText('Những lưu ý quan trọng', 4),
+              Divider(
+                height: 0.0,
+                thickness: 2,
+                indent: 14.0,
+                endIndent: 18.0,
+              ),
+              _buildText('Liên hệ', 5),
+              Divider(
+                height: 0.0,
+                thickness: 2,
+                indent: 14.0,
+                endIndent: 18.0,
+              ),
+            ],
+          )
+        
       ),
     );
   }
@@ -113,7 +121,7 @@ class _Support_SettingsState extends State<Support_Settings> {
       title: Text(
         _text,
         style: TextStyle(
-          fontSize: 18.0,      
+          fontSize: 18.0,
           color: black,
         ),
       ),
@@ -121,12 +129,13 @@ class _Support_SettingsState extends State<Support_Settings> {
         switch (_a) {
           case 1:
             {
-               launch('https://www.facebook.com/groups/HTcongiasu/');
+              launch('https://www.facebook.com/groups/HTcongiasu/');
             }
             break;
           case 2:
             {
-              launch("https://htcon.vn/huong-dan-xu-ly-phat-sinh-htcon-gia-su/");
+              launch(
+                  "https://htcon.vn/huong-dan-xu-ly-phat-sinh-htcon-gia-su/");
             }
             break;
           case 3:

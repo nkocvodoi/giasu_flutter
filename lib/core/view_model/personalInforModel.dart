@@ -19,6 +19,9 @@ class PersonalInforModel extends ChangeNotifier {
   PersonalInforModel({this.authenticationService}) {
     init();
   }
+  
+  PersonalInforModel.internal(this.authenticationService);
+  
   Map personalInfor = new Map();
   bool _busy = false;
   bool get busy => _busy;
@@ -86,6 +89,8 @@ class PersonalInforModel extends ChangeNotifier {
     _province = province;
   }
 
+  Data_teacher _user;
+  Data_teacher get user => _user;
   int _idProvince;
   int get idProvince => _idProvince;
   void setIdProvince(int value) {
@@ -106,7 +111,7 @@ class PersonalInforModel extends ChangeNotifier {
     notifyListeners();
   }
   List<List<Topics>> _topics = [];
-   List<List<Topics>> get topics => _topics;
+  List<List<Topics>> get topics => _topics;
   void setTopics(List<List<Topics>> topics) {
     _topics = topics;
   }
@@ -163,6 +168,7 @@ class PersonalInforModel extends ChangeNotifier {
 
   void init() async {
     setBusy(true);
+    
     _province = await ProvinceService.instance.fetchProvince();
     _city = await LocationService.instance.fetchLocation();
     _subject = await SubjectService.instance.fetchSubject();
@@ -190,15 +196,31 @@ class PersonalInforModel extends ChangeNotifier {
     _topic19 = await TopicService.instance.fetchTopic(19);
     _topic20 = await TopicService.instance.fetchTopic(20);
     _topic21 = await TopicService.instance.fetchTopic(21);
-    
     // _topic = [_topic1,_topic2,_topic3,_topic4,_topic5,_topic6,_topic7,_topic8,_topic9,_topic10,_topic11,_topic12,_topic13,_topic14,_topic15,_topic16,_topic17,_topic18,_topic19,_topic20,_topic21].expand((element) => element).toList();
-    _topic = _topic1 +_topic2 +_topic3+_topic4+_topic5+_topic6+_topic7+_topic8+_topic9+_topic10+_topic11+_topic12+_topic13+_topic14+_topic15+_topic16+_topic17+_topic18+_topic19+_topic20 + _topic21;
-    print(_topic);
-    print(_subject);
+    _topic = _topic1 +
+        _topic2 +
+        _topic3 +
+        _topic4 +
+        _topic5 +
+        _topic6 +
+        _topic7 +
+        _topic8 +
+        _topic9 +
+        _topic10 +
+        _topic11 +
+        _topic12 +
+        _topic13 +
+        _topic14 +
+        _topic15 +
+        _topic16 +
+        _topic17 +
+        _topic18 +
+        _topic19 +
+        _topic20 +
+        _topic21;
+   
     setBusy(false);
   }
-
- 
 
   String _infor;
   String get Infor => _infor;
@@ -208,18 +230,46 @@ class PersonalInforModel extends ChangeNotifier {
 //  void setValidate() {
 //    _validate = true;
 //  }
-  
+
+  Future<Data_teacher> fetchProfile() async {
+//    print('log' + authenticationService.id);
+    final response = await http.get(APIUrl + 'api/v1/users/521', headers: {
+      'Content-Type': 'application/json',
+      'Accept': 'application/json',
+      'Authorization':
+          'Bearer eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjo1MjEsImV4cCI6MTU4NzYzMjEyNiwiaXNzIjoic2Fva2h1ZWUiLCJhdWQiOiJjbGllbnQifQ.EJDqSbqa-ZL2TgBtKkcIVzIhe30NMlsEcKwa7xZVVZg',
+    });
+
+    Map<String, dynamic> mapResponse = json.decode(response.body);
+//    print('log' + mapResponse.toString());
+    if (response.statusCode == 200) {
+//    Map<String, dynamic> mapResponse = json.decode(response.body);
+      if (mapResponse["code"] == 1) {
+//        print(mapResponse['data'].toString());
+//        print('log');
+//        CurrentUser _ds = CurrentUser.fromJson(mapResponse["data"]);
+        Data_teacher _ds = Data_teacher.fromJson(mapResponse["data"]);
+        //print('log' + Data_Teacher.fromJson(mapResponse["data"]).toString());
+        print('dfhduf' + _ds.role.toString());
+        return Data_teacher.fromJson(mapResponse["data"]);
+      }
+    } else {
+      // If that call was not successful, throw an error.
+      throw Exception('Failed to load ');
+    }
+  }
+
   Future<bool> personalInforCheckup(Map _map) async {
     var data = {"user": _map};
     print("kajshduiashuidhausidash");
     try {
-      var res = await http.put(APIUrl + 'api/v1/tutors/521',
-          body: json.encode(data),
-          headers: {
-            'Content-Type': 'application/json',
-            'Authorization': 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjo1MjEsImV4cCI6MTU4NjMyOTExOSwiaXNzIjoic2Fva2h1ZWUiLCJhdWQiOiJjbGllbnQifQ.zoDa9R5-q_ygJexVYnOxLAZHBcfJiI6EtYgLzO3BZ3c',
-          });
-      if (res.statusCode == 200){
+      var res = await http
+          .put(APIUrl + 'api/v1/tutors/521', body: json.encode(data), headers: {
+        'Content-Type': 'application/json',
+        'Authorization':
+            'Bearer eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjo1MjEsImV4cCI6MTU4NjMyOTExOSwiaXNzIjoic2Fva2h1ZWUiLCJhdWQiOiJjbGllbnQifQ.zoDa9R5-q_ygJexVYnOxLAZHBcfJiI6EtYgLzO3BZ3c',
+      });
+      if (res.statusCode == 200) {
         Map<String, dynamic> mapResponse = json.decode(res.body);
         print(mapResponse.toString());
 
@@ -229,7 +279,7 @@ class PersonalInforModel extends ChangeNotifier {
           _infor = mapResponse["message"];
           return false;
         }
-      } 
+      }
     } catch (e) {
       print(e.toString());
     }
@@ -240,14 +290,15 @@ class PersonalInforModel extends ChangeNotifier {
 class Schedules {
   int day;
   int session;
-  Schedules({this.day,this.session});
-  factory Schedules.fromJson(Map<String,dynamic>json) => Schedules(day: json['day'],session: json['session']);
-  Map<String,dynamic> toJson() => <String,dynamic>{
-    'day': day,
-    'session': session,
-  };
-  Map<String,dynamic> toMap() => <String,dynamic>{
-    'day': day,
-    'session': session,
-  };
+  Schedules({this.day, this.session});
+  factory Schedules.fromJson(Map<String, dynamic> json) =>
+      Schedules(day: json['day'], session: json['session']);
+  Map<String, dynamic> toJson() => <String, dynamic>{
+        'day': day,
+        'session': session,
+      };
+  Map<String, dynamic> toMap() => <String, dynamic>{
+        'day': day,
+        'session': session,
+      };
 }

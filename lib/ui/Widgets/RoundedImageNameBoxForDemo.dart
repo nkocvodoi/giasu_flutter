@@ -4,19 +4,15 @@ import 'package:test_giasu/core/model/List_TeacherData.dart';
 import 'package:test_giasu/ui/Helper/ScreenConfig.dart';
 import 'package:test_giasu/ui/UI_Main/TutorInfor.dart';
 
-class RoundedImageNameBox extends StatelessWidget {
+class RoundedImageNameBoxForDemo extends StatelessWidget {
   String urlString;
   String name;
-  Data_teacher teacherData;
-  RoundedImageNameBox(this.urlString, this.name, this.teacherData);
+
+  RoundedImageNameBoxForDemo(this.urlString, this.name);
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
-    return GestureDetector(
-      onTap: (){
-        Navigator.push(context, MaterialPageRoute(builder: (context) => TutorInfor(teacherData)));
-      },
-      child: Container(
+    return Container(
         padding: EdgeInsets.all(10),
         child: Column(
           children: <Widget>[
@@ -37,7 +33,7 @@ class RoundedImageNameBox extends StatelessWidget {
               ),
             ),
           ],
-        ))
+        )
     );
   }
 }

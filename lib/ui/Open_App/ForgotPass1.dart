@@ -3,6 +3,7 @@ import 'package:flutter/painting.dart';
 
 import 'package:provider/provider.dart';
 import 'package:test_giasu/core/view_model/forgotPassModel.dart';
+import 'package:test_giasu/ui/Helper/ScreenConfig.dart';
 import 'package:test_giasu/ui/UI_Main/General_Infor.dart';
 import 'package:test_giasu/ui/Widgets/previous_widget.dart';
 
@@ -31,12 +32,8 @@ class _ForgotPass1State extends State<ForgotPass1> {
       appBar: AppBar(
         leading: buildPreviousButton(),
         backgroundColor: colorApp,
-        title: new Padding(
-          padding: EdgeInsets.only(top: 20.0, bottom: 5.0),
-          child: Text(
-            'Quên mật khẩu',
-            // style: TextStyle(fontSize: 35, fontWeight: FontWeight.w400),
-          ),
+        title: Text(
+          'Quên mật khẩu',
         ),
         centerTitle: true,
       ),
@@ -68,8 +65,10 @@ class _ForgotPass1State extends State<ForgotPass1> {
                   padding: EdgeInsets.only(left: 60.0, right: 60.0),
                   child: Text(
                     '*Mật khẩu bắt buộc từ 6 -32 ký tự, bao gồm chữ và số',
-                    style:
-                        TextStyle(fontSize: 15.0, fontStyle: FontStyle.italic,color: Colors.grey),
+                    style: TextStyle(
+                        fontSize: 15.0,
+                        fontStyle: FontStyle.italic,
+                        color: Colors.grey),
                   ),
                 ),
                 new SizedBox(
@@ -88,12 +87,10 @@ class _ForgotPass1State extends State<ForgotPass1> {
                       },
                       color: colorApp,
                       child: new Padding(
-                        padding: EdgeInsets.all(10.0),
+                        padding: EdgeInsets.only(top: 5, bottom: 5),
                         child: Text(
                           'Khôi phục mật khẩu',
                           style: TextStyle(
-                              fontSize: 18,
-                              fontWeight: FontWeight.w400,
                               color: Colors.white),
                         ),
                       ),
@@ -109,10 +106,11 @@ class _ForgotPass1State extends State<ForgotPass1> {
               top: 25.0,
               child: new Container(
                 child: TextField(
+                  
                   autofocus: true,
                   style: TextStyle(fontSize: 18.0),
                   decoration: InputDecoration(
-                    contentPadding: EdgeInsets.only(left: 5),
+                    contentPadding: EdgeInsets.only(left: 10),
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(10),
                     ),
@@ -120,7 +118,7 @@ class _ForgotPass1State extends State<ForgotPass1> {
                   ),
                 ),
                 height: 60,
-                width: 250,
+                width: SizeConfig.safeBlockHorizontal * 70,
                 decoration: BoxDecoration(
                   color: Colors.white,
                   //   border: Border.all(color: Colors.blueAccent),
@@ -139,12 +137,12 @@ class _ForgotPass1State extends State<ForgotPass1> {
       builder: (_, model, __) {
         return Container(
           height: 60,
-          width: 250,
+          width: SizeConfig.safeBlockHorizontal* 70,
           child: TextField(
             obscureText: model.count,
             style: TextStyle(fontSize: 18.0),
             decoration: InputDecoration(
-                contentPadding: EdgeInsets.only(left: 5),
+                contentPadding: EdgeInsets.only(left: 10),
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(10),
                 ),
@@ -158,11 +156,7 @@ class _ForgotPass1State extends State<ForgotPass1> {
                       _b = !_b;
                     })),
           ),
-          // decoration: BoxDecoration(
-          //   color: Colors.white,
-          //   border: Border.all(color: Colors.blueAccent),
-          //   borderRadius: BorderRadius.circular(10),
-          // ),
+         
         );
       },
     );

@@ -20,7 +20,7 @@ class SmallTextField extends StatelessWidget {
     SizeConfig().init(context);
     return Container(
       
-      width: SizeConfig.safeBlockHorizontal * 90,
+      width: SizeConfig.safeBlockHorizontal * 85,
       height: 80,
       child: TextFormField(
        

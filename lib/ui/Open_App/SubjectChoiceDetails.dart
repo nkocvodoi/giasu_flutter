@@ -8,6 +8,7 @@ import 'package:test_giasu/core/view_model/personalInforModel.dart';
 import 'package:test_giasu/core/view_model/subjectchoiceModel.dart';
 import 'package:test_giasu/ui/Open_App/SpecialtyInfor.dart';
 import 'package:test_giasu/ui/UI_Main/BottomNavigationBar.dart';
+import 'package:test_giasu/ui/UI_Main/General_Infor.dart';
 import 'package:test_giasu/ui/Widgets/previous_widget.dart';
 
 import 'DetailRaisedButton.dart';
@@ -128,7 +129,7 @@ class SubjectChoiceDetailsState extends State<SubjectChoiceDetails> {
               style: TextStyle(
                   fontStyle: FontStyle.normal,
                   fontSize: 20,
-                  color: Colors.blue),
+                  color: blue),
             ),
           ),
           SizedBox(
@@ -232,7 +233,7 @@ class SubjectChoiceDetailsState extends State<SubjectChoiceDetails> {
       appBar: AppBar(
         leading: buildPreviousButton(),
         
-        backgroundColor: Color.fromRGBO(47, 101, 174, 1),
+        backgroundColor: blue,
         centerTitle: true,
         title: Text(
           'Lựa chọn chủ đề',
@@ -257,7 +258,7 @@ class SubjectChoiceDetailsState extends State<SubjectChoiceDetails> {
                     child:
                         Consumer<PersonalInforModel>(builder: (_, model, __) {
                       return RaisedButton(
-                        color: Color.fromRGBO(47, 101, 174, 1),
+                        color: blue,
                         shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(10)),
                         child: Text(

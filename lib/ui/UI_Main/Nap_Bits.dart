@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 import 'package:test_giasu/core/model/currentUser.dart';
 import 'package:test_giasu/core/service/authentication_service.dart';
 import 'package:test_giasu/core/view_model/napbitsModel.dart';
+import 'package:test_giasu/ui/Helper/ScreenConfig.dart';
 import 'package:test_giasu/ui/UI_Main/General_Infor.dart';
 import 'package:test_giasu/ui/UI_Main/WebView.dart';
 import 'package:test_giasu/ui/Widgets/previous_widget.dart';
@@ -27,69 +28,64 @@ class _Nap_Bits_State extends State<Nap_Bits> {
   Widget build(BuildContext context) {
     // TODO: implement build
     return Scaffold(
-      appBar: AppBar(
-        leading: buildPreviousButton(),
-        centerTitle: true,
-        backgroundColor: colorApp,
-        title: Text(
-          'Nạp Bits vào tài khoản của bạn',
-          textAlign: TextAlign.center,
+        appBar: AppBar(
+          leading: buildPreviousButton(),
+          centerTitle: true,
+          backgroundColor: colorApp,
+          title: Text(
+            'Nạp Bits vào tài khoản của bạn',
+            textAlign: TextAlign.center,
+          ),
         ),
-      ),
-      body: SingleChildScrollView(
-          child: Center(
-        child: Column(
-          children: <Widget>[
-            SizedBox(height: 20),
-            _Box1(),
-            SizedBox(
-              height: 10,
-            ),
-            _Box2(),
-            SizedBox(
-              height: 10,
-            ),
-            _Box3(),
-            SizedBox(
-              height: 40.0,
-            ),
-            Divider(
-              thickness: 1,
-            ),
-            Padding(
-              padding: EdgeInsets.only(left: 240),
-              child: RaisedButton(
-                color: colorApp,
-                onPressed: () async {
-                  String _link =
-                      await Provider.of<NapBitsModel>(context).postNapBits();
-                  print(_link);
-                  Navigator.of(context).push(MaterialPageRoute(
-                      builder: (BuildContext context) => MyWebView(
-//                        title: "Alligator.io",
-                            websiteUrl: _link,
-                          )));
-                },
-                child: Text(
-                  'Nạp Bits',
-                  style: TextStyle(
-                    fontSize: 18,
-                    fontWeight: FontWeight.w400,
-                    color: Colors.white,
+        body: SingleChildScrollView(
+            child: Center(
+          child: Column(
+            children: <Widget>[
+              SizedBox(height: 20),
+              _Box1(),
+              SizedBox(
+                height: 10,
+              ),
+              _Box2(),
+              SizedBox(
+                height: 10,
+              ),
+              _Box3(),
+              SizedBox(
+                height: 40.0,
+              ),
+             
+            ],
+          ),
+        )),
+        bottomNavigationBar: Container(
+          width: 40,
+          padding: EdgeInsets.only(left: 280,right: 30),
+          child: RaisedButton(
+            color: blue,
+            onPressed: () async {
+              String _link =
+                  await Provider.of<NapBitsModel>(context).postNapBits();
+              print(_link);
+              Navigator.of(context).push(
+                MaterialPageRoute(
+                  builder: (BuildContext context) => MyWebView(
+                    websiteUrl: _link,
                   ),
                 ),
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(10.0),
-                ),
+              );
+            },
+            child: Text(
+              'Nạp Bits',
+              style: TextStyle(
+                color: Colors.white,
               ),
             ),
-            SizedBox(
-              height: 20,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(10.0),
             ),
-          ],
-        ),
-      )),
-    );
+          ),
+        ));
   }
 
   Widget _Box1() {
@@ -104,7 +100,7 @@ class _Nap_Bits_State extends State<Nap_Bits> {
             Text(
               'Thông tin tài khoản của bạn',
               style: TextStyle(
-                  fontSize: 20, fontWeight: FontWeight.w500, color: colorApp),
+                  fontSize: 20, fontWeight: FontWeight.w500, color: blue),
             ),
             Row(
               children: <Widget>[
@@ -125,7 +121,7 @@ class _Nap_Bits_State extends State<Nap_Bits> {
       ),
       decoration: BoxDecoration(
         color: Colors.white,
-        border: Border.all(color: Colors.blueAccent, width: 2),
+        border: Border.all(color: blue, width: 2),
       ),
     );
   }
@@ -211,7 +207,7 @@ class _Nap_Bits_State extends State<Nap_Bits> {
       ),
       decoration: BoxDecoration(
         color: Colors.white,
-        border: Border.all(color: Colors.blueAccent, width: 2),
+        border: Border.all(color: blue, width: 2),
       ),
     );
   }
@@ -229,13 +225,12 @@ class _Nap_Bits_State extends State<Nap_Bits> {
               width: 150,
               height: 40.0,
               child: Text(
-                  _s,
-                  textAlign: TextAlign.center,
-                  style: TextStyle(fontSize: 13, color: Colors.white),
-                ),
-              
+                _s,
+                textAlign: TextAlign.center,
+                style: TextStyle(fontSize: 13, color: Colors.white),
+              ),
               decoration: BoxDecoration(
-                color: colorApp,
+                color: blue,
                 borderRadius: BorderRadius.circular(10.0),
               ),
             ),
@@ -263,7 +258,7 @@ class _Nap_Bits_State extends State<Nap_Bits> {
       child: new RichText(
         text: TextSpan(
           text: _s,
-          style: TextStyle(color: colorApp, fontSize: 18.0),
+          style: TextStyle(color: blue, fontSize: 18.0),
           children: <TextSpan>[
             TextSpan(
               text: '*',
@@ -279,34 +274,32 @@ class _Nap_Bits_State extends State<Nap_Bits> {
     return Container(
       height: 230,
       width: 350,
-     
-        padding: EdgeInsets.all(5.0),
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: <Widget>[
-            _richText('Bước 2: Chọn phương thức thanh toán '),
-            _LineBox3(
-              'Nạp tiền bằng Internet-Banking',
-              0,
-            ),
-            _LineBox3(
-              'Thanh toán online bằng thẻ ngân hàng nội địa',
-              1,
-            ),
-            _LineBox3(
-              'Chuyển khoản ngân hàng',
-              2,
-            ),
-            _LineBox3(
-              'Nạp Coin tại văn phòng đại diện HTcon',
-              3,
-            ),
-          ],
-        
+      padding: EdgeInsets.all(5.0),
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: <Widget>[
+          _richText('Bước 2: Chọn phương thức thanh toán '),
+          _LineBox3(
+            'Nạp tiền bằng Internet-Banking',
+            0,
+          ),
+          _LineBox3(
+            'Thanh toán online bằng thẻ ngân hàng nội địa',
+            1,
+          ),
+          _LineBox3(
+            'Chuyển khoản ngân hàng',
+            2,
+          ),
+          _LineBox3(
+            'Nạp Coin tại văn phòng đại diện HTcon',
+            3,
+          ),
+        ],
       ),
       decoration: BoxDecoration(
         color: Colors.white,
-        border: Border.all(color: Colors.blueAccent, width: 2),
+        border: Border.all(color: blue, width: 2),
       ),
     );
   }

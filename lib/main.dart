@@ -11,6 +11,7 @@ import 'package:test_giasu/ui/Students/Filter_S.dart';
 import 'package:test_giasu/ui/Students/PostRequest.dart';
 import 'package:test_giasu/ui/UI_Main/Anouncement.dart';
 import 'package:test_giasu/ui/UI_Main/Bits_Manager.dart';
+import 'package:test_giasu/ui/UI_Main/ClassDetail4.dart';
 import 'package:test_giasu/ui/UI_Main/ClassDetailRequest.dart';
 import 'package:test_giasu/ui/UI_Main/ClassDetailRequestDemo.dart';
 import 'package:test_giasu/ui/UI_Main/Lists_Class.dart';

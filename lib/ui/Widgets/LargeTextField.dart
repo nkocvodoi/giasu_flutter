@@ -34,9 +34,9 @@ class LargeTextFieldState extends State<LargeTextField> {
     return Container(
       padding: EdgeInsets.only(top: 3,bottom: 3),
 //      height: SizeConfig.blockSizeHorizontal * 20,
-      width: SizeConfig.blockSizeHorizontal * 90,
+      width: SizeConfig.blockSizeHorizontal * 85,
       
-        height: 120,
+        height: 150,
         child: TextFormField(
           validator: validate,
           onSaved: (String val){

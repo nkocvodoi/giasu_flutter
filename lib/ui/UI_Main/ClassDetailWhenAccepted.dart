@@ -1,3 +1,4 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -9,6 +10,7 @@ import 'package:test_giasu/ui/UI_Main/Payments.dart';
 import 'package:test_giasu/ui/Widgets/ARichTextLine.dart';
 import 'package:test_giasu/ui/Widgets/LargeTextBox.dart';
 import 'package:test_giasu/ui/Widgets/RoundedImageNameBox.dart';
+import 'package:test_giasu/ui/Widgets/RoundedImageNameBoxForDemo.dart';
 import 'package:test_giasu/ui/Widgets/SelectedTimeColumn.dart';
 import 'package:test_giasu/ui/Widgets/previous_widget.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -78,7 +80,7 @@ class _ClassDetailRequestDemoState extends State<ClassDetailWhenAcceptedDemo> {
                         height: SizeConfig.safeBlockVertical * 20,
                         alignment: Alignment.center,
                         color: Color.fromRGBO(47, 101, 174, 1),
-                        child: RoundedImageNameBox(
+                        child: RoundedImageNameBoxForDemo(
                           '/avatar/1466/14963324_211293059282131_333912323949534667_n_56fea2079cd3f8a1f771.jpg',
                           'Gia Sư Bách Khoa',
                         ),
@@ -86,22 +88,30 @@ class _ClassDetailRequestDemoState extends State<ClassDetailWhenAcceptedDemo> {
                       Align(
                         alignment: Alignment.bottomCenter,
                         child: Container(
+                          alignment: Alignment.center,
                           width: SizeConfig.safeBlockHorizontal * 80,
                           height: SizeConfig.safeBlockVertical * 5,
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(20.0),
-                            border: Border.all(color: black),
+                            border: Border.all(color: grey, width: 1),
                             color: Colors.white,
                           ),
                           child: Center(
-                            child: Text(
-                              'TANH 5 XUÂN PHƯƠNG, TỪ LIÊM',
-                              style: TextStyle(
-                                fontStyle: FontStyle.normal,
-                                fontSize: 13,
-                                color: black
+                            child: ConstrainedBox(
+                              constraints: BoxConstraints(
+                                minHeight: SizeConfig.safeBlockHorizontal * 8,
+                                maxHeight: SizeConfig.safeBlockHorizontal * 10,
+                                minWidth: SizeConfig.safeBlockHorizontal * 8,
+                                maxWidth: SizeConfig.safeBlockHorizontal * 78,
                               ),
-                              textAlign: TextAlign.center,
+                              child: AutoSizeText(
+                                'TANH 5 XUÂN PHƯƠNG, TỪ LIÊM',
+                                maxLines: 1,
+                                maxFontSize: 20,
+                                style: TextStyle(
+                                    fontStyle: FontStyle.normal, color: black),
+                                textAlign: TextAlign.center,
+                              ),
                             ),
                           ),
                         ),
@@ -118,7 +128,7 @@ class _ClassDetailRequestDemoState extends State<ClassDetailWhenAcceptedDemo> {
                   // alignment: Alignment.center,
                   width: SizeConfig.safeBlockHorizontal * 95,
                   decoration: BoxDecoration(
-                    border: Border.all(color: Colors.blue),
+                    border: Border.all(color: blue),
                     borderRadius: BorderRadius.circular(10),
                   ),
                   child: Column(
@@ -137,6 +147,9 @@ class _ClassDetailRequestDemoState extends State<ClassDetailWhenAcceptedDemo> {
                           size: 15,
                         ),
                       ),
+                      Divider(
+                        color: grey,
+                      ),
                       _iconTextBox(
                         Text(
                           'Mã lớp: 1222 - Tiếng Anh | Lớp: 5',
@@ -150,6 +163,9 @@ class _ClassDetailRequestDemoState extends State<ClassDetailWhenAcceptedDemo> {
                           color: black,
                           size: 15,
                         ),
+                      ),
+                      Divider(
+                        color: grey,
                       ),
                       _iconTextBox(
                         Text(
@@ -165,6 +181,9 @@ class _ClassDetailRequestDemoState extends State<ClassDetailWhenAcceptedDemo> {
                           size: 15,
                         ),
                       ),
+                      Divider(
+                        color: grey,
+                      ),
                       _iconTextBox(
                         Text(
                           'Số buổi/tuần:  1 buổi (2h/buổi)',
@@ -179,6 +198,9 @@ class _ClassDetailRequestDemoState extends State<ClassDetailWhenAcceptedDemo> {
                           size: 15,
                         ),
                       ),
+                      Divider(
+                        color: grey,
+                      ),
                       _iconTextBox(
                         Text(
                           'Số học viên: 1',
@@ -192,6 +214,9 @@ class _ClassDetailRequestDemoState extends State<ClassDetailWhenAcceptedDemo> {
                           color: black,
                           size: 15,
                         ),
+                      ),
+                      Divider(
+                        color: grey,
                       ),
                       Row(
                         children: <Widget>[
@@ -243,6 +268,9 @@ class _ClassDetailRequestDemoState extends State<ClassDetailWhenAcceptedDemo> {
                           ),
                         ],
                       ),
+                      Divider(
+                        color: grey,
+                      ),
                       _iconTextBox(
                         Text(
                           'Cách bạn: 2km',
@@ -257,6 +285,9 @@ class _ClassDetailRequestDemoState extends State<ClassDetailWhenAcceptedDemo> {
                           size: 15,
                         ),
                       ),
+                      Divider(
+                        color: grey,
+                      ),
                       _iconTextBox(
                         Text(
                           'Học phí/buổi: 130,000 vnđ/2h',
@@ -270,6 +301,9 @@ class _ClassDetailRequestDemoState extends State<ClassDetailWhenAcceptedDemo> {
                           color: black,
                           size: 15,
                         ),
+                      ),
+                      Divider(
+                        color: grey,
                       ),
                       _iconTextBox(
                         Text(

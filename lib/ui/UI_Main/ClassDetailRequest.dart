@@ -1,14 +1,20 @@
+import 'package:auto_size_text/auto_size_text.dart';
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:test_giasu/core/model/List_ClassData.dart';
 import 'package:test_giasu/ui/Helper/ScreenConfig.dart';
 import 'package:test_giasu/ui/UI_Main/BottomNavigationBar.dart';
+import 'package:test_giasu/ui/UI_Main/ClassDetailWhenAccepted.dart';
+import 'package:test_giasu/ui/UI_Main/ClassDetailWhenAcceptedReal.dart';
 import 'package:test_giasu/ui/UI_Main/General_Infor.dart';
 import 'package:test_giasu/ui/Widgets/ARichTextLine.dart';
 import 'package:test_giasu/ui/Widgets/LargeTextBox.dart';
 import 'package:test_giasu/ui/Widgets/RoundedImageNameBox.dart';
+import 'package:test_giasu/ui/Widgets/RoundedImageNameBoxForDemo.dart';
 import 'package:test_giasu/ui/Widgets/SelectedTimeColumn.dart';
 import 'package:test_giasu/ui/Widgets/previous_widget.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class ClassDetailRequest extends StatefulWidget {
   Data_class classData;
@@ -79,7 +85,7 @@ class _ClassDetailRequestState extends State<ClassDetailRequest> {
                         height: SizeConfig.safeBlockVertical * 17.5,
                         alignment: Alignment.center,
                         color: colorApp,
-                        child: RoundedImageNameBox(
+                        child: RoundedImageNameBoxForDemo(
                           classData.parent.avatar,
                           classData.parent.full_name,
                         ),
@@ -91,17 +97,25 @@ class _ClassDetailRequestState extends State<ClassDetailRequest> {
                           height: SizeConfig.safeBlockVertical * 5,
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(20.0),
-                            border: Border.all(),
+                            border: Border.all(color: grey, width: 1),
                             color: Colors.white,
                           ),
                           child: Center(
-                            child: Text(
-                              classData.name,
-                              style: TextStyle(
-                                fontStyle: FontStyle.normal,
-                                fontSize: 13,
+                            child: ConstrainedBox(
+                              constraints: BoxConstraints(
+                                minHeight: SizeConfig.safeBlockHorizontal * 8,
+                                maxHeight: SizeConfig.safeBlockHorizontal * 10,
+                                minWidth: SizeConfig.safeBlockHorizontal * 8,
+                                maxWidth: SizeConfig.safeBlockHorizontal * 78,
                               ),
-                              textAlign: TextAlign.center,
+                              child: AutoSizeText(
+                                classData.name,
+                                maxLines: 1,
+                                maxFontSize: 20,
+                                style: TextStyle(
+                                    fontStyle: FontStyle.normal, color: black),
+                                textAlign: TextAlign.center,
+                              ),
                             ),
                           ),
                         ),
@@ -118,7 +132,7 @@ class _ClassDetailRequestState extends State<ClassDetailRequest> {
                   // alignment: Alignment.center,
                   width: SizeConfig.safeBlockHorizontal * 95,
                   decoration: BoxDecoration(
-                    border: Border.all(color: Colors.blue),
+                    border: Border.all(color: blue),
                     borderRadius: BorderRadius.circular(10),
                   ),
                   child: Column(
@@ -133,93 +147,149 @@ class _ClassDetailRequestState extends State<ClassDetailRequest> {
                         ),
                         Icon(
                           Icons.portrait,
-                          color: Colors.grey,
+                          color: black,
                           size: 15,
                         ),
+                      ),
+                      Divider(
+                        color: grey,
                       ),
                       _iconTextBox(
                         Text(
                           'Mã lớp: ${classData.id} - ${classData.subject.name} | Lớp ${classData.grade}',
                           style: TextStyle(
-                            color: Colors.grey,
+                            color: black,
                             fontSize: 15,
                           ),
                         ),
                         Icon(
                           Icons.home,
-                          color: Colors.grey,
+                          color: black,
                           size: 15,
                         ),
+                      ),
+                      Divider(
+                        color: grey,
                       ),
                       _iconTextBox(
                         Text(
                           'Hình thức học: ${classData.form_teaching_name}',
                           style: TextStyle(
-                            color: Colors.grey,
+                            color: black,
                             fontSize: 15,
                           ),
                         ),
                         Icon(
                           Icons.school,
-                          color: Colors.grey,
+                          color: black,
                           size: 15,
                         ),
+                      ),
+                      Divider(
+                        color: grey,
                       ),
                       _iconTextBox(
                         Text(
                           'Số buổi/tuần: ${classData.lesson_per_week} (${(classData.time_per_lesson).toInt()}h/buổi)',
                           style: TextStyle(
-                            color: Colors.grey,
+                            color: black,
                             fontSize: 15,
                           ),
                         ),
                         Icon(
                           Icons.timelapse,
-                          color: Colors.grey,
+                          color: black,
                           size: 15,
                         ),
+                      ),
+                      Divider(
+                        color: grey,
                       ),
                       _iconTextBox(
                         Text(
                           'Số học viên: ${classData.student_per_class}',
                           style: TextStyle(
-                            color: Colors.grey,
+                            color: black,
                             fontSize: 15,
                           ),
                         ),
                         Icon(
                           Icons.person_outline,
-                          color: Colors.grey,
+                          color: black,
                           size: 15,
                         ),
                       ),
-                      _iconTextBox(
-                        Text(
-                          'Địa chỉ: ${classData.address}',
-                          style: TextStyle(
-                            color: Colors.grey,
-                            fontSize: 15,
+                      Divider(
+                        color: grey,
+                      ),
+                      Row(
+                        children: <Widget>[
+                          Expanded(
+                            child: Icon(
+                              Icons.map,
+                              color: Colors.grey,
+                              size: 15,
+                            ),
                           ),
-                        ),
-                        Icon(
-                          Icons.map,
-                          color: Colors.grey,
-                          size: 15,
-                        ),
+                          Expanded(
+                            child: SizedBox(
+                              width: ScreenUtil.getInstance().setWidth(20),
+                            ),
+                          ),
+                          Expanded(
+                            flex: 20,
+                            child: Container(
+                              child: RichText(
+                                textAlign: TextAlign.start,
+                                text: TextSpan(
+                                  children: <TextSpan>[
+                                    TextSpan(
+                                      text: classData.address,
+                                      style: TextStyle(
+                                        fontSize: 15,
+                                        color: Colors.grey,
+                                        fontFamily: 'UTM',
+                                      ),
+                                    ),
+                                    TextSpan(
+                                      recognizer: TapGestureRecognizer()
+                                        ..onTap = () {
+                                          launch(
+                                              'https://www.google.com/maps/place/38+Tr%E1%BA%A7n+Qu%C3%BD+Ki%C3%AAn,+D%E1%BB%8Bch+V%E1%BB%8Dng,+C%E1%BA%A7u+Gi%E1%BA%A5y,+H%C3%A0+N%E1%BB%99i,+Vi%E1%BB%87t+Nam/@21.0373781,105.7920155,17z/data=!3m1!4b1!4m5!3m4!1s0x3135ab37c1376ff7:0x245ac013cbc4304e!8m2!3d21.0373781!4d105.7920155?hl=vi-VNv');
+                                        },
+                                      text: ' ( Xem bản đồ )',
+                                      style: TextStyle(
+                                        fontFamily: 'UTM',
+                                        color: orange,
+                                        fontSize: 15,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                      Divider(
+                        color: grey,
                       ),
                       _iconTextBox(
                         Text(
                           'Cách bạn: 2km',
                           style: TextStyle(
-                            color: Colors.grey,
+                            color: black,
                             fontSize: 15,
                           ),
                         ),
                         Icon(
                           Icons.radio_button_checked,
-                          color: Colors.grey,
+                          color: black,
                           size: 15,
                         ),
+                      ),
+                      Divider(
+                        color: grey,
                       ),
                       _iconTextBox(
                         Text(
@@ -231,9 +301,12 @@ class _ClassDetailRequestState extends State<ClassDetailRequest> {
                         ),
                         Icon(
                           Icons.monetization_on,
-                          color: Colors.grey,
+                          color: black,
                           size: 15,
                         ),
+                      ),
+                      Divider(
+                        color: grey,
                       ),
                       _iconTextBox(
                         Text(
@@ -245,7 +318,7 @@ class _ClassDetailRequestState extends State<ClassDetailRequest> {
                         ),
                         Icon(
                           Icons.attach_money,
-                          color: Colors.grey,
+                          color: black,
                           size: 15,
                         ),
                       ),
@@ -264,68 +337,77 @@ class _ClassDetailRequestState extends State<ClassDetailRequest> {
                 SizedBox(
                   height: ScreenUtil.getInstance().setHeight(50),
                 ),
-                Divider(
-                  thickness: 1,
+                ],
+            ),
+          ],
+        ),
+      ),
+      bottomNavigationBar: Container(
+        alignment: Alignment.center,
+        width: ScreenUtil.getInstance().setWidth(700),
+        height: ScreenUtil.getInstance().setHeight(100),
+        child: Row(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: <Widget>[
+            Expanded(
+              child: SizedBox(),
+              flex: 1,
+            ),
+            Container(
+              height: SizeConfig.safeBlockVertical * 5,
+              width: SizeConfig.safeBlockHorizontal * 20,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(20.0),
+              ),
+              child: RaisedButton(
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(10.0)),
+                color: orange,
+                onPressed: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => MyBottomNavigationBar()));
+                },
+                textColor: Colors.white,
+                child: Text(
+                  'Từ chối',
+                  style:
+                      TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 3.5),
                 ),
-                Container(
-                  alignment: Alignment.center,
-                  width: ScreenUtil.getInstance().setWidth(700),
-                  height: ScreenUtil.getInstance().setHeight(100),
-                  child: Row(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: <Widget>[
-                      Expanded(
-                        child: SizedBox(),
-                        flex: 1,
-                      ),
-                      Container(
-                        height: SizeConfig.safeBlockVertical * 5,
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(20.0),
-                        ),
-                        child: RaisedButton(
-                          color: orange,
-                          onPressed: () {
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) =>
-                                        MyBottomNavigationBar()));
-                          },
-                          textColor: Colors.white,
-                          child: Text('Từ chối'),
-                        ),
-                      ),
-                      Expanded(
-                        child: SizedBox(),
-                        flex: 2,
-                      ),
-                      Container(
-                        height: SizeConfig.safeBlockVertical * 5,
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(20.0),
-                        ),
-                        child: RaisedButton(
-                          color: colorApp,
-                          onPressed: () {
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) =>
-                                        MyBottomNavigationBar()));
-                          },
-                          textColor: Colors.white,
-                          child: Text('Đồng ý'),
-                        ),
-                      ),
-                      Expanded(
-                        child: SizedBox(),
-                        flex: 1,
-                      ),
-                    ],
-                  ),
+              ),
+            ),
+            Expanded(
+              child: SizedBox(),
+              flex: 2,
+            ),
+            Container(
+              height: SizeConfig.safeBlockVertical * 5,
+              width: SizeConfig.safeBlockHorizontal * 20,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(20.0),
+              ),
+              child: RaisedButton(
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(10.0)),
+                color: colorApp,
+                onPressed: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => ClassDetailWhenAccepted(classData)));
+                },
+                textColor: Colors.white,
+                child: Container(
+                  child: Text('Đồng ý',
+                      style: TextStyle(
+                          fontSize: SizeConfig.safeBlockHorizontal * 3.5)),
                 ),
-              ],
+              ),
+            ),
+            Expanded(
+              child: SizedBox(),
+              flex: 1,
             ),
           ],
         ),

@@ -67,7 +67,7 @@ class Waiting_screenState extends State<Waiting_screen> {
         children: <Widget>[
           Column(
         children: <Widget>[
-          Expanded(child: SizedBox(),flex: 2,),
+          Expanded(child: SizedBox(),flex: 4,),
           Image.asset(
             'assets/Logo.png',
             cacheHeight: 90,
@@ -83,7 +83,7 @@ class Waiting_screenState extends State<Waiting_screen> {
                 fontSize: 15,
             ),
           ),
-          Expanded(child: SizedBox(),flex: 2,),
+          Expanded(child: SizedBox(),flex: 6,),
         ],
 
       ),

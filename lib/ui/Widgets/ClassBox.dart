@@ -26,7 +26,7 @@ class List_Box extends StatelessWidget {
 //                  height: 190,
                   child: RaisedButton(
                     onPressed: () {
-                      Navigator.push(context, MaterialPageRoute(builder: (context) => ClassDetailWithMoreTutorInfor(box[index])));
+                      
                       Navigator.push(
                           context,
                           MaterialPageRoute(

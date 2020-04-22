@@ -50,6 +50,7 @@ class _ForgotPass2State extends State<ForgotPass2> {
                   fontSize: 15.0, color: Colors.black.withOpacity(0.8)),
             ),
           ),
+          SizedBox(height: 10),
           new Column(
             children: <Widget>[
               new Wrap(

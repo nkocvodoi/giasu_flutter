@@ -102,7 +102,7 @@ class _Lists_Class_State extends State<Lists_Class> {
                                 child: Row(
                                   children: <Widget>[
                                     Container(
-                                      height: 55,
+                                      height: 50,
                                       width: SizeConfig.safeBlockHorizontal* 28,
                                       child: Center(
                                         child: Text(
@@ -123,7 +123,7 @@ class _Lists_Class_State extends State<Lists_Class> {
                                       ),
                                     ),
                                     Container(
-                                      height: 55,
+                                      height: 50,
                                       width: SizeConfig.safeBlockHorizontal * 28,
                                       child: ListTile(
                                         title: Text(
@@ -143,7 +143,9 @@ class _Lists_Class_State extends State<Lists_Class> {
                                           );
                                         },
                                         trailing: Icon(
+                                          
                                           Icons.arrow_forward_ios,
+                                          size:20,
                                           color: Colors.white,
                                         ),
                                       ),
@@ -156,7 +158,7 @@ class _Lists_Class_State extends State<Lists_Class> {
                                           bottomRight: Radius.circular(40.0),
                                         ),
                                       ),
-                                    )
+                                    ),
                                   ],
                                 ),
                               ),

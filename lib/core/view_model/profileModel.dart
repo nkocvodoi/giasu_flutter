@@ -40,7 +40,7 @@ class ProfileModel extends ChangeNotifier {
 //        CurrentUser _ds = CurrentUser.fromJson(mapResponse["data"]);
         DataUser _ds = DataUser.fromJson(mapResponse["data"]);
       //print('log' + DataUser.fromJson(mapResponse["data"]).toString());
-        print('dfhduf' + _ds.role.toString());
+//        print('dfhduf' + _ds.role.toString());
         return DataUser.fromJson(mapResponse["data"]);
       }
     } else {
@@ -51,5 +51,7 @@ class ProfileModel extends ChangeNotifier {
 //  void initState(){
 //    _userdata = fetchUserData();
 //  }
-
+Future<DataUser> getdata() async {
+    return await fetchProfile();
+}
 }

@@ -77,14 +77,15 @@ class TeacherListBoxState extends State<TeacherListBox> {
                     );
                   },
                   child: Container(
-                    child: TeacherBox(
-                        teacherBox[index].avatar,
-                        teacherBox[index].full_name,
-                        teacherBox[index].location.name,
-                        teacherBox[index].subject_text,
-                        teacherBox[index].tuition_fee,
-                        8,
-                        teacherBox[index].achievement),
+//                    child: TeacherBox(
+//                      'accepted',
+//                        teacherBox[index].avatar,
+//                        teacherBox[index].full_name,
+//                        teacherBox[index].location.name,
+//                        teacherBox[index].subject_text,
+//                        teacherBox[index].tuition_fee,
+//                        8,
+//                        teacherBox[index].achievement),
                   ),
                 );
           //     } else if (snapshot.hasError) {

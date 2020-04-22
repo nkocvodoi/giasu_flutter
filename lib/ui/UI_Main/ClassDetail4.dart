@@ -1,5 +1,7 @@
-import 'package:flutter/material.dart';
 
+//Lưu ý + Báo phát sinh
+
+import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:test_giasu/ui/Helper/ScreenConfig.dart';
 import 'package:test_giasu/ui/UI_Main/General_Infor.dart';

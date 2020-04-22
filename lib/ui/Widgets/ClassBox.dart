@@ -2,6 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:test_giasu/core/model/List_ClassData.dart';
 import 'package:test_giasu/ui/UI_Main/ClassDetail.dart';
+import 'package:test_giasu/ui/UI_Main/ClassDetail4.dart';
+import 'package:test_giasu/ui/UI_Main/ClassDetailWhenAccepted.dart';
+import 'package:test_giasu/ui/UI_Main/ClassDetailWithCreator.dart';
 import 'package:test_giasu/ui/UI_Main/ClassDetailWithMoreTutorInfor.dart';
 import 'package:test_giasu/core/view_model/classModel.dart';
 import 'package:test_giasu/ui/UI_Main/ClassDetail.dart';
@@ -13,7 +16,8 @@ class List_Box extends StatelessWidget {
   ScrollController controller;
   bool stateButton;
 
-  List_Box({Key key, this.box, this.controller, this.stateButton}) : super(key: key);
+  List_Box({Key key, this.box, this.controller, this.stateButton})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -26,9 +30,10 @@ class List_Box extends StatelessWidget {
           itemBuilder: (BuildContext context, int index) {
 //                print('log recommen ${box[index].recommended}');
 //                print(box[index].recommended);
-          if(stateButton) {
-            model.setRecomended(box[index].recommended);
-          };
+            if (stateButton) {
+              model.setRecomended(box[index].recommended);
+            }
+            ;
 //              model.setInfor(box[index].recommended);
 //                if(box[index].recommended) {
 //                  model.setInfor('Hủy đề nghị dạy');
@@ -39,9 +44,7 @@ class List_Box extends StatelessWidget {
 
             return Container(
               child: Stack(
-
                 children: <Widget>[
-
                   Container(
                     alignment: Alignment.centerLeft,
                     margin: EdgeInsets.all(10.0),
@@ -49,7 +52,100 @@ class List_Box extends StatelessWidget {
                     child: SingleChildScrollView(
                       scrollDirection: Axis.horizontal,
                       child: RaisedButton(
-                        onPressed: () {},
+                        onPressed: () async {
+//                          Navigator.push(
+//                            context,
+//                            MaterialPageRoute(
+//                              builder: (context) => ClassDetail( box[index].id),
+//
+//                            ),
+//                          );
+                          await model.setClassDataId(box[index].id);
+//                        print(model.isFetchingClassDataId);
+                          if (model.isFetchingClassDataId) {
+//                          print(model.data_class.toString());
+                            model.checkStateClass(model.data_class);
+                            print(model.StateClass);
+                            switch (model.StateClass) {
+                              case "De nghi day":
+                                {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) =>
+                                          ClassDetail(box[index].id),
+                                    ),
+                                  );
+                                }
+                                break;
+                              case 'Huy de nghi':
+                                {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) =>
+                                          ClassDetail(box[index].id),
+                                    ),
+                                  );
+                                }
+                                break;
+
+                              case "Xem de nghi day":
+                                {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) =>
+                                          ClassDetailWithCreator(box[index].id),
+                                    ),
+                                  );
+                                }
+                                break;
+                              case "Thanh toan":
+                                {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) =>
+                                          ClassDetailWhenAcceptedDemo(),
+                                    ),
+                                  );
+                                }
+                                break;
+                              case "Lop phat sinh + Change":
+                                {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) => ClassDetail4(),
+                                    ),
+                                  );
+                                }
+                                break;
+                              case "Change":
+                                {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) => ClassDetail4(),
+                                    ),
+                                  );
+                                }
+                                break;
+
+                              case "No button":
+                                {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) => ClassDetail4(),
+                                    ),
+                                  );
+                                }
+                                break;
+                            }
+                          }
+                        },
                         padding: EdgeInsets.all(5.0),
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
@@ -113,19 +209,20 @@ class List_Box extends StatelessWidget {
                       size: 30.0,
                     ),
                   ),
-                  (stateButton ? Positioned(
-                    top: 153,
-                    right: 25,
-                    child: SizedBox(
-                      height: 33,
-                      child: RaisedButton(
-                        padding: EdgeInsets.only(
-                          left: 2.0,
-                          right: 2.0,
-                        ),
-                        color: colorApp,
-                        onPressed: () async {
-                          model.setIdclass(box[index].id);
+                  (stateButton
+                      ? Positioned(
+                          top: 153,
+                          right: 25,
+                          child: SizedBox(
+                            height: 33,
+                            child: RaisedButton(
+                              padding: EdgeInsets.only(
+                                left: 2.0,
+                                right: 2.0,
+                              ),
+                              color: colorApp,
+                              onPressed: () async {
+                                model.setIdclass(box[index].id);
 //                              await model.setInfor();
 //                              print(model.infor);
 //                                    print( 'log ${model.recommended}');
@@ -135,37 +232,34 @@ class List_Box extends StatelessWidget {
 
 //                          print('recommended ${box[index].recommended}');
 //                          model.setRecomended(box[index].recommended);
-                          print(
-                              'recommended ${model.recommended} + ${box[index].id}');
+                                print(
+                                    'recommended ${model.recommended} + ${box[index].id}');
 
-                          if (model.recommended) {
-                            await model.setHuydenghi();
-                            print('Huy');
-                          } else {
-                            await model.setDenghi();
-                            print('Denghi');
-                          }
+                                if (model.recommended) {
+                                  await model.setHuydenghi();
+                                  print('Huy');
+                                } else {
+                                  await model.setDenghi();
+                                  print('Denghi');
+                                }
 
 //                          model.change();
 
-
-
-                          print('=> ${model.recommended}');
+                                print('=> ${model.recommended}');
 //                          print(model.infor);
-                        },
-                        child: Text(
-                          model.infor,
-                          style: TextStyle(fontSize: 15, color: Colors.white),
-                        ),
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(15.0),
-                        ),
-                      ),
-                    ),
-                  )
-                  :
-                      SizedBox()
-                  ),
+                              },
+                              child: Text(
+                                model.infor,
+                                style: TextStyle(
+                                    fontSize: 15, color: Colors.white),
+                              ),
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(15.0),
+                              ),
+                            ),
+                          ),
+                        )
+                      : SizedBox()),
                   Positioned(
                     top: 125,
                     right: 40,

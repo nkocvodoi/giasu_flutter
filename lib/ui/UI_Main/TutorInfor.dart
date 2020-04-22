@@ -167,8 +167,14 @@ class TutorInforState extends State<TutorInfor> {
                                 color: Colors.white,
                               ),
                               child: Expanded(
-                                child: Image.network('https://giasu.htcon.vn' +
-                                    teacherData.avatar),
+                                child: (teacherData.avatar != null)
+                                ?
+                                Image.network('https://giasu.htcon.vn' +
+                                    teacherData.avatar)
+                                :
+                                Image.asset(
+                                    'assets/red.jpg' )
+                                ,
                               ),
                             ),
                           )

@@ -14,15 +14,6 @@ class ClassModel extends ChangeNotifier {
     }
   }
 
-//  bool _busy = false;
-//
-//  bool get busy => _busy;
-//
-//  void setBusy(bool value) {
-//    _busy = value;
-//    notifyListeners();
-//  }
-
   List<Data_class> _list_class = new List<Data_class>();
   Future<CLassData> _page_class;
   int _idclass;
@@ -79,6 +70,18 @@ class ClassModel extends ChangeNotifier {
     _page_class = fetchClassDatatest();
   }
 
+  Data_class _data_class = new Data_class();
+  Data_class get data_class => _data_class;
+
+  bool _isFetchingClassDataId = false;
+  bool get isFetchingClassDataId => _isFetchingClassDataId;
+  void setBusyClassDataId(bool _val) {
+    _isFetchingClassDataId = _val;
+    notifyListeners();
+  }
+
+  String _stateClass;
+  String get StateClass => _stateClass;
 
 
   Future<CLassData> fetchClassDatatest() async {
@@ -120,6 +123,31 @@ class ClassModel extends ChangeNotifier {
       return CLassData.fromJson(mapResponse);
     } else {
       // If that call was not successful, throw an error.
+      throw Exception('Failed to load ');
+    }
+  }
+
+Future setClassDataId(int _idclass) async {
+    setBusyClassDataId(false);
+    _data_class = await fetchClassDataId(_idclass);
+    setBusyClassDataId(true);
+
+}
+
+  Future<Data_class> fetchClassDataId(int _id) async {
+    final response = await http.get(
+      APIUrl + 'api/v1/parents/courses/${_id}',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer ${authenticationService.token}',
+      },
+    );
+    Map<String, dynamic> mapResponse = json.decode(response.body);
+    if (response.statusCode == 200) {
+//      print('log' + mapResponse['data']['status']);
+
+      return Data_class.fromJson(mapResponse["data"]);
+    } else {
       throw Exception('Failed to load ');
     }
   }
@@ -228,4 +256,107 @@ class ClassModel extends ChangeNotifier {
     }
 //    notifyListeners();
   }
+   checkStateClass(Data_class testData) {
+//    Navigator.push(
+//        context,
+//        MaterialPageRoute(
+//        builder: (context) => PersonInfor(),
+
+//  _getdata();
+    if (testData.parentt_id == authenticationService.id) {
+      // Nguoi tao lop
+      switch (testData.status) {
+        case "completing":
+          {
+//            print("Lop phat sinh + Change");
+            _stateClass = "Lop phat sinh + Change";
+          }
+          break;
+        case "reporting":
+          {
+//            print("Change");
+            _stateClass = "Change" ;
+          }
+          break;
+        case "date_changed":
+          {
+//            print("No button");
+            _stateClass = "No button";
+          }
+          break;
+
+        default:
+          {
+//            print("Xem de nghi day");
+            _stateClass = "Xem de nghi day";
+          }
+          break;
+      }
+    } else {
+      if (testData.check_recommend) {
+        //Nguoi de nghi
+
+        switch (testData.status) {
+          case "completing":
+            {
+//              print("Lop phat sinh + Change");
+              _stateClass = "Lop phat sinh + Change";
+
+            }
+            break;
+          case "pending":
+            {
+              if (testData.recommend_status == "accepted") {
+//                print("Thanh toan");
+                _stateClass = "Thanh toan";
+              } else {
+//                print('Huy de nghi');
+                _stateClass = 'Huy de nghi';
+              }
+            }
+            break;
+          case "reporting":
+            {
+//              print("Change");
+              _stateClass = "Change";
+            }
+            break;
+          case "date_changed":
+            {
+//              print("No button");
+              _stateClass = "No button";
+            }
+            break;
+
+//      default:
+//        {
+//          print("Invalid choice");
+//        }
+//        break;
+        }
+      } else {
+        //Chua de nghi
+        switch (testData.status) {
+          case "reporting":
+            {
+//              print("Change");
+              _stateClass = "Change";
+            }
+            break;
+          case "date_changed":
+            {
+//              print("No button");
+              _stateClass = "No button";
+            }
+            break;
+          default:
+            {
+//              print("De nghi day");
+              _stateClass = "De nghi day";
+            }
+        }
+      }
+    }
+  }
 }
+

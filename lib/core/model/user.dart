@@ -1,76 +1,3 @@
-//class User {
-//  int code;
-//  DataUser user;
-//  String token;
-//  bool user_deactive;
-//
-//  User({
-//    this.code,
-//    this.user,
-//    this.token,
-//    this.user_deactive,
-//  });
-//
-//  factory User.fromJson(Map<String, dynamic> json) => User(
-//        code: json['code'],
-//        user: DataUser.fromJson(json['user']),
-//        token: json['token'],
-//        user_deactive: json['user_deactive'],
-//      );
-//
-//  Map<String, dynamic> toJson() => <String, dynamic>{
-//        'code': code,
-//        'user': user,
-//        'token': token,
-//        'user_deactive': user_deactive,
-//      };
-//}
-
-//class DataUser {
-//  int id;
-//  String email;
-//  String role;
-//  String identification_number;
-//  bool full_info;
-//  String full_name;
-//  String phone_number;
-//  String avatar;
-//
-//  DataUser({
-//    this.id,
-//    this.email,
-//    this.role,
-//    this.identification_number,
-//    this.full_info,
-//    this.full_name,
-//    this.phone_number,
-//    this.avatar,
-//
-//
-//  });
-//
-//  factory DataUser.fromJson(Map<String, dynamic> json) => DataUser(
-//      id: json['id'],
-//      email: json['email'],
-//      role: json['role'],
-//      identification_number: json['identification_number'],
-//      full_info: json['full_info'],
-//      full_name: json['full_name'],
-//      phone_number: json['phone_number']);
-//
-//  Map<String, dynamic> toJson() => <String, dynamic>{
-//        'id': id,
-//        'email': email,
-//        'role': role,
-//        'identification_number': identification_number,
-//        'full_info': full_info,
-//        'full_name': full_name,
-//        'phone_number': phone_number,
-//      };
-//}
-
-//import 'List_TeacherData.dart';
-
 class DataUser {
   int id;
   String role;
@@ -196,7 +123,7 @@ class DataUser {
       subject_text: json['subject_text'],
       course_count: json['course_count'],
       like_count: json['like_count'],
-      location: Location.fromJson(json['location']),
+//      location: Location.fromJson(json['location']),
     );
   }
 }
@@ -328,5 +255,3 @@ class Subject {
     'group': group,
   };
 }
-
-

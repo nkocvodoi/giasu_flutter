@@ -219,296 +219,173 @@ class _PersonInforState extends State<PersonInfor> {
           'THÔNG TIN CÁ NHÂN',
         ),
       ),
-      body: Consumer<PersonalInforModel>(
-        builder: (_, model, __) {
-          return FutureBuilder<Data_teacher>(
-            future: Provider.of<PersonalInforModel>(context).fetchProfile(),
-            builder: (context, snapshot) {
-              if (snapshot.hasData) {
-                Data_teacher _data = snapshot.data;
-                print(_data);
-                return SingleChildScrollView(
-                  child: Form(
-                    key: _key1,
-                    autovalidate: _validate,
-                    child: Padding(
-                      padding: EdgeInsets.only(
-                        left: ScreenUtil.getInstance().setWidth(28),
-                        right: ScreenUtil.getInstance().setWidth(28),
-                        top: ScreenUtil.getInstance().setHeight(20),
-                      ),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: <Widget>[
-                          Text(
-                            'Ảnh đại diện',
-                            style: TextStyle(
-                              fontSize: 20,
-                            ),
-                          ),
-                          Container(
-                            margin: EdgeInsets.all(10.0),
-                            // padding: EdgeInsets.all(3.0),
-                            width: 100,
-                            height: 100,
-                            decoration: BoxDecoration(
-                              border: Border.all(color: Colors.blueAccent),
-                              borderRadius: BorderRadius.circular(10.0),
-                            ),
-                            child: GestureDetector(
-                              onTap: chooseImage,
-                              child: imageNull()
-                                  ? Image.asset(
-                                      'assets/user.png',
-                                      width: 90,
-                                    )
-                                  : showImage(),
-                            ),
-                          ),
-                          Column(
+      body: Consumer<PersonalInforModel>(builder: (_, model, __) {
+        return SingleChildScrollView(
+          child: Form(
+            key: _key1,
+            autovalidate: _validate,
+            child: Padding(
+              padding: EdgeInsets.only(
+                left: ScreenUtil.getInstance().setWidth(28),
+                right: ScreenUtil.getInstance().setWidth(28),
+                top: ScreenUtil.getInstance().setHeight(20),
+              ),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: <Widget>[
+                  Text(
+                    'Ảnh đại diện',
+                    style: TextStyle(
+                      fontSize: 20,
+                    ),
+                  ),
+                  Container(
+                    margin: EdgeInsets.all(10.0),
+                    // padding: EdgeInsets.all(3.0),
+                    width: 100,
+                    height: 100,
+                    decoration: BoxDecoration(
+                      border: Border.all(color: Colors.blueAccent),
+                      borderRadius: BorderRadius.circular(10.0),
+                    ),
+                    child: GestureDetector(
+                      onTap: chooseImage,
+                      child: imageNull()
+                          ? Image.asset(
+                              'assets/user.png',
+                              width: 90,
+                            )
+                          : showImage(),
+                    ),
+                  ),
+                  Column(
+                    children: <Widget>[
+                      Container(
+                          margin: EdgeInsets.all(15.0),
+                          decoration: BoxDecoration(),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
                             children: <Widget>[
+                              SmallTextField('Họ và tên', full_name),
                               Container(
-                                  margin: EdgeInsets.all(15.0),
-                                  decoration: BoxDecoration(),
-                                  child: Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
+                                padding: EdgeInsets.only(
+                                    top: 3.0, bottom: 5.0, left: 10),
+                                width: 350,
+                                height: 50,
+                                child: DropdownButton<int>(
+                                  autofocus: true,
+                                  underline: Container(
+                                    padding: EdgeInsets.only(left: 10),
+                                    color: Colors.transparent,
+                                  ),
+                                  isExpanded: true,
+                                  value: genderID,
+                                  items: [
+                                    DropdownMenuItem(
+                                      child: Text('Giới tính',
+                                          style: TextStyle(
+                                              fontSize: 18.0,
+                                              color: Colors.grey)),
+                                      value: null,
+                                    ),
+                                    ...List.generate(genderList.length,
+                                        (index) {
+                                      return DropdownMenuItem(
+                                        child: Text('${genderList[index]}',
+                                            style: TextStyle(
+                                                fontSize: 18.0,
+                                                color: Colors.grey)),
+                                        value: index,
+                                      );
+                                    }),
+                                  ],
+                                  onChanged: (int value) {
+                                    if (value != genderID) {
+                                      setState(() {
+                                        genderID = value;
+                                      });
+                                    }
+                                  },
+                                ),
+                                decoration: BoxDecoration(
+                                  border: Border.all(color: black, width: 1.5),
+                                  borderRadius: BorderRadius.circular(10.0),
+                                ),
+                              ),
+                              SizedBox(
+                                height: 30,
+                              ),
+                              Container(
+                                padding: EdgeInsets.only(
+                                    top: 3.0, bottom: 5.0, left: 10),
+                                width: 350,
+                                height: 50,
+                                child: DropdownButton<int>(
+                                  autofocus: true,
+                                  underline: Container(
+                                    padding: EdgeInsets.only(left: 10),
+                                    color: Colors.transparent,
+                                  ),
+                                  isExpanded: true,
+                                  value: model.idProvince,
+                                  items: [
+                                    DropdownMenuItem(
+                                      child: Text('Quê quán',
+                                          style: TextStyle(
+                                              fontSize: 18.0,
+                                              color: Colors.grey)),
+                                      value: null,
+                                    ),
+                                    ...List.generate(model.province.length,
+                                        (index) {
+                                      return DropdownMenuItem(
+                                        child: Text(
+                                            '${model.province[index].name}',
+                                            style: TextStyle(
+                                                fontSize: 18.0,
+                                                color: Colors.grey)),
+                                        value: model.province[index].id,
+                                      );
+                                    }),
+                                  ],
+                                  onChanged: (int value) {
+                                    if (value != model.idProvince) {
+                                      model.setIdProvince(value);
+                                    }
+                                  },
+                                ),
+                                decoration: BoxDecoration(
+                                  border: Border.all(color: black, width: 1.5),
+                                  borderRadius: BorderRadius.circular(10.0),
+                                ),
+                              ),
+                              SizedBox(height: 20),
+                              Container(
+                                  padding:
+                                      EdgeInsets.only(top: 3.0, bottom: 3.0),
+                                  width: 350,
+                                  height: 80,
+                                  child: Row(
                                     children: <Widget>[
-                                      SmallTextField('Họ và tên', full_name),
-                                      Container(
-                                        padding: EdgeInsets.only(
-                                            top: 3.0, bottom: 5.0, left: 10),
-                                        width: 350,
-                                        height: 50,
-                                        child: DropdownButton<int>(
-                                          autofocus: true,
-                                          underline: Container(
-                                            padding: EdgeInsets.only(left: 10),
-                                            color: Colors.transparent,
-                                          ),
-                                          isExpanded: true,
-                                          value: genderID,
-                                          items: [
-                                            DropdownMenuItem(
-                                              child: Text('Giới tính',
-                                                  style: TextStyle(
-                                                      fontSize: 18.0,
-                                                      color: Colors.grey)),
-                                              value: null,
-                                            ),
-                                            ...List.generate(genderList.length,
-                                                (index) {
-                                              return DropdownMenuItem(
-                                                child: Text(
-                                                    '${genderList[index]}',
-                                                    style: TextStyle(
-                                                        fontSize: 18.0,
-                                                        color: Colors.grey)),
-                                                value: index,
-                                              );
-                                            }),
-                                          ],
-                                          onChanged: (int value) {
-                                            if (value != genderID) {
-                                              setState(() {
-                                                genderID = value;
-                                              });
-                                            }
-                                          },
-                                        ),
-                                        decoration: BoxDecoration(
-                                          border: Border.all(
-                                              color: black, width: 1.5),
-                                          borderRadius:
-                                              BorderRadius.circular(10.0),
-                                        ),
-                                      ),
-                                      SizedBox(
-                                        height: 30,
-                                      ),
-                                      Container(
-                                        padding: EdgeInsets.only(
-                                            top: 3.0, bottom: 5.0, left: 10),
-                                        width: 350,
-                                        height: 50,
-                                        child: DropdownButton<int>(
-                                          autofocus: true,
-                                          underline: Container(
-                                            padding: EdgeInsets.only(left: 10),
-                                            color: Colors.transparent,
-                                          ),
-                                          isExpanded: true,
-                                          value: model.idProvince,
-                                          items: [
-                                            DropdownMenuItem(
-                                              child: Text('Quê quán',
-                                                  style: TextStyle(
-                                                      fontSize: 18.0,
-                                                      color: Colors.grey)),
-                                              value: null,
-                                            ),
-                                            ...List.generate(
-                                                model.province.length, (index) {
-                                              return DropdownMenuItem(
-                                                child: Text(
-                                                    '${model.province[index].name}',
-                                                    style: TextStyle(
-                                                        fontSize: 18.0,
-                                                        color: Colors.grey)),
-                                                value: model.province[index].id,
-                                              );
-                                            }),
-                                          ],
-                                          onChanged: (int value) {
-                                            if (value != model.idProvince) {
-                                              model.setIdProvince(value);
-                                            }
-                                          },
-                                        ),
-                                        decoration: BoxDecoration(
-                                          border: Border.all(
-                                              color: black, width: 1.5),
-                                          borderRadius:
-                                              BorderRadius.circular(10.0),
-                                        ),
-                                      ),
-                                      SizedBox(height: 20),
-                                      Container(
-                                          padding: EdgeInsets.only(
-                                              top: 3.0, bottom: 3.0),
-                                          width: 350,
-                                          height: 80,
-                                          child: Row(
-                                            children: <Widget>[
-                                              Expanded(
-                                                flex: 8,
-                                                child: TextFormField(
-                                                  initialValue: _data.birthdate,
-                                                  autofocus: true,
-                                                  validator: validate,
-                                                  onSaved: (String val) {
-                                                    if (dateTimeNull()) {
-                                                      birthdate.text = val;
-                                                    } else {
-                                                      birthdate.text =
-                                                          formatDate(_date, [
-                                                        dd,
-                                                        '/',
-                                                        mm,
-                                                        '/',
-                                                        yyyy
-                                                      ]);
-                                                    }
-                                                  },
-                                                  enableSuggestions: true,
-                                                  decoration: InputDecoration(
-                                                    contentPadding:
-                                                        EdgeInsets.only(
-                                                            left: 10),
-                                                    hintText: 'Ngày sinh',
-                                                    border: OutlineInputBorder(
-                                                      borderRadius:
-                                                          BorderRadius.circular(
-                                                              10.0),
-                                                    ),
-                                                    hintStyle: TextStyle(
-                                                      fontSize: 18,
-                                                      fontFamily: 'UTM',
-                                                      color: Colors.grey[400],
-                                                    ),
-                                                  ),
-                                                ),
-                                              ),
-                                              SizedBox(
-                                                width: 3,
-                                              ),
-                                              Expanded(
-                                                  child: Container(
-                                                decoration: BoxDecoration(
-                                                  border:
-                                                      Border.all(color: black),
-                                                  borderRadius:
-                                                      BorderRadius.circular(10),
-                                                ),
-                                                child: IconButton(
-                                                    icon: Icon(
-                                                        Icons.calendar_today),
-                                                    onPressed: () {
-                                                      selectDate(context);
-                                                    }),
-                                              )),
-                                            ],
-                                          )),
-                                      SizedBox(height: 20),
-                                      Container(
-                                        padding: EdgeInsets.only(
-                                            top: 3.0, bottom: 5.0, left: 10),
-                                        width: 350,
-                                        height: 50,
-                                        child: DropdownButton<int>(
-                                          autofocus: true,
-                                          underline: Container(
-                                            padding: EdgeInsets.only(left: 10),
-                                            color: Colors.transparent,
-                                          ),
-                                          isExpanded: true,
-                                          value: model.idVoice,
-                                          items: [
-                                            DropdownMenuItem(
-                                              child: Text('Giọng nói',
-                                                  style: TextStyle(
-                                                      fontSize: 18.0,
-                                                      color: Colors.grey)),
-                                              value: null,
-                                            ),
-                                            ...List.generate(model.voice.length,
-                                                (index) {
-                                              return DropdownMenuItem(
-                                                child: Text(
-                                                    '${model.voice[index].name}',
-                                                    style: TextStyle(
-                                                        fontSize: 18.0,
-                                                        color: Colors.grey)),
-                                                value: model.voice[index].id,
-                                              );
-                                            }),
-                                          ],
-                                          onChanged: (int value) {
-                                            if (value != model.idVoice) {
-                                              model.setIdVoice(value);
-                                            }
-                                          },
-                                        ),
-                                        decoration: BoxDecoration(
-                                          border: Border.all(
-                                              color: black, width: 1.5),
-                                          borderRadius:
-                                              BorderRadius.circular(10.0),
-                                        ),
-                                      ),
-                                      SizedBox(height: 30),
-                                      SmallTextField(
-                                          'Link Facebook của bạn', facebook),
-                                      Container(
-                                        width: 350,
-                                        height: 80,
+                                      Expanded(
+                                        flex: 8,
                                         child: TextFormField(
+                                         
                                           autofocus: true,
                                           validator: validate,
                                           onSaved: (String val) {
-                                            phone_number.text = val;
-                                            // if (val !=
-                                            //     model.authenticationService.identification_number) {
-                                            //   phone_number.text = val;
-                                            // }
+                                            if (dateTimeNull()) {
+                                              birthdate.text = val;
+                                            } else {
+                                              birthdate.text = formatDate(_date,
+                                                  [dd, '/', mm, '/', yyyy]);
+                                            }
                                           },
-                                          keyboardType: TextInputType.phone,
-                                          controller: phone_number,
                                           enableSuggestions: true,
                                           decoration: InputDecoration(
                                             contentPadding:
                                                 EdgeInsets.only(left: 10),
-                                            hintText: "Số điện thoại",
+                                            hintText: 'Ngày sinh',
                                             border: OutlineInputBorder(
                                               borderRadius:
                                                   BorderRadius.circular(10.0),
@@ -516,776 +393,300 @@ class _PersonInforState extends State<PersonInfor> {
                                             hintStyle: TextStyle(
                                               fontSize: 18,
                                               fontFamily: 'UTM',
-                                              color: Colors.grey,
+                                              color: Colors.grey[400],
                                             ),
-                                          ),
-                                        ),
-                                      ),
-                                      Container(
-                                        width: 350,
-                                        height: 80,
-                                        child: TextFormField(
-                                          autofocus: true,
-                                          validator: validateEmail,
-                                          initialValue:
-                                              model.personalInfor["email"] ??
-                                                  "",
-                                          onSaved: (String val) {
-                                            model.personalInfor["email"] = val;
-                                          },
-                                          keyboardType:
-                                              TextInputType.emailAddress,
-                                          enableSuggestions: true,
-                                          decoration: InputDecoration(
-                                            contentPadding:
-                                                EdgeInsets.only(left: 10),
-                                            hintText: "Email",
-                                            border: OutlineInputBorder(
-                                              borderRadius:
-                                                  BorderRadius.circular(10.0),
-                                            ),
-                                            hintStyle: TextStyle(
-                                              fontSize: 18,
-                                              color: Colors.grey,
-                                            ),
-                                          ),
-                                        ),
-                                      ),
-                                      Container(
-                                        padding: EdgeInsets.only(
-                                            top: 3.0, bottom: 5.0, left: 10),
-                                        width: 350,
-                                        height: 50,
-                                        child: DropdownButton<int>(
-                                          autofocus: true,
-                                          underline: Container(
-                                            padding: EdgeInsets.only(left: 10),
-                                            color: Colors.transparent,
-                                          ),
-                                          isExpanded: true,
-                                          value: model.idCity,
-                                          items: [
-                                            DropdownMenuItem(
-                                              child: Text('Địa điểm dạy',
-                                                  style: TextStyle(
-                                                      fontSize: 18.0,
-                                                      color: Colors.grey)),
-                                              value: null,
-                                            ),
-                                            ...List.generate(model.city.length,
-                                                (index) {
-                                              return DropdownMenuItem(
-                                                child: Text(
-                                                    '${model.city[index].name}',
-                                                    style: TextStyle(
-                                                        fontSize: 18.0,
-                                                        color: Colors.grey)),
-                                                value: model.city[index].id,
-                                              );
-                                            }),
-                                          ],
-                                          onChanged: (int value) {
-                                            if (value != model.idCity) {
-                                              model.setIdCity(value);
-                                            }
-                                          },
-                                        ),
-                                        decoration: BoxDecoration(
-                                          border: Border.all(
-                                              color: black, width: 1.5),
-                                          borderRadius:
-                                              BorderRadius.circular(10.0),
-                                        ),
-                                      ),
-                                      SizedBox(height: 30),
-                                      SmallTextField(
-                                          "Địa chỉ hiện tại", address),
-                                      Padding(
-                                        padding: EdgeInsets.only(
-                                            left: 20.0,
-                                            top: 10.0,
-                                            bottom: 10.0),
-                                        child: Text(
-                                          'Ảnh xác thực',
-                                          style: TextStyle(
-                                            fontSize: 20,
-                                            color: Colors.blueGrey,
-                                          ),
-                                        ),
-                                      ),
-                                      Container(
-                                        margin: EdgeInsets.all(10.0),
-                                        // padding: EdgeInsets.all(3.0),
-
-                                        width: 350,
-
-                                        decoration: BoxDecoration(
-                                          border: Border.all(
-                                              color: Colors.blueAccent),
-                                          borderRadius:
-                                              BorderRadius.circular(15.0),
-                                        ),
-                                        child: GestureDetector(
-                                          onTap: () {},
-                                          child: Row(
-                                            children: <Widget>[
-                                              SizedBox(width: 5),
-                                              Image.asset(
-                                                'assets/user.png',
-                                                width: 100,
-                                              ),
-                                              Column(
-                                                crossAxisAlignment:
-                                                    CrossAxisAlignment.start,
-                                                children: <Widget>[
-                                                  Text(
-                                                    'Chứng minh thư mặt trước ',
-                                                    style: TextStyle(
-                                                      color: Colors.blue,
-                                                      fontSize: 15,
-                                                    ),
-                                                  ),
-                                                  Container(
-                                                    width: 200,
-                                                    child: Text(
-                                                      'CMT của bạn sẽ được sử dụng để xác thực. Thông tin này sẽ được chúng tôi bảo mật an toàn.',
-                                                      style: TextStyle(
-                                                        fontSize: 15,
-                                                        fontStyle:
-                                                            FontStyle.normal,
-                                                        color: Colors.black38,
-                                                      ),
-                                                    ),
-                                                  ),
-                                                ],
-                                              ),
-                                            ],
-                                          ),
-                                        ),
-                                      ),
-                                      Container(
-                                        margin: EdgeInsets.all(10.0),
-                                        // padding: EdgeInsets.all(3.0),
-
-                                        width: 350,
-
-                                        decoration: BoxDecoration(
-                                          border: Border.all(
-                                              color: Colors.blueAccent),
-                                          borderRadius:
-                                              BorderRadius.circular(15.0),
-                                        ),
-                                        child: GestureDetector(
-                                          onTap: () {},
-                                          child: Row(
-                                            children: <Widget>[
-                                              SizedBox(width: 5),
-                                              Image.asset(
-                                                'assets/user.png',
-                                                width: 100,
-                                              ),
-                                              Column(
-                                                crossAxisAlignment:
-                                                    CrossAxisAlignment.start,
-                                                children: <Widget>[
-                                                  Text(
-                                                    'Thẻ sinh viên hoặc bằng cấp ',
-                                                    style: TextStyle(
-                                                      color: Colors.blue,
-                                                      fontSize: 15,
-                                                    ),
-                                                  ),
-                                                  Container(
-                                                    width:
-                                                        ScreenUtil.getInstance()
-                                                            .setWidth(440),
-                                                    child: Text(
-                                                      'Thẻ sinh viên/bằng cấp của bạn sẽ được sử dụng để xác thực. Thông tin này sẽ được chúng tôi bảo mật an toàn.',
-                                                      style: TextStyle(
-                                                        fontSize: 15,
-                                                        fontStyle:
-                                                            FontStyle.normal,
-                                                        color: Colors.black38,
-                                                      ),
-                                                    ),
-                                                  ),
-                                                  SizedBox(height: 10),
-                                                ],
-                                              ),
-                                            ],
                                           ),
                                         ),
                                       ),
                                       SizedBox(
-                                        height: ScreenUtil.getInstance()
-                                            .setHeight(50),
+                                        width: 3,
                                       ),
-                                      Divider(
-                                        thickness: 1,
-                                      ),
+                                      Expanded(
+                                          child: Container(
+                                        decoration: BoxDecoration(
+                                          border: Border.all(color: black),
+                                          borderRadius:
+                                              BorderRadius.circular(10),
+                                        ),
+                                        child: IconButton(
+                                            icon: Icon(Icons.calendar_today),
+                                            onPressed: () {
+                                              selectDate(context);
+                                            }),
+                                      )),
                                     ],
                                   )),
-                            ],
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
-                );
-              }
-              return SingleChildScrollView(
-                child: Form(
-                  key: _key1,
-                  autovalidate: _validate,
-                  child: Padding(
-                    padding: EdgeInsets.only(
-                      left: ScreenUtil.getInstance().setWidth(28),
-                      right: ScreenUtil.getInstance().setWidth(28),
-                      top: ScreenUtil.getInstance().setHeight(20),
-                    ),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: <Widget>[
-                        Text(
-                          'Ảnh đại diện',
-                          style: TextStyle(
-                            fontSize: 20,
-                          ),
-                        ),
-                        Container(
-                          margin: EdgeInsets.all(10.0),
-                          // padding: EdgeInsets.all(3.0),
-                          width: 100,
-                          height: 100,
-                          decoration: BoxDecoration(
-                            border: Border.all(color: Colors.blueAccent),
-                            borderRadius: BorderRadius.circular(10.0),
-                          ),
-                          child: GestureDetector(
-                            onTap: chooseImage,
-                            child: imageNull()
-                                ? Image.asset(
-                                    'assets/user.png',
-                                    width: 90,
-                                  )
-                                : showImage(),
-                          ),
-                        ),
-                        Column(
-                          children: <Widget>[
-                            Container(
-                                margin: EdgeInsets.all(15.0),
-                                decoration: BoxDecoration(),
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: <Widget>[
-                                    SmallTextField('Họ và tên', full_name),
-                                    Container(
-                                      padding: EdgeInsets.only(
-                                          top: 3.0, bottom: 5.0, left: 10),
-                                      width: 350,
-                                      height: 50,
-                                      child: DropdownButton<int>(
-                                        autofocus: true,
-                                        underline: Container(
-                                          padding: EdgeInsets.only(left: 10),
-                                          color: Colors.transparent,
-                                        ),
-                                        isExpanded: true,
-                                        value: genderID,
-                                        items: [
-                                          DropdownMenuItem(
-                                            child: Text('Giới tính',
-                                                style: TextStyle(
-                                                    fontSize: 18.0,
-                                                    color: Colors.grey)),
-                                            value: null,
-                                          ),
-                                          ...List.generate(genderList.length,
-                                              (index) {
-                                            return DropdownMenuItem(
-                                              child: Text(
-                                                  '${genderList[index]}',
-                                                  style: TextStyle(
-                                                      fontSize: 18.0,
-                                                      color: Colors.grey)),
-                                              value: index,
-                                            );
-                                          }),
-                                        ],
-                                        onChanged: (int value) {
-                                          if (value != genderID) {
-                                            setState(() {
-                                              genderID = value;
-                                            });
-                                          }
-                                        },
-                                      ),
-                                      decoration: BoxDecoration(
-                                        border: Border.all(
-                                            color: black, width: 1.5),
-                                        borderRadius:
-                                            BorderRadius.circular(10.0),
-                                      ),
+                              SizedBox(height: 20),
+                              Container(
+                                padding: EdgeInsets.only(
+                                    top: 3.0, bottom: 5.0, left: 10),
+                                width: 350,
+                                height: 50,
+                                child: DropdownButton<int>(
+                                  autofocus: true,
+                                  underline: Container(
+                                    padding: EdgeInsets.only(left: 10),
+                                    color: Colors.transparent,
+                                  ),
+                                  isExpanded: true,
+                                  value: model.idVoice,
+                                  items: [
+                                    DropdownMenuItem(
+                                      child: Text('Giọng nói',
+                                          style: TextStyle(
+                                              fontSize: 18.0,
+                                              color: Colors.grey)),
+                                      value: null,
                                     ),
-                                    SizedBox(
-                                      height: 30,
-                                    ),
-                                    Container(
-                                      padding: EdgeInsets.only(
-                                          top: 3.0, bottom: 5.0, left: 10),
-                                      width: 350,
-                                      height: 50,
-                                      child: DropdownButton<int>(
-                                        autofocus: true,
-                                        underline: Container(
-                                          padding: EdgeInsets.only(left: 10),
-                                          color: Colors.transparent,
-                                        ),
-                                        isExpanded: true,
-                                        value: model.idProvince,
-                                        items: [
-                                          DropdownMenuItem(
-                                            child: Text('Quê quán',
-                                                style: TextStyle(
-                                                    fontSize: 18.0,
-                                                    color: Colors.grey)),
-                                            value: null,
-                                          ),
-                                          ...List.generate(
-                                              model.province.length, (index) {
-                                            return DropdownMenuItem(
-                                              child: Text(
-                                                  '${model.province[index].name}',
-                                                  style: TextStyle(
-                                                      fontSize: 18.0,
-                                                      color: Colors.grey)),
-                                              value: model.province[index].id,
-                                            );
-                                          }),
-                                        ],
-                                        onChanged: (int value) {
-                                          if (value != model.idProvince) {
-                                            model.setIdProvince(value);
-                                          }
-                                        },
-                                      ),
-                                      decoration: BoxDecoration(
-                                        border: Border.all(
-                                            color: black, width: 1.5),
-                                        borderRadius:
-                                            BorderRadius.circular(10.0),
-                                      ),
-                                    ),
-                                    SizedBox(height: 20),
-                                    Container(
-                                        padding: EdgeInsets.only(
-                                            top: 3.0, bottom: 3.0),
-                                        width: 350,
-                                        height: 80,
-                                        child: Row(
-                                          children: <Widget>[
-                                            Expanded(
-                                              flex: 8,
-                                              child: TextFormField(
-                                                controller: birthdate,
-                                                autofocus: true,
-                                                validator: validate,
-                                                onSaved: (String val) {
-                                                  if (dateTimeNull()) {
-                                                    birthdate.text = val;
-                                                  } else {
-                                                    birthdate.text = formatDate(
-                                                        _date, [
-                                                      dd,
-                                                      '/',
-                                                      mm,
-                                                      '/',
-                                                      yyyy
-                                                    ]);
-                                                  }
-                                                },
-                                                enableSuggestions: true,
-                                                decoration: InputDecoration(
-                                                  contentPadding:
-                                                      EdgeInsets.only(left: 10),
-                                                  hintText: 'Ngày sinh',
-                                                  border: OutlineInputBorder(
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            10.0),
-                                                  ),
-                                                  hintStyle: TextStyle(
-                                                    fontSize: 18,
-                                                    fontFamily: 'UTM',
-                                                    color: Colors.grey[400],
-                                                  ),
-                                                ),
-                                              ),
-                                            ),
-                                            SizedBox(
-                                              width: 3,
-                                            ),
-                                            Expanded(
-                                                child: Container(
-                                              decoration: BoxDecoration(
-                                                border:
-                                                    Border.all(color: black),
-                                                borderRadius:
-                                                    BorderRadius.circular(10),
-                                              ),
-                                              child: IconButton(
-                                                  icon: Icon(
-                                                      Icons.calendar_today),
-                                                  onPressed: () {
-                                                    selectDate(context);
-                                                  }),
-                                            )),
-                                          ],
-                                        )),
-                                    SizedBox(height: 20),
-                                    Container(
-                                      padding: EdgeInsets.only(
-                                          top: 3.0, bottom: 5.0, left: 10),
-                                      width: 350,
-                                      height: 50,
-                                      child: DropdownButton<int>(
-                                        autofocus: true,
-                                        underline: Container(
-                                          padding: EdgeInsets.only(left: 10),
-                                          color: Colors.transparent,
-                                        ),
-                                        isExpanded: true,
-                                        value: model.idVoice,
-                                        items: [
-                                          DropdownMenuItem(
-                                            child: Text('Giọng nói',
-                                                style: TextStyle(
-                                                    fontSize: 18.0,
-                                                    color: Colors.grey)),
-                                            value: null,
-                                          ),
-                                          ...List.generate(model.voice.length,
-                                              (index) {
-                                            return DropdownMenuItem(
-                                              child: Text(
-                                                  '${model.voice[index].name}',
-                                                  style: TextStyle(
-                                                      fontSize: 18.0,
-                                                      color: Colors.grey)),
-                                              value: model.voice[index].id,
-                                            );
-                                          }),
-                                        ],
-                                        onChanged: (int value) {
-                                          if (value != model.idVoice) {
-                                            model.setIdVoice(value);
-                                          }
-                                        },
-                                      ),
-                                      decoration: BoxDecoration(
-                                        border: Border.all(
-                                            color: black, width: 1.5),
-                                        borderRadius:
-                                            BorderRadius.circular(10.0),
-                                      ),
-                                    ),
-                                    SizedBox(height: 30),
-                                    SmallTextField(
-                                        'Link Facebook của bạn', facebook),
-                                    Container(
-                                      width: 350,
-                                      height: 80,
-                                      child: TextFormField(
-                                        autofocus: true,
-                                        validator: validate,
-                                        onSaved: (String val) {
-                                          phone_number.text = val;
-                                          // if (val !=
-                                          //     model.authenticationService.identification_number) {
-                                          //   phone_number.text = val;
-                                          // }
-                                        },
-                                        keyboardType: TextInputType.phone,
-                                        controller: phone_number,
-                                        enableSuggestions: true,
-                                        decoration: InputDecoration(
-                                          contentPadding:
-                                              EdgeInsets.only(left: 10),
-                                          hintText: "Số điện thoại",
-                                          border: OutlineInputBorder(
-                                            borderRadius:
-                                                BorderRadius.circular(10.0),
-                                          ),
-                                          hintStyle: TextStyle(
-                                            fontSize: 18,
-                                            fontFamily: 'UTM',
-                                            color: Colors.grey,
-                                          ),
-                                        ),
-                                      ),
-                                    ),
-                                    Container(
-                                      width: 350,
-                                      height: 80,
-                                      child: TextFormField(
-                                        autofocus: true,
-                                        validator: validateEmail,
-                                        onSaved: (String val) {
-                                          model.personalInfor["email"] = val;
-                                        },
-                                        keyboardType:
-                                            TextInputType.emailAddress,
-                                        enableSuggestions: true,
-                                        decoration: InputDecoration(
-                                          contentPadding:
-                                              EdgeInsets.only(left: 10),
-                                          hintText: "Email",
-                                          border: OutlineInputBorder(
-                                            borderRadius:
-                                                BorderRadius.circular(10.0),
-                                          ),
-                                          hintStyle: TextStyle(
-                                            fontSize: 18,
-                                            color: Colors.grey,
-                                          ),
-                                        ),
-                                      ),
-                                    ),
-                                    Container(
-                                      padding: EdgeInsets.only(
-                                          top: 3.0, bottom: 5.0, left: 10),
-                                      width: 350,
-                                      height: 50,
-                                      child: DropdownButton<int>(
-                                        autofocus: true,
-                                        underline: Container(
-                                          padding: EdgeInsets.only(left: 10),
-                                          color: Colors.transparent,
-                                        ),
-                                        isExpanded: true,
-                                        value: model.idCity,
-                                        items: [
-                                          DropdownMenuItem(
-                                            child: Text('Địa điểm dạy',
-                                                style: TextStyle(
-                                                    fontSize: 18.0,
-                                                    color: Colors.grey)),
-                                            value: null,
-                                          ),
-                                          ...List.generate(model.city.length,
-                                              (index) {
-                                            return DropdownMenuItem(
-                                              child: Text(
-                                                  '${model.city[index].name}',
-                                                  style: TextStyle(
-                                                      fontSize: 18.0,
-                                                      color: Colors.grey)),
-                                              value: model.city[index].id,
-                                            );
-                                          }),
-                                        ],
-                                        onChanged: (int value) {
-                                          if (value != model.idCity) {
-                                            model.setIdCity(value);
-                                          }
-                                        },
-                                      ),
-                                      decoration: BoxDecoration(
-                                        border: Border.all(
-                                            color: black, width: 1.5),
-                                        borderRadius:
-                                            BorderRadius.circular(10.0),
-                                      ),
-                                    ),
-                                    SizedBox(height: 30),
-                                    Container(
-                                      width:
-                                          SizeConfig.safeBlockHorizontal * 85,
-                                      height: 80,
-                                      child: TextFormField(
-                                        onTap: () async {
-                                          Prediction prediction =
-                                              await PlacesAutocomplete.show(
-                                                  context: context,
-                                                  apiKey:
-                                                      "AIzaSyBq6cLIE1fz2zyJjuPFvg8CUHcs5kBihss",
-                                                  language: "vi",
-                                                  components: [
-                                                Component(
-                                                    Component.country, "vn")
-                                              ]);
-                                        },
-                                        autofocus: true,
-                                        validator: validate,
-                                        onSaved: (String val) {
-                                          address.text = val;
-                                        },
-                                        controller: address,
-                                        enableSuggestions: true,
-                                        decoration: InputDecoration(
-                                          contentPadding:
-                                              EdgeInsets.only(left: 10),
-                                          hintText: "Địa chỉ hiện tại",
-                                          border: OutlineInputBorder(
-                                            borderRadius:
-                                                BorderRadius.circular(10.0),
-                                          ),
-                                          hintStyle: TextStyle(
-                                            fontSize: 18,
-                                            fontFamily: 'UTM',
-                                            color: Colors.grey,
-                                          ),
-                                        ),
-                                      ),
-                                    ),
-                                    Container(
-                                      height:
-                                          MediaQuery.of(context).size.height,
-                                      width: MediaQuery.of(context).size.width,
-                                      child: GoogleMap(
-                                        initialCameraPosition: CameraPosition(
-                                          target:
-                                              LatLng(37.4219999, -122.0862462),
-                                        ),
-                                        onMapCreated:
-                                            (GoogleMapController controller) {},
-                                      ),
-                                    ),
-                                    Padding(
-                                      padding: EdgeInsets.only(
-                                          left: 20.0, top: 10.0, bottom: 10.0),
-                                      child: Text(
-                                        'Ảnh xác thực',
-                                        style: TextStyle(
-                                          fontSize: 20,
-                                          color: Colors.blueGrey,
-                                        ),
-                                      ),
-                                    ),
-                                    Container(
-                                      margin: EdgeInsets.all(10.0),
-                                      // padding: EdgeInsets.all(3.0),
-
-                                      width: 350,
-
-                                      decoration: BoxDecoration(
-                                        border: Border.all(
-                                            color: Colors.blueAccent),
-                                        borderRadius:
-                                            BorderRadius.circular(15.0),
-                                      ),
-                                      child: GestureDetector(
-                                        onTap: () {},
-                                        child: Row(
-                                          children: <Widget>[
-                                            SizedBox(width: 5),
-                                            Image.asset(
-                                              'assets/user.png',
-                                              width: 100,
-                                            ),
-                                            Column(
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.start,
-                                              children: <Widget>[
-                                                Text(
-                                                  'Chứng minh thư mặt trước ',
-                                                  style: TextStyle(
-                                                    color: Colors.blue,
-                                                    fontSize: 15,
-                                                  ),
-                                                ),
-                                                Container(
-                                                  width: 200,
-                                                  child: Text(
-                                                    'CMT của bạn sẽ được sử dụng để xác thực. Thông tin này sẽ được chúng tôi bảo mật an toàn.',
-                                                    style: TextStyle(
-                                                      fontSize: 15,
-                                                      fontStyle:
-                                                          FontStyle.normal,
-                                                      color: Colors.black38,
-                                                    ),
-                                                  ),
-                                                ),
-                                              ],
-                                            ),
-                                          ],
-                                        ),
-                                      ),
-                                    ),
-                                    Container(
-                                      margin: EdgeInsets.all(10.0),
-                                      // padding: EdgeInsets.all(3.0),
-
-                                      width: 350,
-
-                                      decoration: BoxDecoration(
-                                        border: Border.all(
-                                            color: Colors.blueAccent),
-                                        borderRadius:
-                                            BorderRadius.circular(15.0),
-                                      ),
-                                      child: GestureDetector(
-                                        onTap: () {},
-                                        child: Row(
-                                          children: <Widget>[
-                                            SizedBox(width: 5),
-                                            Image.asset(
-                                              'assets/user.png',
-                                              width: 100,
-                                            ),
-                                            Column(
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.start,
-                                              children: <Widget>[
-                                                Text(
-                                                  'Thẻ sinh viên hoặc bằng cấp ',
-                                                  style: TextStyle(
-                                                    color: Colors.blue,
-                                                    fontSize: 15,
-                                                  ),
-                                                ),
-                                                Container(
-                                                  width:
-                                                      ScreenUtil.getInstance()
-                                                          .setWidth(440),
-                                                  child: Text(
-                                                    'Thẻ sinh viên/bằng cấp của bạn sẽ được sử dụng để xác thực. Thông tin này sẽ được chúng tôi bảo mật an toàn.',
-                                                    style: TextStyle(
-                                                      fontSize: 15,
-                                                      fontStyle:
-                                                          FontStyle.normal,
-                                                      color: Colors.black38,
-                                                    ),
-                                                  ),
-                                                ),
-                                                SizedBox(height: 10),
-                                              ],
-                                            ),
-                                          ],
-                                        ),
-                                      ),
-                                    ),
-                                    SizedBox(
-                                      height: ScreenUtil.getInstance()
-                                          .setHeight(50),
-                                    ),
-                                    Divider(
-                                      thickness: 1,
-                                    ),
+                                    ...List.generate(model.voice.length,
+                                        (index) {
+                                      return DropdownMenuItem(
+                                        child: Text(
+                                            '${model.voice[index].name}',
+                                            style: TextStyle(
+                                                fontSize: 18.0,
+                                                color: Colors.grey)),
+                                        value: model.voice[index].id,
+                                      );
+                                    }),
                                   ],
-                                )),
-                          ],
-                        ),
-                      ],
-                    ),
+                                  onChanged: (int value) {
+                                    if (value != model.idVoice) {
+                                      model.setIdVoice(value);
+                                    }
+                                  },
+                                ),
+                                decoration: BoxDecoration(
+                                  border: Border.all(color: black, width: 1.5),
+                                  borderRadius: BorderRadius.circular(10.0),
+                                ),
+                              ),
+                              SizedBox(height: 30),
+                              SmallTextField('Link Facebook của bạn', facebook),
+                              Container(
+                                width: 350,
+                                height: 80,
+                                child: TextFormField(
+                                  autofocus: true,
+                                  validator: validate,
+                                  onSaved: (String val) {
+                                    phone_number.text = val;
+                                    // if (val !=
+                                    //     model.authenticationService.identification_number) {
+                                    //   phone_number.text = val;
+                                    // }
+                                  },
+                                  keyboardType: TextInputType.phone,
+                                  controller: phone_number,
+                                  enableSuggestions: true,
+                                  decoration: InputDecoration(
+                                    contentPadding: EdgeInsets.only(left: 10),
+                                    hintText: "Số điện thoại",
+                                    border: OutlineInputBorder(
+                                      borderRadius: BorderRadius.circular(10.0),
+                                    ),
+                                    hintStyle: TextStyle(
+                                      fontSize: 18,
+                                      fontFamily: 'UTM',
+                                      color: Colors.grey,
+                                    ),
+                                  ),
+                                ),
+                              ),
+                              Container(
+                                width: 350,
+                                height: 80,
+                                child: TextFormField(
+                                  autofocus: true,
+                                  validator: validateEmail,
+                                  initialValue:
+                                      model.personalInfor["email"] ?? "",
+                                  onSaved: (String val) {
+                                    model.personalInfor["email"] = val;
+                                  },
+                                  keyboardType: TextInputType.emailAddress,
+                                  enableSuggestions: true,
+                                  decoration: InputDecoration(
+                                    contentPadding: EdgeInsets.only(left: 10),
+                                    hintText: "Email",
+                                    border: OutlineInputBorder(
+                                      borderRadius: BorderRadius.circular(10.0),
+                                    ),
+                                    hintStyle: TextStyle(
+                                      fontSize: 18,
+                                      color: Colors.grey,
+                                    ),
+                                  ),
+                                ),
+                              ),
+                              Container(
+                                padding: EdgeInsets.only(
+                                    top: 3.0, bottom: 5.0, left: 10),
+                                width: 350,
+                                height: 50,
+                                child: DropdownButton<int>(
+                                  autofocus: true,
+                                  underline: Container(
+                                    padding: EdgeInsets.only(left: 10),
+                                    color: Colors.transparent,
+                                  ),
+                                  isExpanded: true,
+                                  value: model.idCity,
+                                  items: [
+                                    DropdownMenuItem(
+                                      child: Text('Địa điểm dạy',
+                                          style: TextStyle(
+                                              fontSize: 18.0,
+                                              color: Colors.grey)),
+                                      value: null,
+                                    ),
+                                    ...List.generate(model.city.length,
+                                        (index) {
+                                      return DropdownMenuItem(
+                                        child: Text('${model.city[index].name}',
+                                            style: TextStyle(
+                                                fontSize: 18.0,
+                                                color: Colors.grey)),
+                                        value: model.city[index].id,
+                                      );
+                                    }),
+                                  ],
+                                  onChanged: (int value) {
+                                    if (value != model.idCity) {
+                                      model.setIdCity(value);
+                                    }
+                                  },
+                                ),
+                                decoration: BoxDecoration(
+                                  border: Border.all(color: black, width: 1.5),
+                                  borderRadius: BorderRadius.circular(10.0),
+                                ),
+                              ),
+                              SizedBox(height: 30),
+                              SmallTextField("Địa chỉ hiện tại", address),
+                              Padding(
+                                padding: EdgeInsets.only(
+                                    left: 20.0, top: 10.0, bottom: 10.0),
+                                child: Text(
+                                  'Ảnh xác thực',
+                                  style: TextStyle(
+                                    fontSize: 20,
+                                    color: Colors.blueGrey,
+                                  ),
+                                ),
+                              ),
+                              Container(
+                                margin: EdgeInsets.all(10.0),
+                                // padding: EdgeInsets.all(3.0),
+
+                                width: 350,
+
+                                decoration: BoxDecoration(
+                                  border: Border.all(color: Colors.blueAccent),
+                                  borderRadius: BorderRadius.circular(15.0),
+                                ),
+                                child: GestureDetector(
+                                  onTap: () {},
+                                  child: Row(
+                                    children: <Widget>[
+                                      SizedBox(width: 5),
+                                      Image.asset(
+                                        'assets/user.png',
+                                        width: 100,
+                                      ),
+                                      Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: <Widget>[
+                                          Text(
+                                            'Chứng minh thư mặt trước ',
+                                            style: TextStyle(
+                                              color: Colors.blue,
+                                              fontSize: 15,
+                                            ),
+                                          ),
+                                          Container(
+                                            width: 200,
+                                            child: Text(
+                                              'CMT của bạn sẽ được sử dụng để xác thực. Thông tin này sẽ được chúng tôi bảo mật an toàn.',
+                                              style: TextStyle(
+                                                fontSize: 15,
+                                                fontStyle: FontStyle.normal,
+                                                color: Colors.black38,
+                                              ),
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ),
+                              Container(
+                                margin: EdgeInsets.all(10.0),
+                                // padding: EdgeInsets.all(3.0),
+
+                                width: 350,
+
+                                decoration: BoxDecoration(
+                                  border: Border.all(color: Colors.blueAccent),
+                                  borderRadius: BorderRadius.circular(15.0),
+                                ),
+                                child: GestureDetector(
+                                  onTap: () {},
+                                  child: Row(
+                                    children: <Widget>[
+                                      SizedBox(width: 5),
+                                      Image.asset(
+                                        'assets/user.png',
+                                        width: 100,
+                                      ),
+                                      Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: <Widget>[
+                                          Text(
+                                            'Thẻ sinh viên hoặc bằng cấp ',
+                                            style: TextStyle(
+                                              color: Colors.blue,
+                                              fontSize: 15,
+                                            ),
+                                          ),
+                                          Container(
+                                            width: ScreenUtil.getInstance()
+                                                .setWidth(440),
+                                            child: Text(
+                                              'Thẻ sinh viên/bằng cấp của bạn sẽ được sử dụng để xác thực. Thông tin này sẽ được chúng tôi bảo mật an toàn.',
+                                              style: TextStyle(
+                                                fontSize: 15,
+                                                fontStyle: FontStyle.normal,
+                                                color: Colors.black38,
+                                              ),
+                                            ),
+                                          ),
+                                          SizedBox(height: 10),
+                                        ],
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ),
+                              SizedBox(
+                                height: ScreenUtil.getInstance().setHeight(50),
+                              ),
+                              Divider(
+                                thickness: 1,
+                              ),
+                            ],
+                          )),
+                    ],
                   ),
-                ),
-              );
-            },
-          );
-        },
-      ),
+                ],
+              ),
+            ),
+          ),
+        );
+      }),
       bottomNavigationBar: Consumer<PersonalInforModel>(
         builder: (_, model, __) {
           // print(model.user.full_name);

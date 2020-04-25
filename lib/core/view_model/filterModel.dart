@@ -1,18 +1,17 @@
 import 'package:flutter/cupertino.dart';
-import 'package:test_giasu/core/model/List_TeacherData.dart' as filter;
-import 'package:test_giasu/core/model/List_TeacherData.dart';
 import 'package:test_giasu/core/model/locationservice.dart';
 import 'package:test_giasu/core/model/provincesService.dart';
 import 'package:test_giasu/core/model/subjectservice.dart';
 import 'package:test_giasu/core/model/educationsservice.dart';
 import 'package:test_giasu/core/model/formTeachingService.dart';
+import 'package:test_giasu/core/model/user.dart' as filter;
+import 'package:test_giasu/core/model/user.dart';
 import 'package:test_giasu/core/model/voiceService.dart';
 
 class FilterModel extends ChangeNotifier {
   FilterModel() {
     init();
   }
-
   bool _busy = false;
   bool get busy => _busy;
   void setBusy(bool value) {

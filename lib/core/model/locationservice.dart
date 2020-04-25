@@ -1,8 +1,9 @@
 import 'dart:convert';
 
 import 'package:http/http.dart' as http;
+import 'package:test_giasu/core/model/user.dart' as filter;
 
-import 'List_TeacherData.dart' as filter;
+
 
 class LocationService {
   static final LocationService instance = LocationService.internal();

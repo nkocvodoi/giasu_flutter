@@ -51,7 +51,7 @@ class List_Box extends StatelessWidget {
                                   Container(
                                     width: 310,
                                     child: Text(
-                                      "Mã Lớp: ${box[index].id} - ${box[index].subject.name} lớp ${box[index].grade}",
+                                      "Mã Lớp: ${box[index].id} - ${box[index].subject.name}| Lớp ${box[index].grade}",
                                       style: TextStyle(
                                         fontSize: 16,
                                         color: blue,

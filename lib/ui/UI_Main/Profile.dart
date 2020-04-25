@@ -113,465 +113,455 @@ class _ProfileState extends State<Profile> {
           future: Provider.of<ProfileModel>(context).fetchProfile(),
           builder: (context, snapshot) {
             if (snapshot.hasData) {
-             print('logggg');
+              print('logggg');
               DataUser _data = snapshot.data;
-             print('log' + snapshot.data.toString());
-              return Stack(fit: StackFit.expand, children: <Widget>[
-                SingleChildScrollView(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: <Widget>[
-                      Container(
-                        width: double.infinity,
-                        height: SizeConfig.safeBlockVertical * 35,
-                        child: Stack(
-                          children: <Widget>[
-                            Container(
-                              width: double.infinity,
-                              height: SizeConfig.safeBlockVertical * 27,
-                              alignment: Alignment.center,
-                              color: colorApp,
-                            ),
-                            Align(
-                              alignment: Alignment.bottomCenter,
-                              child: Container(
-                                width: SizeConfig.safeBlockHorizontal * 40,
-                                height: SizeConfig.safeBlockHorizontal * 40,
-                                decoration: BoxDecoration(
-                                  border:
-                                      Border.all(width: 3, color: Colors.white),
-                                  color: Colors.white,
-                                ),
-                                child: Expanded(
-                                  child: Image.asset('assets/red.jpg'),
+              print('log' + snapshot.data.toString());
+              return SingleChildScrollView(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: <Widget>[
+                    Container(
+                      width: double.infinity,
+                      height: SizeConfig.safeBlockVertical * 35,
+                      child: Stack(
+                        children: <Widget>[
+                          Container(
+                            width: double.infinity,
+                            height: SizeConfig.safeBlockVertical * 27,
+                            alignment: Alignment.center,
+                            color: colorApp,
+                          ),
+                          Align(
+                            alignment: Alignment.bottomCenter,
+                            child: Container(
+                              width: SizeConfig.safeBlockHorizontal * 40,
+                              height: SizeConfig.safeBlockHorizontal * 40,
+                              decoration: BoxDecoration(
+                                border:
+                                    Border.all(width: 3, color: Colors.white),
+                                color: Colors.white,
+                              ),
+
+                              child: Image.asset('assets/red.jpg'),
 //                                    ),
 //                                    child: Expanded(
 //                                      child: Image.network(
 //                                          'https://giasu.htcon.vn' + _data.avatar ),
 //                                    ),
-                                ),
-                              ),
-                            )
-                          ],
-                        ),
-                      ),
-                      SizedBox(
-                        height: 20,
-                      ),
-                      Container(
-                        alignment: Alignment.topCenter,
-                        width: double.infinity,
-                        child: Row(
-                          children: <Widget>[
-                            Expanded(child: SizedBox()),
-                            Icon(Icons.business_center, color: Colors.green),
-                            SizedBox(
-                              width: ScreenUtil.getInstance().setWidth(20),
                             ),
-                            RichText(
-                              textAlign: TextAlign.start,
-                              text: TextSpan(
-                                children: <TextSpan>[
-                                  TextSpan(
-                                    text: 'ID Gia Sư: ',
-                                    style: TextStyle(
-                                      fontSize:
-                                          SizeConfig.safeBlockHorizontal * 5,
-                                      color: Colors.grey,
-                                    ),
-                                  ),
-                                  TextSpan(
-                                    text: ' ${_data.id}',
-                                    style: TextStyle(
-                                      color: Colors.black,
-                                      fontSize:
-                                          SizeConfig.safeBlockHorizontal * 5,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ),
-                            Expanded(child: SizedBox()),
-                          ],
-                        ),
+                          )
+                        ],
                       ),
-                      SizedBox(
-                        height: 30,
-                      ),
-                      Container(
-                        width: ScreenUtil.getInstance().setWidth(700),
-                        child: Center(
-                          child: Row(
-                            children: <Widget>[
-                              SizedBox(
-                                width: 20,
-                              ),
-                              Text(
-                                '${_data.full_name}',
-                                style: TextStyle(
-                                  color: blue,
-                                  fontWeight: FontWeight.bold,
-                                  fontSize:
-                                      SizeConfig.safeBlockHorizontal * 3.5,
-                                ),
-                              ),
-                              Expanded(
-                                child: SizedBox(),
-                              ),
-                              // _iconTextBox(
-                              //     Text(
-                              //       'Bỏ thích',
-                              //       style: TextStyle(
-                              //           fontSize:
-                              //               SizeConfig.safeBlockHorizontal * 3,
-                              //           color: Colors.white),
-                              //     ),
-                              //     Icon(
-                              //       MaterialCommunityIcons.thumb_up,
-                              //       size: SizeConfig.safeBlockHorizontal * 3,
-                              //       color: Colors.white,
-                              //     ),
-                              //     colorApp,
-                              //     50),
-                              // SizedBox(width: 10),
-                              // _iconTextBox(
-                              //     Text(
-                              //       'Đánh giá',
-                              //       style: TextStyle(
-                              //           fontSize:
-                              //               SizeConfig.safeBlockHorizontal * 3,
-                              //           color: Colors.white),
-                              //     ),
-                              //     Icon(
-                              //       MaterialCommunityIcons.star,
-                              //       size: SizeConfig.safeBlockHorizontal * 3,
-                              //       color: Colors.white,
-                              //     ),
-                              //     colorApp,
-                              //     50),
-                              // SizedBox(
-                              //   width: 20,
-                              // ),
-                            ],
+                    ),
+                    SizedBox(
+                      height: 20,
+                    ),
+                    Container(
+                      alignment: Alignment.topCenter,
+                      width: double.infinity,
+                      child: Row(
+                        children: <Widget>[
+                          Expanded(child: SizedBox()),
+                          Icon(Icons.business_center, color: Colors.green),
+                          SizedBox(
+                            width: ScreenUtil.getInstance().setWidth(20),
                           ),
-                        ),
+                          RichText(
+                            textAlign: TextAlign.start,
+                            text: TextSpan(
+                              children: <TextSpan>[
+                                TextSpan(
+                                  text: 'ID Gia Sư: ',
+                                  style: TextStyle(
+                                    fontSize:
+                                        SizeConfig.safeBlockHorizontal * 5,
+                                    color: Colors.grey,
+                                  ),
+                                ),
+                                TextSpan(
+                                  text: ' ${_data.id}',
+                                  style: TextStyle(
+                                    color: Colors.black,
+                                    fontSize:
+                                        SizeConfig.safeBlockHorizontal * 5,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                          Expanded(child: SizedBox()),
+                        ],
                       ),
-                      Divider(thickness: 1),
-                      Container(
+                    ),
+                    SizedBox(
+                      height: 30,
+                    ),
+                    Container(
+                      width: ScreenUtil.getInstance().setWidth(700),
+                      child: Center(
                         child: Row(
                           children: <Widget>[
-                            SizedBox(width: SizeConfig.safeBlockHorizontal * 1),
-                            Icon(MaterialCommunityIcons.book),
-                            SizedBox(width: 5),
-                            ConstrainedBox(
-                              constraints: BoxConstraints(
-                                minWidth: SizeConfig.safeBlockHorizontal * 20,
-                                maxWidth: SizeConfig.safeBlockHorizontal * 50,
-                                minHeight: SizeConfig.safeBlockHorizontal * 5,
-                                maxHeight: SizeConfig.safeBlockHorizontal * 10,
-                              ),
-                              child: AutoSizeText(
-                                "${_data.subject_text}",
-                                maxFontSize: 16,
-                                maxLines: 2,
-                                style: TextStyle(
-                                  fontWeight: FontWeight.bold,
-                                ),
-                              ),
-                            ),
                             SizedBox(
                               width: 20,
                             ),
-                            Icon(
-                              MaterialCommunityIcons.tag,
-                              color: Colors.red,
-                            ),
-                            SizedBox(
-                              width: 5,
-                            ),
                             Text(
-                              '${_data.tuition_fee} vnđ/buổi',
-                              style: TextStyle(color: Colors.red, fontSize: 16),
-                            ),
-                          ],
-                        ),
-                      ),
-                      Divider(
-                        thickness: 1,
-                      ),
-                      Container(
-                        child: Row(
-                          children: <Widget>[
-                            SizedBox(width: SizeConfig.safeBlockHorizontal * 1),
-                            Icon(
-                              Icons.location_on,
-                              color: blue,
-                            ),
-                            SizedBox(width: SizeConfig.safeBlockHorizontal * 1),
-                            Text(
-                              '${_data.location}',
+                              '${_data.full_name}',
                               style: TextStyle(
                                 color: blue,
                                 fontWeight: FontWeight.bold,
-                                fontSize: 16,
+                                fontSize: SizeConfig.safeBlockHorizontal * 3.5,
                               ),
                             ),
-                            SizedBox(width: SizeConfig.safeBlockHorizontal * 3),
-                            Icon(Icons.business_center, color: Colors.black),
-                            SizedBox(width: SizeConfig.safeBlockHorizontal * 1),
-                            ConstrainedBox(
-                              constraints: BoxConstraints(
-                                minWidth: SizeConfig.safeBlockHorizontal * 20,
-                                maxWidth: SizeConfig.safeBlockHorizontal * 70,
-                                minHeight: SizeConfig.safeBlockHorizontal * 3,
-                                maxHeight: SizeConfig.safeBlockHorizontal * 5,
-                              ),
-                              child: AutoSizeText(
-                                // (_data.form_teachings.length == 2)
-                                //     ? _data.form_teachings[0].name +
-                                //         ', ' +
-                                //         _data.form_teachings[1].name
-                                //     : "${_data.form_teachings[0].name}",
-                                "null",
-                                maxLines: 1,
-                                maxFontSize: 16,
-                                style: TextStyle(
-                                    color: Colors.black,
-                                    fontWeight: FontWeight.bold),
-                              ),
+                            Expanded(
+                              child: SizedBox(),
                             ),
+                            // _iconTextBox(
+                            //     Text(
+                            //       'Bỏ thích',
+                            //       style: TextStyle(
+                            //           fontSize:
+                            //               SizeConfig.safeBlockHorizontal * 3,
+                            //           color: Colors.white),
+                            //     ),
+                            //     Icon(
+                            //       MaterialCommunityIcons.thumb_up,
+                            //       size: SizeConfig.safeBlockHorizontal * 3,
+                            //       color: Colors.white,
+                            //     ),
+                            //     colorApp,
+                            //     50),
+                            // SizedBox(width: 10),
+                            // _iconTextBox(
+                            //     Text(
+                            //       'Đánh giá',
+                            //       style: TextStyle(
+                            //           fontSize:
+                            //               SizeConfig.safeBlockHorizontal * 3,
+                            //           color: Colors.white),
+                            //     ),
+                            //     Icon(
+                            //       MaterialCommunityIcons.star,
+                            //       size: SizeConfig.safeBlockHorizontal * 3,
+                            //       color: Colors.white,
+                            //     ),
+                            //     colorApp,
+                            //     50),
+                            // SizedBox(
+                            //   width: 20,
+                            // ),
                           ],
                         ),
                       ),
-                      Divider(
-                        thickness: 1,
-                      ),
-                      SizedBox(height: 30),
-                      Container(
-                        height: SizeConfig.safeBlockHorizontal * 30,
-                        child: Row(
-                          mainAxisSize: MainAxisSize.max,
-                          children: <Widget>[
-                            Expanded(child: SizedBox()),
-                            _box(
-                                (_data.course_count == null)
-                                    ? 0
-                                    : _data.course_count,
-                                'Lớp đã dạy'),
-                            Expanded(child: SizedBox()),
-                            _box(
-                                (_data.like_count == null)
-                                    ? 0
-                                    : _data.like_count,
-                                'Lượt thích'),
-                            Expanded(child: SizedBox()),
-                            _box(
-                                (_data.promotion_coin == null)
-                                    ? 0
-                                    : _data.promotion_coin,
-                                'Lượt đánh giá'),
-                            Expanded(child: SizedBox()),
-                          ],
-                        ),
-                      ),
-                      SizedBox(
-                        height: ScreenUtil.getInstance().setHeight(50),
-                      ),
-                      Container(
-                        width: SizeConfig.safeBlockHorizontal * 90,
-                        alignment: Alignment.bottomLeft,
-                        child: Text(
-                          'THÔNG TIN GIA SƯ',
-                          style: TextStyle(
-                            fontSize: 20,
-                            fontStyle: FontStyle.normal,
-                            color: blue,
+                    ),
+                    Divider(thickness: 1),
+                    Row(
+                      children: <Widget>[
+                        SizedBox(width: SizeConfig.safeBlockHorizontal * 1),
+                        Icon(MaterialCommunityIcons.book),
+                        SizedBox(width: 5),
+                        ConstrainedBox(
+                          constraints: BoxConstraints(
+                            minWidth: SizeConfig.safeBlockHorizontal * 20,
+                            maxWidth: SizeConfig.safeBlockHorizontal * 50,
+                            minHeight: SizeConfig.safeBlockHorizontal * 5,
+                            maxHeight: SizeConfig.safeBlockHorizontal * 10,
+                          ),
+                          child: AutoSizeText(
+                            "${_data.subject_text}",
+                            maxFontSize: 16,
+                            maxLines: 2,
+                            style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                            ),
                           ),
                         ),
+                        SizedBox(
+                          width: 20,
+                        ),
+                        Icon(
+                          MaterialCommunityIcons.tag,
+                          color: Colors.red,
+                        ),
+                        SizedBox(
+                          width: 5,
+                        ),
+                        Text(
+                          '${_data.tuition_fee} vnđ/buổi',
+                          style: TextStyle(color: Colors.red, fontSize: 16),
+                        ),
+                      ],
+                    ),
+                    Divider(
+                      thickness: 1,
+                    ),
+                    Row(
+                      children: <Widget>[
+                        SizedBox(width: SizeConfig.safeBlockHorizontal * 1),
+                        Icon(
+                          Icons.location_on,
+                          color: blue,
+                        ),
+                        SizedBox(width: SizeConfig.safeBlockHorizontal * 1),
+                        Text(
+                          '${_data.location}',
+                          style: TextStyle(
+                            color: blue,
+                            fontWeight: FontWeight.bold,
+                            fontSize: 16,
+                          ),
+                        ),
+                        SizedBox(width: SizeConfig.safeBlockHorizontal * 3),
+                        Icon(Icons.business_center, color: Colors.black),
+                        SizedBox(width: SizeConfig.safeBlockHorizontal * 1),
+                        ConstrainedBox(
+                          constraints: BoxConstraints(
+                            minWidth: SizeConfig.safeBlockHorizontal * 20,
+                            maxWidth: SizeConfig.safeBlockHorizontal * 70,
+                            minHeight: SizeConfig.safeBlockHorizontal * 3,
+                            maxHeight: SizeConfig.safeBlockHorizontal * 5,
+                          ),
+                          child: AutoSizeText(
+                            // (_data.form_teachings.length == 2)
+                            //     ? _data.form_teachings[0].name +
+                            //         ', ' +
+                            //         _data.form_teachings[1].name
+                            //     : "${_data.form_teachings[0].name}",
+                            "null",
+                            maxLines: 1,
+                            maxFontSize: 16,
+                            style: TextStyle(
+                                color: Colors.black,
+                                fontWeight: FontWeight.bold),
+                          ),
+                        ),
+                      ],
+                    ),
+                    Divider(
+                      thickness: 1,
+                    ),
+                    SizedBox(height: 30),
+                    Container(
+                      height: SizeConfig.safeBlockHorizontal * 30,
+                      child: Row(
+                        mainAxisSize: MainAxisSize.max,
+                        children: <Widget>[
+                          Expanded(child: SizedBox()),
+                          _box(
+                              (_data.course_count == null)
+                                  ? 0
+                                  : _data.course_count,
+                              'Lớp đã dạy'),
+                          Expanded(child: SizedBox()),
+                          _box(
+                              (_data.like_count == null) ? 0 : _data.like_count,
+                              'Lượt thích'),
+                          Expanded(child: SizedBox()),
+                          _box(
+                              (_data.promotion_coin == null)
+                                  ? 0
+                                  : _data.promotion_coin,
+                              'Lượt đánh giá'),
+                          Expanded(child: SizedBox()),
+                        ],
                       ),
-                      Divider(
-                        thickness: 1,
-                        indent: SizeConfig.safeBlockHorizontal * 5,
-                        endIndent: SizeConfig.safeBlockHorizontal * 5,
+                    ),
+                    SizedBox(
+                      height: ScreenUtil.getInstance().setHeight(50),
+                    ),
+                    Container(
+                      width: SizeConfig.safeBlockHorizontal * 90,
+                      alignment: Alignment.bottomLeft,
+                      child: Text(
+                        'THÔNG TIN GIA SƯ',
+                        style: TextStyle(
+                          fontSize: 20,
+                          fontStyle: FontStyle.normal,
+                          color: blue,
+                        ),
                       ),
-                      SizedBox(
-                        height: ScreenUtil.getInstance().setHeight(10),
-                      ),
-                      Container(
-                        padding: EdgeInsets.only(
-                            left: SizeConfig.safeBlockHorizontal * 5,
-                            right: SizeConfig.safeBlockHorizontal * 5,
-                            bottom: 20),
-                        width: double.infinity,
-                        alignment: Alignment.topLeft,
-                        child: Column(
-                          mainAxisSize: MainAxisSize.min,
-                          children: <Widget>[
-                            SmallTextBoxWithBold('Thông tin cơ bản'),
-                            SmallTextBox(
-                              'Năm sinh: ${_data.birthdate} ',
-                            ),
-                            SmallTextBox(
-                              'Giới tính: ${_data.gender} ',
-                            ),
+                    ),
+                    Divider(
+                      thickness: 1,
+                      indent: SizeConfig.safeBlockHorizontal * 5,
+                      endIndent: SizeConfig.safeBlockHorizontal * 5,
+                    ),
+                    SizedBox(
+                      height: ScreenUtil.getInstance().setHeight(10),
+                    ),
+                    Container(
+                      padding: EdgeInsets.only(
+                          left: SizeConfig.safeBlockHorizontal * 5,
+                          right: SizeConfig.safeBlockHorizontal * 5,
+                          bottom: 20),
+                      width: double.infinity,
+                      alignment: Alignment.topLeft,
+                      child: Column(
+                        mainAxisSize: MainAxisSize.min,
+                        children: <Widget>[
+                          SmallTextBoxWithBold('Thông tin cơ bản'),
+                          SmallTextBox(
+                            'Năm sinh: ${_data.birthdate} ',
+                          ),
+                          SmallTextBox(
+                            'Giới tính: ${_data.gender} ',
+                          ),
 //                                SmallTextBox('Quê quán: ${_data.native_country.name}' ),
 //                                SmallTextBox('Giọng nói: ${_data.voice.name}' ),
 //                                SmallTextBox('Học vấn: ${_data.education_level.name}'),
-                            SmallTextBox(
-                                'Đại học năm: ${_data.school_year}-${_data.specialism}-${_data.university}'),
-                            SmallTextBoxWithBold(
-                                'Kinh nghiệm gia sư, giảng dạy'),
-                            SmallTextBox('${_data.experience}'),
-                            SmallTextBoxWithBold(
-                                'Thành tích trong học tập và dạy học'),
-                            SmallTextBox('${_data.achievement}'),
-                            SmallTextBoxWithBold('Chủ đề dạy'),
+                          SmallTextBox(
+                              'Đại học năm: ${_data.school_year}-${_data.specialism}-${_data.university}'),
+                          SmallTextBoxWithBold('Kinh nghiệm gia sư, giảng dạy'),
+                          SmallTextBox('${_data.experience}'),
+                          SmallTextBoxWithBold(
+                              'Thành tích trong học tập và dạy học'),
+                          SmallTextBox('${_data.achievement}'),
+                          SmallTextBoxWithBold('Chủ đề dạy'),
 //                                ListView.builder(
 //                                  itemCount: _data.subject.length,
 //                                  itemBuilder: (BuildContext context, int index) {
 //                                    return SmallTextBox('${_data.subject[index].name}');
 //                                  },
 //                                ),
-                            SmallTextBox('${_data.subject}'),
-                            SmallTextBoxWithBold('Gia sư đang là'),
+                          // SmallTextBox('${_data.subject}'),
+                          SmallTextBoxWithBold('Gia sư đang là'),
 //                                SmallTextBox('${_data.education.name}'),
-                          ],
+                        ],
+                      ),
+                    ),
+                    Container(
+                      width: SizeConfig.safeBlockHorizontal * 90,
+                      alignment: Alignment.bottomLeft,
+                      child: Text(
+                        'LỚP ĐÃ DẠY',
+                        style: TextStyle(
+                          fontSize: 20,
+                          fontStyle: FontStyle.normal,
+                          color: blue,
                         ),
                       ),
-                      Container(
-                        width: SizeConfig.safeBlockHorizontal * 90,
-                        alignment: Alignment.bottomLeft,
-                        child: Text(
-                          'LỚP ĐÃ DẠY',
-                          style: TextStyle(
-                            fontSize: 20,
-                            fontStyle: FontStyle.normal,
-                            color: blue,
-                          ),
+                    ),
+                    Divider(
+                      thickness: 1,
+                      indent: SizeConfig.safeBlockHorizontal * 5,
+                      endIndent: SizeConfig.safeBlockHorizontal * 5,
+                    ),
+                    SizedBox(
+                      height: ScreenUtil.getInstance().setHeight(50),
+                    ),
+                    Container(
+                      width: SizeConfig.safeBlockHorizontal * 90,
+                      alignment: Alignment.bottomLeft,
+                      child: Text(
+                        'LỊCH DẠY GIA SƯ',
+                        style: TextStyle(
+                          fontSize: 20,
+                          fontStyle: FontStyle.normal,
+                          color: blue,
                         ),
                       ),
-                      Divider(
-                        thickness: 1,
-                        indent: SizeConfig.safeBlockHorizontal * 5,
-                        endIndent: SizeConfig.safeBlockHorizontal * 5,
-                      ),
-                      SizedBox(
-                        height: ScreenUtil.getInstance().setHeight(50),
-                      ),
-                      Container(
-                        width: SizeConfig.safeBlockHorizontal * 90,
-                        alignment: Alignment.bottomLeft,
-                        child: Text(
-                          'LỊCH DẠY GIA SƯ',
-                          style: TextStyle(
-                            fontSize: 20,
-                            fontStyle: FontStyle.normal,
-                            color: blue,
-                          ),
-                        ),
-                      ),
-                      Divider(
-                        thickness: 1,
-                        indent: SizeConfig.safeBlockHorizontal * 5,
-                        endIndent: SizeConfig.safeBlockHorizontal * 5,
-                      ),
-                      SizedBox(height: 10),
-                      RichTextLine(),
-                      SelectedTimeColumn(),
-                      SizedBox(height: 20),
-                      Container(
-                        width: SizeConfig.safeBlockHorizontal * 90,
-                        height: SizeConfig.safeBlockVertical * 10,
-                        alignment: Alignment.bottomLeft,
-                        child: Row(
-                          children: <Widget>[
-                            Container(
-                              width: SizeConfig.safeBlockHorizontal * 30,
-                              alignment: Alignment.bottomCenter,
-                              child: Text(
-                                'VỊ TRÍ GIA SƯ',
-                                style: TextStyle(
-                                  fontSize: 18,
-                                  fontStyle: FontStyle.normal,
-                                  color: blue,
-                                ),
+                    ),
+                    Divider(
+                      thickness: 1,
+                      indent: SizeConfig.safeBlockHorizontal * 5,
+                      endIndent: SizeConfig.safeBlockHorizontal * 5,
+                    ),
+                    SizedBox(height: 10),
+                    RichTextLine(),
+                    SelectedTimeColumn(),
+                    SizedBox(height: 20),
+                    Container(
+                      width: SizeConfig.safeBlockHorizontal * 90,
+                      height: SizeConfig.safeBlockVertical * 10,
+                      alignment: Alignment.bottomLeft,
+                      child: Row(
+                        children: <Widget>[
+                          Container(
+                            width: SizeConfig.safeBlockHorizontal * 30,
+                            alignment: Alignment.bottomCenter,
+                            child: Text(
+                              'VỊ TRÍ GIA SƯ',
+                              style: TextStyle(
+                                fontSize: 18,
+                                fontStyle: FontStyle.normal,
+                                color: blue,
                               ),
                             ),
-                            SizedBox(
-                              width: 15,
-                            ),
-                            Container(
-                              alignment: Alignment.bottomRight,
-                              width: SizeConfig.safeBlockHorizontal * 55,
-// height: SizeConfig.safeBlockVertical * 20,
-                              child: (_data.address != null)
-                                  ? RichText(
-                                      textAlign: TextAlign.start,
-                                      text: TextSpan(
-                                        children: <TextSpan>[
-                                          TextSpan(
-                                            text: "${_data.address}",
-                                            style: TextStyle(
-                                              fontSize: 15,
-                                              color: Colors.grey,
-                                              fontStyle: FontStyle.normal,
-                                            ),
-                                          ),
-                                          TextSpan(
-                                            recognizer: TapGestureRecognizer()
-                                              ..onTap = () {
-                                                launch(
-                                                    'https://www.google.com/maps/place/38+Tr%E1%BA%A7n+Qu%C3%BD+Ki%C3%AAn,+D%E1%BB%8Bch+V%E1%BB%8Dng,+C%E1%BA%A7u+Gi%E1%BA%A5y,+H%C3%A0+N%E1%BB%99i,+Vi%E1%BB%87t+Nam/@21.0373781,105.7920155,17z/data=!3m1!4b1!4m5!3m4!1s0x3135ab37c1376ff7:0x245ac013cbc4304e!8m2!3d21.0373781!4d105.7920155?hl=vi-VNv');
-                                              },
-                                            text: '( Xem bản đồ )',
-                                            style: TextStyle(
-                                              fontStyle: FontStyle.normal,
-                                              color: Colors.deepOrange,
-                                              fontSize: 15,
-                                            ),
-                                          ),
-                                        ],
-                                      ),
-                                    )
-                                  : SizedBox(),
-                            ),
-                          ],
-                        ),
-                      ),
-                      Divider(
-                        thickness: 1,
-                        indent: SizeConfig.safeBlockHorizontal * 3,
-                        endIndent: SizeConfig.safeBlockHorizontal * 3,
-                      ),
-                      SizedBox(
-                        height: ScreenUtil.getInstance().setHeight(50),
-                      ),
-                      Container(
-                        width: SizeConfig.safeBlockHorizontal * 90,
-                        alignment: Alignment.bottomLeft,
-                        child: Text(
-                          'ĐÁNH GIÁ GIA SƯ',
-                          style: TextStyle(
-                            fontSize: 20,
-                            fontStyle: FontStyle.normal,
-                            color: blue,
                           ),
+                          SizedBox(
+                            width: 15,
+                          ),
+                          Container(
+                            alignment: Alignment.bottomRight,
+                            width: SizeConfig.safeBlockHorizontal * 55,
+// height: SizeConfig.safeBlockVertical * 20,
+                            child: (_data.address != null)
+                                ? RichText(
+                                    textAlign: TextAlign.start,
+                                    text: TextSpan(
+                                      children: <TextSpan>[
+                                        TextSpan(
+                                          text: "${_data.address}",
+                                          style: TextStyle(
+                                            fontSize: 15,
+                                            color: Colors.grey,
+                                            fontStyle: FontStyle.normal,
+                                          ),
+                                        ),
+                                        TextSpan(
+                                          recognizer: TapGestureRecognizer()
+                                            ..onTap = () {
+                                              launch(
+                                                  'https://www.google.com/maps/place/38+Tr%E1%BA%A7n+Qu%C3%BD+Ki%C3%AAn,+D%E1%BB%8Bch+V%E1%BB%8Dng,+C%E1%BA%A7u+Gi%E1%BA%A5y,+H%C3%A0+N%E1%BB%99i,+Vi%E1%BB%87t+Nam/@21.0373781,105.7920155,17z/data=!3m1!4b1!4m5!3m4!1s0x3135ab37c1376ff7:0x245ac013cbc4304e!8m2!3d21.0373781!4d105.7920155?hl=vi-VNv');
+                                            },
+                                          text: '( Xem bản đồ )',
+                                          style: TextStyle(
+                                            fontStyle: FontStyle.normal,
+                                            color: Colors.deepOrange,
+                                            fontSize: 15,
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  )
+                                : SizedBox(),
+                          ),
+                        ],
+                      ),
+                    ),
+                    Divider(
+                      thickness: 1,
+                      indent: SizeConfig.safeBlockHorizontal * 3,
+                      endIndent: SizeConfig.safeBlockHorizontal * 3,
+                    ),
+                    SizedBox(
+                      height: ScreenUtil.getInstance().setHeight(50),
+                    ),
+                    Container(
+                      width: SizeConfig.safeBlockHorizontal * 90,
+                      alignment: Alignment.bottomLeft,
+                      child: Text(
+                        'ĐÁNH GIÁ GIA SƯ',
+                        style: TextStyle(
+                          fontSize: 20,
+                          fontStyle: FontStyle.normal,
+                          color: blue,
                         ),
                       ),
-                      Divider(
-                        thickness: 1,
-                        indent: SizeConfig.safeBlockHorizontal * 5,
-                        endIndent: SizeConfig.safeBlockHorizontal * 5,
-                      ),
-                      SizedBox(
-                        height: ScreenUtil.getInstance().setHeight(50),
-                      ),
-                     
-                    ],
-                  ),
-                )
-              ]);
-            }else {print("nope");}
+                    ),
+                    Divider(
+                      thickness: 1,
+                      indent: SizeConfig.safeBlockHorizontal * 5,
+                      endIndent: SizeConfig.safeBlockHorizontal * 5,
+                    ),
+                    SizedBox(
+                      height: ScreenUtil.getInstance().setHeight(50),
+                    ),
+                  ],
+                ),
+              );
+            } else {
+              print("nope");
+            }
             return CircularProgressIndicator();
           },
         ),

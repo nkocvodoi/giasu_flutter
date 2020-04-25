@@ -2,13 +2,14 @@ import 'package:provider/provider.dart';
 import 'package:flutter/cupertino.dart';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
-import 'package:test_giasu/core/model/List_TeacherData.dart';
+
 import 'package:test_giasu/core/model/educationsservice.dart';
 import 'package:test_giasu/core/model/formTeachingService.dart';
 import 'package:test_giasu/core/model/locationservice.dart';
 import 'package:test_giasu/core/model/provincesService.dart';
 import 'package:test_giasu/core/model/subjectservice.dart';
 import 'package:test_giasu/core/model/topicService.dart';
+import 'package:test_giasu/core/model/user.dart';
 import 'package:test_giasu/core/model/voiceService.dart';
 import 'package:test_giasu/core/service/authentication_service.dart';
 import 'package:test_giasu/ui/UI_Main/General_Infor.dart';
@@ -16,10 +17,11 @@ import 'package:test_giasu/ui/UI_Main/General_Infor.dart';
 class PostRequestModel extends ChangeNotifier {
   final AuthenticationService authenticationService;
 
-  PostRequestModel({this.authenticationService}){
-  init();
+  PostRequestModel({this.authenticationService}) {
+    init();
   }
-   Map postRequestInfor = new Map();
+
+  Map postRequestInfor = new Map();
   bool _busy = false;
   bool get busy => _busy;
   void setBusy(bool value) {
@@ -105,8 +107,9 @@ class PostRequestModel extends ChangeNotifier {
     _idSubject = value;
     notifyListeners();
   }
+
   List<List<Topics>> _topics = [];
-   List<List<Topics>> get topics => _topics;
+  List<List<Topics>> get topics => _topics;
   void setTopics(List<List<Topics>> topics) {
     _topics = topics;
   }
@@ -150,6 +153,7 @@ class PostRequestModel extends ChangeNotifier {
     _idTopic = value;
     notifyListeners();
   }
+
   void init() async {
     setBusy(true);
     _province = await ProvinceService.instance.fetchProvince();
@@ -179,36 +183,58 @@ class PostRequestModel extends ChangeNotifier {
     _topic19 = await TopicService.instance.fetchTopic(19);
     _topic20 = await TopicService.instance.fetchTopic(20);
     _topic21 = await TopicService.instance.fetchTopic(21);
-    
+
     // _topic = [_topic1,_topic2,_topic3,_topic4,_topic5,_topic6,_topic7,_topic8,_topic9,_topic10,_topic11,_topic12,_topic13,_topic14,_topic15,_topic16,_topic17,_topic18,_topic19,_topic20,_topic21].expand((element) => element).toList();
-    _topic = _topic1 +_topic2 +_topic3+_topic4+_topic5+_topic6+_topic7+_topic8+_topic9+_topic10+_topic11+_topic12+_topic13+_topic14+_topic15+_topic16+_topic17+_topic18+_topic19+_topic20 + _topic21;
+    _topic = _topic1 +
+        _topic2 +
+        _topic3 +
+        _topic4 +
+        _topic5 +
+        _topic6 +
+        _topic7 +
+        _topic8 +
+        _topic9 +
+        _topic10 +
+        _topic11 +
+        _topic12 +
+        _topic13 +
+        _topic14 +
+        _topic15 +
+        _topic16 +
+        _topic17 +
+        _topic18 +
+        _topic19 +
+        _topic20 +
+        _topic21;
     print(_topic);
     print(_subject);
     setBusy(false);
   }
-  
+
   String _infor;
   String get Infor => _infor;
 
   Future<bool> postRequest(Map _map) async {
     var data = {"course": _map};
     var res = await http.post(APIUrl + 'api/v1/parents/courses',
-        body: json.encode(data), 
-        headers: {'Content-Type': 'application/json',
-        'Authorization': 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjo1MjEsImV4cCI6MTU4NjMyOTExOSwiaXNzIjoic2Fva2h1ZWUiLCJhdWQiOiJjbGllbnQifQ.zoDa9R5-q_ygJexVYnOxLAZHBcfJiI6EtYgLzO3BZ3c',});
+        body: json.encode(data),
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization':
+              'Bearer eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjo1MjEsImV4cCI6MTU4NjMyOTExOSwiaXNzIjoic2Fva2h1ZWUiLCJhdWQiOiJjbGllbnQifQ.zoDa9R5-q_ygJexVYnOxLAZHBcfJiI6EtYgLzO3BZ3c',
+        });
     if (res.statusCode == 200) //return res.body;
     {
-        Map<String, dynamic> mapResponse = json.decode(res.body);
-        print(mapResponse.toString());
+      Map<String, dynamic> mapResponse = json.decode(res.body);
+      print(mapResponse.toString());
 
-        if (mapResponse["code"] == 1) {
-          return true;
-        } else {
-          _infor = mapResponse["message"];
-          return false;
-        }
-      
-    }  
+      if (mapResponse["code"] == 1) {
+        return true;
+      } else {
+        _infor = mapResponse["message"];
+        return false;
+      }
+    }
     notifyListeners();
   }
 }
@@ -216,14 +242,15 @@ class PostRequestModel extends ChangeNotifier {
 class Schedules {
   int day;
   int session;
-  Schedules({this.day,this.session});
-  factory Schedules.fromJson(Map<String,dynamic>json) => Schedules(day: json['day'],session: json['session']);
-  Map<String,dynamic> toJson() => <String,dynamic>{
-    'day': day,
-    'session': session,
-  };
-  Map<String,dynamic> toMap() => <String,dynamic>{
-    'day': day,
-    'session': session,
-  };
+  Schedules({this.day, this.session});
+  factory Schedules.fromJson(Map<String, dynamic> json) =>
+      Schedules(day: json['day'], session: json['session']);
+  Map<String, dynamic> toJson() => <String, dynamic>{
+        'day': day,
+        'session': session,
+      };
+  Map<String, dynamic> toMap() => <String, dynamic>{
+        'day': day,
+        'session': session,
+      };
 }

@@ -1,7 +1,8 @@
 import 'dart:convert';
 
 import 'package:http/http.dart' as http;
-import 'List_TeacherData.dart' as filter;
+import 'package:test_giasu/core/model/user.dart' as filter;
+
 
 //import 'List_ClassData.dart' as filter;
 

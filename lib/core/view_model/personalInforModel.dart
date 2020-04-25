@@ -2,13 +2,14 @@ import 'package:provider/provider.dart';
 import 'package:flutter/cupertino.dart';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
-import 'package:test_giasu/core/model/List_TeacherData.dart';
+
 import 'package:test_giasu/core/model/educationsservice.dart';
 import 'package:test_giasu/core/model/formTeachingService.dart';
 import 'package:test_giasu/core/model/locationservice.dart';
 import 'package:test_giasu/core/model/provincesService.dart';
 import 'package:test_giasu/core/model/subjectservice.dart';
 import 'package:test_giasu/core/model/topicService.dart';
+import 'package:test_giasu/core/model/user.dart';
 import 'package:test_giasu/core/model/voiceService.dart';
 import 'package:test_giasu/core/service/authentication_service.dart';
 import 'package:test_giasu/ui/UI_Main/General_Infor.dart';
@@ -88,15 +89,16 @@ class PersonalInforModel extends ChangeNotifier {
   void setProvince(List<Province> city) {
     _province = province;
   }
-
-  Data_teacher _user;
-  Data_teacher get user => _user;
-  int _idProvince;
+int _idProvince;
   int get idProvince => _idProvince;
   void setIdProvince(int value) {
     _idProvince = value;
     notifyListeners();
   }
+  
+  DataUser _user;
+  DataUser get user => _user;
+  
 
   List<Subjects> _subject = [];
   List<Subjects> get subject => _subject;
@@ -231,13 +233,13 @@ class PersonalInforModel extends ChangeNotifier {
 //    _validate = true;
 //  }
 
-  Future<Data_teacher> fetchProfile() async {
+  Future<DataUser> fetchProfile() async {
 //    print('log' + authenticationService.id);
     final response = await http.get(APIUrl + 'api/v1/users/521', headers: {
       'Content-Type': 'application/json',
       'Accept': 'application/json',
       'Authorization':
-          'Bearer eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjo1MjEsImV4cCI6MTU4NzYzMjEyNiwiaXNzIjoic2Fva2h1ZWUiLCJhdWQiOiJjbGllbnQifQ.EJDqSbqa-ZL2TgBtKkcIVzIhe30NMlsEcKwa7xZVVZg',
+          'Bearer eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjo1MjEsImV4cCI6MTU4ODEyODYxNCwiaXNzIjoic2Fva2h1ZWUiLCJhdWQiOiJjbGllbnQifQ.70XEOZnapjG0T7MTDo8aizJK8eUbqQwgz3DHDD6BDuU',
     });
 
     Map<String, dynamic> mapResponse = json.decode(response.body);
@@ -248,10 +250,10 @@ class PersonalInforModel extends ChangeNotifier {
 //        print(mapResponse['data'].toString());
 //        print('log');
 //        CurrentUser _ds = CurrentUser.fromJson(mapResponse["data"]);
-        Data_teacher _ds = Data_teacher.fromJson(mapResponse["data"]);
+        DataUser _ds = DataUser.fromJson(mapResponse["data"]);
         //print('log' + Data_Teacher.fromJson(mapResponse["data"]).toString());
         print('dfhduf' + _ds.role.toString());
-        return Data_teacher.fromJson(mapResponse["data"]);
+        return DataUser.fromJson(mapResponse["data"]);
       }
     } else {
       // If that call was not successful, throw an error.
@@ -264,10 +266,9 @@ class PersonalInforModel extends ChangeNotifier {
     print("kajshduiashuidhausidash");
     try {
       var res = await http
-          .put(APIUrl + 'api/v1/tutors/521', body: json.encode(data), headers: {
+          .put(APIUrl + 'api/v1/tutors/${authenticationService.id}', body: json.encode(data), headers: {
         'Content-Type': 'application/json',
-        'Authorization':
-            'Bearer eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjo1MjEsImV4cCI6MTU4NjMyOTExOSwiaXNzIjoic2Fva2h1ZWUiLCJhdWQiOiJjbGllbnQifQ.zoDa9R5-q_ygJexVYnOxLAZHBcfJiI6EtYgLzO3BZ3c',
+        'Authorization': 'Bearer ${authenticationService.token}',
       });
       if (res.statusCode == 200) {
         Map<String, dynamic> mapResponse = json.decode(res.body);

@@ -56,7 +56,7 @@ class MyApp extends StatelessWidget {
        '/open': (context) => Waiting_screen(),
        '/signIn': (context) => SignIn_Page(),
        '/signUp': (context) => SignUpPage(),
-       '/specialty': (context) => SpecialtyInfor(),
+      
        '/subject': (context) => SubjectChoice(),
        '/home': (context) => MyBottomNavigationBar(),
        '/request': (context) => PostRequest(),

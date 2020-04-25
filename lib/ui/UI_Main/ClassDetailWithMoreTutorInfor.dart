@@ -215,7 +215,7 @@ class _ClassDetailWithMoreTutorInforState
                               ),
                               _iconTextBox(
                                 Text(
-                                  'Số buổi/tuần: ${classData.lesson_per_week} (${(classData.time_per_lesson).toInt()}h/buổi)',
+                                  'Số buổi/tuần: ${classData.lesson_per_week} (${(classData.time_per_lesson)}h/buổi)',
                                   style: TextStyle(
                                     color: black,
                                     fontSize: 15,

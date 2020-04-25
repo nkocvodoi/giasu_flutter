@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
 import 'package:test_giasu/core/model/List_ClassData.dart';
+import 'package:test_giasu/core/model/user.dart';
 import 'package:test_giasu/core/view_model/filterModel.dart';
 import 'package:test_giasu/core/view_model/personalInforModel.dart';
 import 'package:test_giasu/core/view_model/selectedModel.dart';
@@ -12,6 +13,7 @@ import 'package:test_giasu/ui/Widgets/ARichTextLine.dart';
 import 'package:test_giasu/ui/Widgets/LargeTextField.dart';
 import 'package:test_giasu/ui/Widgets/SelectedTimeColumn.dart';
 import 'package:test_giasu/ui/Widgets/SmallTextField.dart';
+import 'package:test_giasu/ui/Widgets/SmallTextFieldInitialValue.dart';
 import 'package:test_giasu/ui/Widgets/previous_widget.dart';
 
 import 'SubjectChoice.dart';
@@ -19,8 +21,8 @@ import 'SubjectChoice.dart';
 import 'SubjectChoice.dart';
 
 class SpecialtyInfor extends StatefulWidget {
-  // Map personalInfor = new Map();
-  // SpecialtyInfor(this.personalInfor);
+  DataUser _data;
+  SpecialtyInfor(this._data);
   @override
   State<StatefulWidget> createState() {
     // TODO: implement createState
@@ -49,7 +51,7 @@ class _SpecialtyInforState extends State<SpecialtyInfor> {
     "Cả hai hình thức",
   ];
   int teaching_formID;
-
+  List<int> form_teaching_id;
   void showInSnackBar(String value) {
     _scaffoldKey.currentState.showSnackBar(
       SnackBar(
@@ -70,7 +72,7 @@ class _SpecialtyInforState extends State<SpecialtyInfor> {
       });
     }
   }
-
+  
   List<bool> isSelected;
   @override
   Widget build(BuildContext context) {
@@ -90,6 +92,19 @@ class _SpecialtyInforState extends State<SpecialtyInfor> {
       ),
       body: Consumer<PersonalInforModel>(
         builder: (_, model, __) {
+          if(model.idEducation == null) model.setIdEducation(widget._data.education_level_id);
+          // if(teaching_formID == null){
+          //   for(var i in widget._data.form_teachings){
+          //     form_teaching_id.add(i.id);
+          //   }
+          //   if(form_teaching_id == [1,2]){teaching_formID = 2;}
+          //   else if(form_teaching_id == [1]){teaching_formID = 0;}
+          //   else teaching_formID = 1;
+          // }
+          
+          print(widget._data.subject);
+          print(widget._data.topic);
+          print(widget._data.form_teachings); 
           return Stack(
             fit: StackFit.expand,
             children: <Widget>[
@@ -149,7 +164,7 @@ class _SpecialtyInforState extends State<SpecialtyInfor> {
                           ),
                         ),
                         SizedBox(height: 30),
-                        SmallTextField("Tốt nghiệp trường", university),
+                        SmallTextFieldInitialValue("Tốt nghiệp trường", university,widget._data.university),
                         Container(
                           width: SizeConfig.safeBlockHorizontal * 85,
                           height: 80,
@@ -174,13 +189,13 @@ class _SpecialtyInforState extends State<SpecialtyInfor> {
                               ),
                               hintStyle: TextStyle(
                                 fontSize: 18,
-                                fontFamily: 'UTM',
+                               
                                 color: black,
                               ),
                             ),
                           ),
                         ),
-                        SmallTextField("Chuyên ngành", specialism),
+                        SmallTextFieldInitialValue("Chuyên ngành", specialism,widget._data.specialism),
                         Container(
                           padding:
                               EdgeInsets.only(top: 3.0, bottom: 5.0, left: 10),
@@ -225,8 +240,8 @@ class _SpecialtyInforState extends State<SpecialtyInfor> {
                           ),
                         ),
                         SizedBox(height: 30),
-                        SmallTextField(
-                            'Học phí vnđ/buổi (VD: 150.000)', tuition_fee),
+                        SmallTextFieldInitialValue(
+                            'Học phí vnđ/buổi (VD: 150.000)', tuition_fee,"${widget._data.tuition_fee}"),
                         Container(
                           width: double.infinity,
                           padding: EdgeInsets.only(top: 3, bottom: 3),
@@ -238,9 +253,9 @@ class _SpecialtyInforState extends State<SpecialtyInfor> {
                               Navigator.pushNamed(context, '/subject');
                             },
                             child: Container(
-                                padding: EdgeInsets.all(3.0),
+                                padding: EdgeInsets.all(7),
                                 width: SizeConfig.safeBlockHorizontal * 85,
-                                height: 40,
+                                
                                 decoration: BoxDecoration(
                                   border: Border.all(color: black),
                                   borderRadius: BorderRadius.circular(10),
@@ -263,8 +278,8 @@ class _SpecialtyInforState extends State<SpecialtyInfor> {
                         ),
 
                         SizedBox(height: 30),
-                        SmallTextField(
-                            'Số lượng lớp đã dạy (VD: 5)', number_class),
+                        SmallTextFieldInitialValue(
+                            'Số lượng lớp đã dạy (VD: 5)', number_class, "${widget._data.number_class}"),
                         RichTextLine(),
                         SelectedTimeColumn(),
                         SizedBox(
@@ -342,7 +357,7 @@ class _SpecialtyInforState extends State<SpecialtyInfor> {
                             (achievement.text == "")
                                 ? "null"
                                 : achievement.text;
-                        model.personalInfor["form_teaching_id"] = [1];
+                        model.personalInfor["form_teaching_id"] = form_teaching_id;
                         // (teaching_formID == 2) ? [1,2] : [(teaching_formID +1)];
                         model.personalInfor["education_level_id"] =
                             model.idEducation.toString();

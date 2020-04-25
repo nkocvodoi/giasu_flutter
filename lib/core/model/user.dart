@@ -1,23 +1,29 @@
 class DataUser {
   int id;
+  
   String role;
   String reset_password_token;
   String experience;
   String avatar;
   String activity_1;
   String full_name;
+  String email;
+  String about_me;
   String address;
   String achievement;
   String video;
   int tuition_fee;
+  String phone_number;
   int number_class;
-  String gender;
+  int gender;
   int available_coin;
   int promotion_coin;
   int booking;
+  int location_id;
   String approval;
   String active;
   String university;
+  String facebook;
   int school_year;
   String specialism;
   int education_level_id;
@@ -30,6 +36,7 @@ class DataUser {
   int course_count;
   int like_count;
   Location location;
+  int voice_id;
   Voice voice;
   EducationLevel education_level;
   NativeCountry native_country;
@@ -39,12 +46,19 @@ class DataUser {
 
   DataUser(
       {this.id,
+      this.location_id,
         this.role,
+        this.about_me,
+        this.phone_number,
         this.reset_password_token,
         this.experience,
+       
         this.avatar,
+        this.facebook,
         this.activity_1,
+        this.voice_id,
         this.full_name,
+        this.email,
         this.address,
         this.achievement,
         this.video,
@@ -88,22 +102,29 @@ class DataUser {
       activity_1: json['activity_1'],
       full_name: json['full_name'],
       address: json['address'],
+      facebook: json['facebook'],
+      email: json['email'],
       achievement: json['achievement'],
       video: json['video'],
+      about_me: json['about_me'],
       tuition_fee: json['tuition_fee'],
       number_class: json['number_class'],
-//      gender: json['gender'],
+      gender: json['gender'],
       available_coin: json['available_coin'],
       promotion_coin: json['promotion_coin'],
       booking: json['booking'],
       approval: json['approval'],
+      voice_id: json['voice_id'],
       active: json['active'],
       university: json['university'],
       school_year: json['school_year'],
       specialism: json['specialism'],
       education_level_id: json['education_level_id'],
       company: json['company'],
+      location_id: json['location_id'],
+      phone_number: json['phone_number'],
       native_country_id: json['native_country_id'],
+   
       schedule_text: json['schedule_text'],
 //       native_country: NativeCountry.fromJson(json['native_country']),
       birthdate: json['birthdate'],

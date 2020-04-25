@@ -244,6 +244,7 @@ class SubjectChoiceState extends State<SubjectChoiceForRequest> {
                           Expanded(
                               flex: 8,
                               child: RaisedButton(
+                                onPressed: (){},
                                 child: Text(
                                   "Môn khác",
                                   style: TextStyle(color: Colors.white),
@@ -279,6 +280,7 @@ class SubjectChoiceState extends State<SubjectChoiceForRequest> {
                           Expanded(
                               flex: 8,
                               child: RaisedButton(
+                                onPressed: (){},
                                 child: Text(
                                   "Ngoại ngữ khác",
                                   style: TextStyle(
@@ -334,6 +336,7 @@ class SubjectChoiceState extends State<SubjectChoiceForRequest> {
                           Expanded(
                               flex: 8,
                               child: RaisedButton(
+                                onPressed: (){},
                                 child: Text(
                                   "Thể thao khác",
                                   style: TextStyle(

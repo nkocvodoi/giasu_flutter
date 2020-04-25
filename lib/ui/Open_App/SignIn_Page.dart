@@ -27,8 +27,7 @@ class _SignIn_PageState extends State<SignIn_Page> {
   //   });
   // }
 
-
-  Map loginmap = new Map<String,dynamic>();
+  Map loginmap = new Map<String, dynamic>();
   GlobalKey<FormState> _key = new GlobalKey();
   bool _validate = false;
   TextEditingController _phone_number = TextEditingController();
@@ -131,7 +130,7 @@ class _SignIn_PageState extends State<SignIn_Page> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: <Widget>[
                           TextFormField(
-                            controller: _phone_number,
+                              controller: _phone_number,
                               decoration: InputDecoration(
                                 hintText: 'Email/ Số điện thoại',
                                 border: OutlineInputBorder(),
@@ -141,18 +140,16 @@ class _SignIn_PageState extends State<SignIn_Page> {
                                   color: Colors.grey[400],
                                   fontSize: 15,
                                 ),
-                                suffixIcon: IconButton(
-                                  icon: Icon(Icons.mail),
-                                ),
+                                suffixIcon: Icon(Icons.mail),
                               ),
                               autofocus: false,
                               keyboardType: TextInputType.phone,
 //                            maxLength: 10,
                               validator: validateMobile,
                               onSaved: (String val) {
-                               setState(() {
+                                setState(() {
                                   _phone_number.text = val.trim();
-                               });
+                                });
                               }),
                           SizedBox(
                             width: double.infinity,
@@ -258,10 +255,10 @@ class _SignIn_PageState extends State<SignIn_Page> {
 //                            MaterialPageRoute(
 //                              builder: (context) => ClassDetailRequestDemo()));
                           Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => MyBottomNavigationBar()));
-
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) =>
+                                      MyBottomNavigationBar()));
                         } else {
                           var _message = await model.Infor;
                           showInSnackBar(_message);
@@ -274,10 +271,8 @@ class _SignIn_PageState extends State<SignIn_Page> {
                         child: Center(
                           child: Text(
                             'Đăng Nhập',
-
                             style: TextStyle(
                                 fontSize: SizeConfig.safeBlockHorizontal * 5,
-
                                 color: Colors.white),
                           ),
                         ),
@@ -372,7 +367,7 @@ class _SignIn_PageState extends State<SignIn_Page> {
   Widget _buildBox(String _a, bool _b) {
     return Consumer<SignInModel>(builder: (_, model, __) {
       return TextFormField(
-        controller: _pass,
+          controller: _pass,
           obscureText: model.count,
           decoration: InputDecoration(
               hintText: 'Mật khẩu',
@@ -398,9 +393,9 @@ class _SignIn_PageState extends State<SignIn_Page> {
 //                            maxLength: 10,
           validator: validatePass,
           onSaved: (String val) {
-           setState(() {
-             _pass.text = val.trim();
-           }); 
+            setState(() {
+              _pass.text = val.trim();
+            });
           });
     });
   }

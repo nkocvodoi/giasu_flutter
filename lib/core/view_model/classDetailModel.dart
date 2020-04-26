@@ -237,4 +237,42 @@ class ClassDetailModel extends ChangeNotifier {
     }
 //  notifyListeners();
   }
+Future<bool> baophatsinh(int _course_id, String _report) async {
+    var data = {
+      "course": {
+        "report": _report
+      }
+    };
+    try {
+      var res = await http.put(APIUrl +'api/v1/tutors/report_courses/${_course_id}',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': 'Bearer ${authenticationService.token}',
+
+        },
+        body: json.encode(data),
+      );
+
+      if (res.statusCode == 200) //return res.body;
+          {
+        Map<String, dynamic> mapResponse = json.decode(res.body);
+
+        if (mapResponse['code'] == 1) {
+//          print(mapResponse['data']);
+
+          return true;
+        } else {
+          return false;
+        }
+      } else {
+        return null;
+      }
+    } catch (e) {
+      print('error ' + e.toString());
+    }
+//  notifyListeners();
+  }
+
+
+
 }

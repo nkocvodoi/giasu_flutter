@@ -21,7 +21,6 @@ class _Support_SettingsState extends State<Support_Settings> {
     showDialog(
         context: context,
         builder: (context) => AlertDialog(
-//          title: Text("Wifi"),
           content: Text("Nếu bạn tắt thông báo, chúng tôi sẽ không thông báo cho bạn nữa."),
         )
     );

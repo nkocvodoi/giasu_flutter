@@ -1,8 +1,9 @@
-
 //Lưu ý + Báo phát sinh
 
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:provider/provider.dart';
+import 'package:test_giasu/core/view_model/classDetailModel.dart';
 import 'package:test_giasu/ui/Helper/ScreenConfig.dart';
 import 'package:test_giasu/ui/UI_Main/General_Infor.dart';
 import 'package:test_giasu/ui/Widgets/ARichTextLine.dart';
@@ -19,6 +20,134 @@ class ClassDetail4 extends StatefulWidget {
 }
 
 class ClassDetail4State extends State<ClassDetail4> {
+
+  TextEditingController _report = TextEditingController();
+  GlobalKey<FormState> _key = new GlobalKey();
+  bool _validate = false;
+
+  String validateReport(String value) {
+    if (value.length == 0) {
+      return "Trường này không được để trống";
+    }
+    return null;
+  }
+
+  _sendToServer() {
+    if (_key.currentState.validate()) {
+      // No any error in validation
+      _key.currentState.save();
+//      print("Name $name");
+//      print("Mobile $mobile");
+//      print("Email $email");
+    } else {
+      // validation error
+      setState(() {
+        _validate = true;
+      });
+    }
+  }
+
+  void _baophatsinh(BuildContext context) {
+    showDialog(
+        context: context,
+        builder: (context) => AlertDialog(
+              titlePadding: EdgeInsets.zero,
+              title: Container(
+                padding: EdgeInsets.all(10.0),
+                color: colorApp,
+                child: Text(
+                  'Lớp phát sinh',
+                  style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 30,
+                      fontWeight: FontWeight.w700),
+                ),
+              ),
+              content: Form(
+                  key: _key,
+                  autovalidate: _validate,
+                  child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  Text(
+                    'Nội dung phát sinh *',
+                    style: TextStyle(
+                      fontSize: 15,
+                    ),
+                  ),
+                  _textLargeField('Nhập nội dung phát sinh'),
+                ],
+              )),
+              actions: <Widget>[
+                // usually buttons at the bottom of the dialog
+                new FlatButton(
+                  child: Container(
+                    padding: EdgeInsets.only(left: 10.0, right: 10.0, top: 5, bottom: 5),
+                    decoration:
+                        BoxDecoration(border: Border.all(color: Colors.grey)),
+                    child: new Text(
+                      "X Đóng",
+                      style: TextStyle(color: Colors.black45, fontSize: 20),
+                    ),
+                  ),
+                  onPressed: () {
+                    Navigator.of(context).pop();
+                  },
+                ),
+                new FlatButton(
+                  color: colorApp,
+                  child: Container(
+//                    color: colorApp,
+                    padding: EdgeInsets.only(left: 10.0, right: 10.0, top: 5, bottom: 5),
+                    decoration:
+                    BoxDecoration(border: Border.all(color: colorApp)),
+                    child: new Text(
+                      "Đánh giá",
+                      style: TextStyle(color: Colors.white, fontSize: 20),
+                    ),
+                  ),
+                  onPressed: () {
+                    _sendToServer();
+                   Provider.of<ClassDetailModel>(context).baophatsinh(636, _report.text);
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => ClassDetail4(),
+                      ),
+                    );
+                  },
+                ),
+              ],
+            ));
+  }
+
+  Widget _textLargeField(String _s) {
+    return Container(
+      height: 120,
+      width: 380,
+      padding: EdgeInsets.all(10.0),
+      child: SizedBox(
+        height: 120,
+        child: TextFormField(
+          maxLines: 5,
+          style: TextStyle(fontSize: 19.0),
+          decoration: InputDecoration(
+            border: InputBorder.none,
+              hintText: _s),
+          validator: validateReport,
+          onSaved: (String _val){
+            _report.text = _val;
+          },
+        ),
+      ),
+      decoration: BoxDecoration(
+        color: Colors.white,
+        border: Border.all(color: Colors.blueAccent),
+        
+      ),
+    );
+  }
+
   Widget _iconTextBox(Text text, Icon icon) {
     return Container(
       decoration: BoxDecoration(
@@ -49,10 +178,9 @@ class ClassDetail4State extends State<ClassDetail4> {
         centerTitle: true,
         backgroundColor: Color.fromRGBO(47, 101, 174, 1),
         title: Text(
-            'Chi tiết lớp học',
-            textAlign: TextAlign.start,
-          ),
-        
+          'Chi tiết lớp học',
+          textAlign: TextAlign.start,
+        ),
       ),
       body: SingleChildScrollView(
         child: Stack(
@@ -319,7 +447,7 @@ class ClassDetail4State extends State<ClassDetail4> {
                           ),
                           color: colorApp,
                           onPressed: () {
-                            print('tap');
+                            _baophatsinh(context);
                           },
                           child: Text(
                             'Báo phát sinh',

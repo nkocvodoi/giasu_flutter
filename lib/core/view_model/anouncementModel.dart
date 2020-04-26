@@ -34,4 +34,6 @@ class AnouncementModel extends ChangeNotifier {
       throw Exception('Failed to load');
     }
   }
+
+
 }

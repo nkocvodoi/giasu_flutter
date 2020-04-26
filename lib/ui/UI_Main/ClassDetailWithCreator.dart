@@ -1,34 +1,35 @@
-import 'package:auto_size_text/auto_size_text.dart';
+
+//Xem Đề nghị dạy
+
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:test_giasu/core/model/List_ClassData.dart';
 import 'package:test_giasu/ui/Helper/ScreenConfig.dart';
 import 'package:test_giasu/ui/UI_Main/BottomNavigationBar.dart';
-import 'package:test_giasu/ui/UI_Main/ClassDetailWhenAccepted.dart';
 import 'package:test_giasu/ui/UI_Main/General_Infor.dart';
 import 'package:test_giasu/ui/UI_Main/Payments.dart';
+import 'package:test_giasu/ui/UI_Main/Recommendations.dart';
 import 'package:test_giasu/ui/Widgets/ARichTextLine.dart';
 import 'package:test_giasu/ui/Widgets/LargeTextBox.dart';
 import 'package:test_giasu/ui/Widgets/RoundedImageNameBox.dart';
-import 'package:test_giasu/ui/Widgets/RoundedImageNameBoxForDemo.dart';
 import 'package:test_giasu/ui/Widgets/SelectedTimeColumn.dart';
 import 'package:test_giasu/ui/Widgets/previous_widget.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-class ClassDetailWhenAccepted extends StatefulWidget {
-  Data_class classData;
-  ClassDetailWhenAccepted(this.classData);
+class ClassDetailWithCreator extends StatefulWidget {
+  int course_id;
+  ClassDetailWithCreator(this.course_id);
   @override
   State<StatefulWidget> createState() {
     // TODO: implement createState
-    return _ClassDetailRequestState(classData);
+    return _ClassDetailWithCreatorState(course_id);
   }
 }
 
-class _ClassDetailRequestState extends State<ClassDetailWhenAccepted> {
-  Data_class classData;
-  _ClassDetailRequestState(this.classData);
+class _ClassDetailWithCreatorState extends State<ClassDetailWithCreator> {
+  int course_id;
+  _ClassDetailWithCreatorState(this.course_id);
   Widget _iconTextBox(Text text, Icon icon) {
     return Row(
       children: <Widget>[
@@ -77,17 +78,17 @@ class _ClassDetailRequestState extends State<ClassDetailWhenAccepted> {
               children: <Widget>[
                 Container(
                   width: double.infinity,
-                  height: SizeConfig.safeBlockVertical * 20,
+                  height: SizeConfig.safeBlockVertical * 22.5,
                   child: Stack(
                     children: <Widget>[
                       Container(
                         width: double.infinity,
-                        height: SizeConfig.safeBlockVertical * 17.5,
+                        height: SizeConfig.safeBlockVertical * 20,
                         alignment: Alignment.center,
-                        color: colorApp,
-                        child: RoundedImageNameBoxForDemo(
-                          classData.parent.avatar,
-                          classData.parent.full_name,
+                        color: Color.fromRGBO(47, 101, 174, 1),
+                        child: RoundedImageNameBox(
+                          '/avatar/1466/14963324_211293059282131_333912323949534667_n_56fea2079cd3f8a1f771.jpg',
+                          'Gia Sư Bách Khoa',
                         ),
                       ),
                       Align(
@@ -97,25 +98,18 @@ class _ClassDetailRequestState extends State<ClassDetailWhenAccepted> {
                           height: SizeConfig.safeBlockVertical * 5,
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(20.0),
-                            border: Border.all(color: grey, width: 1),
+                            border: Border.all(color: black),
                             color: Colors.white,
                           ),
                           child: Center(
-                            child: ConstrainedBox(
-                              constraints: BoxConstraints(
-                                minHeight: SizeConfig.safeBlockHorizontal * 8,
-                                maxHeight: SizeConfig.safeBlockHorizontal * 10,
-                                minWidth: SizeConfig.safeBlockHorizontal * 8,
-                                maxWidth: SizeConfig.safeBlockHorizontal * 78,
+                            child: Text(
+                              'TANH 5 XUÂN PHƯƠNG, TỪ LIÊM',
+                              style: TextStyle(
+                                  fontStyle: FontStyle.normal,
+                                  fontSize: 13,
+                                  color: black
                               ),
-                              child: AutoSizeText(
-                                classData.name,
-                                maxLines: 1,
-                                maxFontSize: 20,
-                                style: TextStyle(
-                                    fontStyle: FontStyle.normal, color: black),
-                                textAlign: TextAlign.center,
-                              ),
+                              textAlign: TextAlign.center,
                             ),
                           ),
                         ),
@@ -132,14 +126,14 @@ class _ClassDetailRequestState extends State<ClassDetailWhenAccepted> {
                   // alignment: Alignment.center,
                   width: SizeConfig.safeBlockHorizontal * 95,
                   decoration: BoxDecoration(
-                    border: Border.all(color: blue),
+                    border: Border.all(color: Colors.blue),
                     borderRadius: BorderRadius.circular(10),
                   ),
                   child: Column(
                     children: <Widget>[
                       _iconTextBox(
                         Text(
-                          'Trạng thái: ${classData.status}',
+                          'Trạng thái: Đang tìm gia sư',
                           style: TextStyle(
                             color: Colors.green,
                             fontSize: 15,
@@ -151,12 +145,9 @@ class _ClassDetailRequestState extends State<ClassDetailWhenAccepted> {
                           size: 15,
                         ),
                       ),
-                      Divider(
-                        color: grey,
-                      ),
                       _iconTextBox(
                         Text(
-                          'Mã lớp: ${classData.id} - ${classData.subject.name} | Lớp ${classData.grade}',
+                          'Mã lớp: 1222 - Tiếng Anh | Lớp: 5',
                           style: TextStyle(
                             color: black,
                             fontSize: 15,
@@ -168,12 +159,9 @@ class _ClassDetailRequestState extends State<ClassDetailWhenAccepted> {
                           size: 15,
                         ),
                       ),
-                      Divider(
-                        color: grey,
-                      ),
                       _iconTextBox(
                         Text(
-                          'Hình thức học: ${classData.form_teaching_name}',
+                          'Hình thức học: Gia sư Offline ( tại nhà )',
                           style: TextStyle(
                             color: black,
                             fontSize: 15,
@@ -185,12 +173,9 @@ class _ClassDetailRequestState extends State<ClassDetailWhenAccepted> {
                           size: 15,
                         ),
                       ),
-                      Divider(
-                        color: grey,
-                      ),
                       _iconTextBox(
                         Text(
-                          'Số buổi/tuần: ${classData.lesson_per_week} (${(classData.time_per_lesson).toInt()}h/buổi)',
+                          'Số buổi/tuần:  1 buổi (2h/buổi)',
                           style: TextStyle(
                             color: black,
                             fontSize: 15,
@@ -202,12 +187,9 @@ class _ClassDetailRequestState extends State<ClassDetailWhenAccepted> {
                           size: 15,
                         ),
                       ),
-                      Divider(
-                        color: grey,
-                      ),
                       _iconTextBox(
                         Text(
-                          'Số học viên: ${classData.student_per_class}',
+                          'Số học viên: 1',
                           style: TextStyle(
                             color: black,
                             fontSize: 15,
@@ -218,9 +200,6 @@ class _ClassDetailRequestState extends State<ClassDetailWhenAccepted> {
                           color: black,
                           size: 15,
                         ),
-                      ),
-                      Divider(
-                        color: grey,
                       ),
                       Row(
                         children: <Widget>[
@@ -244,7 +223,8 @@ class _ClassDetailRequestState extends State<ClassDetailWhenAccepted> {
                                 text: TextSpan(
                                   children: <TextSpan>[
                                     TextSpan(
-                                      text: classData.address,
+                                      text:
+                                      'Địa chỉ: Chung Cư Athena Complex Xuân Phương, Phương Canh, Từ Liêm, Hà Nội, Việt Nam | Hà Nội',
                                       style: TextStyle(
                                         fontSize: 15,
                                         color: Colors.grey,
@@ -271,9 +251,6 @@ class _ClassDetailRequestState extends State<ClassDetailWhenAccepted> {
                           ),
                         ],
                       ),
-                      Divider(
-                        color: grey,
-                      ),
                       _iconTextBox(
                         Text(
                           'Cách bạn: 2km',
@@ -288,14 +265,11 @@ class _ClassDetailRequestState extends State<ClassDetailWhenAccepted> {
                           size: 15,
                         ),
                       ),
-                      Divider(
-                        color: grey,
-                      ),
                       _iconTextBox(
                         Text(
-                          'Học phí/buổi: ${(classData.tuition_fee / 1000).toInt()},000 vnđ/2h',
+                          'Học phí/buổi: 130,000 vnđ/2h',
                           style: TextStyle(
-                            color: Colors.orange,
+                            color: orange,
                             fontSize: 15,
                           ),
                         ),
@@ -305,14 +279,11 @@ class _ClassDetailRequestState extends State<ClassDetailWhenAccepted> {
                           size: 15,
                         ),
                       ),
-                      Divider(
-                        color: grey,
-                      ),
                       _iconTextBox(
                         Text(
-                          'Phí nhận lớp: ${(classData.class_fee / 1000).toInt()},000 vnđ',
+                          'Phí nhận lớp: 260,000 vnđ',
                           style: TextStyle(
-                            color: Colors.blue[400],
+                            color: blue,
                             fontSize: 15,
                           ),
                         ),
@@ -328,7 +299,7 @@ class _ClassDetailRequestState extends State<ClassDetailWhenAccepted> {
                 SizedBox(
                   height: ScreenUtil.getInstance().setHeight(20),
                 ),
-                LargeTextBox(classData.about_course),
+                LargeTextBox('Chi tiết nội dung yêu cầu'),
                 SizedBox(
                   height: ScreenUtil.getInstance().setHeight(10),
                 ),
@@ -337,7 +308,7 @@ class _ClassDetailRequestState extends State<ClassDetailWhenAccepted> {
                 SizedBox(
                   height: ScreenUtil.getInstance().setHeight(50),
                 ),
-                ],
+              ],
             ),
           ],
         ),
@@ -346,35 +317,22 @@ class _ClassDetailRequestState extends State<ClassDetailWhenAccepted> {
         alignment: Alignment.center,
         width: ScreenUtil.getInstance().setWidth(700),
         height: ScreenUtil.getInstance().setHeight(100),
-        child: Row(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: <Widget>[
-            Expanded(
-              child: SizedBox(),
-              flex: 6,
-            ),
-            Container(
-              height: SizeConfig.safeBlockHorizontal * 10,
-              width: SizeConfig.safeBlockHorizontal *25,
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(20.0),
-              ),
-              child: RaisedButton(
-                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
-                color: colorApp,
-                onPressed: () {
-                  // Navigator.push(context,
-                  //     MaterialPageRoute(builder: (context) => Payments()));
-                },
-                textColor: Colors.white,
-                child: Text('Thanh toán',style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 3)),
-              ),
-            ),
-            Expanded(
-              child: SizedBox(),
-              flex: 1,
-            ),
-          ],
+        child: Container(
+          height: SizeConfig.safeBlockHorizontal * 10,
+//              width: SizeConfig.safeBlockHorizontal *25,
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(20.0),
+          ),
+          child: RaisedButton(
+            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+            color: colorApp,
+            onPressed: () {
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => Recommendations(course_id)));
+            },
+            textColor: Colors.white,
+            child: Text('Xem đề nghị dạy',style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 4)),
+          ),
         ),
       ),
     );

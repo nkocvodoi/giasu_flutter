@@ -14,10 +14,22 @@ class RectangleImageNameBox extends StatelessWidget {
         width: double.infinity,
         child: Column(
           children: <Widget>[
+//            Image.network(
+//                urlString,
+//                cacheHeight: 90,
+//              ),
+
+            (urlString != null)
+                ?
             Image.network(
-                urlString,
-                cacheHeight: 90,
-              ),
+              'https://giasu.htcon.vn${urlString}',
+              cacheHeight: 90,
+            )
+                :
+            Image.asset(
+                'assets/red.jpg',
+                cacheHeight: 90
+            ),
               
             Text(
               name,

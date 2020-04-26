@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
+import 'package:test_giasu/TestFunction.dart';
 import 'package:test_giasu/ui/Open_App/ForgotPass1.dart';
 import 'package:test_giasu/ui/Open_App/PersonInfor.dart';
 import 'package:test_giasu/ui/Open_App/SignUp_PageTutor.dart';
@@ -14,6 +15,7 @@ import 'package:test_giasu/ui/UI_Main/Bits_Manager.dart';
 import 'package:test_giasu/ui/UI_Main/ClassDetail4.dart';
 import 'package:test_giasu/ui/UI_Main/ClassDetailRequest.dart';
 import 'package:test_giasu/ui/UI_Main/ClassDetailRequestDemo.dart';
+import 'package:test_giasu/ui/UI_Main/ClassDetailWithCreator.dart';
 import 'package:test_giasu/ui/UI_Main/Lists_Class.dart';
 import 'package:test_giasu/ui/UI_Main/Nap_Bits.dart';
 import 'package:test_giasu/ui/UI_Main/Profile.dart';

@@ -1,33 +1,49 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:test_giasu/core/model/List_ClassData.dart';
 import 'package:test_giasu/core/view_model/paymentModel.dart';
+import 'package:test_giasu/ui/UI_Main/Bits_Manager.dart';
 import 'package:test_giasu/ui/UI_Main/BottomNavigationBar.dart';
+import 'package:test_giasu/ui/UI_Main/ClassDetailRequestDemo.dart';
 import 'package:test_giasu/ui/UI_Main/General_Infor.dart';
+import 'package:test_giasu/ui/UI_Main/Nap_Bits.dart';
 import 'package:test_giasu/ui/Widgets/previous_widget.dart';
 
+import 'ClassDetail4.dart';
+
 class Payments extends StatefulWidget {
+  int phinhanlop;
+  int nophi;
+  Data_class classData;
+  Payments(this.phinhanlop, this.nophi,this.classData);
   @override
   State<StatefulWidget> createState() {
+
     // TODO: implement createState
-    return _Payments_State();
+    return _Payments_State(this.phinhanlop, this.nophi);
   }
 }
 
 class _Payments_State extends State<Payments> {
-  final Color _color = Color.fromRGBO(47, 101, 174, 1);
 
-  String _selectedvalue = 'Thanh toán đủ phí';
-  List<String> _menu = ['Thanh toán đủ phí', 'Nợ phí',
+  int phinhanlop;
+  int nophi;
+  _Payments_State(this.phinhanlop, this.nophi);
+
+  List<String> _menu1 = ['Thanh toán đủ phí'];
+  List<String> _menu2 = ['Thanh toán đủ phí', 'Nợ phí',
   ];
-  String infor = 'Bạn cần nạp đủ 490 Bits';
+
+
 
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
     return Scaffold(
+
       appBar: AppBar(
         leading: buildPreviousButton(),
-        backgroundColor: _color,
+        backgroundColor: colorApp,
       ),
       body:Consumer<PaymentModel>(
           builder: (_ ,model, __) {
@@ -46,7 +62,7 @@ class _Payments_State extends State<Payments> {
                              color: Colors.white, fontSize: 18.0),
                       ),
                       decoration: BoxDecoration(
-                        color: _color,
+                        color: colorApp,
                       ),
                     ),
                     SizedBox(
@@ -56,7 +72,7 @@ class _Payments_State extends State<Payments> {
                         
                         width: 380,
                         child: Text(
-                          model.infor,
+                          '${model.mess_thanhtoan}',
                           textAlign: TextAlign.center,
                           style: TextStyle(color: colorApp, fontSize: 18.0),
                         ),
@@ -69,9 +85,28 @@ class _Payments_State extends State<Payments> {
                       padding: EdgeInsets.only(left: 240),
                       child: RaisedButton(
                         padding: EdgeInsets.all(10.0),
-                        color: _color,
-                        onPressed: () {
-                         Navigator.push(context, MaterialPageRoute(builder: (context)=> MyBottomNavigationBar()));
+                        color: colorApp,
+                        onPressed: () async {
+                          int _code = await model.thanhtoan(634, phinhanlop);
+                          if(_code == 1) {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) =>
+                                      ClassDetail4(widget.classData),
+                              ),
+                            );
+                          }
+                          else {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) =>
+                                      Nap_Bits(model.message),
+                              ),
+                            );
+                          }
+//                        print(model.phi_nhanlop(346332, 40, 23));
                         },
                         child: Text(
                           'Thanh toán',
@@ -108,7 +143,7 @@ class _Payments_State extends State<Payments> {
                         ),
                         iconSize: 36,
                         value: model.v,
-                        items: _menu.map((_menu) {
+                        items: (phinhanlop<nophi ? _menu1 : _menu2).map((_menu) {
                           return DropdownMenuItem(
                             value: _menu,
                             child: Row(
@@ -126,17 +161,11 @@ class _Payments_State extends State<Payments> {
                             ),
                           );
                         }).toList(),
-                        onChanged: (String val) {
+                        onChanged: (String val) async {
                           model.setValue(val);
-                          model.setInfor();
-//                    setState(() {
-//                      _selectedvalue = v;
-//                      if (v == 'Nợ phí')
-//                        infor =
-//                            'Bạn cần nạp đủ 250 Bits và được nợ lại 240 Bits tối đa 35 ngày (kể từ ngày bắt đầu nhận lớp)';
-//                      else
-//                        infor = 'Bạn cần nạp đủ 490 Bits';
-//                    });
+//                          await model.thanhtoan(640, 4, 1826321);
+                        model.setMess_thanhtoan(phinhanlop, nophi);
+
                         },
                       ),
                     ),

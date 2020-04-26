@@ -79,6 +79,8 @@ class Data_class {
   String parent_number;
   String form_teaching_name;
   Parent parent;
+  bool check_recommend;
+  String recommend_status;
   bool recommended;
   int recommend_number;
   Subject subject;
@@ -122,6 +124,8 @@ class Data_class {
         this.parent_number,
         this.form_teaching_name,
         this.parent,
+        this.check_recommend,
+        this.recommend_status,
         this.recommended,
         this.recommend_number,
         this.subject,
@@ -154,6 +158,8 @@ class Data_class {
     parent_number: json['parent_number'],
     form_teaching_name: json['form_teaching_name'],
     parent: Parent.fromJson(json['parent']),
+    check_recommend: json['check_recommend'],
+    recommend_status: json['recommend_status'],
     recommended: json['recommended'],
     recommend_number: json['recommend_number'],
     subject: Subject.fromJson(json['subject']),

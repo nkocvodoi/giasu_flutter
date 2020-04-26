@@ -112,8 +112,9 @@ class _ProfileState extends State<Profile> {
         child: FutureBuilder<DataUser>(
           future: Provider.of<ProfileModel>(context).fetchProfile(),
           builder: (context, snapshot) {
-            if (snapshot.hasData) {
-              print('logggg');
+//            DataUser _test = await Provider.of<ProfileModel>(context).getdata();
+            if(snapshot.hasData) {
+//              print('logggg');
               DataUser _data = snapshot.data;
               print('log' + snapshot.data.toString());
               return SingleChildScrollView(

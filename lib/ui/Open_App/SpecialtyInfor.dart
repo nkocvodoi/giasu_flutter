@@ -11,6 +11,7 @@ import 'package:test_giasu/ui/UI_Main/BottomNavigationBar.dart';
 import 'package:test_giasu/ui/UI_Main/General_Infor.dart';
 import 'package:test_giasu/ui/Widgets/ARichTextLine.dart';
 import 'package:test_giasu/ui/Widgets/LargeTextField.dart';
+import 'package:test_giasu/ui/Widgets/LargeTextFieldInitialValue.dart';
 import 'package:test_giasu/ui/Widgets/SelectedTimeColumn.dart';
 import 'package:test_giasu/ui/Widgets/SmallTextField.dart';
 import 'package:test_giasu/ui/Widgets/SmallTextFieldInitialValue.dart';
@@ -113,16 +114,16 @@ class _SpecialtyInforState extends State<SpecialtyInfor> {
                   key: _key1,
                   autovalidate: _validate,
                   child: Padding(
-                    padding: EdgeInsets.all(5),
+                    padding: EdgeInsets.all(10),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: <Widget>[
-                        LargeTextField(
-                            'Kinh nghiệm gia sư & dạy học', about_me),
-                        SizedBox(height: 30),
-                        LargeTextField(
-                            'Thành tích học tập & dạy học', achievement),
-                        SizedBox(height: 30),
+                        LargeTextFieldInitialValue(
+                            'Kinh nghiệm gia sư & dạy học', about_me, widget._data.about_me),
+                        SizedBox(height:30),
+                        LargeTextFieldInitialValue(
+                            'Thành tích học tập & dạy học', achievement, widget._data.achievement),
+                        SizedBox(height:30),
                         Container(
                           padding:
                               EdgeInsets.only(top: 3.0, bottom: 5.0, left: 10),
@@ -163,7 +164,7 @@ class _SpecialtyInforState extends State<SpecialtyInfor> {
                             borderRadius: BorderRadius.circular(10.0),
                           ),
                         ),
-                        SizedBox(height: 30),
+                        SizedBox(height:30),
                         SmallTextFieldInitialValue("Tốt nghiệp trường", university,widget._data.university),
                         Container(
                           width: SizeConfig.safeBlockHorizontal * 85,
@@ -253,7 +254,7 @@ class _SpecialtyInforState extends State<SpecialtyInfor> {
                               Navigator.pushNamed(context, '/subject');
                             },
                             child: Container(
-                                padding: EdgeInsets.all(7),
+                                padding: EdgeInsets.all(8),
                                 width: SizeConfig.safeBlockHorizontal * 85,
                                 
                                 decoration: BoxDecoration(
@@ -276,7 +277,6 @@ class _SpecialtyInforState extends State<SpecialtyInfor> {
                                 )),
                           ),
                         ),
-
                         SizedBox(height: 30),
                         SmallTextFieldInitialValue(
                             'Số lượng lớp đã dạy (VD: 5)', number_class, "${widget._data.number_class}"),

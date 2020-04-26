@@ -281,36 +281,7 @@ Future<bool> get_dataclass(Map _map) async {
   }
 //  notifyListeners();
 }
-Future<bool> get_danhsachdenghi(Map _map) async {
-  try {
-    var res = await http.put(APIUrl +'api/v1/tutors/recommendations?course_id=:id',
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': 'Bearer token',
-      },);
 
-    if (res.statusCode == 200) //return res.body;
-        {
-      Map<String, dynamic> mapResponse = json.decode(res.body);
-
-      if (mapResponse['code'] == 1) {
-
-        final recommendation = mapResponse["data"].cast<Map<String, dynamic>>();
-        final listOfRecommendation = await recommendation.map<RecommendationData>((json) {
-          return RecommendationData.fromJson(json);
-        }).toList();
-        return listOfRecommendation;
-      } else {
-        return false;
-      }
-    } else {
-      return null;
-    }
-  } catch (e) {
-    print('login error ' + e.toString());
-  }
-//  notifyListeners();
-}
 
 
 

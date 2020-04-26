@@ -5,6 +5,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:test_giasu/core/model/List_ClassData.dart';
 import 'package:test_giasu/ui/Helper/ScreenConfig.dart';
 import 'package:test_giasu/ui/UI_Main/BottomNavigationBar.dart';
+import 'package:test_giasu/ui/UI_Main/ClassDetailRequest.dart';
 import 'package:test_giasu/ui/UI_Main/ClassDetailWhenAccepted.dart';
 import 'package:test_giasu/ui/UI_Main/General_Infor.dart';
 import 'package:test_giasu/ui/Widgets/ARichTextLine.dart';
@@ -16,6 +17,8 @@ import 'package:test_giasu/ui/Widgets/previous_widget.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class ClassDetailRequestDemo extends StatefulWidget {
+  Data_class classData;
+  ClassDetailRequestDemo(this.classData);
   @override
   State<StatefulWidget> createState() {
     // TODO: implement createState
@@ -392,7 +395,7 @@ class _ClassDetailRequestDemoState extends State<ClassDetailRequestDemo> {
                   Navigator.push(
                       context,
                       MaterialPageRoute(
-                          builder: (context) => ClassDetailWhenAcceptedDemo()));
+                          builder: (context) => ClassDetailWhenAcceptedDemo(widget.classData)));
                 },
                 textColor: Colors.white,
                 child: Container(

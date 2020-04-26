@@ -39,6 +39,7 @@ class SmalltextFieldInitialValueState
     return Container(
       width: SizeConfig.safeBlockHorizontal * 85,
       height: 80,
+      padding: EdgeInsets.zero,
       child: TextFormField(
         controller: widget._controller,
         style: TextStyle(

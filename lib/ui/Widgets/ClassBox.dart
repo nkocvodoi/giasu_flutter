@@ -1,23 +1,45 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:test_giasu/core/model/List_ClassData.dart';
+import 'package:test_giasu/core/view_model/classModel.dart';
 import 'package:test_giasu/ui/UI_Main/ClassDetail.dart';
+import 'package:test_giasu/ui/UI_Main/ClassDetail4.dart';
+import 'package:test_giasu/ui/UI_Main/ClassDetailWhenAccepted.dart';
+import 'package:test_giasu/ui/UI_Main/ClassDetailWithCreator.dart';
 import 'package:test_giasu/ui/UI_Main/ClassDetailWithMoreTutorInfor.dart';
 import 'package:test_giasu/ui/UI_Main/General_Infor.dart';
 class List_Box extends StatelessWidget {
   List<Data_class> box;
   ScrollController controller;
-  List_Box({Key key, this.box, this.controller}) : super(key: key);
+  bool stateButton;
+
+  List_Box({Key key, this.box, this.controller, this.stateButton})
+      : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
-    return ListView.builder(
-        padding: EdgeInsets.zero,
-        controller: controller,
-        shrinkWrap: true,
-        itemCount: box.length,
-        itemBuilder: (BuildContext context, int index) {
-//          print(box[index].id);
-          return Container(
+    return Consumer<ClassModel>(builder: (_, model, __) {
+      return ListView.builder(
+          controller: controller,
+          shrinkWrap: true,
+          itemCount: box.length,
+          itemBuilder: (BuildContext context, int index) {
+//                print('log recommen ${box[index].recommended}');
+//                print(box[index].recommended);
+            if (stateButton) {
+              model.setRecomended(box[index].recommended);
+            }
+            ;
+//              model.setInfor(box[index].recommended);
+//                if(box[index].recommended) {
+//                  model.setInfor('Hủy đề nghị dạy');
+//                }
+//                else {
+//                  model.setInfor('Đề nghị dạy');
+//                }
+
+            return Container(
             child: Stack(
               children: <Widget>[
                 Container(
@@ -25,16 +47,102 @@ class List_Box extends StatelessWidget {
                   margin: EdgeInsets.all(10.0),
 //                  height: 190,
                   child: RaisedButton(
-                    onPressed: () {
-                      
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) =>
-                                  ClassDetailWithMoreTutorInfor(box[index])));
-                    },
-                    padding: EdgeInsets.all(5.0),
-                    child: Row(
+                        onPressed: () async {
+//                          Navigator.push(
+//                            context,
+//                            MaterialPageRoute(
+//                              builder: (context) => ClassDetail( box[index].id),
+//
+//                            ),
+//                          );
+                          await model.setClassDataId(box[index].id);
+//                        print(model.isFetchingClassDataId);
+                          if (model.isFetchingClassDataId) {
+//                          print(model.data_class.toString());
+                            model.checkStateClass(model.data_class);
+//                            print(model.StateClass);
+                            switch (model.StateClass) {
+                              case "De nghi day":
+                                {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) =>
+                                          ClassDetail(box[index].id),
+                                    ),
+                                  );
+                                }
+                                break;
+                              case 'Huy de nghi':
+                                {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) =>
+                                          ClassDetail(box[index].id),
+                                    ),
+                                  );
+                                }
+                                break;
+
+                              case "Xem de nghi day":
+                                {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) =>
+                                          ClassDetailWithCreator(box[index].id),
+                                    ),
+                                  );
+                                }
+                                break;
+                              case "Thanh toan":
+                                {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) =>
+                                          ClassDetailWhenAcceptedDemo(box[index]),
+                                    ),
+                                  );
+                                }
+                                break;
+                              case "Lop phat sinh + Change":
+                                {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) => ClassDetail4(box[index]),
+                                    ),
+                                  );
+                                }
+                                break;
+                              case "Change":
+                                {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) => ClassDetail4(box[index]),
+                                    ),
+                                  );
+                                }
+                                break;
+
+                              case "No button":
+                                {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) => ClassDetail4(box[index]),
+                                    ),
+                                  );
+                                }
+                                break;
+                            }
+                          }
+                        },
+                        padding: EdgeInsets.all(5.0),
+                        child:Row(
                       children: <Widget>[
                         Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
@@ -124,7 +232,8 @@ class List_Box extends StatelessWidget {
                 //     size: 30.0,
                 //   ),
                 // ),
-                Positioned(
+                (stateButton
+                      ? Positioned(
                   bottom: 15,
                   right: 25,
                   child: Column(
@@ -143,31 +252,61 @@ class List_Box extends StatelessWidget {
                         height: 2,
                       ),
                       SizedBox(
-                        height: 33,
-                        child: RaisedButton(
-                          padding: EdgeInsets.only(
-                            left: 2.0,
-                            right: 2.0,
+                            height: 33,
+                            child: RaisedButton(
+                              padding: EdgeInsets.only(
+                                left: 2.0,
+                                right: 2.0,
+                              ),
+                              color: colorApp,
+                              onPressed: () async {
+                                model.setIdclass(box[index].id);
+//                              await model.setInfor();
+//                              print(model.infor);
+//                                    print( 'log ${model.recommended}');
+//                                    model.setRecomen(model.recommended);
+//                                    print('recommended ${model.recommended}' );
+//                                    print('recomme ${model.recomended}' );
+
+//                          print('recommended ${box[index].recommended}');
+//                          model.setRecomended(box[index].recommended);
+                                print(
+                                    'recommended ${model.recommended} + ${box[index].id}');
+
+                                if (model.recommended) {
+                                  await model.setHuydenghi();
+                                  print('Huy');
+                                } else {
+                                  await model.setDenghi();
+                                  print('Denghi');
+                                }
+
+//                          model.change();
+
+                                print('=> ${model.recommended}');
+//                          print(model.infor);
+                              },
+                              child: Text(
+                                model.infor,
+                                style: TextStyle(
+                                    fontSize: 15, color: Colors.white),
+                              ),
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(15.0),
+                              ),
+                            ),
                           ),
-                          color: colorApp,
-                          onPressed: () {},
-                          child: Text(
-                            'Đề nghị dạy',
-                            style: TextStyle(fontSize: 13, color: Colors.white),
-                          ),
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(10.0),
-                          ),
-                        ),
-                      ),
                     ],
                   ),
-                )
+                ): SizedBox()),
               ],
             ),
           );
         });
   }
+    );
+  }
+
   Widget _iconTextBox(String _text, Color _c, Icon _icon) {
     return Container(
       child: Row(

@@ -8,13 +8,13 @@ class RoundedImageNameBox extends StatelessWidget {
   String urlString;
   String name;
   Data_teacher teacherData;
-  RoundedImageNameBox(this.urlString, this.name, this.teacherData);
+  RoundedImageNameBox(this.urlString, this.name);
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
     return GestureDetector(
       onTap: (){
-        Navigator.push(context, MaterialPageRoute(builder: (context) => TutorInfor(teacherData)));
+        // Navigator.push(context, MaterialPageRoute(builder: (context) => TutorInfor(teacherData)));
       },
       child: Container(
         padding: EdgeInsets.all(10),

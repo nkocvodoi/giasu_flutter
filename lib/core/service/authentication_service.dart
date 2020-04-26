@@ -13,6 +13,7 @@ class AuthenticationService extends ChangeNotifier {
   String _token;
   String _email;
   String _identification_number;
+  String _notification;
   AuthenticationService() {
     reload();
   }
@@ -104,6 +105,16 @@ get id {
     if (identification_number != _identification_number) {
       _identification_number = identification_number;
       this._setString("identification_number", _identification_number);
+    }
+  }
+  get notification {
+    return _notification;
+  }
+
+  void setNotification(String notification) {
+    if (notification != _notification) {
+      _notification = notification;
+      this._setString("notification", _notification);
       notifyListeners();
     }
   }
@@ -126,6 +137,7 @@ get id {
 //    }
 
     _token = this._getString("token") ?? null;
+    _notification = this._getString("notification") ?? null;
     _id = this._getInt("id") ?? null;
 
   }

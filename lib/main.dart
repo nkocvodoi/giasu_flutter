@@ -63,7 +63,7 @@ class MyApp extends StatelessWidget {
 //     },
 
         home: SignIn_Page(),
-//        home: ClassDetailWithCreator(638),
+//        home: SubjectChoice(),
       ),
     );
   }

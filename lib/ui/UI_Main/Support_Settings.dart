@@ -17,6 +17,16 @@ class Support_Settings extends StatefulWidget {
 
 class _Support_SettingsState extends State<Support_Settings> {
 
+  void _showAlert(BuildContext context) {
+    showDialog(
+        context: context,
+        builder: (context) => AlertDialog(
+//          title: Text("Wifi"),
+          content: Text("Nếu bạn tắt thông báo, chúng tôi sẽ không thông báo cho bạn nữa."),
+        )
+    );
+  }
+
 
   @override
   Widget build(BuildContext context) {
@@ -38,9 +48,12 @@ class _Support_SettingsState extends State<Support_Settings> {
                 children: <Widget>[
                   SwitchListTile(
                     value: model.count,
-                    onChanged:(bool _val) {
+                    onChanged:(bool _val) async {
+                      if(model.count) _showAlert(context);
                       model.setCount(_val);
                       model.setNotifi();
+                      await model.setNotification();
+
 
                     },
                     secondary: Icon(

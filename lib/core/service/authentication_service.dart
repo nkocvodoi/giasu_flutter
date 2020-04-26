@@ -11,6 +11,7 @@ class AuthenticationService extends ChangeNotifier {
   Detail_teacher _user;
   int _id;
   String _token;
+  String _notification;
   AuthenticationService() {
     reload();
   }
@@ -83,6 +84,17 @@ get id {
       notifyListeners();
     }
   }
+  get notification {
+    return _notification;
+  }
+
+  void setNotification(String notification) {
+    if (notification != _notification) {
+      _notification = notification;
+      this._setString("notification", _notification);
+      notifyListeners();
+    }
+  }
 
   void reload() async {
     if (this._prefs == null) {
@@ -102,6 +114,7 @@ get id {
 //    }
 
     _token = this._getString("token") ?? null;
+    _notification = this._getString("notification") ?? null;
     _id = this._getInt("id") ?? null;
 
   }

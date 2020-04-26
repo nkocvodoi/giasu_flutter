@@ -23,9 +23,6 @@ import 'core/view_model/selectedModel.dart';
 List<SingleChildCloneableWidget> getProviders() {
   List<SingleChildCloneableWidget> independentServices = [
     ChangeNotifierProvider(
-      create: (context) => PaymentModel(),
-    ),
-    ChangeNotifierProvider(
       create: (context) => FilterModel(),
     ),
     ChangeNotifierProvider(
@@ -45,9 +42,6 @@ List<SingleChildCloneableWidget> getProviders() {
     ),
     ChangeNotifierProvider(
       create: (context) => SubjectChoiceModel(),
-    ),
-    ChangeNotifierProvider(
-      create: (context) => Support_SettingModel(),
     ),
     ChangeNotifierProvider(
       create: (context) => PersonalInforModel(),
@@ -95,9 +89,17 @@ List<SingleChildCloneableWidget> getProviders() {
       update: (_, authentication, __) =>
           ClassDetailModel(authenticationService: authentication),
     ),
-ChangeNotifierProxyProvider<AuthenticationService, PassWordModel>(
+    ChangeNotifierProxyProvider<AuthenticationService, PassWordModel>(
       update: (_, authentication, __) =>
           PassWordModel(authenticationService: authentication),
+    ),
+    ChangeNotifierProxyProvider<AuthenticationService, PaymentModel>(
+      update: (_, authentication, __) =>
+          PaymentModel(authenticationService: authentication),
+    ),
+    ChangeNotifierProxyProvider<AuthenticationService, Support_SettingModel>(
+      update: (_, authentication, __) =>
+          Support_SettingModel(authenticationService: authentication),
     ),
 
   ];

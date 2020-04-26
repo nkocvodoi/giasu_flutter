@@ -65,7 +65,7 @@ class List_Box extends StatelessWidget {
                           if (model.isFetchingClassDataId) {
 //                          print(model.data_class.toString());
                             model.checkStateClass(model.data_class);
-                            print(model.StateClass);
+//                            print(model.StateClass);
                             switch (model.StateClass) {
                               case "De nghi day":
                                 {

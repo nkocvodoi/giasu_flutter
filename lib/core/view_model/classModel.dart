@@ -9,9 +9,9 @@ class ClassModel extends ChangeNotifier {
   final AuthenticationService authenticationService;
 
   ClassModel({this.authenticationService}) {
-    if (authenticationService.isLogined) {
-      initState();
-    }
+//    if (authenticationService.isLogined) {
+//      initState();
+//    }
   }
 
   List<Data_class> _list_class = new List<Data_class>();

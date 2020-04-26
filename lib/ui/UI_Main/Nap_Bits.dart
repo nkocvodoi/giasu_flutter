@@ -8,14 +8,19 @@ import 'package:test_giasu/ui/UI_Main/WebView.dart';
 import 'package:test_giasu/ui/Widgets/previous_widget.dart';
 
 class Nap_Bits extends StatefulWidget {
+  String message;
+  Nap_Bits(this.message);
   @override
   State<StatefulWidget> createState() {
     // TODO: implement createState
-    return _Nap_Bits_State();
+    return _Nap_Bits_State(this.message);
   }
 }
 
 class _Nap_Bits_State extends State<Nap_Bits> {
+  String message;
+  _Nap_Bits_State(this.message);
+
   final String _a = 'Họ Tên:',
       _b = 'Mã số(ID):',
       _c = 'Email:',
@@ -23,10 +28,32 @@ class _Nap_Bits_State extends State<Nap_Bits> {
   int group1 = 0;
   int group2 = 0;
 
+  final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
+
+  void showInSnackBar(String value) {
+    _scaffoldKey.currentState.showSnackBar(
+      SnackBar(
+        content: new Text(value, textAlign: TextAlign.start),
+        duration: Duration(seconds: 2),
+      ),
+    );
+  }
+  void initState() {
+    super.initState();
+    Future.delayed(Duration(seconds: 1)).then(
+            (_) {
+             if(message != null){
+               showInSnackBar(message);
+             }
+            },
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
     return Scaffold(
+      key: _scaffoldKey,
       appBar: AppBar(
         leading: buildPreviousButton(),
         centerTitle: true,
@@ -229,11 +256,10 @@ class _Nap_Bits_State extends State<Nap_Bits> {
               width: 150,
               height: 40.0,
               child: Text(
-                  _s,
-                  textAlign: TextAlign.center,
-                  style: TextStyle(fontSize: 13, color: Colors.white),
-                ),
-              
+                _s,
+                textAlign: TextAlign.center,
+                style: TextStyle(fontSize: 13, color: Colors.white),
+              ),
               decoration: BoxDecoration(
                 color: colorApp,
                 borderRadius: BorderRadius.circular(10.0),
@@ -279,30 +305,28 @@ class _Nap_Bits_State extends State<Nap_Bits> {
     return Container(
       height: 230,
       width: 350,
-     
-        padding: EdgeInsets.all(5.0),
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: <Widget>[
-            _richText('Bước 2: Chọn phương thức thanh toán '),
-            _LineBox3(
-              'Nạp tiền bằng Internet-Banking',
-              0,
-            ),
-            _LineBox3(
-              'Thanh toán online bằng thẻ ngân hàng nội địa',
-              1,
-            ),
-            _LineBox3(
-              'Chuyển khoản ngân hàng',
-              2,
-            ),
-            _LineBox3(
-              'Nạp Coin tại văn phòng đại diện HTcon',
-              3,
-            ),
-          ],
-        
+      padding: EdgeInsets.all(5.0),
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: <Widget>[
+          _richText('Bước 2: Chọn phương thức thanh toán '),
+          _LineBox3(
+            'Nạp tiền bằng Internet-Banking',
+            0,
+          ),
+          _LineBox3(
+            'Thanh toán online bằng thẻ ngân hàng nội địa',
+            1,
+          ),
+          _LineBox3(
+            'Chuyển khoản ngân hàng',
+            2,
+          ),
+          _LineBox3(
+            'Nạp Coin tại văn phòng đại diện HTcon',
+            3,
+          ),
+        ],
       ),
       decoration: BoxDecoration(
         color: Colors.white,

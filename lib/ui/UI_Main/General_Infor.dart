@@ -21,3 +21,4 @@ final String infor_invite1 = 'Gia sư copy hoặc chia sẻ link qua facebook.',
         'Gia sư được giới thiệu mỗi lần nhận lớp thành công bạn sẽ được HTcon cộng 10 Bits = 10,000 vnđ, không giới hạn số lần nhận lớp, có thể nhận tới trên 100,000 vnđ/1 gia sư giới thiệu.',
     infor_invite3 =
         'Đặc biệt bạn có thể nhận hậu mãi chính sách hoa hồng, khi người được giới thiệu sử dụng các sản phẩm khác trên HTcon.';
+int phu_phi = 10;

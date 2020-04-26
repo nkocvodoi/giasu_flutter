@@ -55,7 +55,8 @@ class _Lists_Class_State extends State<Lists_Class> {
     return Consumer<ClassModel>(builder: (_, model, __) {
       return Center(
         child: FutureBuilder<CLassData>(
-          future: model.Page_class,
+//          future: model.Page_class,
+        future: model.fetchClassDatatest(),
           builder: (context, snapshot) {
             if (snapshot.hasData) {
               model.setList_class(snapshot.data.data);

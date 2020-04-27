@@ -1,5 +1,4 @@
 import 'package:auto_size_text/auto_size_text.dart';
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
@@ -9,10 +8,8 @@ import 'package:test_giasu/ui/Helper/ScreenConfig.dart';
 import 'package:test_giasu/ui/Widgets/ARichTextLine.dart';
 import 'package:test_giasu/ui/Widgets/LargeTextBox.dart';
 import 'package:test_giasu/ui/Widgets/RoundedImageNameBox.dart';
-import 'package:test_giasu/ui/Widgets/RoundedImageNameBoxForDemo.dart';
 import 'package:test_giasu/ui/Widgets/SelectedTimeColumn.dart';
 import 'package:test_giasu/ui/Widgets/previous_widget.dart';
-import 'package:url_launcher/url_launcher.dart';
 
 import 'General_Infor.dart';
 
@@ -60,25 +57,25 @@ class ClassDetailState extends State<ClassDetail> {
     ScreenUtil.instance =
         ScreenUtil(width: 750, height: 1334, allowFontScaling: true);
     // TODO: implement build
-    return Scaffold(
-      appBar: AppBar(
-        centerTitle: true,
-        leading: buildPreviousButton(),
-        backgroundColor: Color.fromRGBO(47, 101, 174, 1),
-        title: Text(
-          'Chi tiết lớp học',
-          textAlign: TextAlign.start,
-        ),
-      ),
-      body: Consumer<ClassDetailModel>(builder: (_, model, __) {
-        return FutureBuilder<Data_class>(
-            future: model.fetchClassDataId(classId),
-            builder: (context, snapshot) {
+    return Consumer<ClassDetailModel>(builder: (_, model, __) {
+      return FutureBuilder<Data_class>(
+          future: model.fetchClassDataId(classId),
+          builder: (context, snapshot) {
 //                  print(snapshot.data.status);
-              if (snapshot.hasData) {
-                Data_class classData = snapshot.data;
-                model.setrecommend(classData.check_recommend);
-                return SingleChildScrollView(
+            if (snapshot.hasData) {
+              Data_class classData = snapshot.data;
+              model.setrecommend(classData.check_recommend);
+              return Scaffold(
+                appBar: AppBar(
+                  centerTitle: true,
+                  leading: buildPreviousButton(),
+                  backgroundColor: Color.fromRGBO(47, 101, 174, 1),
+                  title: Text(
+                    'Chi tiết lớp học',
+                    textAlign: TextAlign.start,
+                  ),
+                ),
+                body: SingleChildScrollView(
                   child: Stack(
                     alignment: Alignment.center,
                     children: <Widget>[
@@ -96,9 +93,9 @@ class ClassDetailState extends State<ClassDetail> {
                                   alignment: Alignment.center,
                                   color: Color.fromRGBO(47, 101, 174, 1),
                                   child: RoundedImageNameBox(
-                                      classData.parent.avatar,
-                                      classData.parent.full_name,
-                                      ),
+                                    classData.parent.avatar,
+                                    classData.parent.full_name,
+                                  ),
                                 ),
                                 Align(
                                   alignment: Alignment.bottomCenter,
@@ -151,7 +148,7 @@ class ClassDetailState extends State<ClassDetail> {
                             // alignment: Alignment.center,
                             width: SizeConfig.safeBlockHorizontal * 95,
                             decoration: BoxDecoration(
-                              border: Border.all(color: Colors.blue),
+                              border: Border.all(color: blue),
                               borderRadius: BorderRadius.circular(10),
                             ),
                             child: Column(
@@ -170,6 +167,9 @@ class ClassDetailState extends State<ClassDetail> {
                                     size: 15,
                                   ),
                                 ),
+                                 Divider(
+                        color: grey,
+                      ),
                                 _iconTextBox(
                                   Text(
                                     'Mã lớp: ${classData.id} - ${classData.subject.name} | Lớp ${classData.grade}',
@@ -184,6 +184,9 @@ class ClassDetailState extends State<ClassDetail> {
                                     size: 15,
                                   ),
                                 ),
+                                 Divider(
+                        color: grey,
+                      ),
                                 _iconTextBox(
                                   Text(
                                     'Hình thức học: ${classData.form_teaching_name}',
@@ -198,6 +201,9 @@ class ClassDetailState extends State<ClassDetail> {
                                     size: 15,
                                   ),
                                 ),
+                                 Divider(
+                        color: grey,
+                      ),
                                 _iconTextBox(
                                   Text(
                                     'Số buổi/tuần: ${classData.lesson_per_week} (${(classData.time_per_lesson).toInt()}h/buổi)',
@@ -212,6 +218,9 @@ class ClassDetailState extends State<ClassDetail> {
                                     size: 15,
                                   ),
                                 ),
+                                 Divider(
+                        color: grey,
+                      ),
                                 _iconTextBox(
                                   Text(
                                     'Số học viên: ${classData.student_per_class}',
@@ -226,39 +235,26 @@ class ClassDetailState extends State<ClassDetail> {
                                     size: 15,
                                   ),
                                 ),
-                                Expanded(
-                                  flex: 20,
-                                  child: Container(
-                                    child: RichText(
-                                      textAlign: TextAlign.start,
-                                      text: TextSpan(
-                                        children: <TextSpan>[
-                                          TextSpan(
-                                            text: classData.address,
-                                            style: TextStyle(
-                                              fontSize: 15,
-                                              color: Colors.grey,
-                                              fontFamily: 'UTM',
-                                            ),
-                                          ),
-                                          TextSpan(
-                                            recognizer: TapGestureRecognizer()
-                                              ..onTap = () {
-                                                launch(
-                                                    'https://www.google.com/maps/place/38+Tr%E1%BA%A7n+Qu%C3%BD+Ki%C3%AAn,+D%E1%BB%8Bch+V%E1%BB%8Dng,+C%E1%BA%A7u+Gi%E1%BA%A5y,+H%C3%A0+N%E1%BB%99i,+Vi%E1%BB%87t+Nam/@21.0373781,105.7920155,17z/data=!3m1!4b1!4m5!3m4!1s0x3135ab37c1376ff7:0x245ac013cbc4304e!8m2!3d21.0373781!4d105.7920155?hl=vi-VNv');
-                                              },
-                                            text: ' ( Xem bản đồ )',
-                                            style: TextStyle(
-                                              fontFamily: 'UTM',
-                                              color: orange,
-                                              fontSize: 15,
-                                            ),
-                                          ),
-                                        ],
-                                      ),
+                                 Divider(
+                        color: grey,
+                      ),
+                                _iconTextBox(
+                                  Text(
+                                    'Địa chỉ: ${classData.address}',
+                                    style: TextStyle(
+                                      color: black,
+                                      fontSize: 15,
                                     ),
                                   ),
+                                  Icon(
+                                    Icons.map,
+                                    color: black,
+                                    size: 15,
+                                  ),
                                 ),
+                                 Divider(
+                        color: grey,
+                      ),
                                 _iconTextBox(
                                   Text(
                                     'Cách bạn: 2km',
@@ -273,6 +269,9 @@ class ClassDetailState extends State<ClassDetail> {
                                     size: 15,
                                   ),
                                 ),
+                                 Divider(
+                        color: grey,
+                      ),
                                 _iconTextBox(
                                   Text(
                                     'Học phí/buổi: ${(classData.tuition_fee / 1000).toInt()},000 vnđ/2h',
@@ -287,6 +286,9 @@ class ClassDetailState extends State<ClassDetail> {
                                     size: 15,
                                   ),
                                 ),
+                                 Divider(
+                        color: grey,
+                      ),
                                 _iconTextBox(
                                   Text(
                                     '',
@@ -320,67 +322,62 @@ class ClassDetailState extends State<ClassDetail> {
                           Divider(
                             thickness: 1,
                           ),
-                          Container(
-                            width: SizeConfig.safeBlockHorizontal * 90,
-                            height: SizeConfig.safeBlockVertical * 10,
-                            child: Row(
-                              children: <Widget>[
-                                Wrap(
-                                  children: <Widget>[
-                                    Container(
-                                      width: ScreenUtil.getInstance()
-                                          .setWidth(145),
-                                      margin: EdgeInsets.all(5.0),
-                                      child: Text(
-                                        'Đã có ${classData.recommend_number}/6 đề nghị dạy',
-                                        textAlign: TextAlign.center,
-                                        style: TextStyle(
-                                          color: Colors.black38,
-                                          fontSize: 13,
-                                        ),
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                                SizedBox(
-                                  width: SizeConfig.safeBlockHorizontal * 30,
-                                ),
-                                RaisedButton(
-                                    shape: RoundedRectangleBorder(
-                                        borderRadius:
-                                            BorderRadius.circular(10)),
-                                    color: colorApp,
-                                    onPressed: () {
-                                      model.change();
-//                                        model.setInforbutton(model.Inforbutton);
-//                                          print(model.Inforbutton);
-                                    },
-                                    child: Container(
-                                      alignment: Alignment.center,
-                                      height:
-                                          SizeConfig.safeBlockHorizontal * 10,
-                                      child: Text(
-                                        '${model.Inforbutton}',
-                                        style: TextStyle(
-                                          color: Colors.white,
-                                          fontStyle: FontStyle.normal,
-                                        ),
-                                      ),
-                                    )),
-                              ],
-                            ),
-                          ),
                         ],
                       ),
                     ],
                   ),
-                );
-              }
+                ),
+                bottomNavigationBar: Container(
+                  width: SizeConfig.safeBlockHorizontal * 90,
+                  height: SizeConfig.safeBlockVertical * 7,
+                  child: Row(
+                    children: <Widget>[
+                      Wrap(
+                        children: <Widget>[
+                          Container(
+                            width: ScreenUtil.getInstance().setWidth(145),
+                            margin: EdgeInsets.all(5.0),
+                            child: Text(
+                              'Đã có ${classData.recommend_number}/6 đề nghị dạy',
+                              textAlign: TextAlign.center,
+                              style: TextStyle(
+                                color: Colors.black38,
+                                fontSize: 13,
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                      Expanded(child: SizedBox()),
+                      Container(
+                        child: RaisedButton(
+                          shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(10)),
+                          color: colorApp,
+                          onPressed: () {
+                            model.change();
+//                                        model.setInforbutton(model.Inforbutton);
+//                                          print(model.Inforbutton);
+                          },
+                          child: Text(
+                            '${model.Inforbutton}',
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontStyle: FontStyle.normal,
+                            ),
+                          ),
+                        ),
+                      ),
+                      SizedBox(width: 10,),
+                    ],
+                  ),
+                ),
+              );
+            } else
               return Center(
                 child: CircularProgressIndicator(),
               );
-            });
-      }),
-    );
+          });
+    });
   }
 }

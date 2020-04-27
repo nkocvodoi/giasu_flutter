@@ -317,9 +317,7 @@ class _ClassDetailWithCreatorState extends State<ClassDetailWithCreator> {
         alignment: Alignment.center,
         width: ScreenUtil.getInstance().setWidth(700),
         height: ScreenUtil.getInstance().setHeight(100),
-        child: Container(
-          height: SizeConfig.safeBlockHorizontal * 10,
-//              width: SizeConfig.safeBlockHorizontal *25,
+        
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(20.0),
           ),
@@ -331,10 +329,10 @@ class _ClassDetailWithCreatorState extends State<ClassDetailWithCreator> {
                   MaterialPageRoute(builder: (context) => Recommendations(course_id)));
             },
             textColor: Colors.white,
-            child: Text('Xem đề nghị dạy',style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 4)),
+            child: Text('Xem đề nghị dạy',style: TextStyle(color: Colors.white)),
           ),
         ),
-      ),
+      
     );
   }
 }

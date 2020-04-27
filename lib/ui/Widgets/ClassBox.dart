@@ -4,6 +4,7 @@ import 'package:test_giasu/core/model/List_ClassData.dart';
 import 'package:test_giasu/core/view_model/classModel.dart';
 import 'package:test_giasu/ui/UI_Main/ClassDetail.dart';
 import 'package:test_giasu/ui/UI_Main/ClassDetail4.dart';
+import 'package:test_giasu/ui/UI_Main/ClassDetailRequestDemo.dart';
 import 'package:test_giasu/ui/UI_Main/ClassDetailWhenAccepted.dart';
 import 'package:test_giasu/ui/UI_Main/ClassDetailWithCreator.dart';
 import 'package:test_giasu/ui/UI_Main/ClassDetailWithMoreTutorInfor.dart';
@@ -48,13 +49,13 @@ class List_Box extends StatelessWidget {
 //                  height: 190,
                   child: RaisedButton(
                         onPressed: () async {
-//                          Navigator.push(
-//                            context,
-//                            MaterialPageRoute(
-//                              builder: (context) => ClassDetail( box[index].id),
-//
-//                            ),
-//                          );
+                        //  Navigator.push(
+                        //    context,
+                        //    MaterialPageRoute(
+                        //      builder: (context) => ClassDetail(box[index].id),
+
+                        //    ),
+                        //  );
                           await model.setClassDataId(box[index].id);
 //                        print(model.isFetchingClassDataId);
                           if (model.isFetchingClassDataId) {
@@ -102,7 +103,7 @@ class List_Box extends StatelessWidget {
                                     context,
                                     MaterialPageRoute(
                                       builder: (context) =>
-                                          ClassDetailWhenAcceptedDemo(box[index]),
+                                         ClassDetail(box[index].id),
                                     ),
                                   );
                                 }
@@ -139,7 +140,7 @@ class List_Box extends StatelessWidget {
                                 }
                                 break;
                             }
-                          }
+                         }
                         },
                         padding: EdgeInsets.all(5.0),
                         child:Row(

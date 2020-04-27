@@ -42,7 +42,12 @@ class _RecommendationsState extends State<Recommendations> {
             builder: (context, snapshot) {
 //print(snapshot.data[0].tutor);
               if (snapshot.hasData) {
+                print("start");
+              
                 List<Recommendation> _teacher = snapshot.data;
+                if(_teacher.length == 0){
+                  return Center(child: Text("Hiện không có lời đề nghị dạy nào."),);
+                }
                 return Container(
                   child: GridView.builder(
                     physics: NeverScrollableScrollPhysics(),

@@ -68,10 +68,6 @@ class Data_teacher {
   String address;
   String achievement;
   String video;
-  String facebook;
-  String email;
-  String phone_number;
-  int location_id;
   int tuition_fee;
   int number_class;
   String gender;

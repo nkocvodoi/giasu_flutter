@@ -36,10 +36,10 @@ class _Lists_Class_State extends State<Lists_Class> {
       if (_scrollController.position.pixels ==
           (_scrollController.position.maxScrollExtent)) {
         i++;
-//        if (i < ((120/15)+1)){
+        if (i < ((120 / 15) + 1)) {
 //          print(i);
           Provider.of<ClassModel>(context).setPage(i);
-//        }
+        }
       }
     });
   }
@@ -56,7 +56,7 @@ class _Lists_Class_State extends State<Lists_Class> {
       return Center(
         child: FutureBuilder<CLassData>(
 //          future: model.Page_class,
-        future: model.fetchClassDatatest(),
+          future: model.fetchClassDatatest(),
           builder: (context, snapshot) {
             if (snapshot.hasData) {
               model.setList_class(snapshot.data.data);
@@ -70,7 +70,7 @@ class _Lists_Class_State extends State<Lists_Class> {
                       SliverAppBar(
                         automaticallyImplyLeading: false,
                         backgroundColor: colorApp,
-                        expandedHeight: 40,
+                        expandedHeight: 0,
 //              floating: false,
                         pinned: true,
                         flexibleSpace: FlexibleSpaceBar(
@@ -84,7 +84,7 @@ class _Lists_Class_State extends State<Lists_Class> {
                         pinned: true,
                         delegate: _SliverAppBarDelegate(
                             child: PreferredSize(
-                          preferredSize: Size.fromHeight(60),
+                          preferredSize: Size.fromHeight(50),
                           child: Stack(
                             alignment: Alignment.center,
                             children: <Widget>[
@@ -103,60 +103,68 @@ class _Lists_Class_State extends State<Lists_Class> {
                                 child: Row(
                                   children: <Widget>[
                                     Container(
-                                      height: 50,
-                                      width: SizeConfig.safeBlockHorizontal* 28,
+                                      height: 45,
+                                      width:
+                                          SizeConfig.safeBlockHorizontal * 28,
                                       child: Center(
                                         child: Text(
                                           ' ${snapshot.data.total} kết quả',
                                           style: TextStyle(
-                                              fontSize: SizeConfig.safeBlockHorizontal* 3.5,
+                                              // fontSize: SizeConfig
+                                              //         .safeBlockHorizontal *
+                                              //     3.5,
                                               color: Colors.white),
                                           textAlign: TextAlign.center,
                                         ),
                                       ),
                                       decoration: BoxDecoration(
                                         color: colorApp,
-                                        border: Border.all(
-                                            color: Colors.blueAccent),
+                                        border: Border.all(color: Colors.white),
                                         borderRadius: BorderRadius.only(
                                             topLeft: Radius.circular(40.0),
                                             bottomLeft: Radius.circular(40.0)),
                                       ),
                                     ),
-                                    Container(
-                                      height: 50,
-                                      width: SizeConfig.safeBlockHorizontal * 28,
-                                      child: ListTile(
-                                        title: Text(
-                                          'Bộ lọc',
-                                          style: TextStyle(
-                                              fontSize: SizeConfig.safeBlockHorizontal* 3.5,
-                                              color: Colors.white),
+                                    GestureDetector(
+                                      onTap: () {
+                                        print('Tap');
+                                        Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                            builder: (context) => Filter(),
+                                          ),
+                                        );
+                                      },
+                                      child: Container(
+                                        height: 45,
+                                        width:
+                                            SizeConfig.safeBlockHorizontal * 28,
+                                        child: Row(
+                                          children: <Widget>[
+                                            SizedBox(width: 10),
+                                            Text(
+                                              'Bộ lọc',
+                                              style: TextStyle(
+                                                  color: Colors.white),
                                               textAlign: TextAlign.center,
-                                        ),
-                                        onTap: () {
-                                          print('Tap');
-                                          Navigator.push(
-                                            context,
-                                            MaterialPageRoute(
-                                              builder: (context) => Filter(),
                                             ),
-                                          );
-                                        },
-                                        trailing: Icon(
-                                          
-                                          Icons.arrow_forward_ios,
-                                          size:20,
-                                          color: Colors.white,
+                                            Expanded(child: SizedBox()),
+                                            Icon(
+                                              Icons.arrow_forward_ios,
+                                              color: Colors.white,
+                                              size: 30,
+                                            ),
+                                            SizedBox(width:10),
+                                          ],
                                         ),
-                                      ),
-                                      decoration: BoxDecoration(
-                                        color: colorApp,
-                                        border: Border.all(
-                                            color: Colors.blueAccent),
-                                        borderRadius: BorderRadius.only(
-                                          topRight: Radius.circular(40.0),
-                                          bottomRight: Radius.circular(40.0),
+                                        decoration: BoxDecoration(
+                                          color: colorApp,
+                                          border:
+                                              Border.all(color: Colors.white),
+                                          borderRadius: BorderRadius.only(
+                                            topRight: Radius.circular(40.0),
+                                            bottomRight: Radius.circular(40.0),
+                                          ),
                                         ),
                                       ),
                                     ),
@@ -172,7 +180,7 @@ class _Lists_Class_State extends State<Lists_Class> {
                   body: List_Box(
                     box: model.list_class,
                     controller: _scrollController,
-                   
+                    stateButton: true,
                   ),
                 ),
               );

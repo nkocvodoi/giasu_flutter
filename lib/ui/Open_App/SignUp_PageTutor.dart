@@ -345,7 +345,7 @@ class _SignUpPageTutor extends State<SignUpPageTutor> {
           autofocus: true,
           style: TextStyle(fontSize: 18.0),
           decoration: new InputDecoration(
-              labelStyle: TextStyle(fontSize: 18.0), labelText: _text),
+              labelStyle: TextStyle(fontSize: 18.0,color: blue), labelText: _text),
           keyboardType: TextInputType.text,
 //                            maxLength: 10,
           validator: validateName,
@@ -362,6 +362,7 @@ class _SignUpPageTutor extends State<SignUpPageTutor> {
           autofocus: true,
           style: TextStyle(fontSize: 18.0),
           decoration: new InputDecoration(
+          
               labelStyle: TextStyle(fontSize: 18.0), labelText: _text),
           keyboardType: TextInputType.emailAddress,
 //                            maxLength: 10,

@@ -6,7 +6,9 @@ import 'package:flutter/material.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:provider/provider.dart';
 import 'package:test_giasu/core/model/List_ClassData.dart';
+import 'package:test_giasu/core/view_model/classDetailModel.dart';
 import 'package:test_giasu/ui/Helper/ScreenConfig.dart';
 import 'package:test_giasu/ui/UI_Main/General_Infor.dart';
 import 'package:test_giasu/ui/Widgets/ARichTextLine.dart';
@@ -23,13 +25,139 @@ class ClassDetail4 extends StatefulWidget {
   @override
   State<StatefulWidget> createState() {
     // TODO: implement createState
-    return ClassDetail4State(classData);
+    return ClassDetail4State();
   }
 }
 
 class ClassDetail4State extends State<ClassDetail4> {
-  Data_class classData;
-  ClassDetail4State(this.classData);
+
+  TextEditingController _report = TextEditingController();
+  GlobalKey<FormState> _key = new GlobalKey();
+  bool _validate = false;
+
+  String validateReport(String value) {
+    if (value.length == 0) {
+      return "Trường này không được để trống";
+    }
+    return null;
+  }
+
+  _sendToServer() {
+    if (_key.currentState.validate()) {
+      // No any error in validation
+      _key.currentState.save();
+//      print("Name $name");
+//      print("Mobile $mobile");
+//      print("Email $email");
+    } else {
+      // validation error
+      setState(() {
+        _validate = true;
+      });
+    }
+  }
+
+  void _baophatsinh(BuildContext context) {
+    showDialog(
+        context: context,
+        builder: (context) => AlertDialog(
+              titlePadding: EdgeInsets.zero,
+              title: Container(
+                padding: EdgeInsets.all(10.0),
+                color: colorApp,
+                child: Text(
+                  'Lớp phát sinh',
+                  style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 30,
+                      fontWeight: FontWeight.w700),
+                ),
+              ),
+              content: Form(
+                  key: _key,
+                  autovalidate: _validate,
+                  child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  Text(
+                    'Nội dung phát sinh *',
+                    style: TextStyle(
+                      fontSize: 15,
+                    ),
+                  ),
+                  _textLargeField('Nhập nội dung phát sinh'),
+                ],
+              )),
+              actions: <Widget>[
+                // usually buttons at the bottom of the dialog
+                new FlatButton(
+                  child: Container(
+                    padding: EdgeInsets.only(left: 10.0, right: 10.0, top: 5, bottom: 5),
+                    decoration:
+                        BoxDecoration(border: Border.all(color: Colors.grey)),
+                    child: new Text(
+                      "X Đóng",
+                      style: TextStyle(color: Colors.black45, fontSize: 20),
+                    ),
+                  ),
+                  onPressed: () {
+                    Navigator.of(context).pop();
+                  },
+                ),
+                new FlatButton(
+                  color: colorApp,
+                  child: Container(
+//                    color: colorApp,
+                    padding: EdgeInsets.only(left: 10.0, right: 10.0, top: 5, bottom: 5),
+                    decoration:
+                    BoxDecoration(border: Border.all(color: colorApp)),
+                    child: new Text(
+                      "Đánh giá",
+                      style: TextStyle(color: Colors.white, fontSize: 20),
+                    ),
+                  ),
+                  onPressed: () {
+                    _sendToServer();
+                   Provider.of<ClassDetailModel>(context).baophatsinh(636, _report.text);
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => ClassDetail4(widget.classData),
+                      ),
+                    );
+                  },
+                ),
+              ],
+            ));
+  }
+
+  Widget _textLargeField(String _s) {
+    return Container(
+      height: 120,
+      width: 380,
+      padding: EdgeInsets.all(10.0),
+      child: SizedBox(
+        height: 120,
+        child: TextFormField(
+          maxLines: 5,
+          style: TextStyle(fontSize: 19.0),
+          decoration: InputDecoration(
+            border: InputBorder.none,
+              hintText: _s),
+          validator: validateReport,
+          onSaved: (String _val){
+            _report.text = _val;
+          },
+        ),
+      ),
+      decoration: BoxDecoration(
+        color: Colors.white,
+        border: Border.all(color: Colors.blueAccent),
+        
+      ),
+    );
+  }
+
   Widget _iconTextBox(Text text, Icon icon) {
     return Container(
       decoration: BoxDecoration(
@@ -82,8 +210,8 @@ class ClassDetail4State extends State<ClassDetail4> {
                         alignment: Alignment.center,
                         color: colorApp,
                         child: RoundedImageNameBoxForDemo(
-                          classData.parent.avatar,
-                          classData.parent.full_name,
+                          widget.classData.parent.avatar,
+                          widget.classData.parent.full_name,
                         ),
                       ),
                       Align(
@@ -105,7 +233,7 @@ class ClassDetail4State extends State<ClassDetail4> {
                                 maxWidth: SizeConfig.safeBlockHorizontal * 78,
                               ),
                               child: AutoSizeText(
-                                classData.name,
+                                widget.classData.name,
                                 maxLines: 1,
                                 maxFontSize: 20,
                                 style: TextStyle(
@@ -169,7 +297,7 @@ class ClassDetail4State extends State<ClassDetail4> {
                       ),
                       _iconTextBox(
                         Text(
-                          'Trạng thái: ${classData.status}',
+                          'Trạng thái: ${widget.classData.status}',
                           style: TextStyle(
                             color: Colors.green,
                             fontSize: 15,
@@ -186,7 +314,7 @@ class ClassDetail4State extends State<ClassDetail4> {
                       ),
                       _iconTextBox(
                         Text(
-                          'Mã lớp: ${classData.id} - ${classData.subject.name} | Lớp ${classData.grade}',
+                          'Mã lớp: ${widget.classData.id} - ${widget.classData.subject.name} | Lớp ${widget.classData.grade}',
                           style: TextStyle(
                             color: black,
                             fontSize: 15,
@@ -203,7 +331,7 @@ class ClassDetail4State extends State<ClassDetail4> {
                       ),
                       _iconTextBox(
                         Text(
-                          'Hình thức học: ${classData.form_teaching_name}',
+                          'Hình thức học: ${widget.classData.form_teaching_name}',
                           style: TextStyle(
                             color: black,
                             fontSize: 15,
@@ -220,7 +348,7 @@ class ClassDetail4State extends State<ClassDetail4> {
                       ),
                       _iconTextBox(
                         Text(
-                          'Số buổi/tuần: ${classData.lesson_per_week} (${(classData.time_per_lesson).toInt()}h/buổi)',
+                          'Số buổi/tuần: ${widget.classData.lesson_per_week} (${(widget.classData.time_per_lesson).toInt()}h/buổi)',
                           style: TextStyle(
                             color: black,
                             fontSize: 15,
@@ -237,7 +365,7 @@ class ClassDetail4State extends State<ClassDetail4> {
                       ),
                       _iconTextBox(
                         Text(
-                          'Số học viên: ${classData.student_per_class}',
+                          'Số học viên: ${widget.classData.student_per_class}',
                           style: TextStyle(
                             color: black,
                             fontSize: 15,
@@ -274,7 +402,7 @@ class ClassDetail4State extends State<ClassDetail4> {
                                 text: TextSpan(
                                   children: <TextSpan>[
                                     TextSpan(
-                                      text: classData.address,
+                                      text: widget.classData.address,
                                       style: TextStyle(
                                         fontSize: 15,
                                         color: Colors.grey,
@@ -323,7 +451,7 @@ class ClassDetail4State extends State<ClassDetail4> {
                       ),
                       _iconTextBox(
                         Text(
-                          'Học phí/buổi: ${(classData.tuition_fee / 1000).toInt()},000 vnđ/2h',
+                          'Học phí/buổi: ${(widget.classData.tuition_fee / 1000).toInt()},000 vnđ/2h',
                           style: TextStyle(
                             color: Colors.orange,
                             fontSize: 15,
@@ -340,7 +468,7 @@ class ClassDetail4State extends State<ClassDetail4> {
                       ),
                       _iconTextBox(
                         Text(
-                          'Phí nhận lớp: ${(classData.class_fee / 1000).toInt()},000 vnđ',
+                          'Phí nhận lớp: ${(widget.classData.class_fee / 1000).toInt()},000 vnđ',
                           style: TextStyle(
                             color: Colors.blue[400],
                             fontSize: 15,
@@ -392,16 +520,22 @@ class ClassDetail4State extends State<ClassDetail4> {
                       Expanded(
                         child: SizedBox(),
                       ),
-                      RaisedButton(
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(5),
-                        ),
-                        color: colorApp,
-                        onPressed: () {},
-                        child: Text(
-                          'Báo phát sinh',
-                          style: TextStyle(
-                            color: Colors.white,
+                      Container(
+                        height: SizeConfig.safeBlockVertical * 5,
+                        child: RaisedButton(
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(5),
+                          ),
+                          color: colorApp,
+                          onPressed: () {
+                            _baophatsinh(context);
+                          },
+                          child: Text(
+                            'Báo phát sinh',
+                            style: TextStyle(
+                              fontSize: 15,
+                              color: Colors.white,
+                            ),
                           ),
                         ),
                       ),

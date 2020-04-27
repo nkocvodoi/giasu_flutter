@@ -63,6 +63,8 @@ class SignInModel extends ChangeNotifier {
         if (mapResponse['code'] == 1) {
           authenticationService.setToken(mapResponse["token"]);
           authenticationService.setId(mapResponse["user"]["id"]);
+          authenticationService.setNotification(mapResponse["user"]["notification"]);
+
           authenticationService
               .setCurrentUser(CurrentUser.fromJson(mapResponse["user"]));
 //          print('log');

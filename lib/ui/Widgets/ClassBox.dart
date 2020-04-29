@@ -6,6 +6,7 @@ import 'package:test_giasu/ui/UI_Main/ClassDetail.dart';
 import 'package:test_giasu/ui/UI_Main/ClassDetail4.dart';
 import 'package:test_giasu/ui/UI_Main/ClassDetailRequestDemo.dart';
 import 'package:test_giasu/ui/UI_Main/ClassDetailWhenAccepted.dart';
+import 'package:test_giasu/ui/UI_Main/ClassDetailWhenAcceptedReal.dart';
 import 'package:test_giasu/ui/UI_Main/ClassDetailWithCreator.dart';
 import 'package:test_giasu/ui/UI_Main/ClassDetailWithMoreTutorInfor.dart';
 import 'package:test_giasu/ui/UI_Main/General_Infor.dart';
@@ -103,7 +104,7 @@ class List_Box extends StatelessWidget {
                                     context,
                                     MaterialPageRoute(
                                       builder: (context) =>
-                                         ClassDetail(box[index].id),
+                                         ClassDetailWhenAccepted(box[index]),
                                     ),
                                   );
                                 }

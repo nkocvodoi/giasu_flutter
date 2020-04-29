@@ -168,12 +168,25 @@ class PostRequestState extends State<PostRequest> {
                 ),
               ),
             ),
-            SliverPersistentHeader(
-              pinned: true,
-              delegate: _SliverAppBarDelegate(
-                  child: PreferredSize(
-                preferredSize: Size.fromHeight(40),
-                child: Container(
+            // SliverPersistentHeader(
+            //   pinned: true,
+            //   delegate: _SliverAppBarDelegate(
+            //       child: PreferredSize(
+            //     preferredSize: Size.fromHeight(40),
+            //     child: 
+            //   ),
+            // ),
+            // )
+          ];
+        }, body: Consumer<PostRequestModel>(builder: (_, model, __) {
+          return Stack(
+            fit: StackFit.expand,
+            children: <Widget>[
+              SingleChildScrollView(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: <Widget>[
+                    Container(
                   width: double.infinity,
                   height: 40,
                   child: Stack(
@@ -214,17 +227,6 @@ class PostRequestState extends State<PostRequest> {
                     ],
                   ),
                 ),
-              )),
-            )
-          ];
-        }, body: Consumer<PostRequestModel>(builder: (_, model, __) {
-          return Stack(
-            fit: StackFit.expand,
-            children: <Widget>[
-              SingleChildScrollView(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: <Widget>[
                     SizedBox(
                       height: 15,
                     ),

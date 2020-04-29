@@ -118,7 +118,7 @@ class ClassDetail4State extends State<ClassDetail4> {
                   ),
                   onPressed: () {
                     _sendToServer();
-                   Provider.of<ClassDetailModel>(context).baophatsinh(636, _report.text);
+                   Provider.of<ClassDetailModel>(context).baophatsinh(widget.classData.id, _report.text);
                     Navigator.push(
                       context,
                       MaterialPageRoute(
@@ -451,7 +451,7 @@ class ClassDetail4State extends State<ClassDetail4> {
                       ),
                       _iconTextBox(
                         Text(
-                          'Học phí/buổi: ${(widget.classData.tuition_fee / 1000).toInt()},000 vnđ/2h',
+                          'Học phí/buổi: ${(widget.classData.tuition_fee)} vnđ/2h',
                           style: TextStyle(
                             color: Colors.orange,
                             fontSize: 15,
@@ -468,7 +468,7 @@ class ClassDetail4State extends State<ClassDetail4> {
                       ),
                       _iconTextBox(
                         Text(
-                          'Phí nhận lớp: ${(widget.classData.class_fee / 1000).toInt()},000 vnđ',
+                          'Phí nhận lớp: ${(widget.classData.class_fee)} vnđ',
                           style: TextStyle(
                             color: Colors.blue[400],
                             fontSize: 15,

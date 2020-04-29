@@ -49,6 +49,11 @@ class ClassDetailState extends State<ClassDetail> {
       ],
     );
   }
+  // String status(String classStatus){
+  //   if(classStatus == "pending") {
+  //     return "Đang tìm gia sư";
+  //   }
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -155,7 +160,7 @@ class ClassDetailState extends State<ClassDetail> {
                               children: <Widget>[
                                 _iconTextBox(
                                   Text(
-                                    'Trạng thái: ${classData.status}',
+                                    'Trạng thái: Đang tìm gia sư',
                                     style: TextStyle(
                                       color: Colors.green,
                                       fontSize: 15,

@@ -87,7 +87,7 @@ class _Payments_State extends State<Payments> {
                         padding: EdgeInsets.all(10.0),
                         color: colorApp,
                         onPressed: () async {
-                          int _code = await model.thanhtoan(634, phinhanlop);
+                          int _code = await model.thanhtoan(widget.classData.id, phinhanlop);
                           if(_code == 1) {
                             Navigator.push(
                               context,

@@ -40,7 +40,8 @@ class _RecommendationsState extends State<Recommendations> {
         return FutureBuilder<List<Recommendation>>(
             future: model.get_danhsachdenghi(course_id),
             builder: (context, snapshot) {
-//print(snapshot.data[0].tutor);
+
+              // print(snapshot.data[0].tutor);
               if (snapshot.hasData) {
                 print("start");
               

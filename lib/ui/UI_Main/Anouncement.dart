@@ -6,6 +6,7 @@ import 'package:test_giasu/core/model/anouncementData.dart';
 import 'package:test_giasu/core/view_model/anouncementModel.dart';
 import 'package:test_giasu/core/view_model/classModel.dart';
 import 'package:test_giasu/ui/Helper/ScreenConfig.dart';
+import 'package:test_giasu/ui/UI_Main/ClassDetailWhenAcceptedReal.dart';
 import 'package:test_giasu/ui/UI_Main/General_Infor.dart';
 import 'ClassDetail.dart';
 import 'ClassDetail4.dart';
@@ -113,7 +114,7 @@ class _AnouncementState extends State<Anouncement> {
                                             context,
                                             MaterialPageRoute(
                                               builder: (context) =>
-                                                  ClassDetailWhenAcceptedDemo(model2.data_class),
+                                                  ClassDetailWhenAccepted(model2.data_class),
                                             ),
                                           );
                                         }

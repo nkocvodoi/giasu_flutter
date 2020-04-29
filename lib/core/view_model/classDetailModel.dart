@@ -144,7 +144,7 @@ class ClassDetailModel extends ChangeNotifier {
       var res = await http.get(APIUrl +'api/v1/tutors/recommendations?course_id=${_idclass}',
         headers: {
           'Content-Type': 'application/json',
-          'Authorization': 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjo1LCJleHAiOjE1ODgwNjM5MzksImlzcyI6InNhb2todWVlIiwiYXVkIjoiY2xpZW50In0.Pe8Apwi_fRhVnQWXo2tOqZ3UIPbcgkoME2V-Pt7eopA',
+          'Authorization': 'Bearer ${authenticationService.token}',
         },);
 
       if (res.statusCode == 200) //return res.body;

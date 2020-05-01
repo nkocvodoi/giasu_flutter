@@ -9,6 +9,7 @@ import 'package:test_giasu/core/view_model/personalInforModel.dart';
 import 'package:test_giasu/core/view_model/postRequestModel.dart';
 import 'package:test_giasu/ui/Helper/ScreenConfig.dart';
 import 'package:test_giasu/ui/Open_App/DetailRaisedButton.dart';
+import 'package:test_giasu/ui/UI_Main/General_Infor.dart';
 import 'package:test_giasu/ui/UI_Main/SubjectChoiceDetailForRequest.dart';
 import 'package:test_giasu/ui/Widgets/previous_widget.dart';
 //import 'package:flutter_vector_icons/flutter_vector_icons.dart';
@@ -244,10 +245,11 @@ class SubjectChoiceState extends State<SubjectChoiceForRequest> {
                           Expanded(
                               flex: 8,
                               child: RaisedButton(
+                                color: Colors.white,
                                 onPressed: (){},
                                 child: Text(
                                   "Môn khác",
-                                  style: TextStyle(color: Colors.white),
+                                  style: TextStyle(color: black),
                                 ),
                                 shape: RoundedRectangleBorder(
                                     borderRadius: BorderRadius.circular(10)),
@@ -280,11 +282,13 @@ class SubjectChoiceState extends State<SubjectChoiceForRequest> {
                           Expanded(
                               flex: 8,
                               child: RaisedButton(
+                                color: Colors.white,
                                 onPressed: (){},
                                 child: Text(
                                   "Ngoại ngữ khác",
+                                  
                                   style: TextStyle(
-                                      color: Colors.white,
+                                      color: black,
                                       fontSize:
                                           SizeConfig.safeBlockHorizontal * 2.5),
                                 ),
@@ -336,11 +340,12 @@ class SubjectChoiceState extends State<SubjectChoiceForRequest> {
                           Expanded(
                               flex: 8,
                               child: RaisedButton(
+                                color: Colors.white,
                                 onPressed: (){},
                                 child: Text(
                                   "Thể thao khác",
                                   style: TextStyle(
-                                      color: Colors.white,
+                                      color: black,
                                       fontSize:
                                           SizeConfig.safeBlockHorizontal * 3),
                                 ),

@@ -7,14 +7,17 @@ import 'package:flutter/material.dart';
 import 'package:flutter_vector_icons/flutter_vector_icons.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
+
 import 'package:test_giasu/core/model/List_TeacherDetail.dart';
 import 'package:test_giasu/core/model/currentUser.dart';
 import 'package:test_giasu/core/model/user.dart';
+import 'package:test_giasu/core/view_model/personalInforModel.dart';
 import 'package:test_giasu/core/view_model/profileModel.dart';
 import 'package:test_giasu/ui/Helper/ScreenConfig.dart';
 import 'package:test_giasu/ui/UI_Main/General_Infor.dart';
 import 'package:test_giasu/ui/Widgets/ARichTextLine.dart';
 import 'package:test_giasu/ui/Widgets/SelectedTimeColumn.dart';
+import 'package:test_giasu/ui/Widgets/SelectedTimeUnchanged.dart';
 import 'package:test_giasu/ui/Widgets/SmallTextBox.dart';
 import 'package:test_giasu/ui/Widgets/SmallTextBoxWithBold.dart';
 import 'package:test_giasu/ui/Widgets/previous_widget.dart';
@@ -33,6 +36,25 @@ class _ProfileState extends State<Profile> {
 //    super.initState();
 //    _profile = Provider.of<ProfileModel>(context).fetchProfile();
 //  }
+  String subject_text(List<Subject> subjects){
+    String subject_string = subjects[0].name;
+    int i =1;
+    while(i< subjects.length){
+      subject_string = "${subject_string}, ${subjects[i].name}" ;
+      i++;
+    }
+    return subject_string;
+  }
+
+  String topic_text(List<Topic> topics){
+    String topic_string = topics[0].name;
+    int i = 1;
+    while(i<topics.length){
+      topic_string = "${topic_string}, ${topics[i].name}";
+      i++;
+    }
+    return topic_string;
+  }
   Widget _box(int number, String detail) {
     return Container(
       width: SizeConfig.blockSizeHorizontal * 25,
@@ -98,7 +120,8 @@ class _ProfileState extends State<Profile> {
         height: MediaQuery.of(context).size.height.toInt(),
         allowFontScaling: true);
     // TODO: implement build
-    return Scaffold(
+    return Consumer<PersonalInforModel>(builder: (_,model,__){
+      return Scaffold(
       appBar: AppBar(
         backgroundColor: colorApp,
         leading: buildPreviousButton(),
@@ -115,8 +138,9 @@ class _ProfileState extends State<Profile> {
 //            DataUser _test = await Provider.of<ProfileModel>(context).getdata();
             if(snapshot.hasData) {
 //              print('logggg');
+              
               DataUser _data = snapshot.data;
-              print('log' + snapshot.data.toString());
+              
               return SingleChildScrollView(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.center,
@@ -268,7 +292,7 @@ class _ProfileState extends State<Profile> {
                             maxHeight: SizeConfig.safeBlockHorizontal * 10,
                           ),
                           child: AutoSizeText(
-                            "${_data.subject_text}",
+                            "${subject_text(_data.subjects)}",
                             maxFontSize: 16,
                             maxLines: 2,
                             style: TextStyle(
@@ -304,7 +328,7 @@ class _ProfileState extends State<Profile> {
                         ),
                         SizedBox(width: SizeConfig.safeBlockHorizontal * 1),
                         Text(
-                          '${_data.location}',
+                          '${model.city[_data.location_id - 1].name}',
                           style: TextStyle(
                             color: blue,
                             fontWeight: FontWeight.bold,
@@ -348,13 +372,13 @@ class _ProfileState extends State<Profile> {
                         children: <Widget>[
                           Expanded(child: SizedBox()),
                           _box(
-                              (_data.course_count == null)
+                              (_data.number_class == null)
                                   ? 0
-                                  : _data.course_count,
+                                  : _data.number_class,
                               'Lớp đã dạy'),
                           Expanded(child: SizedBox()),
                           _box(
-                              (_data.like_count == null) ? 0 : _data.like_count,
+                              (_data.booking == null) ? 0 : _data.booking,
                               'Lượt thích'),
                           Expanded(child: SizedBox()),
                           _box(
@@ -404,7 +428,7 @@ class _ProfileState extends State<Profile> {
                             'Năm sinh: ${_data.birthdate} ',
                           ),
                           SmallTextBox(
-                            'Giới tính: ${_data.gender} ',
+                            'Giới tính: ${(_data.gender == 1) ? "Nam" : "Nữ"} ',
                           ),
 //                                SmallTextBox('Quê quán: ${_data.native_country.name}' ),
 //                                SmallTextBox('Giọng nói: ${_data.voice.name}' ),
@@ -417,6 +441,7 @@ class _ProfileState extends State<Profile> {
                               'Thành tích trong học tập và dạy học'),
                           SmallTextBox('${_data.achievement}'),
                           SmallTextBoxWithBold('Chủ đề dạy'),
+                          SmallTextBox("${topic_text(_data.topics)}"),
 //                                ListView.builder(
 //                                  itemCount: _data.subject.length,
 //                                  itemBuilder: (BuildContext context, int index) {
@@ -425,7 +450,7 @@ class _ProfileState extends State<Profile> {
 //                                ),
                           // SmallTextBox('${_data.subject}'),
                           SmallTextBoxWithBold('Gia sư đang là'),
-//                                SmallTextBox('${_data.education.name}'),
+                                SmallTextBox('${model.education[_data.education_level_id -1].name}'),
                         ],
                       ),
                     ),
@@ -468,7 +493,7 @@ class _ProfileState extends State<Profile> {
                     ),
                     SizedBox(height: 10),
                     RichTextLine(),
-                    SelectedTimeColumn(),
+                    SelectedTimeUnchanged(),
                     SizedBox(height: 20),
                     Container(
                       width: SizeConfig.safeBlockHorizontal * 90,
@@ -568,5 +593,7 @@ class _ProfileState extends State<Profile> {
         ),
       ),
     );
-  }
+  
+    },);
+    }
 }

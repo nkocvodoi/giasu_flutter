@@ -9,6 +9,7 @@ import 'package:test_giasu/ui/Widgets/ARichTextLine.dart';
 import 'package:test_giasu/ui/Widgets/LargeTextBox.dart';
 import 'package:test_giasu/ui/Widgets/RoundedImageNameBox.dart';
 import 'package:test_giasu/ui/Widgets/SelectedTimeColumn.dart';
+import 'package:test_giasu/ui/Widgets/SelectedTimeUnchangedForClass.dart';
 import 'package:test_giasu/ui/Widgets/previous_widget.dart';
 
 import 'General_Infor.dart';
@@ -66,9 +67,11 @@ class ClassDetailState extends State<ClassDetail> {
       return FutureBuilder<Data_class>(
           future: model.fetchClassDataId(classId),
           builder: (context, snapshot) {
+            
 //                  print(snapshot.data.status);
             if (snapshot.hasData) {
               Data_class classData = snapshot.data;
+              print("classdata schedules: ${classData.schedules}");
               model.setrecommend(classData.check_recommend);
               return Scaffold(
                 appBar: AppBar(
@@ -211,7 +214,7 @@ class ClassDetailState extends State<ClassDetail> {
                       ),
                                 _iconTextBox(
                                   Text(
-                                    'Số buổi/tuần: ${classData.lesson_per_week} (${(classData.time_per_lesson).toInt()}h/buổi)',
+                                    'Số buổi/tuần: ${classData.lesson_per_week} (${(classData.time_per_lesson)}h/buổi)',
                                     style: TextStyle(
                                       color: black,
                                       fontSize: 15,
@@ -279,7 +282,7 @@ class ClassDetailState extends State<ClassDetail> {
                       ),
                                 _iconTextBox(
                                   Text(
-                                    'Học phí/buổi: ${(classData.tuition_fee / 1000).toInt()},000 vnđ/2h',
+                                    'Học phí/buổi: ${(classData.tuition_fee)} vnđ/2h',
                                     style: TextStyle(
                                       color: orange,
                                       fontSize: 15,
@@ -320,7 +323,7 @@ class ClassDetailState extends State<ClassDetail> {
                             height: ScreenUtil.getInstance().setHeight(10),
                           ),
                           RichTextLine(),
-                          SelectedTimeColumn(),
+                          SelectedTimeUnchangedForClass(schedules: classData.schedules,),
                           SizedBox(
                             height: ScreenUtil.getInstance().setHeight(50),
                           ),

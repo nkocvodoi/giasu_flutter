@@ -3,6 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 
+
 import 'package:test_giasu/core/model/educationsservice.dart';
 import 'package:test_giasu/core/model/formTeachingService.dart';
 import 'package:test_giasu/core/model/locationservice.dart';
@@ -233,13 +234,46 @@ int _idProvince;
 //    _validate = true;
 //  }
 
+  
+  Future<bool> personalInforCheckup(Map _map) async {
+    var data = {"user": _map};
+  
+    try {
+      var res = await http
+          .put(APIUrl + 'api/v1/tutors/${authenticationService.id}', body: json.encode(data), headers: {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer ${authenticationService.token}',
+      });
+      print("respone: ${res.toString()}");
+      print("responeStatus: ${res.statusCode}");
+      if (res.statusCode == 200) {
+        Map<String, dynamic> mapResponse = json.decode(res.body);
+        print("personalInforCheck");
+        print(mapResponse.toString());
+
+        if (mapResponse["code"] == 1) {
+          return true;
+        } else {
+          _infor = mapResponse["message"];
+          return false;
+        }
+        
+      } return false;
+    } catch (e) {
+      print(e.toString());
+    
+    }
+    
+    notifyListeners();
+  }
+
   Future<DataUser> fetchProfile() async {
 //    print('log' + authenticationService.id);
-    final response = await http.get(APIUrl + 'api/v1/users/521', headers: {
+    final response = await http
+        .get(APIUrl + 'api/v1/parents/tutors/${authenticationService.id}', headers: {
       'Content-Type': 'application/json',
       'Accept': 'application/json',
-      'Authorization':
-          'Bearer eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjo1MjEsImV4cCI6MTU4ODEyODYxNCwiaXNzIjoic2Fva2h1ZWUiLCJhdWQiOiJjbGllbnQifQ.70XEOZnapjG0T7MTDo8aizJK8eUbqQwgz3DHDD6BDuU',
+      'Authorization': 'Bearer ${authenticationService.token}',
     });
 
     Map<String, dynamic> mapResponse = json.decode(response.body);
@@ -251,8 +285,8 @@ int _idProvince;
 //        print('log');
 //        CurrentUser _ds = CurrentUser.fromJson(mapResponse["data"]);
         DataUser _ds = DataUser.fromJson(mapResponse["data"]);
-        //print('log' + Data_Teacher.fromJson(mapResponse["data"]).toString());
-        print('dfhduf' + _ds.role.toString());
+      //print('log' + DataUser.fromJson(mapResponse["data"]).toString());
+//        print('dfhduf' + _ds.role.toString());
         return DataUser.fromJson(mapResponse["data"]);
       }
     } else {
@@ -260,32 +294,7 @@ int _idProvince;
       throw Exception('Failed to load ');
     }
   }
-
-  Future<bool> personalInforCheckup(Map _map) async {
-    var data = {"user": _map};
-    print("kajshduiashuidhausidash");
-    try {
-      var res = await http
-          .put(APIUrl + 'api/v1/tutors/${authenticationService.id}', body: json.encode(data), headers: {
-        'Content-Type': 'application/json',
-        'Authorization': 'Bearer ${authenticationService.token}',
-      });
-      if (res.statusCode == 200) {
-        Map<String, dynamic> mapResponse = json.decode(res.body);
-        print(mapResponse.toString());
-
-        if (mapResponse["code"] == 1) {
-          return true;
-        } else {
-          _infor = mapResponse["message"];
-          return false;
-        }
-      }
-    } catch (e) {
-      print(e.toString());
-    }
-    notifyListeners();
-  }
+  
 }
 
 class Schedules {

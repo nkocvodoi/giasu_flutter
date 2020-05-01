@@ -57,6 +57,7 @@ class CLassData {
 
 class Data_class {
   int id;
+  String updated_at;
   String name;
   String grade;
   int location_id;
@@ -68,12 +69,13 @@ class Data_class {
   int tuition_fee;
   double time_per_lesson;
   String phone_number;
-  int form_teaching_id;
+  List<int> form_teaching_id;
   String about_course;
   String address;
   String tutor_gender;
   String lng;
   String lat;
+  List<Schedule> schedules;
   int debt;
   int class_fee;
   String parent_number;
@@ -106,6 +108,7 @@ class Data_class {
       {this.id,
         this.name,
         this.grade,
+        this.schedules,
         this.location_id,
         this.subject_id,
         this.parentt_id,
@@ -118,6 +121,7 @@ class Data_class {
         this.form_teaching_id,
         this.about_course,
         this.address,
+        this.updated_at,
         this.tutor_gender,
         this.debt,
         this.class_fee,
@@ -147,9 +151,10 @@ class Data_class {
     tuition_fee: json['tuition_fee'],
     time_per_lesson: json['time_per_lesson'],
     phone_number: json['phone_number'],
-    form_teaching_id: json['form_teaching_id'],
+   // form_teaching_id: json['form_teaching_id'],
     about_course: json['about_course'],
     address: json['address'],
+    updated_at: json['update_at'],
     tutor_gender: json['tutor_gender'],
     debt: json['debt'],
     lng: json['lng'],
@@ -161,6 +166,10 @@ class Data_class {
     check_recommend: json['check_recommend'],
     recommend_status: json['recommend_status'],
     recommended: json['recommended'],
+    schedules: (json['schedules'] as List)
+        ?.map((e) =>
+    e == null ? null : Schedule.fromJson(e as Map<String, dynamic>))
+        ?.toList(),
     recommend_number: json['recommend_number'],
     subject: Subject.fromJson(json['subject']),
     schedule_courses: (json['data'] as List)
@@ -186,11 +195,11 @@ class ScheduleCourses {
 }
 
 class Schedule {
-  int id;
+   int id;
   int day;
   int session;
   Schedule({this.id,this.day,this.session});
-  factory Schedule.fromJson(Map<String,dynamic>json) => Schedule(day: json['day'],session: json['session']);
+  factory Schedule.fromJson(Map<String,dynamic>json) => Schedule(id: json['id'],day: json['day'],session: json['session']);
   Map<String,dynamic> toJson() => <String,dynamic>{
     'id' : id,
     'day': day,

@@ -13,6 +13,7 @@ import 'package:test_giasu/ui/Widgets/LargeTextBox.dart';
 import 'package:test_giasu/ui/Widgets/RoundedImageNameBox.dart';
 import 'package:test_giasu/ui/Widgets/RoundedImageNameBoxForDemo.dart';
 import 'package:test_giasu/ui/Widgets/SelectedTimeColumn.dart';
+import 'package:test_giasu/ui/Widgets/SelectedTimeUnchangedForClass.dart';
 import 'package:test_giasu/ui/Widgets/previous_widget.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -333,7 +334,7 @@ class _ClassDetailRequestState extends State<ClassDetailRequest> {
                   height: ScreenUtil.getInstance().setHeight(10),
                 ),
                 RichTextLine(),
-                SelectedTimeColumn(),
+                SelectedTimeUnchangedForClass(schedules: classData.schedules,),
                 SizedBox(
                   height: ScreenUtil.getInstance().setHeight(50),
                 ),

@@ -127,25 +127,21 @@ class SubjectChoiceDetailsState extends State<SubjectChoiceDetails> {
             child: Text(
               '     Môn ${a.name}',
               style: TextStyle(
-                  fontStyle: FontStyle.normal,
-                  fontSize: 20,
-                  color: blue),
+                  fontStyle: FontStyle.normal, fontSize: 20, color: blue),
             ),
           ),
           SizedBox(
             height: 20,
           ),
-          
           (n > 0) ? _rowOfChoices(topicList, n) : SizedBox(),
-           (n > 2) ? _rowOfChoices(topicList, n - 2) : SizedBox(),
-           (n > 4) ? _rowOfChoices(topicList, n - 4) : SizedBox(),
+          (n > 2) ? _rowOfChoices(topicList, n - 2) : SizedBox(),
+          (n > 4) ? _rowOfChoices(topicList, n - 4) : SizedBox(),
           (n > 6) ? _rowOfChoices(topicList, n - 6) : SizedBox(),
-           (n > 8) ? _rowOfChoices(topicList, n - 8) : SizedBox(),
-           (n > 10) ? _rowOfChoices(topicList, n - 10) : SizedBox(),
+          (n > 8) ? _rowOfChoices(topicList, n - 8) : SizedBox(),
+          (n > 10) ? _rowOfChoices(topicList, n - 10) : SizedBox(),
           (n > 12) ? _rowOfChoices(topicList, n - 12) : SizedBox(),
           (n > 14) ? _rowOfChoices(topicList, n - 14) : SizedBox(),
           (n > 16) ? _rowOfChoices(topicList, n - 16) : SizedBox(),
-         
         ]);
   }
 
@@ -213,11 +209,10 @@ class SubjectChoiceDetailsState extends State<SubjectChoiceDetails> {
           ),
         ],
       );
-    }else
+    } else
       return SizedBox(
         width: double.infinity,
       );
-    
   }
 
   @override
@@ -226,13 +221,12 @@ class SubjectChoiceDetailsState extends State<SubjectChoiceDetails> {
     ScreenUtil.instance = ScreenUtil.getInstance()..init(context);
     ScreenUtil.instance =
         ScreenUtil(width: 750, height: 1334, allowFontScaling: true);
-    for(var i in widget.data){
+    for (var i in widget.data) {
       subjectListToMap.add(i.toMap());
     }
     return Scaffold(
       appBar: AppBar(
         leading: buildPreviousButton(),
-        
         backgroundColor: blue,
         centerTitle: true,
         title: Text(
@@ -270,13 +264,16 @@ class SubjectChoiceDetailsState extends State<SubjectChoiceDetails> {
                           ),
                         ),
                         onPressed: () {
-                          print(listTopicID);
-                          //  _saveToServer();
-                          model.personalInfor["topic_id"] = listTopicID;
+                           print(listTopicID);
+                          print(subjectListToMap);
+                           // _saveToServer();
+                           model.personalInfor["topic_id"] = listTopicID;
                           model.personalInfor["subjects"] = subjectListToMap;
-                          Navigator.popUntil(
-                              context, ModalRoute.withName('/specialty'));
-                        },
+                          var count = 0;
+                          Navigator.popUntil(context, (route) {
+                            return count++ == 2;
+                          });
+                         },
                       );
                     })),
                 SizedBox(

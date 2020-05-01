@@ -109,6 +109,10 @@ List<SingleChildCloneableWidget> getProviders() {
       update: (_, authentication, __) =>
           Support_SettingModel(authenticationService: authentication),
     ),
+    ChangeNotifierProxyProvider<AuthenticationService, SelectedTimeModel>(
+      update: (_, authentication, __) =>
+          SelectedTimeModel(authenticationService: authentication),
+    ),
 
   ];
 

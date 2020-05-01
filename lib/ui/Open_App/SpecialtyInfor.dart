@@ -40,7 +40,7 @@ class _SpecialtyInforState extends State<SpecialtyInfor> {
   final TextEditingController tuition_fee = TextEditingController();
   final TextEditingController number_class = TextEditingController();
   final TextEditingController specialism = TextEditingController();
-  final TextEditingController _controller5 = TextEditingController();
+
   final TextEditingController _controller6 = TextEditingController();
   final TextEditingController about_me = TextEditingController();
   final TextEditingController achievement = TextEditingController();
@@ -73,7 +73,7 @@ class _SpecialtyInforState extends State<SpecialtyInfor> {
       });
     }
   }
-  
+
   List<bool> isSelected;
   @override
   Widget build(BuildContext context) {
@@ -93,7 +93,10 @@ class _SpecialtyInforState extends State<SpecialtyInfor> {
       ),
       body: Consumer<PersonalInforModel>(
         builder: (_, model, __) {
-          if(model.idEducation == null) model.setIdEducation(widget._data.education_level_id);
+          if (model.idEducation == null)
+            model.setIdEducation(widget._data.education_level_id);
+          if (school_year.text == "")
+            school_year.text = widget._data.school_year.toString();
           // if(teaching_formID == null){
           //   for(var i in widget._data.form_teachings){
           //     form_teaching_id.add(i.id);
@@ -102,10 +105,10 @@ class _SpecialtyInforState extends State<SpecialtyInfor> {
           //   else if(form_teaching_id == [1]){teaching_formID = 0;}
           //   else teaching_formID = 1;
           // }
-          
-          print(widget._data.subject);
-          print(widget._data.topic);
-          print(widget._data.form_teachings); 
+
+          print(widget._data.subjects[0].name);
+          print(widget._data.topics[0].name);
+          //print(widget._data.form_teachings);
           return Stack(
             fit: StackFit.expand,
             children: <Widget>[
@@ -119,11 +122,15 @@ class _SpecialtyInforState extends State<SpecialtyInfor> {
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: <Widget>[
                         LargeTextFieldInitialValue(
-                            'Kinh nghiệm gia sư & dạy học', about_me, widget._data.about_me),
-                        SizedBox(height:30),
+                            'Kinh nghiệm gia sư & dạy học',
+                            about_me,
+                            widget._data.about_me),
+                        SizedBox(height: 30),
                         LargeTextFieldInitialValue(
-                            'Thành tích học tập & dạy học', achievement, widget._data.achievement),
-                        SizedBox(height:30),
+                            'Thành tích học tập & dạy học',
+                            achievement,
+                            widget._data.achievement),
+                        SizedBox(height: 30),
                         Container(
                           padding:
                               EdgeInsets.only(top: 3.0, bottom: 5.0, left: 10),
@@ -164,8 +171,9 @@ class _SpecialtyInforState extends State<SpecialtyInfor> {
                             borderRadius: BorderRadius.circular(10.0),
                           ),
                         ),
-                        SizedBox(height:30),
-                        SmallTextFieldInitialValue("Tốt nghiệp trường", university,widget._data.university),
+                        SizedBox(height: 30),
+                        SmallTextFieldInitialValue("Tốt nghiệp trường",
+                            university, widget._data.university),
                         Container(
                           width: SizeConfig.safeBlockHorizontal * 85,
                           height: 80,
@@ -180,6 +188,7 @@ class _SpecialtyInforState extends State<SpecialtyInfor> {
                               // }
                             },
                             keyboardType: TextInputType.phone,
+                            style: TextStyle(fontSize: 18, color: black),
                             controller: school_year,
                             enableSuggestions: true,
                             decoration: InputDecoration(
@@ -190,13 +199,13 @@ class _SpecialtyInforState extends State<SpecialtyInfor> {
                               ),
                               hintStyle: TextStyle(
                                 fontSize: 18,
-                               
                                 color: black,
                               ),
                             ),
                           ),
                         ),
-                        SmallTextFieldInitialValue("Chuyên ngành", specialism,widget._data.specialism),
+                        SmallTextFieldInitialValue("Chuyên ngành", specialism,
+                            widget._data.specialism),
                         Container(
                           padding:
                               EdgeInsets.only(top: 3.0, bottom: 5.0, left: 10),
@@ -242,7 +251,9 @@ class _SpecialtyInforState extends State<SpecialtyInfor> {
                         ),
                         SizedBox(height: 30),
                         SmallTextFieldInitialValue(
-                            'Học phí vnđ/buổi (VD: 150.000)', tuition_fee,"${widget._data.tuition_fee}"),
+                            'Học phí vnđ/buổi (VD: 150.000)',
+                            tuition_fee,
+                            "${widget._data.tuition_fee}"),
                         Container(
                           width: double.infinity,
                           padding: EdgeInsets.only(top: 3, bottom: 3),
@@ -256,7 +267,6 @@ class _SpecialtyInforState extends State<SpecialtyInfor> {
                             child: Container(
                                 padding: EdgeInsets.all(8),
                                 width: SizeConfig.safeBlockHorizontal * 85,
-                                
                                 decoration: BoxDecoration(
                                   border: Border.all(color: black),
                                   borderRadius: BorderRadius.circular(10),
@@ -279,7 +289,9 @@ class _SpecialtyInforState extends State<SpecialtyInfor> {
                         ),
                         SizedBox(height: 30),
                         SmallTextFieldInitialValue(
-                            'Số lượng lớp đã dạy (VD: 5)', number_class, "${widget._data.number_class}"),
+                            'Số lượng lớp đã dạy (VD: 5)',
+                            number_class,
+                            "${widget._data.number_class}"),
                         RichTextLine(),
                         SelectedTimeColumn(),
                         SizedBox(
@@ -342,44 +354,36 @@ class _SpecialtyInforState extends State<SpecialtyInfor> {
                           }
                         }
                         print(listSchedule.length);
+                        selectedModel.refreshList();
                         _saveToServer();
-                        model.personalInfor["tuition_fee"] =
-                            (tuition_fee.text == "")
-                                ? "null"
-                                : tuition_fee.text;
-                        model.personalInfor["number_class"] =
-                            (number_class.text == "")
-                                ? "null"
-                                : number_class.text;
-                        model.personalInfor["about_me"] =
-                            (about_me.text == "") ? "null" : about_me.text;
-                        model.personalInfor["achievement"] =
-                            (achievement.text == "")
-                                ? "null"
-                                : achievement.text;
-                        model.personalInfor["form_teaching_id"] = form_teaching_id;
-                        // (teaching_formID == 2) ? [1,2] : [(teaching_formID +1)];
+                        model.personalInfor["tuition_fee"] = tuition_fee.text;
+                        model.personalInfor["number_class"] = number_class.text;
+                        model.personalInfor["about_me"] = about_me.text;
+                        model.personalInfor["achievement"] = achievement.text;
+                        model.personalInfor["form_teaching_id"] = [1,2];
+                            // (teaching_formID == 2)
+                                // ? [1, 2]
+                                // : [(teaching_formID + (1))];
                         model.personalInfor["education_level_id"] =
                             model.idEducation.toString();
-                        model.personalInfor["lng"] = "3.0";
-                        model.personalInfor["lat"] = "2.0";
+                        // model.personalInfor["lng"] = "3.0";
+                        // model.personalInfor["lat"] = "2.0";
                         model.personalInfor["schedules"] = scheduleList;
                         //  model.personalInfor["role"] = "tutor";
                         //  model.personalInfor["id"] = 521;
                         //  model.personalInfor["username"] = "Kien";
                         //  model.personalInfor["identification_number"] = "0398567928";
-                        model.personalInfor["university"] =
-                            "Ironbarrow Technical College";
+                        model.personalInfor["university"] = university.text;
                         // university.text;
-                        model.personalInfor["school_year"] = 2019;
-                        model.personalInfor["company"] =
-                            "Ironbarrow Technical College";
+                        model.personalInfor["school_year"] =
+                            int.parse(school_year.text);
+
                         model.personalInfor["specialism"] = "Sư phạm Anh";
                         //specialism.text;
                         print(model.personalInfor.toString());
                         var success = await model
                             .personalInforCheckup(model.personalInfor);
-
+                        print(success);
                         if (success) {
                           Navigator.pushNamed(context, '/home');
                         } else {

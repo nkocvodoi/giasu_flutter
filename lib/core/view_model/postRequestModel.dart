@@ -221,7 +221,7 @@ class PostRequestModel extends ChangeNotifier {
         headers: {
           'Content-Type': 'application/json',
           'Authorization':
-              'Bearer eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjo1MjEsImV4cCI6MTU4NjMyOTExOSwiaXNzIjoic2Fva2h1ZWUiLCJhdWQiOiJjbGllbnQifQ.zoDa9R5-q_ygJexVYnOxLAZHBcfJiI6EtYgLzO3BZ3c',
+              'Bearer ${authenticationService.token}',
         });
     if (res.statusCode == 200) //return res.body;
     {

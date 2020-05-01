@@ -31,7 +31,7 @@ class DataUser {
   int native_country_id;
   String schedule_text;
   String birthdate;
-  List<Subject> subject;
+  List<Subject> subjects;
   String subject_text;
   int course_count;
   int like_count;
@@ -40,7 +40,7 @@ class DataUser {
   Voice voice;
   EducationLevel education_level;
   NativeCountry native_country;
-  List<Topic> topic;
+  List<Topic> topics;
   Education education;
   List<FormTeaching> form_teachings;
 
@@ -77,7 +77,7 @@ class DataUser {
         this.company,
         this.native_country_id,
         this.schedule_text,
-        this.subject,
+        this.subjects,
         this.subject_text,
         this.course_count,
         this.like_count,
@@ -86,7 +86,7 @@ class DataUser {
         this.education_level,
         this.native_country,
         this.voice,
-        this.topic,
+        this.topics,
         this.birthdate,
         this.form_teachings
         });
@@ -128,11 +128,11 @@ class DataUser {
       schedule_text: json['schedule_text'],
 //       native_country: NativeCountry.fromJson(json['native_country']),
       birthdate: json['birthdate'],
-      topic: (json['topic'] as List)
+      topics: (json['topics'] as List)
           ?.map((e) =>
       e == null ? null : Topic.fromJson(e as Map<String, dynamic>))
           ?.toList(),
-      subject: (json['subject'] as List)
+      subjects: (json['subjects'] as List)
           ?.map((e) =>
       e == null ? null : Subject.fromJson(e as Map<String, dynamic>))
           ?.toList(),

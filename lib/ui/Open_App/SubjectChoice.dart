@@ -53,6 +53,7 @@ class SubjectChoiceState extends State<SubjectChoice> {
   List<bool> listsBool = List.filled(25, true, growable: true);
   List<Subjects> listSubject = new List<Subjects>();
   List<Map> subjects = List();
+  int amountOfFalse = 0;
   bool alreadyExist(int id) {
     for (var i in listSubject) {
       if (i.id == id) return true;
@@ -61,7 +62,15 @@ class SubjectChoiceState extends State<SubjectChoice> {
   }
 
   void onPressed(Subjects subject) {
-    setState(() => listsBool[subject.id] = !listsBool[subject.id]);
+    setState(() {
+     if(amountOfFalse < 3){
+       listsBool[subject.id] = !listsBool[subject.id];
+       amountOfFalse++;
+     }else if(amountOfFalse <= 3 && listsBool[subject.id] == false){
+       listsBool[subject.id] = !listsBool[subject.id];
+       amountOfFalse--;
+     }else listsBool[subject.id] = listsBool[subject.id];
+    });
     if (listsBool[subject.id] == false && alreadyExist(subject.id) == false) {
       listSubject.add(subject);
       subjects.add(subject.toMap());

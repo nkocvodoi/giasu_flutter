@@ -24,28 +24,25 @@ class _Bits_Manager_State extends State<Bits_Manager> {
   Widget build(BuildContext context) {
     // TODO: implement build
     return Scaffold(
-      body: NestedScrollView(
-        headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
-          return <Widget>[
-            SliverAppBar(
-              backgroundColor: colorApp,
-              expandedHeight: 40,
-              automaticallyImplyLeading: false,
-//              floating: false,
-              pinned: true,
-              flexibleSpace: FlexibleSpaceBar(
-                centerTitle: true,
-                title: Text(
-                  'Quản lý Bits',
-                ),
-              ),
-            ),
-            SliverPersistentHeader(
-              pinned: true,
-              delegate: SliverAppBarDelegate(
-                child: PreferredSize(
-                  preferredSize: Size.fromHeight(110),
-                  child: Stack(
+      appBar: AppBar(
+        automaticallyImplyLeading: false,
+        centerTitle: true,
+        backgroundColor: colorApp,
+        title: Text(
+          'Quản lý Bits',
+          textAlign: TextAlign.center,
+        ),
+      ),
+
+//      bottomNavigationBar: MyBottomNavigationBar(),
+      body: SingleChildScrollView(
+        child: Consumer<BitsManagerModel>(
+            builder: (_ ,model, __) {
+              return Stack(
+                alignment: Alignment.center,
+                children: <Widget>[
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.center,
                     children: <Widget>[
                       Container(
                         alignment: Alignment.center,
@@ -54,108 +51,118 @@ class _Bits_Manager_State extends State<Bits_Manager> {
                           color: colorApp,
                         ),
                       ),
-                      Align(
-                        alignment: Alignment.bottomCenter,
-                        child: Row(
+                      SizedBox(
+                        height: 70,
+                      ),
+                      _Infor_Box('Bits khả dụng',model.authenticationService.currentUser.available_coin.toString()),
+                      SizedBox(
+                        height: 15,
+                      ),
+                      _Infor_Box('Bits nợ', model.authenticationService.currentUser.debt.toString()),
+                      SizedBox(
+                        height: 15,
+                      ),
+                      _Infor_Box('Bits chờ rút', model.authenticationService.currentUser.booking.toString()),
+                      SizedBox(
+                        height: 15,
+                      ),
+                      _infor_text(),
+                      SizedBox(height: 20),
+                      RaisedButton(
+                    color: colorApp,
+                    onPressed: () {},
+                    child: Text(
+                      'Lịch sử giao dịch Bits',
+                      style: TextStyle(fontSize: 20, color: Colors.white),
+                    ),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(60),
+                    ),
+                  ),
+                    ],
+                  ),
+                  Positioned(
+                    top: 10.0,
+                    child: Row(
+                      children: <Widget>[
+                        _header_box(
+                            Icon(
+                              Icons.account_box,
+                              size: 40.0,
+                            ),
+                            'Nạp Bits',
+                            1),
+                        SizedBox(
+                          width: 15.0,
+                        ),
+                        RaisedButton(
+                      padding: EdgeInsets.all(0.0),
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => MyBottomNavigationBar()),
+                        );
+                      },
+                      color: Colors.white,
+                      child: Container(
+                        height: 90,
+                        width: SizeConfig.safeBlockHorizontal * 28,
+                        padding: EdgeInsets.all(5),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.center,
                           children: <Widget>[
+                            Icon(
+                              Icons.open_in_browser,
+                              size: 40,
+                            ),
                             Expanded(
                               child: SizedBox(),
                             ),
-                            _header_box(
-                                Icon(
-                                  Icons.account_box,
-                                  size: 40.0,
-                                ),
-                                'Nạp Bits',
-                                1),
-                            SizedBox(
-                              width: 15.0,
-                            ),
-                            _header_box(
-                                Icon(
-                                  Icons.account_box,
-                                  size: 40.0,
-                                ),
-                                'Chuyển Bits',
-                                2),
-                            SizedBox(
-                              width: 15.0,
-                            ),
-                            _header_box(
-                                Icon(
-                                  Icons.account_box,
-                                  size: 40.0,
-                                ),
-                                'Rút Bits',
-                                3),
-                            Expanded(
-                              child: SizedBox(),
+                            Text(
+                              "Chuyển Bits",
+                              style: TextStyle(
+                                  fontSize: 16.0,
+                                  color: colorApp,
+                                  fontWeight: FontWeight.w400),
                             ),
                           ],
                         ),
-                        //child: _header_box(Icon(Icons.account_box, size: 40.0,), 'Nạp Bits')
                       ),
-                    ],
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10.0),
+                      ),
+                    ),
+                    SizedBox(
+                          width: 15.0,
+                        ),
+                        _header_box(
+                            Icon(
+                              Icons.account_box,
+                              size: 40.0,
+                            ),
+                            'Rút Bits',
+                            3),
+                      ],
+                    ),
+                    //child: _header_box(Icon(Icons.account_box, size: 40.0,), 'Nạp Bits')
                   ),
-                ),
-              ),
-            ),
-          ];
-        },
-        body: Consumer<BitsManagerModel>(builder: (_, model, __) {
-          return SingleChildScrollView(
-            child: Column(
-              children: <Widget>[
-                SizedBox(height: 20),
-                _Infor_Box(
-                    'Bits khả dụng',
-                    model.authenticationService.currentUser.available_coin
-                        .toString()),
-                SizedBox(
-                  height: 7,
-                ),
-                _Infor_Box('Bits nợ',
-                    model.authenticationService.currentUser.debt.toString()),
-                SizedBox(
-                  height: 7,
-                ),
-                _Infor_Box('Bits chờ rút',
-                    model.authenticationService.currentUser.booking.toString()),
-                SizedBox(
-                  height: 7,
-                ),
-                _infor_text(),
-                Container(
-                  alignment: Alignment.center,
-                  margin: EdgeInsets.all(7),
-                  width: 310,
-                  height: 35,
-                  color: blue,
-                  child: Text(
-                    'LỊCH SỬ GIAO DỊCH BITS',
-                    style: TextStyle(color: Colors.white, fontSize: 22.0),
-                  ),
-                ),
-                _textField('Chọn giao dịch'),
-                _textField('Ngày giao dịch'),
-                _textField('Trạng thái'),
-                SizedBox(height: 20),
-                _button(),
-                SizedBox(
-                  height: 20,
-                ),
-              ],
-            ),
-          );
-        }),
+                ],
+              );
+            }
+        ),
       ),
     );
   }
 
+  
+
+  
+
   Widget _Infor_Box(String _s, String _a) {
     return Container(
       height: 45.0,
-      width: 300,
+      width: SizeConfig.safeBlockHorizontal * 85,
       child: Padding(
         padding: EdgeInsets.only(left: 15.0, right: 15.0),
         child: Row(
@@ -215,25 +222,24 @@ class _Bits_Manager_State extends State<Bits_Manager> {
                 ),
               ),
             ),
-            
           ],
         ));
   }
 
   Widget _infor_text() {
     return Container(
-      width: 300,
+      width: SizeConfig.safeBlockHorizontal * 85,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
           Text(
             Infor_Bits_Manager,
-            style: TextStyle(color: Colors.grey[700], fontSize: 15),
+            style: TextStyle(color: black, fontSize: 16),
           ),
           RichText(
             text: TextSpan(
               text: 'Xem hướng dẫn,',
-              style: TextStyle(color: Colors.grey[700], fontSize: 15),
+              style: TextStyle(color: black, fontSize: 16),
               children: <TextSpan>[
                 TextSpan(
                   text: ' tại đây!',
@@ -302,14 +308,13 @@ class _Bits_Manager_State extends State<Bits_Manager> {
       color: Colors.white,
       child: Container(
         height: 90,
+        width: SizeConfig.safeBlockHorizontal * 28,
         padding: EdgeInsets.all(5),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: <Widget>[
             _icon,
-            SizedBox(
-              height: 10,
-            ),
+            Expanded(child: SizedBox()),
             Text(
               _s,
               style: TextStyle(

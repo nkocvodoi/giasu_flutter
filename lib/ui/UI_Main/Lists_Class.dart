@@ -62,8 +62,7 @@ class _Lists_Class_State extends State<Lists_Class> {
               model.setList_class(snapshot.data.data);
 //                      model.setScroll();
 //                    print(snapshot.data.total);
-              return Scaffold(
-                body: NestedScrollView(
+              return NestedScrollView(
                   headerSliverBuilder:
                       (BuildContext context, bool innerBoxIsScrolled) {
                     return <Widget>[
@@ -182,8 +181,8 @@ class _Lists_Class_State extends State<Lists_Class> {
                     controller: _scrollController,
                     stateButton: true,
                   ),
-                ),
-              );
+                );
+              
             }
             return CircularProgressIndicator();
           },

@@ -46,7 +46,7 @@ class List_Box extends StatelessWidget {
               children: <Widget>[
                 Container(
                   alignment: Alignment.centerLeft,
-                  margin: EdgeInsets.all(10.0),
+                  margin: EdgeInsets.only(left:10.0,right:10,bottom: 20),
 //                  height: 190,
                   child: RaisedButton(
                         onPressed: () async {
@@ -156,7 +156,7 @@ class List_Box extends StatelessWidget {
                             Container(
                               child: Row(
                                 children: <Widget>[
-                                  Icon(Icons.school,color: blue,),
+                                  Icon(Icons.school,color: blue,size: 18,),
                                   SizedBox(width: 5),
                                   Container(
                                     width: 310,
@@ -176,30 +176,30 @@ class List_Box extends StatelessWidget {
                               box[index].parent.full_name,
                               //Colors.deepOrange,
                               orange,
-                              Icon(Icons.account_box,color: orange,),
+                              Icon(Icons.account_box,color: orange,size: 18,),
                             ),
                             _iconTextBox(
                               box[index].address,
                               black,
-                              Icon(Icons.map,color: black,),
+                              Icon(Icons.map,color: black,size: 18,),
                             ),
                             _iconTextBox(
                               //'${(box[index].tuition_fee / 1000).toInt()},000 vnđ/${box[index].time_per_lesson.toInt()}h - ${box[index].lesson_per_week}/tuần',
                               '${box[index].tuition_fee} vnđ/${box[index].time_per_lesson} h - ${box[index].lesson_per_week}/tuần',
                               black,
-                              Icon(Icons.monetization_on,color: black),
+                              Icon(Icons.monetization_on,color: black,size: 18,),
                             ),
                             _iconTextBox(
                               'Cách bạn: 2 km',
                               black,
-                              Icon(Icons.radio_button_checked,color: black,),
+                              Icon(Icons.radio_button_checked,color: black,size: 18,),
                             ),
                             _iconTextBox(
                               // 'Phí nhận lớp: ${(box[index].class_fee / 1000).toInt()},000 vnđ',
                               // Colors.blue,
                               'Phí nhận lớp: ${box[index].class_fee} vnđ',
                               blue,
-                              Icon(Icons.attach_money,color: blue,),
+                              Icon(Icons.attach_money,color: blue,size: 18,),
                             ),
                           ],
                         ),
@@ -236,7 +236,7 @@ class List_Box extends StatelessWidget {
                 // ),
                 (stateButton
                       ? Positioned(
-                  bottom: 15,
+                  bottom: 25,
                   right: 25,
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.center,

@@ -270,9 +270,12 @@ class SubjectChoiceDetailsState extends State<SubjectChoiceDetailsForRequest> {
                           print(listTopicID);
                           //  _saveToServer();
                           model.postRequestInfor["topic_id"] = listTopicID;
-
-                          Navigator.popUntil(
-                              context, ModalRoute.withName('/request'));
+                          model.postRequestInfor['topics'] = listTopic;
+                          model.postRequestInfor['subject_id']= widget.data[0].id;
+                          var count = 0;
+                          Navigator.popUntil(context, (route) {
+                            return count++ == 2;
+                          });
                         },
                       );
                     })),

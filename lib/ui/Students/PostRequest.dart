@@ -2,6 +2,7 @@ import 'package:date_format/date_format.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:test_giasu/core/model/List_ClassData.dart';
+import 'package:test_giasu/core/model/List_TeacherData.dart';
 import 'package:test_giasu/core/view_model/postRequestModel.dart';
 import 'package:test_giasu/core/view_model/selectedModel.dart';
 import 'package:test_giasu/ui/Helper/ScreenConfig.dart';
@@ -77,12 +78,8 @@ class PostRequestState extends State<PostRequest> {
     "6 buổi",
     "7 buổi",
   ];
-  List<String> time_per_lesson_list = [
-    "1h",
-    "1.5h",
-    "2h",
-    "2.5h",
-  ];
+  List<double> time_per_lesson_list = [
+    1,1.5,2,2.5];
   List<int> student_per_class_list = [
     1,
     2,
@@ -211,6 +208,7 @@ class PostRequestState extends State<PostRequest> {
                                 ),
                                 child: Center(
                                   child: TextField(
+                                    autofocus: false,
                                     controller: name,
                                     textAlign: TextAlign.center,
                                     decoration: InputDecoration(
@@ -387,7 +385,7 @@ class PostRequestState extends State<PostRequest> {
                                   ...List.generate(4, (index) {
                                     return DropdownMenuItem(
                                       child: Text(
-                                          '${time_per_lesson_list[index]}',
+                                          '${time_per_lesson_list[index]}h',
                                           style: TextStyle(
                                               fontSize: 18.0,
                                               color: Colors.grey)),
@@ -735,6 +733,8 @@ class PostRequestState extends State<PostRequest> {
                                 List<int> form_teaching_list_of =
                                     new List<int>();
                                 form_teaching_list_of.add(teaching_formID);
+                                List<Topic> listTopic = [Topic(id: 1, name: "Toán cấp 3", subject_id: 1)];
+                                print(listTopic);
                                 return RaisedButton(
                                   color: colorApp,
                                   onPressed: () async {
@@ -753,47 +753,50 @@ class PostRequestState extends State<PostRequest> {
                                       }
                                     }
                                     _sendToServer();
-                                    // model.setRole();
-                                    postRequestInfor["name"] = "Kiên đi học";
-                                    //name.text;
-                                    postRequestInfor["grade"] = "12";
-                                    //className[classID];
-                                    postRequestInfor["lesson_per_week"] =
-                                        "4 buổi";
-                                    //lesson_per_week_list[lessonID];
-                                    postRequestInfor["time_per_lesson"] = 1.5;
-                                    // time_per_lesson_list[timeID];
-                                    postRequestInfor["student_per_class"] = 2;
-                                    //student_per_class_list[student_numberID];
-                                    postRequestInfor["course_education"] = [
+                                    
+                                    model.postRequestInfor["name"] = name.text;
+                                   
+                                    // model.postRequestInfor["subject_id"] = 1;
+                                    //  model.postRequestInfor["topics"] = listTopic;
+                                    // model.postRequestInfor["topic_id"] = [1];
+                                    model.postRequestInfor["grade"] = className[classID];
+                                  
+                                    model.postRequestInfor["lesson_per_week"] =
+                                        lesson_per_week_list[lessonID];
+                                    
+                                    model.postRequestInfor["student_per_class"] = time_per_lesson_list[timeID];;
+                                    
+                                    
+                                    model.postRequestInfor["tuition_fee"] = int.parse(tuition_fee.text);
+                                    model.postRequestInfor["time_per_lesson"] = student_per_class_list[student_numberID];
+                                    
+                                    model.postRequestInfor["course_education"] = [
                                       {"id": 4, "name": "Người đi làm"}
                                     ];
+                                    model.postRequestInfor["phone_number"] =
+                                        phone_number.text;
                                     // [
                                     //   (model.education[model.idEducation - 1].name)
                                     // ];
-                                    postRequestInfor["tutor_gender"] = 1;
-                                    //(genderID + 1).toString();
-                                    postRequestInfor["form_teaching_id"] = 1;
-                                    //  (teaching_formID + 1);
-                                    postRequestInfor["tuition_fee"] = "150000";
-                                    // tuition_fee.text;
-                                    postRequestInfor["phone_number"] =
-                                        "0398567928";
-                                    // phone_number.text;
-                                    postRequestInfor["location_id"] = 13;
-                                    //model.idCity;
-                                    postRequestInfor["address"] = address.text;
-                                    postRequestInfor["from_date"] =
-                                        from_date.text;
-                                    postRequestInfor["about_course"] =
+                                    model.postRequestInfor["form_teaching_id"] = (teaching_formID + 1);
+
+                                    model.postRequestInfor["about_course"] =
                                         about_course.text;
-                                    postRequestInfor["schedules"] =
-                                        [Schedule(day: 1,session: 1), Schedule(day: 3, session: 1)];
-                                    postRequestInfor["topics"] = [15];
-                                    postRequestInfor["topic_id"] = [15];
-                                    print(postRequestInfor);
+
+                                    model.postRequestInfor["location_id"] = model.idCity;
+
+                                    model.postRequestInfor["address"] = address.text;
+                                    model.postRequestInfor["schedules"] = listSchedule;
+                                    model.postRequestInfor["tutor_gender"] = (genderID +1);
+                                    model.postRequestInfor["from_date"] =
+                                        from_date.text;
+                                    // model.postRequestInfor["lat"] = "21.036237";
+                                    // model.postRequestInfor["lng"] = "105.790583";
+                                    model.postRequestInfor["parentt_id"] = model.authenticationService.id;
+                                    
+                                    print(model.postRequestInfor);
                                     var postData = await model
-                                        .postRequest(postRequestInfor);
+                                        .postRequest(model.postRequestInfor);
                                     if (postData) {
                                       Navigator.push(
                                           context,

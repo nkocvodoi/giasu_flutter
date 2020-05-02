@@ -234,7 +234,7 @@ class PostRequestModel extends ChangeNotifier {
         _infor = mapResponse["message"];
         return false;
       }
-    }
+    } 
     notifyListeners();
   }
 }

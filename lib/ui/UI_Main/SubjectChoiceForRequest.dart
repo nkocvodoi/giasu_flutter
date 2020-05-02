@@ -14,7 +14,6 @@ import 'package:test_giasu/ui/UI_Main/SubjectChoiceDetailForRequest.dart';
 import 'package:test_giasu/ui/Widgets/previous_widget.dart';
 //import 'package:flutter_vector_icons/flutter_vector_icons.dart';
 
-
 class SubjectChoiceForRequest extends StatefulWidget {
   // Map personalInfor = new Map();
   // SubjectChoice(this.personalInfor);
@@ -55,23 +54,35 @@ class SubjectChoiceState extends State<SubjectChoiceForRequest> {
   List<bool> listsBool = List.filled(25, true, growable: true);
   List<Subjects> listSubject = new List<Subjects>();
   List<Map> subjects = List();
-  bool alreadyExist(int id){
-    for(var i in listSubject){
-      if(i.id == id) return true;
+  int amountOfFalse = 0;
+  bool alreadyExist(int id) {
+    for (var i in listSubject) {
+      if (i.id == id) return true;
     }
     return false;
   }
+
   void onPressed(Subjects subject) {
-    setState(() => listsBool[subject.id] = !listsBool[subject.id]);
-    if (listsBool[subject.id] == false && alreadyExist(subject.id)== false) {
+    setState(() {
+     if(amountOfFalse ==0){
+       listsBool[subject.id] = !listsBool[subject.id];
+       amountOfFalse++;
+     }else if(amountOfFalse ==1 && listsBool[subject.id] == false){
+       listsBool[subject.id] = !listsBool[subject.id];
+       amountOfFalse--;
+     }else listsBool[subject.id] = listsBool[subject.id];
+    });
+    if (listsBool[subject.id] == false && alreadyExist(subject.id) == false) {
       listSubject.add(subject);
       subjects.add(subject.toMap());
+     
     }
     if (listsBool[subject.id] == true) {
       listSubject.removeWhere((item) => item.id == subject.id);
       subjects.removeWhere((element) => element["id"] == subject.toMap()["id"]);
       
     }
+    print(amountOfFalse);
   }
 
   Widget _subjectChoice(Subjects firstSubject, size1, Subjects secondSubject,
@@ -171,7 +182,7 @@ class SubjectChoiceState extends State<SubjectChoiceForRequest> {
                             ),
                             child: Center(
                               child: Text(
-                                'Lựa chọn tối đa 3 môn',
+                                'Lựa chọn 1 môn học',
                                 style: TextStyle(
                                   fontStyle: FontStyle.normal,
                                   fontSize: 18,
@@ -246,7 +257,7 @@ class SubjectChoiceState extends State<SubjectChoiceForRequest> {
                               flex: 8,
                               child: RaisedButton(
                                 color: Colors.white,
-                                onPressed: (){},
+                                onPressed: () {},
                                 child: Text(
                                   "Môn khác",
                                   style: TextStyle(color: black),
@@ -283,10 +294,9 @@ class SubjectChoiceState extends State<SubjectChoiceForRequest> {
                               flex: 8,
                               child: RaisedButton(
                                 color: Colors.white,
-                                onPressed: (){},
+                                onPressed: () {},
                                 child: Text(
                                   "Ngoại ngữ khác",
-                                  
                                   style: TextStyle(
                                       color: black,
                                       fontSize:
@@ -341,7 +351,7 @@ class SubjectChoiceState extends State<SubjectChoiceForRequest> {
                               flex: 8,
                               child: RaisedButton(
                                 color: Colors.white,
-                                onPressed: (){},
+                                onPressed: () {},
                                 child: Text(
                                   "Thể thao khác",
                                   style: TextStyle(
@@ -382,56 +392,61 @@ class SubjectChoiceState extends State<SubjectChoiceForRequest> {
                       ),
                       onPressed: () {
                         if (listSubject.length <= 3 &&
-                            listSubject.length >= 1) {    
-                              firstTopicList.clear();
-                              secondTopicList.clear();
-                              thirdTopicList.clear();                     
-                          listSubject.sort((a,b) => a.id.compareTo(b.id));
+                            listSubject.length >= 1) {
+                          firstTopicList.clear();
+                          secondTopicList.clear();
+                          thirdTopicList.clear();
+                          listSubject.sort((a, b) => a.id.compareTo(b.id));
                           for (var i in listSubject) {
                             print(i.name);
                           }
-                          int i =0;
+                          int i = 0;
                           int j = 0;
-                          while(i < listSubject.length){
-                            if(listSubject[i].id == model.topic[j].subject_id && i == 0){
+                          while (i < listSubject.length) {
+                            if (listSubject[i].id ==
+                                    model.topic[j].subject_id &&
+                                i == 0) {
                               firstTopicList.add(model.topic[j]);
                             }
-                            if(listSubject[i].id == model.topic[j].subject_id && i == 1){
+                            if (listSubject[i].id ==
+                                    model.topic[j].subject_id &&
+                                i == 1) {
                               secondTopicList.add(model.topic[j]);
                             }
-                            if(listSubject[i].id == model.topic[j].subject_id && i == 2){
+                            if (listSubject[i].id ==
+                                    model.topic[j].subject_id &&
+                                i == 2) {
                               thirdTopicList.add(model.topic[j]);
                             }
-                            if(listSubject[i].id < model.topic[j].subject_id){
+                            if (listSubject[i].id < model.topic[j].subject_id) {
                               i++;
                             }
                             j++;
                           }
-                          for(var i in firstTopicList){
+                          for (var i in firstTopicList) {
                             print(i.name);
                           }
-                           for(var i in secondTopicList){
+                          for (var i in secondTopicList) {
                             print(i.name);
                           }
-                           for(var i in thirdTopicList){
+                          for (var i in thirdTopicList) {
                             print(i.name);
                           }
-
 
                           Navigator.push(
                               context,
                               MaterialPageRoute(
-                                builder: (context) => SubjectChoiceDetailsForRequest(
-                                  listSubject,
-                                  firstTopicList,
-                                  secondTopicList,
-                                  thirdTopicList
-                                ),
+                                builder: (context) =>
+                                    SubjectChoiceDetailsForRequest(
+                                        listSubject,
+                                        firstTopicList,
+                                        secondTopicList,
+                                        thirdTopicList),
                               ));
                           // listSubject.clear();
-                          
-                          for(var i in listsBool){
-                            if(i == false){
+
+                          for (var i in listsBool) {
+                            if (i == false) {
                               setState(() => i = true);
                             }
                           }
